@@ -1,30 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dpU-y3-k54">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <!--Tab Bar Controller-->
+        <scene sceneID="ITo-7D-kGD">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController storyboardIdentifier="UITabBarControllerView" automaticallyAdjustsScrollViewInsets="NO" id="dpU-y3-k54" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MoH-jX-1vy">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="xwk-Pv-IN2" kind="relationship" relationship="viewControllers" id="Kh7-iT-JbE"/>
+                        <segue destination="YxG-86-6Nd" kind="relationship" relationship="viewControllers" id="h5h-Q8-a4c"/>
+                        <segue destination="eFN-74-s9M" kind="relationship" relationship="viewControllers" id="epd-il-kIk"/>
+                        <segue destination="Vyc-dg-Upp" kind="relationship" relationship="viewControllers" id="odE-j7-L58"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YB5-2i-CGO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-79" y="-35"/>
+        </scene>
+        <!--ShoppingListView-->
+        <scene sceneID="L1Q-7T-CeB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShoppingListView" id="xwk-Pv-IN2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="IRf-JE-yYT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TF8-U8-UMb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="-326"/>
+        </scene>
+        <!--SalesFloorMapView-->
+        <scene sceneID="FDo-NI-q0u">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SalesFloorMapView" id="YxG-86-6Nd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="9h2-fh-i7y"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZD-1Z-7Ib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="-144"/>
+        </scene>
+        <!--EditShoppingListView-->
+        <scene sceneID="Yb8-Bf-fzE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditShoppingListView" id="eFN-74-s9M" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="vad-nr-jNi"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2e-iv-Ipy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="61"/>
+        </scene>
+        <!--EditSalesFloorMapView-->
+        <scene sceneID="FQX-c1-Oh1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditSalesFloorMapView" id="Vyc-dg-Upp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="adz-Hd-MLN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4j-kc-uye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="256"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
