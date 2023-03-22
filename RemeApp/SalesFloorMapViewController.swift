@@ -74,7 +74,7 @@ class SalesFloorMapViewController: UIViewController {
         setBorderForLabel(label: registerLabel)
         setBorderForLabel(label: leftEntranceLabel)
         setBorderForLabel(label: rightEntranceLabel)
-
+        updateButtonAppearance()
     }
 
     // UILabelに枠線を設定するメソッド
@@ -86,9 +86,18 @@ class SalesFloorMapViewController: UIViewController {
         label.sizeToFit()
     }
 
-//     各UIButtonに名称と色を設定するメソッド
-    func setButtonTitle(uiButton: UIButton,salesFloorType: SalesFloorType) {
+    //     各UIButtonに名称と色を設定するメソッド
+    func updateButtonAppearance() {
+        let buttons = [aOneButton, aTwoButton, aThreeButton, bOneButton, bTwoButton, bThreeButton, bFourButton, bFiveButton, bSixButton, bSevenButton, cOneButton, cTwoButton, cThreeButton, cFourButton, cFiveButton, cSixButton, cSevenButton]
+
+        for (index, button) in buttons.enumerated() {
+            let salesFloor = SalesFloorType(rawValue: index)!
+            button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
+            button?.backgroundColor = salesFloor.colorOfSalesFloor
+            button?.setTitleColor(.black, for: .normal)
+            button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
 
         }
+    }
 
 }
