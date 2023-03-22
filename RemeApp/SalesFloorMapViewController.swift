@@ -86,9 +86,9 @@ class SalesFloorMapViewController: UIViewController {
         label.sizeToFit()
     }
 
-    // 各UIButtonに名称と色を設定するメソッド
-    //    func setButtonTitle(salesFloorType: SalesFloorType) {
-    //        let salesFloorType = salesFloorType.nameOfSalesFloor
-    //    }
+//     各UIButtonに名称と色を設定するメソッド
+    func setButtonTitle(uiButton: UIButton,salesFloorType: SalesFloorType) {
+
+        }
 
 }

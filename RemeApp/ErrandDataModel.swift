@@ -62,91 +62,91 @@ struct ErrandDataModel {
 }
 
 enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, PersistableEnum
-    case First
-    case AOne
-    case ATwo
-    case ATree
-    case BOne
-    case BTwo
-    case BThree
-    case BFour
-    case BFive
-    case BSix
-    case BSeven
-    case COne
-    case CTwo
-    case CTree
-    case CFour
-    case CFive
-    case CSix
-    case CSeven
+    case first
+    case aOne
+    case aTwo
+    case aTree
+    case bOne
+    case bTwo
+    case bThree
+    case bFour
+    case bFive
+    case bSix
+    case bSeven
+    case cOne
+    case cTwo
+    case cTree
+    case cFour
+    case cFive
+    case cSix
+    case cSeven
 
     var nameOfSalesFloor: String {
         switch self {
-            case .First: return "売り場を選択"
-            case .AOne: return "乳製品"
-            case .ATwo: return "肉"
-            case .ATree: return "魚介"
-            case .BOne: return "卵"
-            case .BTwo: return "冷凍品"
-            case .BThree: return "お茶・コーヒー"
-            case .BFour: return "乾麺・パスタ"
-            case .BFive: return "レトルト"
-            case .BSix: return "調味料"
-            case .BSeven: return "惣菜"
-            case .COne: return "パン"
-            case .CTwo: return "飲料・酒"
-            case .CTree: return "米"
-            case .CFour: return "菓子"
-            case .CFive: return "事務用品"
-            case .CSix: return "日用品"
-            case .CSeven: return "野菜"
+            case .first: return "売り場を選択"
+            case .aOne: return "乳製品"
+            case .aTwo: return "肉"
+            case .aTree: return "魚介"
+            case .bOne: return "卵"
+            case .bTwo: return "冷凍品"
+            case .bThree: return "お茶・コーヒー"
+            case .bFour: return "乾麺・パスタ"
+            case .bFive: return "レトルト"
+            case .bSix: return "調味料"
+            case .bSeven: return "惣菜"
+            case .cOne: return "パン"
+            case .cTwo: return "飲料・酒"
+            case .cTree: return "米"
+            case .cFour: return "菓子"
+            case .cFive: return "事務用品"
+            case .cSix: return "日用品"
+            case .cSeven: return "野菜"
         }
     }
 
     var colorOfSalesFloor: UIColor {
         switch self {
-            case .First: return .gray
-            case .AOne: return .red
-            case .ATwo: return .blue
-            case .ATree: return .green
-            case .BOne: return .purple
-            case .BTwo: return .orange
-            case .BThree: return .brown
-            case .BFour: return .magenta
-            case .BFive: return .cyan
-            case .BSix: return .systemPink
-            case .BSeven: return .systemTeal
-            case .COne: return .systemIndigo
-            case .CTwo: return .systemYellow
-            case .CTree: return .systemGreen
-            case .CFour: return .systemRed
-            case .CFive: return .systemGray
-            case .CSix: return .systemPurple
-            case .CSeven: return .systemBlue
+            case .first: return .gray
+            case .aOne: return .red
+            case .aTwo: return .blue
+            case .aTree: return .green
+            case .bOne: return .purple
+            case .bTwo: return .orange
+            case .bThree: return .brown
+            case .bFour: return .magenta
+            case .bFive: return .cyan
+            case .bSix: return .systemPink
+            case .bSeven: return .systemTeal
+            case .cOne: return .systemIndigo
+            case .cTwo: return .systemYellow
+            case .cTree: return .systemGreen
+            case .cFour: return .systemRed
+            case .cFive: return .systemGray
+            case .cSix: return .systemPurple
+            case .cSeven: return .systemBlue
         }
     }
 
     var addressOfSalesFloor: String {
         switch self {
-            case .First: return ""
-            case .AOne: return "A-1"
-            case .ATwo: return "A-2"
-            case .ATree: return "A-3"
-            case .BOne: return "B-1"
-            case .BTwo: return "B-2"
-            case .BThree: return "B-3"
-            case .BFour: return "B-4"
-            case .BFive: return "B-5"
-            case .BSix: return "B-6"
-            case .BSeven: return "B-7"
-            case .COne: return "C-1"
-            case .CTwo: return "C-2"
-            case .CTree: return "C-3"
-            case .CFour: return "C-4"
-            case .CFive: return "C-5"
-            case .CSix: return "C-6"
-            case .CSeven: return "C-7"
+            case .first: return ""
+            case .aOne: return "A-1"
+            case .aTwo: return "A-2"
+            case .aTree: return "A-3"
+            case .bOne: return "B-1"
+            case .bTwo: return "B-2"
+            case .bThree: return "B-3"
+            case .bFour: return "B-4"
+            case .bFive: return "B-5"
+            case .bSix: return "B-6"
+            case .bSeven: return "B-7"
+            case .cOne: return "C-1"
+            case .cTwo: return "C-2"
+            case .cTree: return "C-3"
+            case .cFour: return "C-4"
+            case .cFive: return "C-5"
+            case .cSix: return "C-6"
+            case .cSeven: return "C-7"
 
         }
     }
