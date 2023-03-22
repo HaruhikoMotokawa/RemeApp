@@ -61,8 +61,8 @@ struct ErrandDataModel {
     }
 }
 
-enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, PersistableEnum
-    case first
+enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , PersistableEnum
+//    case first
     case aOne
     case aTwo
     case aTree
@@ -83,13 +83,13 @@ enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, Persista
 
     var nameOfSalesFloor: String {
         switch self {
-            case .first: return "売り場を選択"
+//            case .first: return "売り場を選択"
             case .aOne: return "乳製品"
-            case .aTwo: return "肉"
+            case .aTwo: return "肉類"
             case .aTree: return "魚介"
             case .bOne: return "卵"
-            case .bTwo: return "冷凍品"
-            case .bThree: return "お茶・コーヒー"
+            case .bTwo: return "冷凍"
+            case .bThree: return "お茶・珈琲"
             case .bFour: return "乾麺・パスタ"
             case .bFive: return "レトルト"
             case .bSix: return "調味料"
@@ -106,7 +106,7 @@ enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, Persista
 
     var colorOfSalesFloor: UIColor {
         switch self {
-            case .first: return .gray
+//            case .first: return .gray
             case .aOne: return .red
             case .aTwo: return .blue
             case .aTree: return .green
@@ -129,7 +129,7 @@ enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, Persista
 
     var addressOfSalesFloor: String {
         switch self {
-            case .first: return ""
+//            case .first: return ""
             case .aOne: return "A-1"
             case .aTwo: return "A-2"
             case .aTree: return "A-3"
@@ -157,5 +157,10 @@ enum SalesFloorType: Int { // Realm実装時に追記-> , CaseIterable, Persista
 
     init?(intValue: Int) {
         self.init(rawValue: intValue)
+
+    }
+
+    static var allCases: [SalesFloorType] {
+        return [.aOne, .aTwo, .aTree, .bOne, .bTwo, .bThree, .bFour, .bFive, .bSix, .bSeven, .cOne, .cTwo, .cTree, .cFour, .cFive, .cSix, .cSeven]
     }
 }
