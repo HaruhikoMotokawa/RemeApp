@@ -22,7 +22,7 @@ class ShoppingListViewController: UIViewController {
     // ダミーデータ表示用
     func setErrandData() {
         for _ in 1...10 {
-            let errandDataModel = ErrandDataModel(checkBox: false, nameOfItem: "テスト", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 1)
+            let errandDataModel = ErrandDataModel(isCheckBox: false, nameOfItem: "テスト", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 1)
             errandDataList.append(errandDataModel)
         }
     }

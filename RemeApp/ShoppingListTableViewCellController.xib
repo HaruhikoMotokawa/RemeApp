@@ -13,7 +13,7 @@
                 <outlet property="isCheckBoxButton" destination="Pcj-uN-fME" id="ZPY-xx-LnE"/>
                 <outlet property="nameOfItemLabel" destination="IFy-YL-jWO" id="Okj-gt-yfe"/>
                 <outlet property="numberOfItemLabel" destination="Mu6-XN-Y8G" id="pNT-li-tJM"/>
-                <outlet property="photoPathLabel" destination="Aub-OF-7Sh" id="bEH-Fv-29B"/>
+                <outlet property="photoPathImageView" destination="Aub-OF-7Sh" id="bEH-Fv-29B"/>
                 <outlet property="supplementLabel" destination="Bbo-8J-rAa" id="4hG-da-gNy"/>
                 <outlet property="unitLabel" destination="ws2-cM-6IS" id="FMl-tR-efD"/>
             </connections>
@@ -37,6 +37,9 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="isCheckBoxButton:" destination="-1" eventType="touchUpInside" id="hDn-fJ-Juu"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="品名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFy-YL-jWO">
                                         <rect key="frame" x="50" y="0.0" width="150" height="59.5"/>
