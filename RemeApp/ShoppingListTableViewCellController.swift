@@ -1,8 +1,8 @@
 //
-//  ShoppingListTableViewCellController.swift
+//  ShoppingListTableViewCellControllerTableViewCell.swift
 //  RemeApp
 //
-//  Created by 本川晴彦 on 2023/03/22.
+//  Created by 本川晴彦 on 2023/03/23.
 //
 
 import UIKit
@@ -10,21 +10,12 @@ import UIKit
 class ShoppingListTableViewCellController: UITableViewCell {
 
 
-    @IBOutlet weak var isCheckBoxButton: UIButton!
-
-    var isChecked:Bool = false
-    let checkedImage = UIImage(named: "checkMark")
-    let uncheckedImage = UIImage(named: "circle")
-    @IBAction func isCheckBoxButton(_ sender: UIButton) {
-        isChecked = !isChecked
-        if isChecked {
-            sender.setImage(checkedImage, for: .normal)
-        } else {
-            sender.setImage(uncheckedImage, for: .normal)
-        }
+    @IBAction func isCheckBoxButton(_ sender: Any) {
     }
 
+
     @IBOutlet weak var nameOfItemLabel: UILabel!
+
 
 
     @IBOutlet weak var numberOfItemLabel: UILabel!
@@ -34,33 +25,45 @@ class ShoppingListTableViewCellController: UITableViewCell {
 
 
 
-    @IBOutlet weak var SalesFloorTypeButton: UIButton!
+    @IBOutlet weak var salesFloorTypeButton: UIButton!
+    @IBAction func salesFloorTypeButton(_ sender: Any) {
+    }
 
+    var isChecked:Bool = false
+    let checkedImage = UIImage(named: "checkMark")
+    let uncheckedImage = UIImage(named: "circle")
 
-    @IBOutlet weak var supplementLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
 
-    @IBOutlet weak var photoPathImageView: UIImageView!
+        // Configure the view for the selected state
+    }
 
     var errandDataList: Array<ErrandDataModel> = []
 
-    func setShoppingList(isCheckBox: Bool, nameOfItem: String, numberOfItem: String,
+    func setShoppingList(nameOfItem: String, numberOfItem: String,
                          unit: String, salesFloorRawValue:Int ,supplement: String?,
                          photoPath: String?) {
         // ここにisCheckBox
-        isChecked = isCheckBox
+//        isChecked = isCheckBox
         nameOfItemLabel.text = nameOfItem
         numberOfItemLabel.text = numberOfItem
         unitLabel.text = unit
         let salesFloor = SalesFloorType(rawValue: salesFloorRawValue)
-        SalesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
-        SalesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
-        SalesFloorTypeButton.setTitleColor(.black, for: .normal)
-        SalesFloorTypeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        supplementLabel.text = supplement
-        if let photoPath = photoPath {
-            let errandDataModel = ErrandDataModel(photoPath: photoPath)
-            photoPathImageView.image = errandDataModel.getImage()
-        }
+        salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
+        salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
+        salesFloorTypeButton.setTitleColor(.black, for: .normal)
+        salesFloorTypeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//        supplementLabel.text = supplement
+//        if let photoPath = photoPath {
+//            let errandDataModel = ErrandDataModel(photoPath: photoPath)
+//            photoPathImageView.image = errandDataModel.getImage()
+//        }
     }
+    
 }
