@@ -29,13 +29,20 @@ class ShoppingListTableViewCellController: UITableViewCell {
     @IBAction func salesFloorTypeButton(_ sender: Any) {
     }
 
+    @IBOutlet private weak var supplementLabel: UILabel!
+
+
+    @IBOutlet weak private var photoPathImageView: UIImageView!
+
+
     var isChecked:Bool = false
     let checkedImage = UIImage(named: "checkMark")
     let uncheckedImage = UIImage(named: "circle")
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,7 +55,7 @@ class ShoppingListTableViewCellController: UITableViewCell {
 
     func setShoppingList(nameOfItem: String, numberOfItem: String,
                          unit: String, salesFloorRawValue:Int ,supplement: String?,
-                         photoPath: String?) {
+                         image: UIImage?) {
         // ここにisCheckBox
 //        isChecked = isCheckBox
         nameOfItemLabel.text = nameOfItem
@@ -58,12 +65,23 @@ class ShoppingListTableViewCellController: UITableViewCell {
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
         salesFloorTypeButton.setTitleColor(.black, for: .normal)
-        salesFloorTypeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//        supplementLabel.text = supplement
+        salesFloorTypeButton.layer.cornerRadius = 10.0
+        salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
+        salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        salesFloorTypeButton.titleLabel?.numberOfLines = 1
+        photoPathImageView.image = image
+        if supplement == nil {
+            return
+        } else {
+            supplementLabel.textColor = UIColor.gray
+            supplementLabel.text = "補足：" + (supplement ?? "")
+        }
+
 //        if let photoPath = photoPath {
-//            let errandDataModel = ErrandDataModel(photoPath: photoPath)
+//             let errandDataModel = ErrandDataModel(photoPath: photoPath)
 //            photoPathImageView.image = errandDataModel.getImage()
 //        }
     }
     
 }
+

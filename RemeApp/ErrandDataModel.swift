@@ -16,7 +16,7 @@ struct ErrandDataModel {
     var salesFloorRawValue:Int = 0
     var supplement:String? = nil
     var photoPath:String? = nil
-
+    var photoImage:UIImage? = nil // テスト用であとで削除
     var salesFloor: SalesFloorType {
         get {
             return SalesFloorType(rawValue: salesFloorRawValue)!
