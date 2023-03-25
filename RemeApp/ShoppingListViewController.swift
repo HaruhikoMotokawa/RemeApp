@@ -22,17 +22,11 @@ class ShoppingListViewController: UIViewController {
         super.viewDidLoad()
         shoppingListTableView.dataSource = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil), forCellReuseIdentifier: "ShoppingListTableViewCell")
-        setErrandData()
+
 
     }
-    // ダミーデータ表示用
-    func setErrandData() {
-//        for _ in 1...10 {
-//            let errandDataModel = ErrandDataModel(nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: "なるべく賞味期限長いもの", photoImage:UIImage(named: "testImage"))
-//            errandDataList.append(errandDataModel)
-//        }
-    }
 }
+
 
 extension ShoppingListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
