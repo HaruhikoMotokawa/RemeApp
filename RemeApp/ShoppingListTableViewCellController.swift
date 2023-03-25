@@ -10,9 +10,9 @@ import UIKit
 class ShoppingListTableViewCellController: UITableViewCell {
 
 
+
     @IBAction func isCheckBoxButton(_ sender: Any) {
     }
-
 
     @IBOutlet weak var nameOfItemLabel: UILabel!
 

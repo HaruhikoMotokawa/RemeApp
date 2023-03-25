@@ -19,16 +19,16 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Npr-xd-jJA" userLabel="全体">
                         <rect key="frame" x="5" y="5" width="310" height="34"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv9-gt-lMM">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fv9-gt-lMM" customClass="CheckBox" customModule="RemeApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="c6u-fP-MwQ"/>
                                     <constraint firstAttribute="width" constant="40" id="rH5-rx-Gu9"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="pencil.circle" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
-                                    <action selector="isCheckBoxButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7B4-vB-CqS"/>
+                                    <action selector="isCheckBoxButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Td-bF-phT"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SSf-71-m1R" userLabel="上下">
@@ -120,7 +120,4 @@
             <point key="canvasLocation" x="515" y="-194"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="pencil.circle" catalog="system" width="128" height="123"/>
-    </resources>
 </document>

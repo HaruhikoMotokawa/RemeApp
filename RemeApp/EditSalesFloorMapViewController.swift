@@ -10,6 +10,12 @@ import UIKit
 
 class EditSalesFloorMapViewController: UIViewController {
 
+
+
+    @IBAction func testCheckBox(_ sender: CheckBox) {
+        print(sender.isChecked)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
