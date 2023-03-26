@@ -36,11 +36,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     @objc func imageViewTapped(_ sender: UITapGestureRecognizer) {
         print("🔥タップ")
-//        let storyboard = UIStoryboard(name: "ImageModalView", bundle: nil)
-//        let shoppingListViewController = storyboard.instantiateViewController(withIdentifier: "ImageModalView") as! ImageModalViewController
-//        shoppingListViewController.modalPresentationStyle = .custom
-//        shoppingListViewController.transitioningDelegate = self
-//        shoppingListViewController.present(shoppingListViewController, animated: true)
+
     }
 
 
@@ -51,8 +47,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoPathImageView.isUserInteractionEnabled = true
-        photoPathImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageViewTapped(_:))))
+
         setAppearanceSalesFloorTypeButton()
 
 
@@ -102,9 +97,5 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     }
 }
 
-//extension ShoppingListTableViewCellController: UIViewControllerTransitioningDelegate {
-//    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-//        <#code#>
-//    }
-//}
+
 
