@@ -30,6 +30,15 @@
                                     <navigationItem title="売り場マップ編集" id="Bb4-OX-vtf"/>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUG-8g-Uq0" customClass="CheckBox" customModule="RemeApp" customModuleProvider="target">
+                                <rect key="frame" x="185" y="246" width="24" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="testCheckBox:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="h1K-cd-elQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

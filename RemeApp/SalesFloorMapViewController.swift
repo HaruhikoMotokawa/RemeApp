@@ -78,7 +78,7 @@ class SalesFloorMapViewController: UIViewController {
     }
 
     // UILabelに枠線を設定するメソッド
-    func setBorderForLabel(label: UILabel) {
+    private func setBorderForLabel(label: UILabel) {
         let borderColor = UIColor.black.cgColor
         label.layer.borderColor = borderColor
         label.layer.borderWidth = 2
@@ -87,7 +87,7 @@ class SalesFloorMapViewController: UIViewController {
     }
 
     //     各UIButtonに名称と色を設定するメソッド
-    func updateButtonAppearance() {
+    private func updateButtonAppearance() {
         let buttons = [aOneButton, aTwoButton, aThreeButton, bOneButton, bTwoButton, bThreeButton, bFourButton, bFiveButton, bSixButton, bSevenButton, cOneButton, cTwoButton, cThreeButton, cFourButton, cFiveButton, cSixButton, cSevenButton]
 
         for (index, button) in buttons.enumerated() {

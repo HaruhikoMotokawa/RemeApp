@@ -9,14 +9,14 @@ import UIKit
 
 struct ErrandDataModel {
     var id:String = UUID().uuidString
-    var checkBox:Bool = false
+    var isCheckBox:Bool = false
     var nameOfItem:String = ""
     var numberOfItem = "1"
     var unit:String = "個"
     var salesFloorRawValue:Int = 0
     var supplement:String? = nil
     var photoPath:String? = nil
-
+    var photoImage:UIImage? = nil // テスト用であとで削除
     var salesFloor: SalesFloorType {
         get {
             return SalesFloorType(rawValue: salesFloorRawValue)!
@@ -158,9 +158,5 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
     init?(intValue: Int) {
         self.init(rawValue: intValue)
 
-    }
-
-    static var allCases: [SalesFloorType] {
-        return [.aOne, .aTwo, .aTree, .bOne, .bTwo, .bThree, .bFour, .bFive, .bSix, .bSeven, .cOne, .cTwo, .cTree, .cFour, .cFive, .cSix, .cSeven]
     }
 }
