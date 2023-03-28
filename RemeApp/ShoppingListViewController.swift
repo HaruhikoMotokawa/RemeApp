@@ -26,7 +26,20 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.dataSource = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil), forCellReuseIdentifier: "ShoppingListTableViewCell")
         shoppingListTableView.delegate = self
+        sortErrandDataList()
+    }
 
+
+
+    // cellをチェックがオフのものを一番上に、かつ売り場順に並び替える関数
+    func sortErrandDataList() {
+        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+            if a.isCheckBox != b.isCheckBox {
+                return !a.isCheckBox
+            } else {
+                return a.salesFloorRawValue < b.salesFloorRawValue
+            }
+        }
     }
 }
 
@@ -38,6 +51,7 @@ extension ShoppingListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = shoppingListTableView.dequeueReusableCell(withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            cell.delegate = self
             let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
             cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,nameOfItem: errandDataModel.nameOfItem, numberOfItem: errandDataModel.numberOfItem, unit: errandDataModel.unit, salesFloorRawValue: errandDataModel.salesFloorRawValue, supplement: errandDataModel.supplement, image: errandDataModel.photoImage)
             return cell
@@ -54,5 +68,15 @@ extension ShoppingListViewController: UITableViewDelegate {
         detailShoppingListViewController.configure(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.present(detailShoppingListViewController, animated: true)
+    }
+}
+
+extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
+        guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
+        let isChecked = !errandDataList[indexPath.row].isCheckBox
+        errandDataList[indexPath.row].isCheckBox = isChecked
+        sortErrandDataList()
+        shoppingListTableView.reloadData()
     }
 }

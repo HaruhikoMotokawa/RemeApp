@@ -10,7 +10,7 @@ import UIKit
 class ShoppingListTableViewCellController: UITableViewCell  {
 
 
-
+    weak var delegate: ShoppingListTableViewCellDelegate?
     @IBOutlet weak var checkBoxButton: CheckBox!
     @IBAction private func isCheckBoxButton(_ sender: Any) {
         if checkBoxButton.isChecked == true {
@@ -18,6 +18,10 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         } else {
             self.contentView.backgroundColor = UIColor.lightGray
         }
+        isChecked = !isChecked
+
+//        errandDataList[indexPath.row].isCheckBox = isChecked
+        delegate?.didTapCheckBoxButton(self)
     }
 
     @IBOutlet private weak var nameOfItemLabel: UILabel!
@@ -41,10 +45,12 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     @IBOutlet weak var photoPathImageView: UIImageView!
 
     var isChecked:Bool = false
+    var itemImage:UIImage? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setAppearanceSalesFloorTypeButton()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -60,13 +66,14 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
+
     }
 
     // 買い物リストのデータをセルにセットする
     func setShoppingList(isCheckBox: Bool ,nameOfItem: String, numberOfItem: String,
                          unit: String, salesFloorRawValue:Int ,supplement: String?,
                          image: UIImage?) {
-        // ここにisCheckBox
+
         isChecked = isCheckBox
         if isCheckBox == false {
             checkBoxButton.isChecked = false
@@ -81,13 +88,17 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         let salesFloor = SalesFloorType(rawValue: salesFloorRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
+        photoPathImageView.image = image
         if image == nil {
-            photoPathImageView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            photoPathImageView.translatesAutoresizingMaskIntoConstraints = false
+            photoPathImageView.widthAnchor.constraint(equalToConstant: 50).isActive = false
+            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).isActive = false
         }else{
             photoPathImageView.translatesAutoresizingMaskIntoConstraints = false
             photoPathImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
             photoPathImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
             photoPathImageView.image = image
+            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).priority = .defaultHigh // 優先度を変更
         }
         if supplement == nil {
             return
@@ -103,5 +114,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     }
 }
 
-
+protocol ShoppingListTableViewCellDelegate: AnyObject {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController)
+}
 
