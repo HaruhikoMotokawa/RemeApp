@@ -16,6 +16,11 @@ class DetailShoppingListViewController: UIViewController {
     @IBOutlet weak var unitLabel: UILabel!
 
     @IBOutlet weak var salesFloorTypeButton: UIButton!
+    @IBAction func goSalesFloorMapView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "SalesFloorMapView", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SalesFloorMapView") as! SalesFloorMapViewController
+        self.present(vc, animated: true)
+    }
 
     @IBOutlet weak var supplementLabel: UILabel!
 

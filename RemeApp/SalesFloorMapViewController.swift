@@ -22,7 +22,6 @@ class SalesFloorMapViewController: UIViewController {
     @IBOutlet weak var bOneButton: UIButton!
 
 
-
     @IBOutlet weak var bTwoButton: UIButton!
 
 
@@ -96,8 +95,6 @@ class SalesFloorMapViewController: UIViewController {
             button?.backgroundColor = salesFloor.colorOfSalesFloor
             button?.setTitleColor(.black, for: .normal)
             button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-
         }
     }
-
 }

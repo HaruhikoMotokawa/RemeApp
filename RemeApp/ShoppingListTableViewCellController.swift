@@ -11,7 +11,13 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
 
 
+    @IBOutlet weak var checkBoxButton: CheckBox!
     @IBAction private func isCheckBoxButton(_ sender: Any) {
+        if checkBoxButton.isChecked == true {
+            self.contentView.backgroundColor = UIColor.systemBackground
+        } else {
+            self.contentView.backgroundColor = UIColor.lightGray
+        }
     }
 
     @IBOutlet private weak var nameOfItemLabel: UILabel!
@@ -34,10 +40,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     @IBOutlet weak var photoPathImageView: UIImageView!
 
-
-
     var isChecked:Bool = false
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,15 +60,21 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
-
     }
 
     // 買い物リストのデータをセルにセットする
-    func setShoppingList(nameOfItem: String, numberOfItem: String,
+    func setShoppingList(isCheckBox: Bool ,nameOfItem: String, numberOfItem: String,
                          unit: String, salesFloorRawValue:Int ,supplement: String?,
                          image: UIImage?) {
         // ここにisCheckBox
-//        isChecked = isCheckBox
+        isChecked = isCheckBox
+        if isCheckBox == false {
+            checkBoxButton.isChecked = false
+            self.contentView.backgroundColor = UIColor.systemBackground
+        }else{
+            checkBoxButton.isChecked = true
+            self.contentView.backgroundColor = UIColor.lightGray
+        }
         nameOfItemLabel.text = nameOfItem
         numberOfItemLabel.text = numberOfItem
         unitLabel.text = unit

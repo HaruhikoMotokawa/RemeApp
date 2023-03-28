@@ -28,7 +28,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
-                                    <action selector="isCheckBoxButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Td-bF-phT"/>
+                                    <action selector="isCheckBoxButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q1D-gY-BIL"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SSf-71-m1R" userLabel="上下">
@@ -74,7 +74,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="salesFloorTypeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3rd-Ur-3DN"/>
+                                                    <action selector="salesFloorTypeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PF9-BS-xcY"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -113,6 +113,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="checkBoxButton" destination="fv9-gt-lMM" id="jq4-4r-PjI"/>
                 <outlet property="nameOfItemLabel" destination="76j-Ci-yYa" id="tju-0C-ljb"/>
                 <outlet property="numberOfItemLabel" destination="Syg-kq-YDf" id="LYs-Ib-Mgz"/>
                 <outlet property="photoPathImageView" destination="HQY-9g-b51" id="gqr-rA-Me7"/>
