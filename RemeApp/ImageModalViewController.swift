@@ -9,6 +9,13 @@ import UIKit
 
 class ImageModalViewController: UIViewController {
 
+
+
+    @IBAction func imageView(_ sender: Any) {
+    }
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26E00A70C1A1D3B8828D1FA1 /* Pods_RemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */; };
+		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
+		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
 		784E1F2029C8451200C9360A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F1F29C8451200C9360A /* ViewController.swift */; };
 		784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */; };
 		784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */; };
@@ -31,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43FB1983A342D2ED6D2DF3D3 /* Pods-RemeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.debug.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
+		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
+		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
 		784E1F1F29C8451200C9360A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -54,6 +61,7 @@
 		78AB3B4329C835D8004685F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78AB3B4529C835D8004685F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
+		AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,17 +69,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E00A70C1A1D3B8828D1FA1 /* Pods_RemeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		457F5F0CCA8D43BEBB52ACE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		78AB3B2B29C835D7004685F1 = {
 			isa = PBXGroup;
 			children = (
 				78AB3B3629C835D7004685F1 /* RemeApp */,
 				78AB3B3529C835D7004685F1 /* Products */,
+				8507120358070AA0C6EFDBBF /* Pods */,
+				457F5F0CCA8D43BEBB52ACE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +109,8 @@
 				784E1F1F29C8451200C9360A /* ViewController.swift */,
 				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
 				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
+				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
+				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
 				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
 				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
 				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
@@ -98,8 +119,6 @@
 				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
 				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
 				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
-				788E1E8F29CED0A8006777E6 /* ImageModalView.storyboard */,
-				788E1E9329CED587006777E6 /* ImageModalViewController.swift */,
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 				78AB3B4529C835D8004685F1 /* Info.plist */,
 				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
@@ -108,8 +127,19 @@
 				78AB3B3729C835D7004685F1 /* AppDelegate.swift */,
 				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
 				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
+				788E1E9329CED587006777E6 /* ImageModalViewController.swift */,
+				788E1E8F29CED0A8006777E6 /* ImageModalView.storyboard */,
 			);
 			path = RemeApp;
+			sourceTree = "<group>";
+		};
+		8507120358070AA0C6EFDBBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43FB1983A342D2ED6D2DF3D3 /* Pods-RemeApp.debug.xcconfig */,
+				5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78AB3B4829C835D8004685F1 /* Build configuration list for PBXNativeTarget "RemeApp" */;
 			buildPhases = (
+				D49E1DAD90F076B7B265C5FF /* [CP] Check Pods Manifest.lock */,
 				78AB3B3029C835D7004685F1 /* Sources */,
 				78AB3B3129C835D7004685F1 /* Frameworks */,
 				78AB3B3229C835D7004685F1 /* Resources */,
+				4402417DDEA118E6201C9EAC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,6 +208,7 @@
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
+				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
@@ -183,6 +216,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4402417DDEA118E6201C9EAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemeApp/Pods-RemeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RemeApp/Pods-RemeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RemeApp/Pods-RemeApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D49E1DAD90F076B7B265C5FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RemeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		78AB3B3029C835D7004685F1 /* Sources */ = {
@@ -193,6 +268,7 @@
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,
+				78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */,
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				784E1F2029C8451200C9360A /* ViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
@@ -334,6 +410,7 @@
 		};
 		78AB3B4929C835D8004685F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43FB1983A342D2ED6D2DF3D3 /* Pods-RemeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -361,6 +438,7 @@
 		};
 		78AB3B4A29C835D8004685F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

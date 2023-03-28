@@ -11,22 +11,22 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
 
 
-    @IBAction func isCheckBoxButton(_ sender: Any) {
+    @IBAction private func isCheckBoxButton(_ sender: Any) {
     }
 
-    @IBOutlet weak var nameOfItemLabel: UILabel!
+    @IBOutlet private weak var nameOfItemLabel: UILabel!
 
 
 
-    @IBOutlet weak var numberOfItemLabel: UILabel!
+    @IBOutlet private weak var numberOfItemLabel: UILabel!
 
 
     @IBOutlet weak var unitLabel: UILabel!
 
 
 
-    @IBOutlet weak var salesFloorTypeButton: UIButton!
-    @IBAction func salesFloorTypeButton(_ sender: Any) {
+    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+    @IBAction private func salesFloorTypeButton(_ sender: Any) {
     }
 
     @IBOutlet private weak var supplementLabel: UILabel!
@@ -34,29 +34,18 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     @IBOutlet weak var photoPathImageView: UIImageView!
 
-    @objc func imageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("🔥タップ")
-
-    }
-
 
 
     var isChecked:Bool = false
-    let checkedImage = UIImage(named: "checkMark")
-    let uncheckedImage = UIImage(named: "circle")
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         setAppearanceSalesFloorTypeButton()
-
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     var errandDataList: Array<ErrandDataModel> = []
@@ -68,8 +57,10 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
+
     }
 
+    // 買い物リストのデータをセルにセットする
     func setShoppingList(nameOfItem: String, numberOfItem: String,
                          unit: String, salesFloorRawValue:Int ,supplement: String?,
                          image: UIImage?) {
@@ -81,8 +72,14 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         let salesFloor = SalesFloorType(rawValue: salesFloorRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
-
-        photoPathImageView.image = image
+        if image == nil {
+            photoPathImageView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        }else{
+            photoPathImageView.translatesAutoresizingMaskIntoConstraints = false
+            photoPathImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            photoPathImageView.image = image
+        }
         if supplement == nil {
             return
         } else {

@@ -86,13 +86,12 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="imageView"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HAN-4n-n0A">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HQY-9g-b51">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="0.0"/>
-                                                <gestureRecognizers/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="BVh-Nq-dfh"/>
-                                                </constraints>
                                             </imageView>
                                         </subviews>
                                     </stackView>
@@ -107,12 +106,16 @@
                     <constraint firstAttribute="trailing" secondItem="Npr-xd-jJA" secondAttribute="trailing" constant="5" id="piR-Zp-6MK"/>
                     <constraint firstItem="Npr-xd-jJA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="taT-wM-qte"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="NO"/>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabledForSubviews" value="NO"/>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="nameOfItemLabel" destination="76j-Ci-yYa" id="tju-0C-ljb"/>
                 <outlet property="numberOfItemLabel" destination="Syg-kq-YDf" id="LYs-Ib-Mgz"/>
-                <outlet property="photoPathImageView" destination="HAN-4n-n0A" id="Y51-Vl-iht"/>
+                <outlet property="photoPathImageView" destination="HQY-9g-b51" id="gqr-rA-Me7"/>
                 <outlet property="salesFloorTypeButton" destination="XRY-5N-YhG" id="eEI-3j-wpo"/>
                 <outlet property="supplementLabel" destination="Y40-jA-vio" id="13A-CZ-qN0"/>
                 <outlet property="unitLabel" destination="Iwb-NZ-xqV" id="Vkl-Mj-tN7"/>
