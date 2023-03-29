@@ -11,7 +11,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
 
     weak var delegate: ShoppingListTableViewCellDelegate?
-    @IBOutlet weak var checkBoxButton: CheckBox!
+    @IBOutlet private weak var checkBoxButton: CheckBox!
     @IBAction private func isCheckBoxButton(_ sender: Any) {
         if checkBoxButton.isChecked == true {
             self.contentView.backgroundColor = UIColor.systemBackground
@@ -19,54 +19,47 @@ class ShoppingListTableViewCellController: UITableViewCell  {
             self.contentView.backgroundColor = UIColor.lightGray
         }
         isChecked = !isChecked
-
-//        errandDataList[indexPath.row].isCheckBox = isChecked
         delegate?.didTapCheckBoxButton(self)
     }
 
     @IBOutlet private weak var nameOfItemLabel: UILabel!
 
-
-
     @IBOutlet private weak var numberOfItemLabel: UILabel!
 
-
-    @IBOutlet weak var unitLabel: UILabel!
-
-
+    @IBOutlet private weak var unitLabel: UILabel!
 
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
+
     @IBAction private func salesFloorTypeButton(_ sender: Any) {
     }
 
     @IBOutlet private weak var supplementLabel: UILabel!
 
+    @IBOutlet private weak var photoPathImageView: UIImageView!
 
-    @IBOutlet weak var photoPathImageView: UIImageView!
+    private var isChecked:Bool = false
 
-    var isChecked:Bool = false
-    var itemImage:UIImage? = nil
+    private var itemImage:UIImage? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setAppearanceSalesFloorTypeButton()
-        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    var errandDataList: Array<ErrandDataModel> = []
+    private var errandDataList: Array<ErrandDataModel> = []
 
     //SalesFloorTypeButtonの文字の色、角丸、文字の縮小、縮小率、１行で表示を設定
-    func setAppearanceSalesFloorTypeButton() {
+    private func setAppearanceSalesFloorTypeButton() {
         salesFloorTypeButton.setTitleColor(.black, for: .normal)
         salesFloorTypeButton.layer.cornerRadius = 10.0
         salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
-
     }
 
     // 買い物リストのデータをセルにセットする
@@ -88,18 +81,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         let salesFloor = SalesFloorType(rawValue: salesFloorRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
-        photoPathImageView.image = image
-        if image == nil {
-            photoPathImageView.translatesAutoresizingMaskIntoConstraints = false
-            photoPathImageView.widthAnchor.constraint(equalToConstant: 50).isActive = false
-            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).isActive = false
-        }else{
-            photoPathImageView.translatesAutoresizingMaskIntoConstraints = false
-            photoPathImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            photoPathImageView.image = image
-            photoPathImageView.heightAnchor.constraint(equalToConstant: 50).priority = .defaultHigh // 優先度を変更
-        }
+        displayImage(image: image, imageView: photoPathImageView)
         if supplement == nil {
             return
         } else {
@@ -112,9 +94,17 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 //            photoPathImageView.image = errandDataModel.getImage()
 //        }
     }
+
+    // 表示する画像をサイズ調整して表示するメソッド
+    private func displayImage(image: UIImage?, imageView: UIImageView) {
+        guard let image = image else { return }
+        let resizedImage = image.resize(to: CGSize(width: 50, height: 50))
+        imageView.image = resizedImage
+    }
 }
 
 protocol ShoppingListTableViewCellDelegate: AnyObject {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController)
 }
+
 

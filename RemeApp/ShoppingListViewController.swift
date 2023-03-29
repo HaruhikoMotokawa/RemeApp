@@ -24,15 +24,13 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         shoppingListTableView.dataSource = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil), forCellReuseIdentifier: "ShoppingListTableViewCell")
         shoppingListTableView.delegate = self
+        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil), forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
     }
 
-
-
     // cellをチェックがオフのものを一番上に、かつ売り場順に並び替える関数
-    func sortErrandDataList() {
+    private func sortErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
