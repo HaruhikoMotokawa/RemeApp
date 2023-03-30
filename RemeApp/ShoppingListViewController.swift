@@ -29,14 +29,24 @@ class ShoppingListViewController: UIViewController {
         sortErrandDataList()
     }
 
-    // cellをチェックがオフのものを一番上に、かつ売り場順に並び替える関数
-    private func sortErrandDataList() {
+    // cellをチェックがオフのものを一番上に、かつ売り場順に並び替え、全て完了したらアラートを出す関数
+    func sortErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
             } else {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
+        }
+    }
+
+    // 全てのセルがチェックされている場合にアラートを表示する
+    func completionAlert() {
+        if errandDataList.allSatisfy({ $0.isCheckBox }) {
+            let alertController = UIAlertController(title: "買い物を完了しました！", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
         }
     }
 }
@@ -75,6 +85,7 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         let isChecked = !errandDataList[indexPath.row].isCheckBox
         errandDataList[indexPath.row].isCheckBox = isChecked
         sortErrandDataList()
+        completionAlert()
         shoppingListTableView.reloadData()
     }
 }
