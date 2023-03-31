@@ -11,7 +11,7 @@ class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var shoppingListTableView: UITableView!
 
-    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
+    public var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: true ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 1, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "milk")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 3, supplement: "なるべく賞味期限長いもの", photoImage: nil),
@@ -43,7 +43,7 @@ class ShoppingListViewController: UIViewController {
     // 全てのセルがチェックされている場合にアラートを表示する
     func completionAlert() {
         if errandDataList.allSatisfy({ $0.isCheckBox }) {
-            let alertController = UIAlertController(title: "買い物を完了しました！", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "買い物が完了しました！", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)

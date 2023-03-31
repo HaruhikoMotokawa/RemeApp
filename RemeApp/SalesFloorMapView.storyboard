@@ -40,6 +40,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="goAOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ebL-b9-1IV"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWl-9h-gnw">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>

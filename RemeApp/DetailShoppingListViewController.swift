@@ -67,16 +67,26 @@ class DetailShoppingListViewController: UIViewController {
         nameOfItemLabel.text = nameOfItemLabelText
         numberOfItemLabel.text = numberOfItemLabelText
         unitLabel.text = unitLabelText
+        setSalesFloorTypeButton(salesFloorButtonRawValue: self.salesFloorButtonRawValue)
+        setSupplementLabelText(supplement: supplementLabelText)
+        photoPathImageView.image = photoPathImage
+
+    }
+
+    // 受け渡されたデータをSalesFloorTypeButtonに表示
+    func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
         let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
+    }
+
+    // 受け渡されたデータをsetSupplementLabelTextに表示
+    func setSupplementLabelText(supplement: String? ) {
         if supplementLabelText == nil {
             supplementLabel.textColor = UIColor.gray
             supplementLabel.text = "なし"
         }else{
             supplementLabel.text = supplementLabelText
         }
-        photoPathImageView.image = photoPathImage
-
     }
 }

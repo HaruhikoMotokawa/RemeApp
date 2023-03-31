@@ -10,6 +10,9 @@ import UIKit
 class SalesFloorMapViewController: UIViewController {
 
 
+    @IBAction func goAOneList(_ sender: Any) {
+
+    }
     @IBOutlet weak var aOneButton: UIButton!
 
 
@@ -74,7 +77,9 @@ class SalesFloorMapViewController: UIViewController {
         setBorderForLabel(label: leftEntranceLabel)
         setBorderForLabel(label: rightEntranceLabel)
         updateButtonAppearance()
+
     }
+
 
     // UILabelに枠線を設定するメソッド
     private func setBorderForLabel(label: UILabel) {
@@ -85,7 +90,7 @@ class SalesFloorMapViewController: UIViewController {
         label.sizeToFit()
     }
 
-    //     各UIButtonに名称と色を設定するメソッド
+    // 各UIButtonに名称と色を設定するメソッド
     private func updateButtonAppearance() {
         let buttons = [aOneButton, aTwoButton, aThreeButton, bOneButton, bTwoButton, bThreeButton, bFourButton, bFiveButton, bSixButton, bSevenButton, cOneButton, cTwoButton, cThreeButton, cFourButton, cFiveButton, cSixButton, cSevenButton]
 
@@ -95,6 +100,29 @@ class SalesFloorMapViewController: UIViewController {
             button?.backgroundColor = salesFloor.colorOfSalesFloor
             button?.setTitleColor(.black, for: .normal)
             button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            button?.layer.borderWidth = 1
+            button?.layer.borderColor = UIColor.black.cgColor
         }
     }
+
+
+
+
+//    func updateButtonAppearance() {
+//        let buttons = [aOneButton, aTwoButton, aThreeButton, bOneButton, bTwoButton, bThreeButton, bFourButton, bFiveButton, bSixButton, bSevenButton, cOneButton, cTwoButton, cThreeButton, cFourButton, cFiveButton, cSixButton, cSevenButton]
+//
+//        for (index, button) in buttons.enumerated() {
+//            let salesFloor = SalesFloorType(rawValue: index)!
+//            button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
+//            if let salesFloorRawValue = errandDataList[index].salesFloorRawValue {
+//                button?.backgroundColor = salesFloor.colorOfSalesFloor
+//            } else {
+//                button?.backgroundColor = UIColor.white
+//            }
+//            button?.setTitleColor(.black, for: .normal)
+//            button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//            button?.layer.borderWidth = 1
+//            button?.layer.borderColor = UIColor.black.cgColor
+//        }
+//    }
 }
