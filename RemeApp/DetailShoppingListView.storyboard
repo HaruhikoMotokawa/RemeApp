@@ -16,14 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cti-23-laq">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                                <items>
-                                    <navigationItem title="買い物リスト" id="odL-rU-wMb"/>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fhr-kh-fbD">
-                                <rect key="frame" x="10" y="113" width="373" height="230"/>
+                                <rect key="frame" x="10" y="59" width="373" height="230"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-do-G8p" userLabel="商品名">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="78.333333333333329"/>
@@ -61,7 +55,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="clX-qm-QqW">
                                                 <rect key="frame" x="62" y="5.6666666666666572" width="311" height="24"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="１０" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-JT-1G1">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="１０" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5j-JT-1G1">
                                                         <rect key="frame" x="0.0" y="0.0" width="45" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="45" id="owx-4p-VzM"/>
@@ -103,9 +97,6 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="売り場">
                                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
                                                 </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="goSalesFloorMapView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1ru-mW-qRy"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a11-kw-Ado">
                                                 <rect key="frame" x="223" y="0.0" width="150" height="38.333333333333336"/>
@@ -148,37 +139,19 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-Pl-t6A">
-                                <rect key="frame" x="10" y="353" width="373" height="377"/>
+                                <rect key="frame" x="10" y="299" width="373" height="431"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyC-Pf-ikQ">
-                                <rect key="frame" x="50" y="750" width="293" height="38"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward" catalog="system" title="  閉じる">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="backView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GpE-z8-ugU"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qyC-Pf-ikQ" firstAttribute="top" secondItem="aLw-Pl-t6A" secondAttribute="bottom" constant="20" id="20j-jL-ma5"/>
-                            <constraint firstItem="Cti-23-laq" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="2X6-lN-PSP"/>
-                            <constraint firstItem="Cti-23-laq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6eq-72-Hud"/>
-                            <constraint firstItem="qyC-Pf-ikQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="ESS-KU-lCC"/>
                             <constraint firstItem="aLw-Pl-t6A" firstAttribute="top" secondItem="Fhr-kh-fbD" secondAttribute="bottom" constant="10" id="LLm-Gm-oSb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Cti-23-laq" secondAttribute="trailing" id="MXN-Od-kDP"/>
+                            <constraint firstItem="Fhr-kh-fbD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="OAH-Fz-5bg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aLw-Pl-t6A" secondAttribute="bottom" constant="88" id="TFE-yb-5Ss"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aLw-Pl-t6A" secondAttribute="trailing" constant="10" id="b3x-H4-kfU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fhr-kh-fbD" secondAttribute="trailing" constant="10" id="fgF-fU-gPS"/>
-                            <constraint firstItem="Fhr-kh-fbD" firstAttribute="top" secondItem="Cti-23-laq" secondAttribute="bottom" constant="10" id="gm8-dx-eY1"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qyC-Pf-ikQ" secondAttribute="bottom" constant="30" id="i3v-kp-FXP"/>
                             <constraint firstItem="aLw-Pl-t6A" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="ihs-4w-TFk"/>
                             <constraint firstItem="Fhr-kh-fbD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="m9S-Wh-Ys4"/>
-                            <constraint firstItem="aLw-Pl-t6A" firstAttribute="top" secondItem="Cti-23-laq" secondAttribute="bottom" constant="250" id="sXU-PG-yX5"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qyC-Pf-ikQ" secondAttribute="trailing" constant="50" id="vUN-GN-KTI"/>
                         </constraints>
                     </view>
                     <connections>
@@ -196,7 +169,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowshape.backward" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

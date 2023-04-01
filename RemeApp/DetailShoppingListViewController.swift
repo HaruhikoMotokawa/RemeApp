@@ -16,19 +16,10 @@ class DetailShoppingListViewController: UIViewController {
     @IBOutlet weak var unitLabel: UILabel!
 
     @IBOutlet weak var salesFloorTypeButton: UIButton!
-    @IBAction func goSalesFloorMapView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "SalesFloorMapView", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SalesFloorMapView") as! SalesFloorMapViewController
-        self.present(vc, animated: true)
-    }
 
     @IBOutlet weak var supplementLabel: UILabel!
 
     @IBOutlet weak var photoPathImageView: UIImageView!
-
-    @IBAction func backView(_ sender: Any) {
-        dismiss(animated: true)
-    }
 
     var nameOfItemLabelText:String = ""
     var numberOfItemLabelText:String = ""
@@ -41,6 +32,7 @@ class DetailShoppingListViewController: UIViewController {
         super.viewDidLoad()
         setAppearanceSalesFloorTypeButton()
         displayData()
+        self.title = "詳細"
     }
 
     //SalesFloorTypeButtonの文字の色、角丸、文字の縮小、縮小率、１行で表示を設定
