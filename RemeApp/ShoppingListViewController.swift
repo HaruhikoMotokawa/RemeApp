@@ -11,6 +11,9 @@ class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var shoppingListTableView: UITableView!
 
+
+
+
     public var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: true ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 1, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "milk")),
@@ -79,6 +82,7 @@ extension ShoppingListViewController: UITableViewDelegate {
     }
 }
 
+// cell内のチェックボックスをタップした際の処理、チェックしたものは下に移動する、全てのチェックがついたらアラートを出す、テーブルビューを再読み込みして表示する
 extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
@@ -89,3 +93,6 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         shoppingListTableView.reloadData()
     }
 }
+
+
+
