@@ -75,7 +75,7 @@ extension ShoppingListViewController: UITableViewDelegate {
         let errandData = errandDataList[indexPath.row]
         detailShoppingListViewController.configure(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.present(detailShoppingListViewController, animated: true)
+        self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
     }
 }
 
