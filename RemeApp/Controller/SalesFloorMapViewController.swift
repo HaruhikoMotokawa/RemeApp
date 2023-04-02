@@ -9,75 +9,90 @@ import UIKit
 
 class SalesFloorMapViewController: UIViewController {
 
-
-
     @IBOutlet weak var greenThreeButton: UIButton!
     @IBAction func goGreenThreeList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueThreeButton: UIButton!
     @IBAction func goBlueThreeList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redThreeButton: UIButton!
     @IBAction func goRedThreeList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var greenFourButton: UIButton!
     @IBAction func goGreenFourList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var greenTwoButton: UIButton!
     @IBAction func goGreenTwoList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
 
     @IBOutlet weak var blueSevenButton: UIButton!
     @IBAction func goBlueSevenList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueFourButton: UIButton!
     @IBAction func goBlueFourList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueTwoButton: UIButton!
     @IBAction func goBlueTwoList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redFourButton: UIButton!
     @IBAction func goRedFourList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redTwoButton: UIButton!
     @IBAction func goRedTwoList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var greenFiveButton: UIButton!
     @IBAction func goGreenFiveList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var greenOneButton: UIButton!
     @IBAction func goGreenOneList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueSixButton: UIButton!
     @IBAction func goBlueSixList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueFiveButton: UIButton!
     @IBAction func goBlueFiveList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var blueOneButton: UIButton!
     @IBAction func goBlueOneList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redFiveButton: UIButton!
     @IBAction func goRedFiveList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redOneButton: UIButton!
     @IBAction func goRedOneList(_ sender: Any) {
+        goSalesFloorShoppingListView()
     }
 
     // レジ、左出入り口、右出入り口のラベル
@@ -141,6 +156,13 @@ class SalesFloorMapViewController: UIViewController {
         button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button?.layer.borderWidth = 1
         button?.layer.borderColor = UIColor.black.cgColor
+    }
+
+    // SalesFloorShoppingListViewに画面遷移する関数
+    func goSalesFloorShoppingListView() {
+        let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

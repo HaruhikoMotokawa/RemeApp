@@ -19,6 +19,8 @@
 		784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */; };
 		784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */; };
 		784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */; };
+		7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */; };
+		7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */; };
 		785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B029C93577006F0CBB /* ErrandDataModel.swift */; };
 		785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */; };
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
@@ -46,6 +48,8 @@
 		784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShoppingListViewController.swift; sourceTree = "<group>"; };
 		784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShoppingListView.storyboard; sourceTree = "<group>"; };
+		7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
+		7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		785D74B029C93577006F0CBB /* ErrandDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandDataModel.swift; sourceTree = "<group>"; };
 		785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
 				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
 				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
+				7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */,
 				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
 				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
 				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
@@ -146,6 +151,7 @@
 				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
 				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
 				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
+				7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */,
 				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
 				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
 			);
@@ -244,6 +250,7 @@
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
+				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
@@ -308,6 +315,7 @@
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				784E1F2029C8451200C9360A /* ViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
+				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
