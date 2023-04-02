@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ss7-FO-nod">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -16,14 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1B-4I-C1k">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
-                                <items>
-                                    <navigationItem title="売り場マップ" id="w18-I8-61R"/>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ID0-Wc-W3s" userLabel="AとBとC">
-                                <rect key="frame" x="0.0" y="293" width="375" height="252"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="501"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yup-4q-UAI" userLabel="売り場A">
                                         <rect key="frame" x="5" y="0.0" width="365" height="60"/>
@@ -40,6 +34,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="goAOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ebL-b9-1IV"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWl-9h-gnw">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
@@ -53,6 +50,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="goBlueThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="uK9-bI-lvw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvN-aU-KHT">
                                                 <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
@@ -66,17 +66,20 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="goRedThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PEg-Hk-OlE"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-75-dWj" userLabel="BとC">
-                                        <rect key="frame" x="5" y="70" width="365" height="182"/>
+                                        <rect key="frame" x="5" y="70" width="365" height="431"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="mb1-6J-jVx" userLabel="売り場B">
-                                                <rect key="frame" x="0.0" y="0.0" width="365" height="86"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="210.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTw-xz-XVi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
@@ -87,9 +90,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goGreenFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tfW-y0-yoe"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-7i-LU5">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="86"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
@@ -100,9 +106,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goGreenTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aRB-j1-uO3"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJi-XN-vxE">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
@@ -113,9 +122,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueSevenList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RxJ-Uv-o7A"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Up-eH-a2E">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
@@ -126,9 +138,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XI2-lv-Hhw"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOs-bA-VCd">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
@@ -139,9 +154,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sBn-ko-U9L"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsk-do-QYg">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="86"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
@@ -152,9 +170,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goRedFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5WG-CO-2LQ"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Uz-sw-xTl">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
@@ -165,14 +186,17 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goRedTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aVz-9R-gKp"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="eNN-m9-hFI" userLabel="売り場C">
-                                                <rect key="frame" x="0.0" y="96" width="365" height="86"/>
+                                                <rect key="frame" x="0.0" y="220.5" width="365" height="210.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Acp-un-ojQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
@@ -183,9 +207,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goGreenFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sKN-5F-nKe"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-9g-bES">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="86"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
@@ -196,9 +223,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goGreenOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="f4Z-t3-YTI"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3m-sI-G8K">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
@@ -209,9 +239,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueSixList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7Ld-du-0tv"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFw-uj-8a5">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
@@ -222,9 +255,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="x3e-rd-fd7"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-4Z-uPC">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
@@ -235,9 +271,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goBlueOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8UG-5d-HdF"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwS-kp-HOJ">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="86"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
@@ -248,9 +287,12 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goRedFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="59Z-RA-qLa"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTq-po-z0G">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="86"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="210.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
@@ -261,6 +303,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="goRedOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wF0-az-C0d"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -322,43 +367,60 @@
                             <constraint firstItem="rVz-pI-OfQ" firstAttribute="top" secondItem="ID0-Wc-W3s" secondAttribute="bottom" constant="10" id="1fe-49-NBV"/>
                             <constraint firstItem="rVz-pI-OfQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="EDz-LV-nBX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rVz-pI-OfQ" secondAttribute="bottom" constant="5" id="Sub-c2-hdj"/>
-                            <constraint firstItem="L1B-4I-C1k" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="W4i-65-RDq"/>
-                            <constraint firstItem="L1B-4I-C1k" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Yff-Gr-z4H"/>
                             <constraint firstItem="ID0-Wc-W3s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="bTD-4t-N8x"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ID0-Wc-W3s" secondAttribute="trailing" id="go0-Iv-WBC"/>
-                            <constraint firstItem="ID0-Wc-W3s" firstAttribute="top" secondItem="L1B-4I-C1k" secondAttribute="bottom" constant="5" id="jWb-3C-zoU"/>
-                            <constraint firstItem="L1B-4I-C1k" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qVf-XG-h89"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rVz-pI-OfQ" secondAttribute="trailing" id="qab-pt-69u"/>
+                            <constraint firstItem="ID0-Wc-W3s" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="sga-Sh-as5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="売り場マップ" image="map" catalog="system" selectedImage="map" id="xn5-gp-SxN"/>
+                    <navigationItem key="navigationItem" title="売り場マップ" id="yx4-XX-H2t"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="aOneButton" destination="D5Q-xo-Zhs" id="2U7-qr-f12"/>
-                        <outlet property="aThreeButton" destination="uvN-aU-KHT" id="BAK-zh-PbO"/>
-                        <outlet property="aTwoButton" destination="dWl-9h-gnw" id="OdU-Pk-kUj"/>
-                        <outlet property="bFiveButton" destination="KOs-bA-VCd" id="RGf-PU-pUK"/>
-                        <outlet property="bFourButton" destination="5Up-eH-a2E" id="ILu-gC-Xl4"/>
-                        <outlet property="bOneButton" destination="zTw-xz-XVi" id="IvF-YZ-lR7"/>
-                        <outlet property="bSevenButton" destination="0Uz-sw-xTl" id="anV-Xn-F9y"/>
-                        <outlet property="bSixButton" destination="dsk-do-QYg" id="zhS-Km-qsC"/>
-                        <outlet property="bThreeButton" destination="XJi-XN-vxE" id="0rJ-Kx-5fi"/>
-                        <outlet property="bTwoButton" destination="ReT-7i-LU5" id="Daq-fN-g8C"/>
-                        <outlet property="cFiveButton" destination="lNy-4Z-uPC" id="b2O-QE-C6k"/>
-                        <outlet property="cFourButton" destination="GFw-uj-8a5" id="cHK-Db-CMf"/>
-                        <outlet property="cOneButton" destination="Acp-un-ojQ" id="2aS-xZ-kzB"/>
-                        <outlet property="cSevenButton" destination="JTq-po-z0G" id="ZW9-2n-Kne"/>
-                        <outlet property="cSixButton" destination="fwS-kp-HOJ" id="7KP-Ff-Joq"/>
-                        <outlet property="cThreeButton" destination="e3m-sI-G8K" id="h93-mQ-4hb"/>
-                        <outlet property="cTwoButton" destination="ZZO-9g-bES" id="IdO-K5-DcM"/>
+                        <outlet property="blueFiveButton" destination="GFw-uj-8a5" id="cHK-Db-CMf"/>
+                        <outlet property="blueFourButton" destination="5Up-eH-a2E" id="7K4-RU-F9b"/>
+                        <outlet property="blueOneButton" destination="lNy-4Z-uPC" id="b2O-QE-C6k"/>
+                        <outlet property="blueSevenButton" destination="XJi-XN-vxE" id="0rJ-Kx-5fi"/>
+                        <outlet property="blueSixButton" destination="e3m-sI-G8K" id="h93-mQ-4hb"/>
+                        <outlet property="blueThreeButton" destination="dWl-9h-gnw" id="OdU-Pk-kUj"/>
+                        <outlet property="blueTwoButton" destination="KOs-bA-VCd" id="RGf-PU-pUK"/>
+                        <outlet property="greenFiveButton" destination="Acp-un-ojQ" id="2aS-xZ-kzB"/>
+                        <outlet property="greenFourButton" destination="zTw-xz-XVi" id="IvF-YZ-lR7"/>
+                        <outlet property="greenOneButton" destination="ZZO-9g-bES" id="IdO-K5-DcM"/>
+                        <outlet property="greenThreeButton" destination="D5Q-xo-Zhs" id="2U7-qr-f12"/>
+                        <outlet property="greenTwoButton" destination="ReT-7i-LU5" id="Daq-fN-g8C"/>
                         <outlet property="leftEntranceLabel" destination="JCc-zF-G1P" id="cyN-Fi-XdU"/>
+                        <outlet property="redFiveButton" destination="fwS-kp-HOJ" id="7KP-Ff-Joq"/>
+                        <outlet property="redFourButton" destination="dsk-do-QYg" id="zhS-Km-qsC"/>
+                        <outlet property="redOneButton" destination="JTq-po-z0G" id="ZW9-2n-Kne"/>
+                        <outlet property="redThreeButton" destination="uvN-aU-KHT" id="BAK-zh-PbO"/>
+                        <outlet property="redTwoButton" destination="0Uz-sw-xTl" id="anV-Xn-F9y"/>
                         <outlet property="registerLabel" destination="CQA-87-5l1" id="eLz-p7-xlQ"/>
                         <outlet property="rightEntranceLabel" destination="MbW-rs-aB0" id="eQN-Re-iUJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418" y="-30"/>
+            <point key="canvasLocation" x="1356" y="-30.134932533733135"/>
+        </scene>
+        <!--売り場マップ-->
+        <scene sceneID="IcC-ro-sCS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ss7-FO-nod" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="売り場マップ" image="map" catalog="system" selectedImage="map" id="xn5-gp-SxN"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ivx-uM-QbV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="s3u-z8-p09"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9IE-zB-Omg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="416.80000000000001" y="-30.134932533733135"/>
         </scene>
     </scenes>
     <resources>
