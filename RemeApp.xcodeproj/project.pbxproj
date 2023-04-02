@@ -25,8 +25,6 @@
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
-		788E1E9029CED0A8006777E6 /* ImageModalView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 788E1E8F29CED0A8006777E6 /* ImageModalView.storyboard */; };
-		788E1E9429CED587006777E6 /* ImageModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E9329CED587006777E6 /* ImageModalViewController.swift */; };
 		78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3729C835D7004685F1 /* AppDelegate.swift */; };
 		78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3929C835D7004685F1 /* SceneDelegate.swift */; };
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
@@ -54,8 +52,6 @@
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
-		788E1E8F29CED0A8006777E6 /* ImageModalView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageModalView.storyboard; sourceTree = "<group>"; };
-		788E1E9329CED587006777E6 /* ImageModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalViewController.swift; sourceTree = "<group>"; };
 		78AB3B3429C835D7004685F1 /* RemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,33 +103,71 @@
 		78AB3B3629C835D7004685F1 /* RemeApp */ = {
 			isa = PBXGroup;
 			children = (
-				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
-				784E1F1F29C8451200C9360A /* ViewController.swift */,
-				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
-				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
-				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
-				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
-				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
-				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
-				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
-				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
-				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
-				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
-				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
-				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+				78F6F6FD29D9552F00AF4DC0 /* Model */,
+				78F6F70029D9556500AF4DC0 /* Controller */,
+				78F6F6FF29D9555500AF4DC0 /* View */,
+				78F6F70229D9565A00AF4DC0 /* Delegate */,
+				78F6F70129D9562300AF4DC0 /* Extension */,
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 				78AB3B4529C835D8004685F1 /* Info.plist */,
-				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
-				785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */,
-				7846528629D42264006BF69E /* ExtensionUIImage.swift */,
 				78AB3B4029C835D8004685F1 /* Assets.xcassets */,
-				78AB3B3729C835D7004685F1 /* AppDelegate.swift */,
-				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
-				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
-				788E1E9329CED587006777E6 /* ImageModalViewController.swift */,
-				788E1E8F29CED0A8006777E6 /* ImageModalView.storyboard */,
 			);
 			path = RemeApp;
+			sourceTree = "<group>";
+		};
+		78F6F6FD29D9552F00AF4DC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		78F6F6FF29D9555500AF4DC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
+				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
+				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
+				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
+				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
+				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
+				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		78F6F70029D9556500AF4DC0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F1F29C8451200C9360A /* ViewController.swift */,
+				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
+				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
+				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
+				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
+				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
+				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		78F6F70129D9562300AF4DC0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */,
+				7846528629D42264006BF69E /* ExtensionUIImage.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		78F6F70229D9565A00AF4DC0 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				78AB3B3729C835D7004685F1 /* AppDelegate.swift */,
+				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		8507120358070AA0C6EFDBBF /* Pods */ = {
@@ -205,7 +239,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				788E1E9029CED0A8006777E6 /* ImageModalView.storyboard in Resources */,
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
@@ -267,7 +300,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				788E1E9429CED587006777E6 /* ImageModalViewController.swift in Sources */,
 				7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */,
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,

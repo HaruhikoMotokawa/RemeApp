@@ -29,7 +29,7 @@ class ShoppingListViewController: UIViewController {
         sortErrandDataList()
     }
 
-    // cellをチェックがオフのものを一番上に、かつ売り場順に並び替え、全て完了したらアラートを出す関数
+    // cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     func sortErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
