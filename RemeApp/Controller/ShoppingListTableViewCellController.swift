@@ -46,7 +46,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         super.setSelected(selected, animated: animated)
     }
 
-    private var errandDataList: Array<ErrandDataModel> = []
+    var errandDataList: Array<ErrandDataModel> = []
 
     //SalesFloorTypeButtonの文字の色、角丸、文字の縮小、縮小率、１行で表示を設定
     private func setAppearanceSalesFloorTypeButton() {

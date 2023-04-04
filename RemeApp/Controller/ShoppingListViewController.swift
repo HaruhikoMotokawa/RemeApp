@@ -11,7 +11,7 @@ class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var shoppingListTableView: UITableView!
 
-    public var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
+    private var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
@@ -73,7 +73,7 @@ extension ShoppingListViewController: UITableViewDelegate {
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
         let detailShoppingListViewController = storyboard.instantiateViewController(withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let errandData = errandDataList[indexPath.row]
-        detailShoppingListViewController.configure(detail: errandData)
+        detailShoppingListViewController.configurerDetailShoppingListView(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
     }

@@ -87,12 +87,15 @@ class SalesFloorMapViewController: UIViewController {
 
     @IBOutlet weak var redFiveButton: UIButton!
     @IBAction func goRedFiveList(_ sender: Any) {
+//        let redFiveButtonType = SalesFloorType(rawValue: 4)
         goSalesFloorShoppingListView()
     }
 
     @IBOutlet weak var redOneButton: UIButton!
     @IBAction func goRedOneList(_ sender: Any) {
+        
         goSalesFloorShoppingListView()
+
     }
 
     // レジ、左出入り口、右出入り口のラベル
@@ -100,7 +103,9 @@ class SalesFloorMapViewController: UIViewController {
     @IBOutlet weak var leftEntranceLabel: UILabel!
     @IBOutlet weak var rightEntranceLabel: UILabel!
 
-    public var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
+    let salesFloorShoppingListVC = SalesFloorShoppingListViewController()
+
+    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
                                                     ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
@@ -162,8 +167,12 @@ class SalesFloorMapViewController: UIViewController {
     func goSalesFloorShoppingListView() {
         let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController
+        let salesFloorRawValue = 0 // ここに渡したい値を指定してください
+        salesFloorShoppingListVC.setSalesFloorRawValue = salesFloorRawValue
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
 
 

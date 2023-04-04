@@ -1,13 +1,13 @@
 //
-//  DetailShoppingListViewController.swift
+//  DetailSalesFloorShoppingListViewController.swift
 //  RemeApp
 //
-//  Created by 本川晴彦 on 2023/03/27.
+//  Created by 本川晴彦 on 2023/04/04.
 //
 
 import UIKit
 
-class DetailShoppingListViewController: UIViewController {
+class DetailSalesFloorShoppingListViewController: UIViewController {
 
     @IBOutlet weak var nameOfItemLabel: UILabel!
 
@@ -45,7 +45,7 @@ class DetailShoppingListViewController: UIViewController {
     }
 
     // データ受け渡し用のメソッド
-    func configurerDetailShoppingListView(detail: ErrandDataModel) {
+    func configurerDetailSalesFloorShoppingListView(detail: ErrandDataModel) {
         nameOfItemLabelText = detail.nameOfItem
         numberOfItemLabelText = detail.numberOfItem
         unitLabelText = detail.unit

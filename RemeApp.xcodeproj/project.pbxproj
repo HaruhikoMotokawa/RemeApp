@@ -32,6 +32,8 @@
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
 		78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */; };
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
+		78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */; };
+		78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		78AB3B4329C835D8004685F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78AB3B4529C835D8004685F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
+		78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailSalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
+		78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
 		AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,8 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				78F6F6FD29D9552F00AF4DC0 /* Model */,
-				78F6F70029D9556500AF4DC0 /* Controller */,
 				78F6F6FF29D9555500AF4DC0 /* View */,
+				78F6F70029D9556500AF4DC0 /* Controller */,
 				78F6F70229D9565A00AF4DC0 /* Delegate */,
 				78F6F70129D9562300AF4DC0 /* Extension */,
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
@@ -131,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */,
 				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
 				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
 				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
@@ -150,6 +155,7 @@
 				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
 				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
 				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
+				78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */,
 				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
 				7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */,
 				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
@@ -248,6 +254,7 @@
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
+				78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
@@ -320,6 +327,7 @@
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
+				78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
