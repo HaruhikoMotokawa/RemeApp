@@ -34,6 +34,8 @@
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
 		78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */; };
 		78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */; };
+		78F38E4929DD8C6C004972A3 /* CreateNewItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */; };
+		78F38E4B29DD8C90004972A3 /* CreateNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
 		78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailSalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
+		78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateNewItemView.storyboard; sourceTree = "<group>"; };
+		78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemViewController.swift; sourceTree = "<group>"; };
 		AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
+				78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
+				78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -224,8 +230,8 @@
 				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
 				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
-				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
 				78EDF40E29DD131600A6407D /* EditShoppingListView */,
+				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
 				78EDF41029DD134800A6407D /* CustumCell */,
 			);
 			path = View;
@@ -334,6 +340,7 @@
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
+				78F38E4929DD8C6C004972A3 /* CreateNewItemView.storyboard in Resources */,
 				78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
@@ -402,6 +409,7 @@
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				784E1F2029C8451200C9360A /* ViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
+				78F38E4B29DD8C90004972A3 /* CreateNewItemViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
