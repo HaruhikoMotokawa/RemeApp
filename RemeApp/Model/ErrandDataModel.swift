@@ -7,16 +7,26 @@
 
 import UIKit
 
+/// お使いデータモデル
 struct ErrandDataModel {
+    /// データのID
     var id:String = UUID().uuidString
+    /// 商品の購入判定
     var isCheckBox:Bool = false
+    /// 商品名
     var nameOfItem:String = ""
+    /// 商品の必要数
     var numberOfItem = "1"
+    /// 商品の必要数に対する単位
     var unit:String = "個"
+    /// 売り場に対応するRawValue
     var salesFloorRawValue:Int = 0
+    /// 商品に対する補足文、nilを許容
     var supplement:String? = nil
+    /// 商品の写真データパス、nilを許容
     var photoPath:String? = nil
     var photoImage:UIImage? = nil // テスト用であとで削除
+    /// enum SalesFloorTypeをお使いデータに登録
     var salesFloor: SalesFloorType {
         get {
             return SalesFloorType(rawValue: salesFloorRawValue)!
@@ -30,6 +40,7 @@ struct ErrandDataModel {
 //        return "id"
 //    }
 
+    ///
     mutating func setImage(image: UIImage?, path: String?) {
         if let image = image {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -61,8 +72,10 @@ struct ErrandDataModel {
     }
 }
 
+/// 売り場の詳細データ
 enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , PersistableEnum
-//    case first
+
+    /// 売り場の番地、赤１〜５と青１〜７、緑１〜５
     case redOne
     case redTwo
     case redThree
@@ -81,9 +94,9 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
     case greenFour
     case greenFive
 
+    /// 売り場の名称
     var nameOfSalesFloor: String {
         switch self {
-//            case .first: return "売り場を選択"
             case .redOne: return "野菜・果物"
             case .redTwo: return "惣菜"
             case .redThree: return "魚介類"
@@ -104,9 +117,9 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
         }
     }
 
+    /// 売り場に対応する色、UIButtonの背景色に使用する
     var colorOfSalesFloor: UIColor {
         switch self {
-//            case .first: return .gray
             case .redOne: return .green
             case .redTwo: return .systemTeal
             case .redThree: return .blue
@@ -127,9 +140,9 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
         }
     }
 
+    /// 売り場の番地、もしかしたら使わないかも？
     var addressOfSalesFloor: String {
         switch self {
-//            case .first: return ""
             case .redOne: return "赤①"
             case .redTwo: return "赤②"
             case .redThree: return "赤③"
@@ -151,10 +164,12 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
         }
     }
 
+    /// enumにintValueを設定
     var intValue: Int {
         return self.rawValue
     }
 
+    /// intValueからenumを設定する
     init?(intValue: Int) {
         self.init(rawValue: intValue)
 

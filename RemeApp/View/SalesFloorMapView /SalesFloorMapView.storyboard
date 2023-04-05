@@ -35,7 +35,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="goAOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ebL-b9-1IV"/>
+                                                    <action selector="goGreenThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="brV-cs-V1q"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWl-9h-gnw">
