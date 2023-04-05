@@ -123,6 +123,92 @@
 			path = RemeApp;
 			sourceTree = "<group>";
 		};
+		78EDF40729DD111300A6407D /* ShoppingListView */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
+				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
+			);
+			path = ShoppingListView;
+			sourceTree = "<group>";
+		};
+		78EDF40829DD114300A6407D /* SalesFloorMapView  */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
+				7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */,
+				78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */,
+			);
+			path = "SalesFloorMapView ";
+			sourceTree = "<group>";
+		};
+		78EDF40929DD117900A6407D /* EditShoppingListView */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
+			);
+			path = EditShoppingListView;
+			sourceTree = "<group>";
+		};
+		78EDF40A29DD11EE00A6407D /* EditSalesFloorMapView */ = {
+			isa = PBXGroup;
+			children = (
+				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
+			);
+			path = EditSalesFloorMapView;
+			sourceTree = "<group>";
+		};
+		78EDF40B29DD121900A6407D /* CustumCell */ = {
+			isa = PBXGroup;
+			children = (
+				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+			);
+			path = CustumCell;
+			sourceTree = "<group>";
+		};
+		78EDF40C29DD12BE00A6407D /* ShoppingListView */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
+				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
+			);
+			path = ShoppingListView;
+			sourceTree = "<group>";
+		};
+		78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
+				7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */,
+				78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */,
+			);
+			path = "SalesFloorMapView ";
+			sourceTree = "<group>";
+		};
+		78EDF40E29DD131600A6407D /* EditShoppingListView */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
+			);
+			path = EditShoppingListView;
+			sourceTree = "<group>";
+		};
+		78EDF40F29DD132900A6407D /* EditSalesFloorMapView */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
+			);
+			path = EditSalesFloorMapView;
+			sourceTree = "<group>";
+		};
+		78EDF41029DD134800A6407D /* CustumCell */ = {
+			isa = PBXGroup;
+			children = (
+				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
+			);
+			path = CustumCell;
+			sourceTree = "<group>";
+		};
 		78F6F6FD29D9552F00AF4DC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,16 +220,13 @@
 		78F6F6FF29D9555500AF4DC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
-				78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */,
-				784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */,
-				78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */,
-				784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */,
-				7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */,
-				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
-				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
-				787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */,
 				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
+				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
+				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
+				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
+				78EDF40E29DD131600A6407D /* EditShoppingListView */,
+				78EDF41029DD134800A6407D /* CustumCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,14 +235,11 @@
 			isa = PBXGroup;
 			children = (
 				784E1F1F29C8451200C9360A /* ViewController.swift */,
-				784E1F2B29C84BCB00C9360A /* ShoppingListViewController.swift */,
-				78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */,
-				784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */,
-				78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */,
-				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
-				7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */,
-				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
-				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+				78EDF40729DD111300A6407D /* ShoppingListView */,
+				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
+				78EDF40929DD117900A6407D /* EditShoppingListView */,
+				78EDF40A29DD11EE00A6407D /* EditSalesFloorMapView */,
+				78EDF40B29DD121900A6407D /* CustumCell */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
