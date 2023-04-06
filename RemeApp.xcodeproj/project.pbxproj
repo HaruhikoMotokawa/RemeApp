@@ -32,6 +32,8 @@
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
 		78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */; };
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
+		78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */; };
+		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
 		78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */; };
 		78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */; };
 		78F38E4929DD8C6C004972A3 /* CreateNewItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */; };
@@ -44,6 +46,8 @@
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
+		784DB3C629DE603100975187 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		784DB3C729DE604E00975187 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		784E1F1F29C8451200C9360A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -64,9 +68,10 @@
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		78AB3B4029C835D8004685F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		78AB3B4329C835D8004685F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78AB3B4529C835D8004685F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
+		78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectTypeOfSalesFloorView.storyboard; sourceTree = "<group>"; };
+		78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfSalesFloorViewController.swift; sourceTree = "<group>"; };
 		78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailSalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateNewItemView.storyboard; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 			children = (
 				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
 				78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */,
+				78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -195,6 +201,7 @@
 			children = (
 				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
 				78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */,
+				78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -320,6 +327,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 				Base,
 			);
 			mainGroup = 78AB3B2B29C835D7004685F1;
@@ -347,6 +355,7 @@
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
+				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
 			);
@@ -416,6 +425,7 @@
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */,
+				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +436,8 @@
 		78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				78AB3B4329C835D8004685F1 /* Base */,
+				784DB3C629DE603100975187 /* ja */,
+				784DB3C729DE604E00975187 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -438,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -498,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

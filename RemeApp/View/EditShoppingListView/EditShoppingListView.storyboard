@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6sB-oq-jtj">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -15,22 +15,26 @@
             <objects>
                 <viewController storyboardIdentifier="EditShoppingListView" title="買い物リスト編集" id="Y6W-OH-hqX" customClass="EditShoppingListViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PuH-sh-ab9">
-                                <rect key="frame" x="0.0" y="101" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="101" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="買い物リスト編集" id="g19-22-9B9"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dg6-dk-nnA">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.94901960780000005" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Opl-RT-tcr">
-                                <rect key="frame" x="193" y="669" width="70" height="70"/>
+                                <rect key="frame" x="215" y="538" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="IwA-r7-T2c"/>
+                                    <constraint firstAttribute="height" constant="50" id="l68-Rx-6zC"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
                                 <connections>
@@ -38,7 +42,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wy-wG-LSR">
-                                <rect key="frame" x="293" y="669" width="70" height="70"/>
+                                <rect key="frame" x="295" y="538" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7jJ-q7-28s"/>
+                                    <constraint firstAttribute="width" constant="50" id="Icj-Ov-Vyg"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <imageReference key="image" image="plus.square" catalog="system" symbolScale="large"/>
@@ -51,18 +59,14 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Wy-wG-LSR" secondAttribute="bottom" constant="30" id="1Sz-D0-KBU"/>
-                            <constraint firstItem="Opl-RT-tcr" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="566" id="4UH-eN-h6w"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="J77-Th-4wj"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Opl-RT-tcr" secondAttribute="bottom" constant="30" id="JTe-it-UqU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Wy-wG-LSR" secondAttribute="trailing" constant="30" id="LFZ-si-W1V"/>
-                            <constraint firstItem="6Wy-wG-LSR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="566" id="M0u-Eu-bhn"/>
-                            <constraint firstItem="6Wy-wG-LSR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="293" id="Tbg-Gk-Nql"/>
                             <constraint firstItem="6Wy-wG-LSR" firstAttribute="leading" secondItem="Opl-RT-tcr" secondAttribute="trailing" constant="30" id="W4y-il-GOD"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="YZm-cb-OLJ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Wy-wG-LSR" secondAttribute="trailing" constant="30" id="aMh-qf-r3y"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Opl-RT-tcr" secondAttribute="bottom" constant="30" id="ag5-e2-I2L"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="chD-Y2-IsN"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXf-o2-UU1"/>
-                            <constraint firstItem="Opl-RT-tcr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="193" id="r4H-rp-DvC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Wy-wG-LSR" secondAttribute="bottom" constant="30" id="ojL-Fo-yYx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="買い物リスト編集" id="XJP-po-moq"/>
@@ -84,7 +88,7 @@
                     <tabBarItem key="tabBarItem" title="買い物リスト編集" image="pencil.circle" catalog="system" selectedImage="pencil.circle" id="RWg-p1-Lm8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tY4-y4-Z7N">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

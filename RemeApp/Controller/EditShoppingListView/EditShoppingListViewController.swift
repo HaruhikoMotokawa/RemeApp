@@ -21,6 +21,9 @@ class EditShoppingListViewController: UIViewController {
 
     @IBOutlet weak var createNewItemButton: UIButton!
     @IBAction func goCreateNewItemView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "CreateNewItemView", bundle: nil)
+        let createNewItemVC = storyboard.instantiateViewController(withIdentifier: "CreateNewItemView") as! CreateNewItemViewController
+        self.present(createNewItemVC, animated: true)
     }
 
 
