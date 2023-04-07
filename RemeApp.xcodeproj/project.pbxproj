@@ -46,8 +46,6 @@
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
-		784DB3C629DE603100975187 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		784DB3C729DE604E00975187 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		784E1F1F29C8451200C9360A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -72,6 +70,9 @@
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
 		78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectTypeOfSalesFloorView.storyboard; sourceTree = "<group>"; };
 		78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfSalesFloorViewController.swift; sourceTree = "<group>"; };
+		78CAAF7B29DFCFE70084A8AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		78CAAF7C29DFD0EA0084A8AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailSalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateNewItemView.storyboard; sourceTree = "<group>"; };
@@ -323,12 +324,12 @@
 			};
 			buildConfigurationList = 78AB3B2F29C835D7004685F1 /* Build configuration list for PBXProject "RemeApp" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				Base,
 				en,
 				ja,
-				Base,
 			);
 			mainGroup = 78AB3B2B29C835D7004685F1;
 			productRefGroup = 78AB3B3529C835D7004685F1 /* Products */;
@@ -436,8 +437,9 @@
 		78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				784DB3C629DE603100975187 /* ja */,
-				784DB3C729DE604E00975187 /* ja */,
+				78CAAF7B29DFCFE70084A8AF /* Base */,
+				78CAAF7C29DFD0EA0084A8AF /* en */,
+				78CAAF7D29DFD1090084A8AF /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

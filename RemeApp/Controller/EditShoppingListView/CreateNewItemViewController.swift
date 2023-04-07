@@ -15,9 +15,7 @@ class CreateNewItemViewController: UIViewController {
 
     @IBOutlet weak var numberOfItemPickerView: UIPickerView!
 
-
     @IBOutlet weak var unitPickerView: UIPickerView!
-
 
     @IBOutlet weak var selectTypeOfSalesFloorButton: UIButton!
 
@@ -31,19 +29,15 @@ class CreateNewItemViewController: UIViewController {
 
     @IBOutlet weak var supplementTextField: UITextField!
 
-
     @IBOutlet weak var selectPhotoButton: UIButton!
 
-
     @IBOutlet weak var photoImageView: UIImageView!
-
 
     @IBOutlet weak var cancelButton: UIButton!
 
     @IBAction func cancelAndReturn(_ sender: Any) {
         dismiss(animated: true)
     }
-
 
     @IBOutlet weak var addButton: UIButton!
     @IBAction func addAndReturn(_ sender: Any) {
@@ -67,22 +61,27 @@ class CreateNewItemViewController: UIViewController {
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
         supplementTextField.delegate = self
-        setCloseButton(textField: nameOfItemTextField)
-        setCloseButton(textField: supplementTextField)
+        setCloseButton()
         setAppearanceAllButton()
-        initialAddButton()
+        disableButton(button: selectTypeOfSalesFloorButton)
+        disableButton(button: addButton)
+
     }
 
-    /// 追加ボタンの初期状態
+    /// ボタンの初期状態
     /// - ボタンの非活性化
     /// - バックグラウンドカラーを白に設定
-    private func initialAddButton() {
-        addButton.isEnabled = false
-        addButton.backgroundColor = .white
+    private func disableButton(button: UIButton) {
+        button.isEnabled = false
+        button.backgroundColor = .white
     }
 
     /// 条件によってボタンを有効にする
-    private func activationAddButton() {
+    /// - nameOfItemTextFieldに入力さている
+    /// - selectTypeOfSalesFloorButtonに売り場が選択されている
+    private func enableButton(button: UIButton) {
+        button.backgroundColor = .lightGray
+        button.isEnabled = true
     }
 
     /// 画面上の全てのButtonの見た目の設定メソッド
@@ -113,18 +112,16 @@ class CreateNewItemViewController: UIViewController {
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
-    private func setCloseButton(textField: UITextField) {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    private func setCloseButton() {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        toolbar.items = [flexSpace, doneButton]
-        textField.inputAccessoryView = toolbar
+        toolbar.items = [doneButton]
+        nameOfItemTextField.inputAccessoryView = toolbar
+        supplementTextField.inputAccessoryView = toolbar
     }
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
     @objc func doneButtonTapped() {
-        nameOfItemTextField.resignFirstResponder()
-        supplementTextField.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 
@@ -165,7 +162,7 @@ extension CreateNewItemViewController: UIPickerViewDataSource {
 extension CreateNewItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限
     /// - 商品名：１５文字以内
-    /// - 補足：２０文字以内
+    /// - 補足：３０文字以内
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
@@ -174,9 +171,17 @@ extension CreateNewItemViewController: UITextFieldDelegate {
             case nameOfItemTextField:
                 return newLength <= 15
             case supplementTextField:
-                return newLength <= 20
+                return newLength <= 30
             default:
                 return true
+        }
+    }
+
+    /// 商品名が入力された時に売り場選択ボタンを活性化するメソッド
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if nameOfItemTextField.text == "" { return }
+        else {
+            enableButton(button: selectTypeOfSalesFloorButton)
         }
     }
 }
@@ -188,5 +193,6 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
     func salesFloorButtonDidTapDone(type: SalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
+        enableButton(button: addButton)
     }
 }

@@ -223,6 +223,8 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     }
 }
 
+
+
 /// 「売り場選択」画面でボタンをタップした後に、
 /// 「品目新規作成」画面のボタンの見た目を変更するためのDelegate
 protocol SelectTypeOfSalesFloorViewControllerDelegate {
