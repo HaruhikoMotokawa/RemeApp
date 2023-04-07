@@ -152,11 +152,15 @@ class SalesFloorMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 各UILabelに枠線を設定
+        setBorderForLabelAllLabel()
+        updateButtonAppearance()
+    }
+
+    /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
+    private func setBorderForLabelAllLabel() {
         setBorderForLabel(label: registerLabel)
         setBorderForLabel(label: leftEntranceLabel)
         setBorderForLabel(label: rightEntranceLabel)
-        updateButtonAppearance()
-
     }
 
     /// UILabelに枠線を設定するメソッド

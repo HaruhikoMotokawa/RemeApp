@@ -20,7 +20,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-4a-8iq">
                                 <rect key="frame" x="0.0" y="20" width="375" height="273"/>
                                 <items>
-                                    <navigationItem title="Title" id="L9A-q4-Vxq"/>
+                                    <navigationItem title="売り場選択" id="L9A-q4-Vxq"/>
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X89-jQ-geJ" userLabel="AとBとC">
@@ -41,6 +41,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectGreenThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="dd6-WF-9f7"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-QU-u5A">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
@@ -54,6 +57,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectBlueThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="fM2-jA-Owc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfh-gH-GQw">
                                                 <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
@@ -67,6 +73,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectRedThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="bCF-nS-wNL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -88,6 +97,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectGreenFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="dQ4-tI-Boo"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQF-jp-1Yu">
                                                         <rect key="frame" x="54" y="0.0" width="40.5" height="86"/>
@@ -101,6 +113,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectGreenTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="0V4-sO-dxT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-oq-c94">
                                                         <rect key="frame" x="108.5" y="0.0" width="40" height="86"/>
@@ -114,6 +129,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueSeven:" destination="nYn-TC-hgD" eventType="touchUpInside" id="8vb-JA-cz4"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uav-Do-hTA">
                                                         <rect key="frame" x="162.5" y="0.0" width="40" height="86"/>
@@ -127,6 +145,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="o0z-8r-jJh"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szH-B9-WH7">
                                                         <rect key="frame" x="216.5" y="0.0" width="40" height="86"/>
@@ -140,6 +161,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="s0v-zB-9XD"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0g-cj-xtp">
                                                         <rect key="frame" x="270.5" y="0.0" width="40.5" height="86"/>
@@ -153,6 +177,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectRedFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="1XA-nI-lfZ"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlE-tv-TEj">
                                                         <rect key="frame" x="325" y="0.0" width="40" height="86"/>
@@ -166,6 +193,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectRedTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="c7s-6j-3u0"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -184,6 +214,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectGreenFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="hQJ-ie-Dz8"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0f-JM-oDG">
                                                         <rect key="frame" x="54" y="0.0" width="40.5" height="86"/>
@@ -197,6 +230,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectGreenOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="XvD-oR-v4q"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7p-MN-ohW">
                                                         <rect key="frame" x="108.5" y="0.0" width="40" height="86"/>
@@ -210,6 +246,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueSix:" destination="nYn-TC-hgD" eventType="touchUpInside" id="p8L-ae-FRb"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4A-AL-GBQ">
                                                         <rect key="frame" x="162.5" y="0.0" width="40" height="86"/>
@@ -223,6 +262,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="g2j-Ay-eSL"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A73-lm-d1V">
                                                         <rect key="frame" x="216.5" y="0.0" width="40" height="86"/>
@@ -236,6 +278,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectBlueOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="h59-k0-KY9"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpL-vB-rjv">
                                                         <rect key="frame" x="270.5" y="0.0" width="40.5" height="86"/>
@@ -249,6 +294,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectRedFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="v0z-pb-jew"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSg-7S-tJJ">
                                                         <rect key="frame" x="325" y="0.0" width="40" height="86"/>
@@ -262,6 +310,9 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="selectRedOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="SWM-MZ-OLB"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -333,10 +384,32 @@
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="blueFiveButton" destination="M4A-AL-GBQ" id="iID-bJ-eLY"/>
+                        <outlet property="blueFourButton" destination="Uav-Do-hTA" id="ZW0-LV-DLZ"/>
+                        <outlet property="blueOneButton" destination="A73-lm-d1V" id="ZSb-Pw-YYT"/>
+                        <outlet property="blueSevenButton" destination="APQ-oq-c94" id="FyF-CL-ptw"/>
+                        <outlet property="blueSixButton" destination="L7p-MN-ohW" id="ASC-qJ-Bsh"/>
+                        <outlet property="blueThreeButton" destination="6no-QU-u5A" id="lE1-uo-oOv"/>
+                        <outlet property="blueTwoButton" destination="szH-B9-WH7" id="Qgz-Ch-QUq"/>
+                        <outlet property="greenFiveButton" destination="c4I-xs-vkd" id="ASx-dM-reO"/>
+                        <outlet property="greenFourButton" destination="lMw-DY-lBR" id="gTj-yi-STs"/>
+                        <outlet property="greenOneButton" destination="w0f-JM-oDG" id="rMu-sM-Wzz"/>
+                        <outlet property="greenThreeButton" destination="9PB-K5-WOs" id="HHQ-fU-P6t"/>
+                        <outlet property="greenTwoButton" destination="UQF-jp-1Yu" id="jKL-m6-233"/>
+                        <outlet property="leftEntranceLabel" destination="sgx-dZ-e9U" id="rQt-6c-iAA"/>
+                        <outlet property="redFiveButton" destination="CpL-vB-rjv" id="SVc-Vj-WoQ"/>
+                        <outlet property="redFourButton" destination="M0g-cj-xtp" id="1pI-DQ-UR8"/>
+                        <outlet property="redOneButton" destination="gSg-7S-tJJ" id="TlF-Ax-BRT"/>
+                        <outlet property="redThreeButton" destination="Wfh-gH-GQw" id="fWo-gg-vDb"/>
+                        <outlet property="redTwoButton" destination="jlE-tv-TEj" id="Bko-c3-u46"/>
+                        <outlet property="registerLabel" destination="p0C-1p-Yaf" id="1fw-ka-rzj"/>
+                        <outlet property="rightEntranceLabel" destination="Knd-gT-RZO" id="FHN-Bn-zW5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xug-eQ-ZqO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1356" y="-30.134932533733135"/>
+            <point key="canvasLocation" x="1289" y="-58"/>
         </scene>
     </scenes>
     <resources>

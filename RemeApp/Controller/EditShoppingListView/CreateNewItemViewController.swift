@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// G-品目新規作成
 class CreateNewItemViewController: UIViewController {
 
 
@@ -24,6 +25,7 @@ class CreateNewItemViewController: UIViewController {
         let storyboard = UIStoryboard(name: "SelectTypeOfSalesFloorView", bundle: nil)
         let selectTypeOfSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "SelectTypeOfSalesFloorView") as! SelectTypeOfSalesFloorViewController
+        selectTypeOfSalesFloorVC.delegate = self
         self.present(selectTypeOfSalesFloorVC, animated: true)
     }
 
@@ -59,14 +61,14 @@ class CreateNewItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCloseButton(textField: nameOfItemTextField)
-        setCloseButton(textField: supplementTextField)
         numberOfItemPickerView.delegate = self
         numberOfItemPickerView.dataSource = self
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
         supplementTextField.delegate = self
+        setCloseButton(textField: nameOfItemTextField)
+        setCloseButton(textField: supplementTextField)
         setAppearanceAllButton()
         initialAddButton()
     }
@@ -79,16 +81,17 @@ class CreateNewItemViewController: UIViewController {
         addButton.backgroundColor = .white
     }
 
+    /// 条件によってボタンを有効にする
+    private func activationAddButton() {
+    }
+
     /// 画面上の全てのButtonの見た目の設定メソッド
     private func setAppearanceAllButton() {
         setAppearanceButton(button: selectTypeOfSalesFloorButton)
         setAppearanceButton(button: selectPhotoButton)
         setAppearanceButton(button: cancelButton)
         setAppearanceButton(button: addButton)
-    }
 
-    /// 条件によってボタンを有効にする
-    private func activationAddButton() {
     }
 
     /// UIButtonの見た目を変更する
@@ -178,4 +181,12 @@ extension CreateNewItemViewController: UITextFieldDelegate {
     }
 }
 
-
+extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
+    /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
+    /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
+    /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
+    func salesFloorButtonDidTapDone(type: SalesFloorType) {
+        selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
+        selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
+    }
+}

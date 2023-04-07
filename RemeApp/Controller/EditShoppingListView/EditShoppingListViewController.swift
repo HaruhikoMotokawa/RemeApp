@@ -47,7 +47,7 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
-setAppearanceButton(button: shareShoppingListButton)
+        setAppearanceButton(button: shareShoppingListButton)
         setAppearanceButton(button: createNewItemButton)
     }
 
@@ -94,6 +94,7 @@ extension EditShoppingListViewController: UITableViewDataSource {
     }
 }
 
+// TODO: 画面遷移作が買い物リスト詳細になっているので、いずれ変更する
 extension EditShoppingListViewController: UITableViewDelegate {
     /// shoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
