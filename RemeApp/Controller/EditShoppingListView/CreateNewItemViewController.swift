@@ -10,7 +10,6 @@ import UIKit
 /// G-品目新規作成
 class CreateNewItemViewController: UIViewController {
 
-
     @IBOutlet weak var nameOfItemTextField: UITextField!
 
     @IBOutlet weak var numberOfItemPickerView: UIPickerView!
@@ -101,6 +100,7 @@ class CreateNewItemViewController: UIViewController {
     /// - １行で表示を設定
     /// - 枠線の幅
     /// - 枠線の色
+    /// - ボタンに影をつける
     private func setAppearanceButton(button: UIButton) {
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10.0
@@ -109,6 +109,18 @@ class CreateNewItemViewController: UIViewController {
         button.titleLabel?.numberOfLines = 1
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.cgColor
+        addShadow(to: button)
+    }
+    /// UIButtonに影をつけるメソッド
+    private func addShadow(to button: UIButton) {
+        // 影の色
+        button.layer.shadowColor = UIColor.black.cgColor
+        // 影の透明度
+        button.layer.shadowOpacity = 0.5
+        // 影のオフセット、影の位置
+        button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        // 影の半径
+        button.layer.shadowRadius = 2
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
@@ -181,7 +193,7 @@ extension CreateNewItemViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if nameOfItemTextField.text == "" { return }
         else {
-            enableButton(button: selectTypeOfSalesFloorButton)
+            selectTypeOfSalesFloorButton.isEnabled = true
         }
     }
 }
