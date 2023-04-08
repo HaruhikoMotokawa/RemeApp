@@ -64,7 +64,8 @@ class CreateNewItemViewController: UIViewController {
         setAppearanceAllButton()
         disableButton(button: selectTypeOfSalesFloorButton)
         disableButton(button: addButton)
-
+        setAppearance(textView: supplementTextView)
+        setPlaceholder(textView: supplementTextView)
     }
 
     /// ボタンの初期状態
@@ -89,7 +90,6 @@ class CreateNewItemViewController: UIViewController {
         setAppearanceButton(button: selectPhotoButton)
         setAppearanceButton(button: cancelButton)
         setAppearanceButton(button: addButton)
-
     }
 
     /// UIButtonの見た目を変更する
@@ -135,6 +135,20 @@ class CreateNewItemViewController: UIViewController {
     @objc func doneButtonTapped() {
         view.endEditing(true)
     }
+
+    /// TextViewにプレースホルダーを設置するメソッド
+    func setPlaceholder(textView: UITextView) {
+        textView.text = "任意：３０文字以内で入力して下さい"
+        textView.textColor = UIColor.lightGray
+        textView.delegate = self
+    }
+
+    /// TextViewに枠線を設置
+    func setAppearance(textView: UITextView) {
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.cornerRadius = 10.0
+    }
 }
 
 extension CreateNewItemViewController: UIPickerViewDelegate {
@@ -172,19 +186,12 @@ extension CreateNewItemViewController: UIPickerViewDataSource {
 }
 
 extension CreateNewItemViewController: UITextFieldDelegate {
-    /// textFieldの文字数制限
-    /// - 商品名：１５文字以内
-    /// - 補足：３０文字以内
+    /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        switch textField {
-            case nameOfItemTextField:
-                return newLength <= 15
-            default:
-                return true
-        }
+        return newLength <= 15
     }
 
     /// 商品名が入力された時に売り場選択ボタンを活性化するメソッド
@@ -206,3 +213,30 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
         enableButton(button: addButton)
     }
 }
+
+extension CreateNewItemViewController: UITextViewDelegate {
+    /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if supplementTextView.text == "任意：３０文字以内で入力して下さい" {
+            supplementTextView.text = ""
+            supplementTextView.textColor = .black
+        }
+    }
+
+    /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if supplementTextView.text == "" {
+            supplementTextView.text = "任意：３０文字以内で入力して下さい"
+            supplementTextView.textColor = .lightGray
+        }
+    }
+
+    /// 入力制限を３０文字以内で設定
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let maxLength = 30
+        let currentString: NSString = supplementTextView.text as NSString
+        let updatedString = currentString.replacingCharacters(in: range, with: text)
+        return updatedString.count <= maxLength
+    }
+}
+

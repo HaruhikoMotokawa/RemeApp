@@ -142,7 +142,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９" translatesAutoresizingMaskIntoConstraints="NO" id="XcE-uV-4uF">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcE-uV-4uF">
                                                         <rect key="frame" x="60" y="0.0" width="295" height="68"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="labelColor"/>
