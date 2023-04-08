@@ -26,7 +26,8 @@ class CreateNewItemViewController: UIViewController {
         self.present(selectTypeOfSalesFloorVC, animated: true)
     }
 
-    @IBOutlet weak var supplementTextField: UITextField!
+
+    @IBOutlet weak var supplementTextView: UITextView!
 
     @IBOutlet weak var selectPhotoButton: UIButton!
 
@@ -59,7 +60,6 @@ class CreateNewItemViewController: UIViewController {
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
-        supplementTextField.delegate = self
         setCloseButton()
         setAppearanceAllButton()
         disableButton(button: selectTypeOfSalesFloorButton)
@@ -129,7 +129,7 @@ class CreateNewItemViewController: UIViewController {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [doneButton]
         nameOfItemTextField.inputAccessoryView = toolbar
-        supplementTextField.inputAccessoryView = toolbar
+        supplementTextView.inputAccessoryView = toolbar
     }
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
     @objc func doneButtonTapped() {
@@ -182,8 +182,6 @@ extension CreateNewItemViewController: UITextFieldDelegate {
         switch textField {
             case nameOfItemTextField:
                 return newLength <= 15
-            case supplementTextField:
-                return newLength <= 30
             default:
                 return true
         }

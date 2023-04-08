@@ -229,15 +229,13 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         button.layer.shadowRadius = 2
     }
 
-    /// 選択した売り場のsalesFloorRawValueを持って画面遷移する処理
+    /// 選択した売り場のSalesFloorTypeを持って画面遷移する処理
     private func navigateToSelectedSalesFloor(type: SalesFloorType) {
         print("\(type)")
         dismiss(animated: true)
         delegate?.salesFloorButtonDidTapDone(type: type)
     }
 }
-
-
 
 /// 「売り場選択」画面でボタンをタップした後に、
 /// 「品目新規作成」画面のボタンの見た目を変更するためのDelegate
