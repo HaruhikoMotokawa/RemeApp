@@ -10,6 +10,9 @@ import UIKit
 /// G-品目新規作成
 class CreateNewItemViewController: UIViewController {
 
+
+    @IBOutlet weak var scrollView: UIScrollView!
+
     @IBOutlet weak var nameOfItemTextField: UITextField!
 
     @IBOutlet weak var numberOfItemPickerView: UIPickerView!
@@ -32,6 +35,25 @@ class CreateNewItemViewController: UIViewController {
     @IBOutlet weak var selectPhotoButton: UIButton!
 
     @IBOutlet weak var photoImageView: UIImageView!
+
+    @IBAction func addPhoto(_ sender: Any) {
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("カメラは利用できます")
+
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.sourceType = .camera
+            imagePickerController.delegate = self
+            present(imagePickerController, animated: true, completion: nil)
+        } else {
+            print("カメラは利用できません")
+        }
+
+
+
+
+
+    }
 
     @IBOutlet weak var cancelButton: UIButton!
 
@@ -66,7 +88,6 @@ class CreateNewItemViewController: UIViewController {
         disableButton(button: addButton)
         setAppearance(textView: supplementTextView)
         setPlaceholder(textView: supplementTextView)
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -227,6 +248,10 @@ extension CreateNewItemViewController: UITextViewDelegate {
             supplementTextView.text = ""
             supplementTextView.textColor = .black
         }
+
+
+
+
     }
 
     /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
@@ -235,6 +260,7 @@ extension CreateNewItemViewController: UITextViewDelegate {
             supplementTextView.text = "任意：３０文字以内で入力して下さい"
             supplementTextView.textColor = .lightGray
         }
+
     }
 
     /// 入力制限を３０文字以内で設定
@@ -245,4 +271,13 @@ extension CreateNewItemViewController: UITextViewDelegate {
         return updatedString.count <= maxLength
     }
 }
+
+extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        photoImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        dismiss(animated: true)
+    }
+
+}
+
 
