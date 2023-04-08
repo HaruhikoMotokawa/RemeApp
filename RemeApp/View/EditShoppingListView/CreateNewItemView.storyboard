@@ -40,6 +40,9 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="evx-2p-Sb7"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="bYf-74-CS5" userLabel="キャンセルと保存">
                                 <rect key="frame" x="10" y="955.5" width="355" height="34.5"/>

@@ -66,6 +66,12 @@ class CreateNewItemViewController: UIViewController {
         disableButton(button: addButton)
         setAppearance(textView: supplementTextView)
         setPlaceholder(textView: supplementTextView)
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
     }
 
     /// ボタンの初期状態
