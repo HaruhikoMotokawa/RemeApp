@@ -150,30 +150,16 @@ class SalesFloorMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 各UILabelに枠線を設定
-        setBorderForLabelAllLabel()
+        setBorderAllLabel()
         updateButtonAppearance()
     }
 
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
-    private func setBorderForLabelAllLabel() {
-        setBorderForLabel(label: registerLabel)
-        setBorderForLabel(label: leftEntranceLabel)
-        setBorderForLabel(label: rightEntranceLabel)
+    private func setBorderAllLabel() {
+        registerLabel.setBorder()
+        leftEntranceLabel.setBorder()
+        rightEntranceLabel.setBorder()
     }
-
-    /// UILabelに枠線を設定するメソッド
-    /// - 枠線の色を黒に
-    /// - 枠線の太さ
-    /// - 枠線を角丸に
-    /// - ラベルのサイズを枠線に合わせる
-    private func setBorderForLabel(label: UILabel) {
-        let borderColor = UIColor.black.cgColor
-        label.layer.borderColor = borderColor
-        label.layer.borderWidth = 2
-        label.layer.cornerRadius = 10
-        label.sizeToFit()
-    }
-
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 対象の売り場に購入商品がある場合は

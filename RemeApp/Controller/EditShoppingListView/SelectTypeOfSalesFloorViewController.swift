@@ -9,6 +9,7 @@ import UIKit
 
 /// H-売り場選択
 class SelectTypeOfSalesFloorViewController: UIViewController {
+
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
@@ -128,12 +129,14 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedOne(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redOne)
     }
+
     /// レジのラベル
     @IBOutlet private weak var registerLabel: UILabel!
     /// 左出入り口のラベル
     @IBOutlet private weak var leftEntranceLabel: UILabel!
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
+
     /// CreateNewItemViewControllerのselectTypeOfSalesFloorButtonの見た目を変更するデリゲート
     var delegate: SelectTypeOfSalesFloorViewControllerDelegate?
 
@@ -144,22 +147,11 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     }
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderForLabelAllLabel() {
-        setBorderForLabel(label: registerLabel)
-        setBorderForLabel(label: leftEntranceLabel)
-        setBorderForLabel(label: rightEntranceLabel)
+        registerLabel.setBorder()
+        leftEntranceLabel.setBorder()
+        rightEntranceLabel.setBorder()
     }
-    /// UILabelに枠線を設定するメソッド
-    /// - 枠線の色を黒に
-    /// - 枠線の太さ
-    /// - 枠線を角丸に
-    /// - ラベルのサイズを枠線に合わせる
-    private func setBorderForLabel(label: UILabel) {
-        let borderColor = UIColor.black.cgColor
-        label.layer.borderColor = borderColor
-        label.layer.borderWidth = 2
-        label.layer.cornerRadius = 10
-        label.sizeToFit()
-    }
+
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 各ボタンに売り場の色を設定
@@ -175,33 +167,10 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
             let salesFloor = SalesFloorType(rawValue: index)!
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
             button?.backgroundColor = salesFloor.colorOfSalesFloor
-            setSalesFloorButtonAppearance(button: button)
+            button?.setAppearanceWithShadow()
         }
     }
-    /// UIButtonの装飾の設定
-    /// - 文字色
-    /// - フォントサイズと種類
-    /// - ボタンの枠線
-    /// - 枠線の色を設定
-    /// - ボタンに影を設定
-    private func setSalesFloorButtonAppearance(button: UIButton?) {
-        button?.setTitleColor(.black, for: .normal)
-        button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button?.layer.borderWidth = 1
-        button?.layer.borderColor = UIColor.black.cgColor
-        addShadow(to: button!)
-    }
-    /// UIButtonに影をつけるメソッド
-    private func addShadow(to button: UIButton) {
-        // 影の色
-        button.layer.shadowColor = UIColor.black.cgColor
-        // 影の透明度
-        button.layer.shadowOpacity = 0.5
-        // 影のオフセット、影の位置
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        // 影の半径
-        button.layer.shadowRadius = 2
-    }
+
     /// 選択した売り場のSalesFloorTypeを持って画面遷移する処理
     private func navigateToSelectedSalesFloor(type: SalesFloorType) {
         print("\(type)")

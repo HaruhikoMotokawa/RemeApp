@@ -8,6 +8,7 @@
 import UIKit
 /// I-品目編集
 class EditItemViewController: UIViewController {
+
     /// 商品名入力
     @IBOutlet private weak var nameOfItemTextField: UITextField!
     /// 個数入力
@@ -66,12 +67,11 @@ class EditItemViewController: UIViewController {
     @IBAction private func addAndReturn(_ sender: Any) {
         dismiss(animated: true)
     }
-    /// numberOfItemPickerViewに表示する値
-    /// - １〜２０で設定
+
+    /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
-    /// unitPickerViewに表示する値
-    /// -　個、本、袋、グラム、パックで設定
+    /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
     private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
     /// 写真のURLパス
     private var imageFilePath: URL?
@@ -109,33 +109,21 @@ class EditItemViewController: UIViewController {
         setAppearance(textView: supplementTextView)
         setPlaceholder(textView: supplementTextView)
     }
+
     /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
     private func setDisableThreeButton() {
-        setDisable(button: selectTypeOfSalesFloorButton)
-        setDisable(button: addButton)
-        setDisable(button: deletePhotoButton)
+        selectTypeOfSalesFloorButton.setDisable()
+        addButton.setDisable()
+        deletePhotoButton.setDisable()
     }
-    /// ボタンの初期状態
-    /// - ボタンの非活性化
-    /// - バックグラウンドカラーを白に設定
-    private func setDisable(button: UIButton) {
-        button.isEnabled = false
-        button.backgroundColor = .white
-    }
-    /// 条件によってボタンを有効にする
-    /// - nameOfItemTextFieldに入力さている
-    /// - selectTypeOfSalesFloorButtonに売り場が選択されている
-    private func setEnable(button: UIButton) {
-        button.backgroundColor = .lightGray
-        button.isEnabled = true
-    }
+
     /// 画面上の全てのButtonの見た目の設定メソッド
     private func setAppearanceAllButton() {
-        setAppearance(button: selectTypeOfSalesFloorButton)
-        setAppearance(button: selectPhotoButton)
-        setAppearance(button: cancelButton)
-        setAppearance(button: addButton)
-        setAppearance(button: deletePhotoButton)
+        selectTypeOfSalesFloorButton.setAppearanceWithShadow()
+        selectPhotoButton.setAppearanceWithShadow()
+        cancelButton.setAppearanceWithShadow()
+        addButton.setAppearanceWithShadow()
+        deletePhotoButton.setAppearanceWithShadow()
     }
 
     // MARK: ここから改修する
@@ -166,36 +154,7 @@ class EditItemViewController: UIViewController {
 //        salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
 //        salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }
-    /// UIButtonの見た目を変更する
-    /// - 文字の色
-    /// - 角丸
-    /// - 文字の縮小
-    /// - 縮小率
-    /// - １行で表示を設定
-    /// - 枠線の幅
-    /// - 枠線の色
-    /// - ボタンに影をつける
-    private func setAppearance(button: UIButton) {
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10.0
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
-        button.titleLabel?.numberOfLines = 1
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
-        addShadow(to: button)
-    }
-    /// UIButtonに影をつけるメソッド
-    private func addShadow(to button: UIButton) {
-        // 影の色
-        button.layer.shadowColor = UIColor.black.cgColor
-        // 影の透明度
-        button.layer.shadowOpacity = 0.5
-        // 影のオフセット、影の位置
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        // 影の半径
-        button.layer.shadowRadius = 2
-    }
+
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
     private func setCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
@@ -279,7 +238,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     func salesFloorButtonDidTapDone(type: SalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
-        setEnable(button: addButton)
+        addButton.setEnable()
     }
 }
 
@@ -316,7 +275,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         photoImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        setEnable(button: deletePhotoButton)
+        deletePhotoButton.setEnable()
         dismiss(animated: true)
     }
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
@@ -364,7 +323,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         let okAction = UIAlertAction(title: "削除する", style: .default) { (action) in
             // OKが押された時の処理
             self.photoImageView.image = nil
-            self.setDisable(button: self.deletePhotoButton)
+            self.deletePhotoButton.setDisable()
             if let filePath = self.imageFilePath {
                 do {
                     try FileManager.default.removeItem(at: filePath)
