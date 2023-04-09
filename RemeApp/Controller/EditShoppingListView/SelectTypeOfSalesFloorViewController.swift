@@ -9,7 +9,6 @@ import UIKit
 
 /// H-売り場選択
 class SelectTypeOfSalesFloorViewController: UIViewController {
-
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
@@ -17,7 +16,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectGreenThree(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.greenThree)
     }
-
     /// 売り場のボタン：StoryboardのA-2
     @IBOutlet private weak var blueThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-2をタップして売り場の買い物リストに画面遷移
@@ -25,7 +23,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueThree(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueThree)
     }
-
     /// 売り場のボタン：StoryboardのA-3
     @IBOutlet private weak var redThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-3をタップして売り場の買い物リストに画面遷移
@@ -33,7 +30,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedThree(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redThree)
     }
-
     /// 売り場のボタン：StoryboardのB-1
     @IBOutlet private weak var greenFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-1をタップして売り場の買い物リストに画面遷移
@@ -41,7 +37,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectGreenFour(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.greenFour)
     }
-
     /// 売り場のボタン：StoryboardのB-2
     @IBOutlet private weak var greenTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-2をタップして売り場の買い物リストに画面遷移
@@ -49,7 +44,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectGreenTwo(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.greenTwo)
     }
-
     /// 売り場のボタン：StoryboardのB-3
     @IBOutlet private weak var blueSevenButton: UIButton!
     /// 売り場のボタン：StoryboardのB-3をタップして売り場の買い物リストに画面遷移
@@ -57,7 +51,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueSeven(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueSeven)
     }
-
     /// 売り場のボタン：StoryboardのB-4
     @IBOutlet private weak var blueFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-4をタップして売り場の買い物リストに画面遷移
@@ -65,7 +58,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueFour(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueFour)
     }
-
     /// 売り場のボタン：StoryboardのB-5
     @IBOutlet private weak var blueTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-5をタップして売り場の買い物リストに画面遷移
@@ -73,7 +65,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueTwo(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueTwo)
     }
-
     /// 売り場のボタン：StoryboardのB-6
     @IBOutlet private weak var redFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-6をタップして売り場の買い物リストに画面遷移
@@ -81,7 +72,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedFour(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redFour)
     }
-
     /// 売り場のボタン：StoryboardのB-7
     @IBOutlet private weak var redTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-7をタップして売り場の買い物リストに画面遷移
@@ -89,7 +79,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedTwo(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redTwo)
     }
-
     /// 売り場のボタン：StoryboardのC-1
     @IBOutlet private weak var greenFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-1をタップして売り場の買い物リストに画面遷移
@@ -97,7 +86,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectGreenFive(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.greenFive)
     }
-
     /// 売り場のボタン：StoryboardのC-2
     @IBOutlet private weak var greenOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-2をタップして売り場の買い物リストに画面遷移
@@ -105,7 +93,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectGreenOne(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.greenOne)
     }
-
     /// 売り場のボタン：StoryboardのC-3
     @IBOutlet private weak var blueSixButton: UIButton!
     /// 売り場のボタン：StoryboardのC-3をタップして売り場の買い物リストに画面遷移
@@ -113,7 +100,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueSix(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueSix)
     }
-
     /// 売り場のボタン：StoryboardのC-4
     @IBOutlet private weak var blueFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-4をタップして売り場の買い物リストに画面遷移
@@ -121,7 +107,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueFive(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueFive)
     }
-
     /// 売り場のボタン：StoryboardのC-5
     @IBOutlet private weak var blueOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-5をタップして売り場の買い物リストに画面遷移
@@ -129,7 +114,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectBlueOne(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.blueOne)
     }
-
     /// 売り場のボタン：StoryboardのC-6
     @IBOutlet private weak var redFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-6をタップして売り場の買い物リストに画面遷移
@@ -137,7 +121,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedFive(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redFive)
     }
-
     /// 売り場のボタン：StoryboardのC-7
     @IBOutlet private weak var redOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-7をタップして売り場の買い物リストに画面遷移
@@ -145,16 +128,12 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     @IBAction private func selectRedOne(_ sender: Any) {
         navigateToSelectedSalesFloor(type: SalesFloorType.redOne)
     }
-
     /// レジのラベル
     @IBOutlet private weak var registerLabel: UILabel!
-
     /// 左出入り口のラベル
     @IBOutlet private weak var leftEntranceLabel: UILabel!
-
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
-
     /// CreateNewItemViewControllerのselectTypeOfSalesFloorButtonの見た目を変更するデリゲート
     var delegate: SelectTypeOfSalesFloorViewControllerDelegate?
 
@@ -163,14 +142,12 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         setBorderForLabelAllLabel()
         updateButtonAppearance()
     }
-
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderForLabelAllLabel() {
         setBorderForLabel(label: registerLabel)
         setBorderForLabel(label: leftEntranceLabel)
         setBorderForLabel(label: rightEntranceLabel)
     }
-
     /// UILabelに枠線を設定するメソッド
     /// - 枠線の色を黒に
     /// - 枠線の太さ
@@ -183,7 +160,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.sizeToFit()
     }
-
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 各ボタンに売り場の色を設定
@@ -202,7 +178,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
             setSalesFloorButtonAppearance(button: button)
         }
     }
-
     /// UIButtonの装飾の設定
     /// - 文字色
     /// - フォントサイズと種類
@@ -216,7 +191,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         button?.layer.borderColor = UIColor.black.cgColor
         addShadow(to: button!)
     }
-
     /// UIButtonに影をつけるメソッド
     private func addShadow(to button: UIButton) {
         // 影の色
@@ -228,7 +202,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         // 影の半径
         button.layer.shadowRadius = 2
     }
-
     /// 選択した売り場のSalesFloorTypeを持って画面遷移する処理
     private func navigateToSelectedSalesFloor(type: SalesFloorType) {
         print("\(type)")
@@ -236,7 +209,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         delegate?.salesFloorButtonDidTapDone(type: type)
     }
 }
-
 /// 「売り場選択」画面でボタンをタップした後に、
 /// 「品目新規作成」画面のボタンの見た目を変更するためのDelegate
 protocol SelectTypeOfSalesFloorViewControllerDelegate {

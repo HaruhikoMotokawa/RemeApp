@@ -12,12 +12,9 @@ class EditShoppingListViewController: UIViewController {
 
     @IBOutlet weak var editShoppingListTableView: UITableView!
 
-
-
     @IBOutlet weak var shareShoppingListButton: UIButton!
     @IBAction func shareShoppingList(_ sender: Any) {
     }
-
 
     @IBOutlet weak var createNewItemButton: UIButton!
     @IBAction func goCreateNewItemView(_ sender: Any) {
@@ -25,9 +22,6 @@ class EditShoppingListViewController: UIViewController {
         let createNewItemVC = storyboard.instantiateViewController(withIdentifier: "CreateNewItemView") as! CreateNewItemViewController
         self.present(createNewItemVC, animated: true)
     }
-
-
-
 
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),

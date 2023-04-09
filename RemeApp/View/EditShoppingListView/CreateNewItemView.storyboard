@@ -231,7 +231,6 @@
                         <outlet property="nameOfItemTextField" destination="RQd-WW-qo9" id="79d-MQ-S7o"/>
                         <outlet property="numberOfItemPickerView" destination="AWi-nL-b3N" id="Kei-CE-DIb"/>
                         <outlet property="photoImageView" destination="YWi-Bj-frU" id="Yk8-jn-krr"/>
-                        <outlet property="scrollView" destination="6cx-Oj-M3S" id="gRr-pp-cTE"/>
                         <outlet property="selectPhotoButton" destination="sON-BO-0No" id="aH2-Y5-VxT"/>
                         <outlet property="selectTypeOfSalesFloorButton" destination="qf2-8I-85S" id="xVm-wI-U9P"/>
                         <outlet property="supplementTextView" destination="XcE-uV-4uF" id="G0S-Ud-vBI"/>
