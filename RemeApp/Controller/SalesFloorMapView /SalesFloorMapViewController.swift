@@ -131,10 +131,8 @@ class SalesFloorMapViewController: UIViewController {
 
     /// レジのラベル
     @IBOutlet private weak var registerLabel: UILabel!
-
     /// 左出入り口のラベル
     @IBOutlet private weak var leftEntranceLabel: UILabel!
-
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
@@ -202,35 +200,10 @@ class SalesFloorMapViewController: UIViewController {
                 button?.backgroundColor = UIColor.white
                 button?.isEnabled = false
             }
-            setSalesFloorButtonAppearance(button: button)
+            button?.setAppearanceWithShadow()
         }
     }
-
-    /// UIButtonの装飾の設定
-    /// - 文字色
-    /// - フォントサイズと種類
-    /// - ボタンの枠線
-    /// - 枠線の色を設定
-    private func setSalesFloorButtonAppearance(button: UIButton?) {
-        button?.setTitleColor(.black, for: .normal)
-        button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button?.layer.borderWidth = 1
-        button?.layer.borderColor = UIColor.black.cgColor
-        addShadow(to: button!)
-    }
-
-    /// UIButtonに影をつけるメソッド
-    private func addShadow(to button: UIButton) {
-        // 影の色
-        button.layer.shadowColor = UIColor.black.cgColor
-        // 影の透明度
-        button.layer.shadowOpacity = 0.5
-        // 影のオフセット、影の位置
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        // 影の半径
-        button.layer.shadowRadius = 2
-    }
-
+    
     /// SalesFloorShoppingListViewに選択した売り場のリストを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
     func goSalesFloorShoppingListView(salesFloorRawValue: Int) {

@@ -41,30 +41,21 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
-        setAppearanceButton(button: shareShoppingListButton)
-        setAppearanceButton(button: createNewItemButton)
+        setAppearance(button: shareShoppingListButton)
+        setAppearance(button: createNewItemButton)
     }
 
     /// ボタンの背景色を変更するメソッド
-    private func setAppearanceButton(button: UIButton) {
+    ///- 背景色を灰色に設定
+    ///- 背景を角丸２０に設定
+    ///- tintColorを黒に設定
+    ///- 影を追加
+    private func setAppearance(button: UIButton) {
         button.backgroundColor = .gray
         button.layer.cornerRadius = 20
         button.tintColor = .black
-        addShadow(to: button)
+        button.addShadow()
     }
-
-    /// UIButtonに影をつけるメソッド
-    private func addShadow(to button: UIButton) {
-        // 影の色
-        button.layer.shadowColor = UIColor.black.cgColor
-        // 影の透明度
-        button.layer.shadowOpacity = 0.5
-        // 影のオフセット、影の位置
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        // 影の半径
-        button.layer.shadowRadius = 2
-    }
-    
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in

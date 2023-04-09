@@ -75,6 +75,24 @@ class EditItemViewController: UIViewController {
     private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
     /// 写真のURLパス
     private var imageFilePath: URL?
+    /// nameOfItemTextFieldに表示するテキスト
+    private var nameOfItemTextFieldText:String = ""
+
+    /// numberOfItemPickerViewに表示する文字列
+    private var numberOfItemPickerViewString:String = ""
+
+    /// unitPickerViewに表示する文字列
+    private var unitPickerViewText:String = ""
+
+    /// selectTypeOfSalesFloorButtonに表示する売り場の種類を指定するためのRawValue
+    private var selectTypeOfSalesFloorButtonRawValue:Int = 0
+
+    /// supplementTextViewに表示するテキスト
+    private var supplementTextViewText:String? = nil
+
+    /// photoImageViewに表示する画像
+    private var photoImageViewImage:UIImage? = nil
+
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -118,6 +136,35 @@ class EditItemViewController: UIViewController {
         setAppearance(button: cancelButton)
         setAppearance(button: addButton)
         setAppearance(button: deletePhotoButton)
+    }
+
+    // MARK: ここから改修する
+    /// データ受け渡し用のメソッド
+    func configurerDetailSalesFloorShoppingListView(detail: ErrandDataModel) {
+        nameOfItemTextFieldText = detail.nameOfItem
+//        numberOfItemPickerView.selectedRow(inComponent: Int) = detail.numberOfItem
+//        unitLabelText = detail.unit
+        selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
+        supplementTextView.text = detail.supplement
+        photoImageView.image = detail.photoImage
+    }
+
+    /// 受け渡されたデータをそれぞれのUI部品に表示
+    private func displayData() {
+//        nameOfItemLabel.text = nameOfItemLabelText
+//        numberOfItemLabel.text = numberOfItemLabelText
+//        unitLabel.text = unitLabelText
+//        setSalesFloorTypeButton(salesFloorButtonRawValue: self.salesFloorButtonRawValue)
+//        setSupplementLabelText(supplement: supplementLabelText)
+//        photoPathImageView.image = photoPathImage
+    }
+    /// 受け渡されたデータをSalesFloorTypeButtonに表示
+    /// - 商品名をタイトルに設定
+    /// - ボタンの背景色を設定
+    private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
+//        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+//        salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
+//        salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }
     /// UIButtonの見た目を変更する
     /// - 文字の色

@@ -23,6 +23,7 @@
 		7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */; };
 		78581B6529E2A85A00930F65 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78581B6429E2A85A00930F65 /* EditItemView.storyboard */; };
 		78581B6729E2A88C00930F65 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78581B6629E2A88C00930F65 /* EditItemViewController.swift */; };
+		78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */; };
 		785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B029C93577006F0CBB /* ErrandDataModel.swift */; };
 		785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */; };
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
@@ -60,6 +61,7 @@
 		7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78581B6429E2A85A00930F65 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78581B6629E2A88C00930F65 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
+		78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		785D74B029C93577006F0CBB /* ErrandDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandDataModel.swift; sourceTree = "<group>"; };
 		785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */,
 				7846528629D42264006BF69E /* ExtensionUIImage.swift */,
+				78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */,
 				78581B6729E2A88C00930F65 /* EditItemViewController.swift in Sources */,
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
+				78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */,
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,
 				78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */,
