@@ -32,8 +32,7 @@ class EditShoppingListViewController: UIViewController {
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15, supplement: "子供用のストローをもらってきてください。", photoImage: nil),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "０１２３４５６７８９０１２３４５６７８９", numberOfItem: "２０" ,unit: "グラム", salesFloorRawValue: 3, supplement: "０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９", photoImage:nil)]
+                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee")),]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,19 +101,19 @@ extension EditShoppingListViewController: UITableViewDataSource {
     }
 }
 
-// TODO: 画面遷移作が買い物リスト詳細になっているので、いずれ変更する
+// TODO: 画面遷移先が買い物リスト詳細になっているので、いずれ変更する
 extension EditShoppingListViewController: UITableViewDelegate {
     /// shoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListViewController = storyboard.instantiateViewController(
-            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
+        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
+        let editItemVC = storyboard.instantiateViewController(
+            withIdentifier: "EditItemView") as! EditItemViewController
         let errandData = errandDataList[indexPath.row]
-        detailShoppingListViewController.configurerDetailShoppingListView(detail: errandData)
-        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
+//        detailShoppingListViewController.configurerDetailShoppingListView(detail: errandData)
+//        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        self.navigationController?.pushViewController(editItemVC, animated: true)
     }
 }
 
