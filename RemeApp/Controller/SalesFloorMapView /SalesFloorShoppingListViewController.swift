@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// C-売り場の買い物リスト
+/// D-売り場の買い物リスト
 class SalesFloorShoppingListViewController: UIViewController {
 
     /// 売り場の買い物リストを表示

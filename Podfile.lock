@@ -1,16 +1,20 @@
 PODS:
   - Hero (1.6.2)
+  - IQKeyboardManagerSwift (6.5.11)
 
 DEPENDENCIES:
   - Hero
+  - IQKeyboardManagerSwift
 
 SPEC REPOS:
   trunk:
     - Hero
+    - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
   Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
 
-PODFILE CHECKSUM: bacdf3b606abdaa962aa36a1ae39e7f4ff7cef79
+PODFILE CHECKSUM: 1e2d0da0b7f4f51dc501beaa5d76e4a7cfd0f967
 
 COCOAPODS: 1.11.3

@@ -1,168 +1,153 @@
 //
-//  SalesFloorMapViewController.swift
+//  SelectTypeOfSalesFloorViewController.swift
 //  RemeApp
 //
-//  Created by 本川晴彦 on 2023/03/20.
+//  Created by 本川晴彦 on 2023/04/06.
 //
 
 import UIKit
 
-/// C-売り場マップ閲覧
-class SalesFloorMapViewController: UIViewController {
-
+/// H-売り場選択
+class SelectTypeOfSalesFloorViewController: UIViewController {
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenThreeList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 14)
+    /// salesFloorRawValue: 14
+    @IBAction private func selectGreenThree(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.greenThree)
     }
-
     /// 売り場のボタン：StoryboardのA-2
     @IBOutlet private weak var blueThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueThreeList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 7)
+    /// salesFloorRawValue: 7
+    @IBAction private func selectBlueThree(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueThree)
     }
-
     /// 売り場のボタン：StoryboardのA-3
     @IBOutlet private weak var redThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedThreeList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 2)
+    /// salesFloorRawValue: 2
+    @IBAction private func selectRedThree(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.redThree)
     }
-
     /// 売り場のボタン：StoryboardのB-1
     @IBOutlet private weak var greenFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFourList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 15)
+    /// salesFloorRawValue: 15
+    @IBAction private func selectGreenFour(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.greenFour)
     }
-
     /// 売り場のボタン：StoryboardのB-2
     @IBOutlet private weak var greenTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenTwoList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 13)
+    /// salesFloorRawValue: 13
+    @IBAction private func selectGreenTwo(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.greenTwo)
     }
-
     /// 売り場のボタン：StoryboardのB-3
     @IBOutlet private weak var blueSevenButton: UIButton!
     /// 売り場のボタン：StoryboardのB-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSevenList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 11)
+    /// salesFloorRawValue: 11
+    @IBAction private func selectBlueSeven(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueSeven)
     }
-
     /// 売り場のボタン：StoryboardのB-4
     @IBOutlet private weak var blueFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFourList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 8)
+    /// salesFloorRawValue: 8
+    @IBAction private func selectBlueFour(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueFour)
     }
-
     /// 売り場のボタン：StoryboardのB-5
     @IBOutlet private weak var blueTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueTwoList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 6)
+    /// salesFloorRawValue: 6
+    @IBAction private func selectBlueTwo(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueTwo)
     }
-
     /// 売り場のボタン：StoryboardのB-6
     @IBOutlet private weak var redFourButton: UIButton!
     /// 売り場のボタン：StoryboardのB-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFourList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 3)
+    /// salesFloorRawValue: 3
+    @IBAction private func selectRedFour(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.redFour)
     }
-
     /// 売り場のボタン：StoryboardのB-7
     @IBOutlet private weak var redTwoButton: UIButton!
     /// 売り場のボタン：StoryboardのB-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedTwoList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 1)
+    /// salesFloorRawValue: 1
+    @IBAction private func selectRedTwo(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.redTwo)
     }
-
     /// 売り場のボタン：StoryboardのC-1
     @IBOutlet private weak var greenFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFiveList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 16)
+    /// salesFloorRawValue: 16
+    @IBAction private func selectGreenFive(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.greenFive)
     }
-
     /// 売り場のボタン：StoryboardのC-2
     @IBOutlet private weak var greenOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenOneList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 12)
+    /// salesFloorRawValue: 12
+    @IBAction private func selectGreenOne(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.greenOne)
     }
-
     /// 売り場のボタン：StoryboardのC-3
     @IBOutlet private weak var blueSixButton: UIButton!
     /// 売り場のボタン：StoryboardのC-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSixList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 10)
+    /// salesFloorRawValue: 10
+    @IBAction private func selectBlueSix(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueSix)
     }
-
     /// 売り場のボタン：StoryboardのC-4
     @IBOutlet private weak var blueFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFiveList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 9)
+    /// salesFloorRawValue: 9
+    @IBAction private func selectBlueFive(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueFive)
     }
-
     /// 売り場のボタン：StoryboardのC-5
     @IBOutlet private weak var blueOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueOneList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 5)
+    /// salesFloorRawValue: 5
+    @IBAction private func selectBlueOne(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.blueOne)
     }
-
     /// 売り場のボタン：StoryboardのC-6
     @IBOutlet private weak var redFiveButton: UIButton!
     /// 売り場のボタン：StoryboardのC-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFiveList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 4)
+    /// salesFloorRawValue: 4
+    @IBAction private func selectRedFive(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.redFive)
     }
-
     /// 売り場のボタン：StoryboardのC-7
     @IBOutlet private weak var redOneButton: UIButton!
     /// 売り場のボタン：StoryboardのC-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedOneList(_ sender: Any) {
-        goSalesFloorShoppingListView(salesFloorRawValue: 0)
+    /// salesFloorRawValue: 0
+    @IBAction private func selectRedOne(_ sender: Any) {
+        navigateToSelectedSalesFloor(type: SalesFloorType.redOne)
     }
-
     /// レジのラベル
     @IBOutlet private weak var registerLabel: UILabel!
-
     /// 左出入り口のラベル
     @IBOutlet private weak var leftEntranceLabel: UILabel!
-
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
-
-    /// 使いデータのダミーデータ
-    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15, supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
+    /// CreateNewItemViewControllerのselectTypeOfSalesFloorButtonの見た目を変更するデリゲート
+    var delegate: SelectTypeOfSalesFloorViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 各UILabelに枠線を設定
         setBorderForLabelAllLabel()
         updateButtonAppearance()
     }
-
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderForLabelAllLabel() {
         setBorderForLabel(label: registerLabel)
         setBorderForLabel(label: leftEntranceLabel)
         setBorderForLabel(label: rightEntranceLabel)
     }
-
     /// UILabelに枠線を設定するメソッド
     /// - 枠線の色を黒に
     /// - 枠線の太さ
@@ -175,16 +160,10 @@ class SalesFloorMapViewController: UIViewController {
         label.layer.cornerRadius = 10
         label.sizeToFit()
     }
-
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
-    /// - 対象の売り場に購入商品がある場合は
-    ///    - 売り場に対応したバックグラウンドカラーを設定
-    ///    - ボタンの活性化
-    ///  - 対象の売り場に購入商品がない場合は
-    ///    - バックグラウンドカラーを白に設定
-    ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
+    /// - 各ボタンに売り場の色を設定
+    /// - 各ボタンに装飾の設定
     private func updateButtonAppearance() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -195,22 +174,16 @@ class SalesFloorMapViewController: UIViewController {
         for (index, button) in buttons.enumerated() {
             let salesFloor = SalesFloorType(rawValue: index)!
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
-            if (errandDataList.first(where: {$0.salesFloorRawValue == index})?.salesFloorRawValue) != nil {
-                button?.backgroundColor = salesFloor.colorOfSalesFloor
-                button?.isEnabled = true
-            } else {
-                button?.backgroundColor = UIColor.white
-                button?.isEnabled = false
-            }
+            button?.backgroundColor = salesFloor.colorOfSalesFloor
             setSalesFloorButtonAppearance(button: button)
         }
     }
-
     /// UIButtonの装飾の設定
     /// - 文字色
     /// - フォントサイズと種類
     /// - ボタンの枠線
     /// - 枠線の色を設定
+    /// - ボタンに影を設定
     private func setSalesFloorButtonAppearance(button: UIButton?) {
         button?.setTitleColor(.black, for: .normal)
         button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -218,7 +191,6 @@ class SalesFloorMapViewController: UIViewController {
         button?.layer.borderColor = UIColor.black.cgColor
         addShadow(to: button!)
     }
-
     /// UIButtonに影をつけるメソッド
     private func addShadow(to button: UIButton) {
         // 影の色
@@ -230,22 +202,15 @@ class SalesFloorMapViewController: UIViewController {
         // 影の半径
         button.layer.shadowRadius = 2
     }
-
-    /// SalesFloorShoppingListViewに選択した売り場のリストを持って画面遷移する関数
-    /// - 引数：売り場に対応したSalesFloorTypeのrawValue
-    func goSalesFloorShoppingListView(salesFloorRawValue: Int) {
-        let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
-        let salesFloorShoppingListVC = storyboard.instantiateViewController(
-            withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController
-        /// 引数に対応した売り場に該当するお使いデータをクロージャで抽出
-        let salesFloorList = errandDataList.filter { $0.salesFloorRawValue == salesFloorRawValue }
-        /// 抽出したお使いデータをSalesFloorShoppingListViewControllerのお使いデータに代入
-        salesFloorShoppingListVC.selectedErrandDataList = salesFloorList
-        /// SalesFloorShoppingListViewにプッシュ遷移
-        self.navigationController?.pushViewController(salesFloorShoppingListVC, animated: true)
+    /// 選択した売り場のSalesFloorTypeを持って画面遷移する処理
+    private func navigateToSelectedSalesFloor(type: SalesFloorType) {
+        print("\(type)")
+        dismiss(animated: true)
+        delegate?.salesFloorButtonDidTapDone(type: type)
     }
 }
-
-
-
-
+/// 「売り場選択」画面でボタンをタップした後に、
+/// 「品目新規作成」画面のボタンの見た目を変更するためのDelegate
+protocol SelectTypeOfSalesFloorViewControllerDelegate {
+    func salesFloorButtonDidTapDone(type: SalesFloorType)
+}

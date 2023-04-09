@@ -32,8 +32,12 @@
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
 		78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */; };
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
+		78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */; };
+		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
 		78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */; };
 		78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */; };
+		78F38E4929DD8C6C004972A3 /* CreateNewItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */; };
+		78F38E4B29DD8C90004972A3 /* CreateNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,11 +66,17 @@
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		78AB3B4029C835D8004685F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		78AB3B4329C835D8004685F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78AB3B4529C835D8004685F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
+		78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectTypeOfSalesFloorView.storyboard; sourceTree = "<group>"; };
+		78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfSalesFloorViewController.swift; sourceTree = "<group>"; };
+		78CAAF7B29DFCFE70084A8AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		78CAAF7C29DFD0EA0084A8AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78EDF40329DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailSalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78EDF40529DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
+		78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateNewItemView.storyboard; sourceTree = "<group>"; };
+		78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemViewController.swift; sourceTree = "<group>"; };
 		AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */,
+				78F38E4A29DD8C90004972A3 /* CreateNewItemViewController.swift */,
+				78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -189,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */,
+				78F38E4829DD8C6C004972A3 /* CreateNewItemView.storyboard */,
+				78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */,
 			);
 			path = EditShoppingListView;
 			sourceTree = "<group>";
@@ -224,8 +238,8 @@
 				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
 				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
-				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
 				78EDF40E29DD131600A6407D /* EditShoppingListView */,
+				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
 				78EDF41029DD134800A6407D /* CustumCell */,
 			);
 			path = View;
@@ -310,11 +324,12 @@
 			};
 			buildConfigurationList = 78AB3B2F29C835D7004685F1 /* Build configuration list for PBXProject "RemeApp" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				ja,
 			);
 			mainGroup = 78AB3B2B29C835D7004685F1;
 			productRefGroup = 78AB3B3529C835D7004685F1 /* Products */;
@@ -334,12 +349,14 @@
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
+				78F38E4929DD8C6C004972A3 /* CreateNewItemView.storyboard in Resources */,
 				78EDF40429DC055F00A6407D /* DetailSalesFloorShoppingListView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
+				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
 			);
@@ -402,12 +419,14 @@
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				784E1F2029C8451200C9360A /* ViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
+				78F38E4B29DD8C90004972A3 /* CreateNewItemViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */,
+				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +437,9 @@
 		78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				78AB3B4329C835D8004685F1 /* Base */,
+				78CAAF7B29DFCFE70084A8AF /* Base */,
+				78CAAF7C29DFD0EA0084A8AF /* en */,
+				78CAAF7D29DFD1090084A8AF /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -430,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -490,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -551,7 +574,7 @@
 				DEVELOPMENT_TEAM = YQB9XDMF5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemeApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラにアクセスします。";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -579,7 +602,7 @@
 				DEVELOPMENT_TEAM = YQB9XDMF5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemeApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラにアクセスします。";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
