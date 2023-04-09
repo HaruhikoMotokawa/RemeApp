@@ -35,13 +35,30 @@ class CreateNewItemViewController: UIViewController {
         // カメラまたはフォトライブラリー、キャンセルを選択するメソッド
         setCameraAndPhotoAction()
     }
+    /// 写真削除ボタン
+    @IBOutlet private weak var deletePhotoButton: UIButton!
+    /// 添付した写真データを削除する
+    @IBAction private func deletePhoto(_ sender: Any) {
+        // 添付した写真を削除するメソッド
+        setDeletePhotoAction()
+    }
     /// 選択した写真を添付する
     @IBOutlet private weak var photoImageView: UIImageView!
     /// キャンセルボタン
     @IBOutlet private weak var cancelButton: UIButton!
     /// 編集を終了してEditShoppingListViewに戻る遷移
     @IBAction private func cancelAndReturn(_ sender: Any) {
-        dismiss(animated: true)
+        let alertController = UIAlertController(title: "作成を中止", message:
+                                                    "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
+        // はいでEditShoppingListViewに戻る
+        let okAction = UIAlertAction(title: "はい", style: .default, handler:  { (action) in
+            self.dismiss(animated: true)
+        })
+        // キャンセル、何もしない
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     /// 追加ボタン
     @IBOutlet private weak var addButton: UIButton!
@@ -56,7 +73,10 @@ class CreateNewItemViewController: UIViewController {
     /// unitPickerViewに表示する値
     /// -　個、本、袋、グラム、パックで設定
     private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
+    /// 写真のURLパス
+    private var imageFilePath: URL?
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         numberOfItemPickerView.delegate = self
@@ -66,31 +86,37 @@ class CreateNewItemViewController: UIViewController {
         nameOfItemTextField.delegate = self
         setCloseButton()
         setAppearanceAllButton()
-        disableButton(button: selectTypeOfSalesFloorButton)
-        disableButton(button: addButton)
+        setDisableThreeButton()
         setAppearance(textView: supplementTextView)
         setPlaceholder(textView: supplementTextView)
+    }
+    /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
+    private func setDisableThreeButton() {
+        setDisable(button: selectTypeOfSalesFloorButton)
+        setDisable(button: addButton)
+        setDisable(button: deletePhotoButton)
     }
     /// ボタンの初期状態
     /// - ボタンの非活性化
     /// - バックグラウンドカラーを白に設定
-    private func disableButton(button: UIButton) {
+    private func setDisable(button: UIButton) {
         button.isEnabled = false
         button.backgroundColor = .white
     }
     /// 条件によってボタンを有効にする
     /// - nameOfItemTextFieldに入力さている
     /// - selectTypeOfSalesFloorButtonに売り場が選択されている
-    private func enableButton(button: UIButton) {
+    private func setEnable(button: UIButton) {
         button.backgroundColor = .lightGray
         button.isEnabled = true
     }
     /// 画面上の全てのButtonの見た目の設定メソッド
     private func setAppearanceAllButton() {
-        setAppearanceButton(button: selectTypeOfSalesFloorButton)
-        setAppearanceButton(button: selectPhotoButton)
-        setAppearanceButton(button: cancelButton)
-        setAppearanceButton(button: addButton)
+        setAppearance(button: selectTypeOfSalesFloorButton)
+        setAppearance(button: selectPhotoButton)
+        setAppearance(button: cancelButton)
+        setAppearance(button: addButton)
+        setAppearance(button: deletePhotoButton)
     }
     /// UIButtonの見た目を変更する
     /// - 文字の色
@@ -101,7 +127,7 @@ class CreateNewItemViewController: UIViewController {
     /// - 枠線の幅
     /// - 枠線の色
     /// - ボタンに影をつける
-    private func setAppearanceButton(button: UIButton) {
+    private func setAppearance(button: UIButton) {
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10.0
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -205,7 +231,7 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
     func salesFloorButtonDidTapDone(type: SalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
-        enableButton(button: addButton)
+        setEnable(button: addButton)
     }
 }
 
@@ -233,14 +259,16 @@ extension CreateNewItemViewController: UITextViewDelegate {
     }
 }
 // !!!: いずれPHPickerに変更しないといけないかも
-// 写真添付のための処理関連
+// 写真添付と削除の処理関連
 extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     /// 撮影または写真選択が終了した際のメソッド
     /// - 撮影または選択した画像をUIImageViewに表示させる
+    /// - 写真の取り消しボタンを有効化する
     /// - 画面を閉じてCreateNewItemViewに戻る
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         photoImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        setEnable(button: deletePhotoButton)
         dismiss(animated: true)
     }
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
@@ -277,5 +305,29 @@ extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINaviga
         // iPadでの処理落ち防止処置
         alertController.popoverPresentationController?.sourceView = view
         present(alertController, animated: true)
+    }
+    /// 添付した写真を削除するメソッド
+    /// - アラートで確認
+    /// - 削除する -> 写真の削除とdeletePhotoButtonの非活性化
+    /// - キャンセル -> 何もせずに戻る
+    private func setDeletePhotoAction() {
+        let alertController = UIAlertController(title: "写真の削除", message: "削除してもよろしいですか？",
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "削除する", style: .default) { (action) in
+            // OKが押された時の処理
+            self.photoImageView.image = nil
+            self.setDisable(button: self.deletePhotoButton)
+            if let filePath = self.imageFilePath {
+                do {
+                    try FileManager.default.removeItem(at: filePath)
+                } catch {
+                    print("Error deleting image: \\(error.localizedDescription)")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

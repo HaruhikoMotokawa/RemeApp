@@ -73,7 +73,7 @@
                                 <rect key="frame" x="10" y="118" width="355" height="827.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xGz-Od-6Hz" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="886"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="930.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="HTK-pa-h90" userLabel="個数">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="100"/>
@@ -185,8 +185,23 @@
                                                     <constraint firstAttribute="height" constant="34" id="ZlB-Om-r98"/>
                                                 </constraints>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Co-Yy-Bk7">
+                                                <rect key="frame" x="0.0" y="386" width="355" height="34.5"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34.5" id="w16-mC-JjP"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="写真を取り消す">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="deletePhoto:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NMy-Nw-xDX"/>
+                                                </connections>
+                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YWi-Bj-frU">
-                                                <rect key="frame" x="0.0" y="386" width="355" height="500"/>
+                                                <rect key="frame" x="0.0" y="430.5" width="355" height="500"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="500" id="az3-QT-H3a"/>
@@ -228,6 +243,7 @@
                     <connections>
                         <outlet property="addButton" destination="5gp-pl-7fB" id="Ewd-Rd-SPI"/>
                         <outlet property="cancelButton" destination="zhN-gr-wUb" id="yhj-of-mwq"/>
+                        <outlet property="deletePhotoButton" destination="3Co-Yy-Bk7" id="qyA-j0-mdO"/>
                         <outlet property="nameOfItemTextField" destination="RQd-WW-qo9" id="79d-MQ-S7o"/>
                         <outlet property="numberOfItemPickerView" destination="AWi-nL-b3N" id="Kei-CE-DIb"/>
                         <outlet property="photoImageView" destination="YWi-Bj-frU" id="Yk8-jn-krr"/>
