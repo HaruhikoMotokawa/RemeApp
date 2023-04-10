@@ -49,17 +49,7 @@ class EditItemViewController: UIViewController {
     @IBOutlet private weak var cancelButton: UIButton!
     /// 編集を終了してEditShoppingListViewに戻る遷移
     @IBAction private func cancelAndReturn(_ sender: Any) {
-        let alertController = UIAlertController(title: "作成を中止", message:
-                                                    "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
-        // はいでEditShoppingListViewに戻る
-        let okAction = UIAlertAction(title: "はい", style: .default, handler:  { (action) in
-            self.dismiss(animated: true)
-        })
-        // キャンセル、何もしない
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
+        showCancelAlert()
     }
     /// 追加ボタン
     @IBOutlet private weak var addButton: UIButton!
@@ -103,11 +93,11 @@ class EditItemViewController: UIViewController {
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
+        supplementTextView.delegate = self
         setCloseButton()
         setAppearanceAllButton()
         setDisableThreeButton()
-        setAppearance(textView: supplementTextView)
-        setPlaceholder(textView: supplementTextView)
+        supplementTextView.setAppearanceAndPlaceholder()
     }
 
     /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
@@ -167,17 +157,23 @@ class EditItemViewController: UIViewController {
     @objc func doneButtonTapped() {
         view.endEditing(true)
     }
-    /// TextViewにプレースホルダーを設置するメソッド
-    private func setPlaceholder(textView: UITextView) {
-        textView.text = "任意：３０文字以内で入力して下さい"
-        textView.textColor = UIColor.lightGray
-        textView.delegate = self
-    }
-    /// TextViewに枠線を設置
-    private func setAppearance(textView: UITextView) {
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.cornerRadius = 10.0
+
+    /// アラートで確認するメソッド
+    /// - 編集を中止て前の画面に戻るか
+    /// - 中止をキャンセルして画面に止まるか
+    func showCancelAlert() {
+        let alertController = UIAlertController(title: "編集を中止", message:
+                                                    "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
+        // はいでEditShoppingListViewに戻る
+        let okAction = UIAlertAction(title: "はい", style: .default, handler:  { (action) in
+            self.navigationController?.popViewController(animated: true)
+        })
+        // キャンセル、何もしない
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -278,41 +274,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         deletePhotoButton.setEnable()
         dismiss(animated: true)
     }
-    /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
-    /// - アクションシートで選択
-    /// - カメラ撮影アクション
-    /// - フォトライブリーラリーから選択アクション
-    /// - キャンセルアクション
-    private func setCameraAndPhotoAction() {
-        /// アラートコントローラーをインスタンス化
-        let alertController = UIAlertController(title: "選択して下さい", message: nil, preferredStyle: .actionSheet)
-        // カメラ撮影アクション定義
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraAction = UIAlertAction(title: "カメラ", style: .default, handler: { (action) in
-                let imagePickerController = UIImagePickerController()
-                imagePickerController.sourceType = .camera
-                imagePickerController.delegate = self
-                self.present(imagePickerController, animated: true, completion: nil)
-            })
-            alertController.addAction(cameraAction)
-        }
-        // フォトラーブラリーから選択アクションを定義
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let photoLibraryAction = UIAlertAction(title: "フォトライブラリー", style: .default,handler: { (action) in
-                let imagePickerController = UIImagePickerController()
-                imagePickerController.sourceType = .photoLibrary
-                imagePickerController.delegate = self
-                self.present(imagePickerController, animated: true)
-            })
-            alertController.addAction(photoLibraryAction)
-        }
-        // キャンセルアクションを定義
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        // iPadでの処理落ち防止処置
-        alertController.popoverPresentationController?.sourceView = view
-        present(alertController, animated: true)
-    }
+
     /// 添付した写真を削除するメソッド
     /// - アラートで確認
     /// - 削除する -> 写真の削除とdeletePhotoButtonの非活性化
@@ -338,3 +300,5 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         present(alertController, animated: true, completion: nil)
     }
 }
+
+extension EditItemViewController: CameraAndPhotoActionable {}
