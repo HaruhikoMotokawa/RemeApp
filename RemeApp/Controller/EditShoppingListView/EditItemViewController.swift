@@ -72,7 +72,7 @@ class EditItemViewController: UIViewController {
     private var numberOfItemPickerViewString:String = ""
 
     /// unitPickerViewに表示する文字列
-    private var unitPickerViewText:String = ""
+    private var unitPickerViewString:String = ""
 
     /// selectTypeOfSalesFloorButtonに表示する売り場の種類を指定するためのRawValue
     private var selectTypeOfSalesFloorButtonRawValue:Int = 0
@@ -91,7 +91,7 @@ class EditItemViewController: UIViewController {
         setDataSourceAndDelegate()
         setKeyboardCloseButton()
         setAppearanceAllButton()
-        setDisableTwoButton()
+        setDisableOrEnable()
         supplementTextView.setAppearanceAndPlaceholder()
         displayData()
     }
@@ -106,10 +106,14 @@ class EditItemViewController: UIViewController {
         supplementTextView.delegate = self
     }
 
-    /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
-    private func setDisableTwoButton() {
-//        addButton.setDisable()
-        deletePhotoButton.setDisable()
+    /// 画面遷移してきた際に写真データの有無で写真の削除ボタンの活性化、非活性化を切り替える処理
+    private func setDisableOrEnable() {
+        // もし写真がない場合
+        if photoImageViewImage == nil {
+            deletePhotoButton.setDisable()
+        } else {
+            deletePhotoButton.setEnable()
+        }
     }
 
     /// 画面上の全てのButtonの見た目の設定メソッド
@@ -121,12 +125,11 @@ class EditItemViewController: UIViewController {
         deletePhotoButton.setAppearanceWithShadow()
     }
 
-    // MARK: ここから改修する
     /// データ受け渡し用のメソッド
     func configurer(detail: ErrandDataModel) {
         nameOfItemTextFieldText = detail.nameOfItem
-//        numberOfItemPickerView.selectedRow(inComponent: Int) = detail.numberOfItem
-//        unitLabelText = detail.unit
+        numberOfItemPickerViewString = detail.numberOfItem
+        unitPickerViewString = detail.unit
         selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
         photoImageViewImage = detail.photoImage
@@ -135,12 +138,25 @@ class EditItemViewController: UIViewController {
     /// 受け渡されたデータをそれぞれのUI部品に表示
     private func displayData() {
         nameOfItemTextField.text = nameOfItemTextFieldText
-//        numberOfItemLabel.text = numberOfItemLabelText
-//        unitLabel.text = unitLabelText
+        selectNumberOfItemRow(selectedNumberOfItem: numberOfItemPickerViewString)
+        selectUnitRow(selectedUnit: unitPickerViewString)
         setSalesFloorTypeButton(salesFloorButtonRawValue: self.selectTypeOfSalesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
         photoImageView.image = photoImageViewImage
     }
+
+    /// numberOfItemPickerViewに表示できるように変換する
+    func selectNumberOfItemRow(selectedNumberOfItem: String) {
+        let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
+        numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
+    }
+
+    /// unitPickerViewに表示できるように変換する
+    func selectUnitRow(selectedUnit: String) {
+        let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
+        unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
+    }
+
     /// 受け渡されたデータをSalesFloorTypeButtonに表示
     /// - 商品名をタイトルに設定
     /// - ボタンの背景色を設定
@@ -151,14 +167,14 @@ class EditItemViewController: UIViewController {
     }
 
     /// 受け渡されたデータをsetSupplementLabelTextに表示
-    /// - 補足がなければ灰色の文字色で「なし」を表示
-    /// - 補足がある場合はそのまま表示
+    /// - 補足がなければ「""」を表示 == textViewDidBeginEditingによってプレースホルダーがセットされる
+    /// - 補足がある場合はフォントを黒にしてそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementTextViewText == nil {
-            supplementTextView.textColor = UIColor.gray
             supplementTextView.text = ""
         }else{
             supplementTextView.text = supplementTextViewText
+            supplementTextView.textColor = .black
         }
     }
 
