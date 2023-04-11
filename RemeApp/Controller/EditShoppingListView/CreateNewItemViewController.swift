@@ -55,7 +55,7 @@ class CreateNewItemViewController: UIViewController {
     @IBOutlet private weak var addButton: UIButton!
     /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
     @IBAction private func addAndReturn(_ sender: Any) {
-        dismiss(animated: true)
+       addOrReEnter()
     }
 
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
@@ -69,16 +69,21 @@ class CreateNewItemViewController: UIViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDataSourceAndDelegate()
+        setKeyboardCloseButton()
+        setAppearanceAllButton()
+        setDisableThreeButton()
+        supplementTextView.setAppearanceAndPlaceholder()
+    }
+
+    /// データソースとデリゲートをセット
+    private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
         numberOfItemPickerView.dataSource = self
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
         supplementTextView.delegate = self
-        setCloseButton()
-        setAppearanceAllButton()
-        setDisableThreeButton()
-        supplementTextView.setAppearanceAndPlaceholder()
     }
 
     /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
@@ -98,7 +103,7 @@ class CreateNewItemViewController: UIViewController {
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
-    private func setCloseButton() {
+    private func setKeyboardCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [doneButton]
@@ -126,6 +131,25 @@ class CreateNewItemViewController: UIViewController {
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
+    }
+
+    /// 追加ボタンをタップした時の処理
+    /// - 商品名が未入力の場合はアラートを出す
+    /// - 商品名が入力されていればデータを書き込み、画面を閉じる
+    func addOrReEnter() {
+        if nameOfItemTextField.text == "" {
+            // 警告アラート
+            let alertController = UIAlertController(title: nil, message:
+                                                        "商品名は必ず入力してください", preferredStyle: .alert)
+            // 何もしない
+            let reEnterAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(reEnterAction)
+            present(alertController, animated: true)
+        } else {
+            // ここに追加の処理
+            
+            self.dismiss(animated: true)
+        }
     }
 }
 
@@ -254,4 +278,5 @@ extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
+// setCameraAndPhotoActionメソッドを使用可能にする
 extension CreateNewItemViewController: CameraAndPhotoActionable {}

@@ -55,7 +55,7 @@ class EditItemViewController: UIViewController {
     @IBOutlet private weak var addButton: UIButton!
     /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
     @IBAction private func addAndReturn(_ sender: Any) {
-        dismiss(animated: true)
+        addOrReEnter()
     }
 
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
@@ -88,22 +88,27 @@ class EditItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "品目編集"
+        setDataSourceAndDelegate()
+        setKeyboardCloseButton()
+        setAppearanceAllButton()
+        setDisableTwoButton()
+        supplementTextView.setAppearanceAndPlaceholder()
+        displayData()
+    }
+
+    /// データソースとデリゲート設定
+    private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
         numberOfItemPickerView.dataSource = self
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         nameOfItemTextField.delegate = self
         supplementTextView.delegate = self
-        setCloseButton()
-        setAppearanceAllButton()
-        setDisableThreeButton()
-        supplementTextView.setAppearanceAndPlaceholder()
     }
 
     /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
-    private func setDisableThreeButton() {
-        selectTypeOfSalesFloorButton.setDisable()
-        addButton.setDisable()
+    private func setDisableTwoButton() {
+//        addButton.setDisable()
         deletePhotoButton.setDisable()
     }
 
@@ -118,41 +123,54 @@ class EditItemViewController: UIViewController {
 
     // MARK: ここから改修する
     /// データ受け渡し用のメソッド
-    func configurerDetailSalesFloorShoppingListView(detail: ErrandDataModel) {
+    func configurer(detail: ErrandDataModel) {
         nameOfItemTextFieldText = detail.nameOfItem
 //        numberOfItemPickerView.selectedRow(inComponent: Int) = detail.numberOfItem
 //        unitLabelText = detail.unit
         selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
-        supplementTextView.text = detail.supplement
-        photoImageView.image = detail.photoImage
+        supplementTextViewText = detail.supplement
+        photoImageViewImage = detail.photoImage
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
     private func displayData() {
-//        nameOfItemLabel.text = nameOfItemLabelText
+        nameOfItemTextField.text = nameOfItemTextFieldText
 //        numberOfItemLabel.text = numberOfItemLabelText
 //        unitLabel.text = unitLabelText
-//        setSalesFloorTypeButton(salesFloorButtonRawValue: self.salesFloorButtonRawValue)
-//        setSupplementLabelText(supplement: supplementLabelText)
-//        photoPathImageView.image = photoPathImage
+        setSalesFloorTypeButton(salesFloorButtonRawValue: self.selectTypeOfSalesFloorButtonRawValue)
+        setSupplementLabelText(supplement: supplementTextViewText)
+        photoImageView.image = photoImageViewImage
     }
     /// 受け渡されたデータをSalesFloorTypeButtonに表示
     /// - 商品名をタイトルに設定
     /// - ボタンの背景色を設定
     private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
-//        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
-//        salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
-//        salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
+        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+        selectTypeOfSalesFloorButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
+        selectTypeOfSalesFloorButton.backgroundColor = salesFloor?.colorOfSalesFloor
+    }
+
+    /// 受け渡されたデータをsetSupplementLabelTextに表示
+    /// - 補足がなければ灰色の文字色で「なし」を表示
+    /// - 補足がある場合はそのまま表示
+    private func setSupplementLabelText(supplement: String? ) {
+        if supplementTextViewText == nil {
+            supplementTextView.textColor = UIColor.gray
+            supplementTextView.text = ""
+        }else{
+            supplementTextView.text = supplementTextViewText
+        }
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
-    private func setCloseButton() {
+    private func setKeyboardCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolbar.items = [doneButton]
         nameOfItemTextField.inputAccessoryView = toolbar
         supplementTextView.inputAccessoryView = toolbar
     }
+
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
     @objc func doneButtonTapped() {
         view.endEditing(true)
@@ -174,6 +192,25 @@ class EditItemViewController: UIViewController {
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
+    }
+
+    /// 追加ボタンをタップした時の処理
+    /// - 商品名が未入力の場合はアラートを出す
+    /// - 商品名が入力されていればデータを書き込み、画面を閉じる
+    func addOrReEnter() {
+        if nameOfItemTextField.text == "" {
+            // 警告アラート
+            let alertController = UIAlertController(title: nil, message:
+                                                        "商品名は必ず入力してください", preferredStyle: .alert)
+            // 何もしない
+            let reEnterAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(reEnterAction)
+            present(alertController, animated: true)
+        } else {
+            // ここに追加の処理
+
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

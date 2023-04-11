@@ -41,8 +41,8 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
-        setAppearance(button: shareShoppingListButton)
-        setAppearance(button: createNewItemButton)
+        setAppearance(shareShoppingListButton)
+        setAppearance(createNewItemButton)
     }
 
     /// ボタンの背景色を変更するメソッド
@@ -50,7 +50,7 @@ class EditShoppingListViewController: UIViewController {
     ///- 背景を角丸２０に設定
     ///- tintColorを黒に設定
     ///- 影を追加
-    private func setAppearance(button: UIButton) {
+    private func setAppearance(_ button: UIButton) {
         button.backgroundColor = .gray
         button.layer.cornerRadius = 20
         button.tintColor = .black
@@ -102,8 +102,8 @@ extension EditShoppingListViewController: UITableViewDelegate {
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
         let errandData = errandDataList[indexPath.row]
-//        detailShoppingListViewController.configurerDetailShoppingListView(detail: errandData)
-//        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        editItemVC.configurer(detail: errandData)
+        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(editItemVC, animated: true)
     }
 }
