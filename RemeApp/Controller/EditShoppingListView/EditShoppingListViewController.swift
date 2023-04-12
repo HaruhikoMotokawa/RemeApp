@@ -45,7 +45,50 @@ class EditShoppingListViewController: UIViewController {
         sortErrandDataList()
         setAppearance(shareShoppingListButton)
         setAppearance(createNewItemButton)
+
+        navigationItem.rightBarButtonItems = [editButtonItem]
+        self.navigationItem.rightBarButtonItem?.title = "複数削除"
+        editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let indexPath = editShoppingListTableView.indexPathForSelectedRow {
+//            editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing {
+            // 編集開始
+            editButtonItem.title = "完了"
+
+            } else {
+            // 編集終了
+            editButtonItem.title = "複数削除"
+            deleteRows()
+        }
+        // 編集モード時のみ複数選択可能とする
+        editShoppingListTableView.isEditing = editing
+    }
+
+    /// 選択した行を削除する
+    private func deleteRows() {
+        guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else {
+            return
+        }
+
+        // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
+        let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
+        for indexPathList in sortedIndexPaths {
+            errandDataList.remove(at: indexPathList.row) // 選択肢のindexPathから配列の要素を削除
+        }
+
+        // tableViewの行を削除
+        editShoppingListTableView.deleteRows(at: sortedIndexPaths, with: UITableView.RowAnimation.automatic)
+    }
+
 
     /// ボタンの背景色を変更するメソッド
     ///- 背景色を灰色に設定
@@ -72,11 +115,12 @@ class EditShoppingListViewController: UIViewController {
 }
 
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
-    /// shoppingListTableViewに表示するcell数を指定
+    /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return errandDataList.count
     }
-    /// shoppingListTableViewに使用するcellの内容を指定
+
+    /// editShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = editShoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
@@ -98,27 +142,68 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     /// - タップされた商品のデータをEditItemViewに渡す
     /// - EditItemViewにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
-        let editItemVC = storyboard.instantiateViewController(
-            withIdentifier: "EditItemView") as! EditItemViewController
-        let errandData = errandDataList[indexPath.row]
-        editItemVC.configurer(detail: errandData)
-        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(editItemVC, animated: true)
-    }
+        if editShoppingListTableView.isEditing {
+            if let _ = self.editShoppingListTableView.indexPathsForSelectedRows {
+                let cell = self.editShoppingListTableView.cellForRow(at: indexPath)
+                cell?.backgroundView?.backgroundColor = .red
+                cell?.contentView.backgroundColor = UIColor.systemGray
+                // 選択肢にチェックが一つでも入ってたら「削除」を表示する。
+                self.editButtonItem.title = "削除"
+
+            } else {
+                // 何もチェックされていないときは完了を表示
+                self.editButtonItem.title = "完了"
+            }
+        } else {
+                let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
+                let editItemVC = storyboard.instantiateViewController(
+                    withIdentifier: "EditItemView") as! EditItemViewController
+                let errandData = errandDataList[indexPath.row]
+                editItemVC.configurer(detail: errandData)
+                editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+                self.navigationController?.pushViewController(editItemVC, animated: true)
+            }
+        }
 
     /// スワイプして削除する処理
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
     UISwipeActionsConfiguration? {
+        /// スワイプした時の処理を定義
         let destructiveAction = UIContextualAction(style: .destructive, title: "削除") {
             (action, view, completionHandler) in
+            // お使いデータの対象のインデックス番号を削除
             self.errandDataList.remove(at: indexPath.row)
+            // テーブルビューから視覚的に削除
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            // アクション完了を報告
             completionHandler(true)
         }
+        // スワイプアクション時の画像を設定
         destructiveAction.image = UIImage(systemName: "trash.fill")
+        // 定義した削除処理を設定
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+        // 実行するように返却
         return configuration
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            errandDataList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            print(errandDataList)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        // 編集モードじゃない場合はreturn
+        guard editShoppingListTableView.isEditing else { return }
+
+        if let _ = self.editShoppingListTableView.indexPathsForSelectedRows {
+            self.editButtonItem.title = "削除"
+        } else {
+            // 何もチェックされていないときは完了を表示
+            self.editButtonItem.title = "完了"
+        }
     }
 }
 

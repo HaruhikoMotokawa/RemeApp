@@ -150,7 +150,7 @@ extension CreateNewItemViewController {
             present(alertController, animated: true)
         } else {
             // ここに追加の処理
-            
+           
             self.dismiss(animated: true)
         }
     }

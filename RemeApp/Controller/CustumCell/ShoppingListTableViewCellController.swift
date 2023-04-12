@@ -48,9 +48,13 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// お使いデータモデル
     var errandDataList: Array<ErrandDataModel> = []
     /// 買い物リストのデータをセルの各パーツにセットする
-     func setShoppingList(isCheckBox: Bool ,nameOfItem: String, numberOfItem: String,
-                         unit: String, salesFloorRawValue:Int ,supplement: String?,
-                         image: UIImage?) {
+     func setShoppingList(isCheckBox: Bool,
+                          nameOfItem: String,
+                          numberOfItem: String,
+                          unit: String,
+                          salesFloorRawValue:Int,
+                          supplement: String?,
+                          image: UIImage?) {
         changeBackgroundColor(isCheckBox: isCheckBox)
         nameOfItemLabel.text = nameOfItem
         numberOfItemLabel.text = numberOfItem
