@@ -55,12 +55,12 @@ class CreateNewItemViewController: UIViewController {
     @IBOutlet private weak var addButton: UIButton!
     /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
     @IBAction private func addAndReturn(_ sender: Any) {
-       addOrReEnter()
+        addOrReEnter()
     }
 
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
-                                            "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
+                                                    "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
     /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
     private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
     /// 写真のURLパス
@@ -114,7 +114,10 @@ class CreateNewItemViewController: UIViewController {
     @objc func doneButtonTapped() {
         view.endEditing(true)
     }
+}
 
+// MARK: ボタンタップ時のアラート関連
+extension CreateNewItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
     /// - 中止をキャンセルして画面に止まるか
@@ -153,7 +156,8 @@ class CreateNewItemViewController: UIViewController {
     }
 }
 
-extension CreateNewItemViewController: UIPickerViewDelegate {
+// MARK: UIPickerViewDataSource&Delegate
+extension CreateNewItemViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     /// pickerViewに表示する内容
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)
     -> String? {
@@ -166,9 +170,6 @@ extension CreateNewItemViewController: UIPickerViewDelegate {
                 return nil
         }
     }
-}
-
-extension CreateNewItemViewController: UIPickerViewDataSource {
     /// pickerViewの列の数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -186,6 +187,7 @@ extension CreateNewItemViewController: UIPickerViewDataSource {
     }
 }
 
+// MARK: UITextFieldDelegate
 extension CreateNewItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
@@ -203,6 +205,7 @@ extension CreateNewItemViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: SelectTypeOfSalesFloorViewControllerDelegate
 extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
@@ -215,6 +218,7 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
     }
 }
 
+// MARK: UITextViewDelegate
 extension CreateNewItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -231,13 +235,16 @@ extension CreateNewItemViewController: UITextViewDelegate {
         }
     }
     /// 入力制限を３０文字以内で設定
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
+                  replacementText text: String) -> Bool {
         let maxLength = 30
         let currentString: NSString = supplementTextView.text as NSString
         let updatedString = currentString.replacingCharacters(in: range, with: text)
         return updatedString.count <= maxLength
     }
 }
+
+// MARK: UIImagePickerDelegate,UINavigationControllerDelegate
 // !!!: いずれPHPickerに変更しないといけないかも
 // 写真添付と削除の処理関連
 extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -278,5 +285,6 @@ extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
+// MARK: CameraAndPhotoActionable
 // setCameraAndPhotoActionメソッドを使用可能にする
 extension CreateNewItemViewController: CameraAndPhotoActionable {}

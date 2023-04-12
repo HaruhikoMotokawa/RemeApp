@@ -13,6 +13,7 @@ class EditShoppingListViewController: UIViewController {
     @IBOutlet weak var editShoppingListTableView: UITableView!
 
     @IBOutlet weak var shareShoppingListButton: UIButton!
+
     @IBAction func shareShoppingList(_ sender: Any) {
     }
 
@@ -34,6 +35,7 @@ class EditShoppingListViewController: UIViewController {
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         editShoppingListTableView.dataSource = self
@@ -69,7 +71,7 @@ class EditShoppingListViewController: UIViewController {
     }
 }
 
-extension EditShoppingListViewController: UITableViewDataSource {
+extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return errandDataList.count
@@ -91,13 +93,10 @@ extension EditShoppingListViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-}
 
-// TODO: 画面遷移先が買い物リスト詳細になっているので、いずれ変更する
-extension EditShoppingListViewController: UITableViewDelegate {
-    /// shoppingListTableViewのcellがタップされた時の挙動を定義
-    /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
-    /// - detailShoppingListViewControllerにプッシュ遷移
+    /// editShoppingListTableViewのcellがタップされた時の挙動を定義
+    /// - タップされた商品のデータをEditItemViewに渡す
+    /// - EditItemViewにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
@@ -106,6 +105,20 @@ extension EditShoppingListViewController: UITableViewDelegate {
         editItemVC.configurer(detail: errandData)
         editShoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(editItemVC, animated: true)
+    }
+
+    /// スワイプして削除する処理
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
+    UISwipeActionsConfiguration? {
+        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") {
+            (action, view, completionHandler) in
+            self.errandDataList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            completionHandler(true)
+        }
+        destructiveAction.image = UIImage(systemName: "trash.fill")
+        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+        return configuration
     }
 }
 

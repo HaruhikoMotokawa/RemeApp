@@ -10,7 +10,6 @@
 		26E00A70C1A1D3B8828D1FA1 /* Pods_RemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */; };
 		7804038D29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
-		7804039329E53B5700DDF94D /* ProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039229E53B5700DDF94D /* ProtocolTest.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
@@ -52,7 +51,6 @@
 		5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
 		7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolCameraAndPhotoActionable.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
-		7804039229E53B5700DDF94D /* ProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTest.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */,
-				7804039229E53B5700DDF94D /* ProtocolTest.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -463,7 +460,6 @@
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,
-				7804039329E53B5700DDF94D /* ProtocolTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

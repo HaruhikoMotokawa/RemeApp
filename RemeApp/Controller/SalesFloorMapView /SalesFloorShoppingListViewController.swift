@@ -48,7 +48,7 @@ class SalesFloorShoppingListViewController: UIViewController {
     }
 }
 
-extension SalesFloorShoppingListViewController: UITableViewDataSource {
+extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// salesFloorShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return selectedErrandDataList.count
@@ -69,9 +69,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-}
 
-extension SalesFloorShoppingListViewController: UITableViewDelegate {
     /// salesFloorShoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにプッシュ遷移
@@ -80,7 +78,7 @@ extension SalesFloorShoppingListViewController: UITableViewDelegate {
         let detailSalesFloorShoppingListViewController = storyboard.instantiateViewController(
             withIdentifier: "DetailSalesFloorShoppingListView") as! DetailSalesFloorShoppingListViewController
         let errandData = selectedErrandDataList[indexPath.row]
-        detailSalesFloorShoppingListViewController.configurerDetailSalesFloorShoppingListView(detail: errandData)
+        detailSalesFloorShoppingListViewController.configurer(detail: errandData)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailSalesFloorShoppingListViewController, animated: true)
     }

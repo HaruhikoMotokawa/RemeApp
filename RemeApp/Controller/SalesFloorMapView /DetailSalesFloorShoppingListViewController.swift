@@ -44,7 +44,7 @@ class DetailSalesFloorShoppingListViewController: UIViewController {
     }
 
     /// データ受け渡し用のメソッド
-    func configurerDetailSalesFloorShoppingListView(detail: ErrandDataModel) {
+    func configurer(detail: ErrandDataModel) {
         nameOfItemLabelText = detail.nameOfItem
         numberOfItemLabelText = detail.numberOfItem
         unitLabelText = detail.unit

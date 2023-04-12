@@ -56,7 +56,7 @@ class ShoppingListViewController: UIViewController {
     }
 }
 
-extension ShoppingListViewController: UITableViewDataSource {
+extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return errandDataList.count
@@ -79,9 +79,7 @@ extension ShoppingListViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-}
 
-extension ShoppingListViewController: UITableViewDelegate {
     /// shoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにプッシュ遷移
@@ -90,7 +88,7 @@ extension ShoppingListViewController: UITableViewDelegate {
         let detailShoppingListViewController = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let errandData = errandDataList[indexPath.row]
-        detailShoppingListViewController.configurerDetailShoppingListView(detail: errandData)
+        detailShoppingListViewController.configurer(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
     }

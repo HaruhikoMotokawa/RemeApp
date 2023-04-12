@@ -191,7 +191,10 @@ class EditItemViewController: UIViewController {
     @objc func doneButtonTapped() {
         view.endEditing(true)
     }
+}
 
+// MARK: ボタンタップ時のアラート関連
+extension EditItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
     /// - 中止をキャンセルして画面に止まるか
@@ -230,7 +233,8 @@ class EditItemViewController: UIViewController {
     }
 }
 
-extension EditItemViewController: UIPickerViewDelegate {
+// MARK: UIPickerViewDelegate&UIPickerViewDataSource
+extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// pickerViewに表示する内容
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)
     -> String? {
@@ -243,9 +247,7 @@ extension EditItemViewController: UIPickerViewDelegate {
                 return nil
         }
     }
-}
 
-extension EditItemViewController: UIPickerViewDataSource {
     /// pickerViewの列の数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -263,6 +265,8 @@ extension EditItemViewController: UIPickerViewDataSource {
     }
 }
 
+
+// MARK: UITextFieldDelegate
 extension EditItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
@@ -280,6 +284,7 @@ extension EditItemViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: SelectTypeOfSalesFloorViewControllerDelegate
 extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
@@ -291,6 +296,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     }
 }
 
+// MARK: UITextViewDelegate
 extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -314,6 +320,8 @@ extension EditItemViewController: UITextViewDelegate {
         return updatedString.count <= maxLength
     }
 }
+
+// MARK: UIImagePickerControllerDelegate&UINavigationControllerDelegate
 // !!!: いずれPHPickerに変更しないといけないかも
 // 写真添付と削除の処理関連
 extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -354,4 +362,5 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
+// MARK: CameraAndPhotoActionable
 extension EditItemViewController: CameraAndPhotoActionable {}
