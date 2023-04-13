@@ -11,7 +11,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// tableViewのcellがタップされた際のデリーゲート
     weak var delegate: ShoppingListTableViewCellDelegate?
     /// チェックボックスのUIButton
-    @IBOutlet private weak var checkBoxButton: CheckBox!
+    @IBOutlet  weak var checkBoxButton: CheckBox!
     /// チェックボックスがタプされた際のメソッド
     /// - cellのバックグラウンドカラーをグレイに変更
         @IBAction private func isCheckBoxButton(_ sender: Any) {
@@ -70,7 +70,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         isChecked = isCheckBox
         if isCheckBox == false {
             checkBoxButton.isChecked = false
-            self.contentView.backgroundColor = UIColor.systemBackground
+            self.contentView.backgroundColor = .clear
         }else{
             checkBoxButton.isChecked = true
             self.contentView.backgroundColor = UIColor.lightGray
