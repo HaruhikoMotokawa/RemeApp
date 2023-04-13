@@ -1,13 +1,13 @@
 //
-//  CreateNewItemViewController.swift
+//  EditItemViewController.swift
 //  RemeApp
 //
-//  Created by 本川晴彦 on 2023/04/05.
+//  Created by 本川晴彦 on 2023/04/09.
 //
 
 import UIKit
-/// G-品目新規作成
-class CreateNewItemViewController: UIViewController {
+/// I-品目編集
+class EditItemViewController: UIViewController {
 
     /// 商品名入力
     @IBOutlet private weak var nameOfItemTextField: UITextField!
@@ -65,18 +65,38 @@ class CreateNewItemViewController: UIViewController {
     private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
     /// 写真のURLパス
     private var imageFilePath: URL?
+    /// nameOfItemTextFieldに表示するテキスト
+    private var nameOfItemTextFieldText:String = ""
+
+    /// numberOfItemPickerViewに表示する文字列
+    private var numberOfItemPickerViewString:String = ""
+
+    /// unitPickerViewに表示する文字列
+    private var unitPickerViewString:String = ""
+
+    /// selectTypeOfSalesFloorButtonに表示する売り場の種類を指定するためのRawValue
+    private var selectTypeOfSalesFloorButtonRawValue:Int = 0
+
+    /// supplementTextViewに表示するテキスト
+    private var supplementTextViewText:String? = nil
+
+    /// photoImageViewに表示する画像
+    private var photoImageViewImage:UIImage? = nil
+
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "品目編集"
         setDataSourceAndDelegate()
         setKeyboardCloseButton()
         setAppearanceAllButton()
-        setDisableThreeButton()
+        setDisableOrEnable()
         supplementTextView.setAppearanceAndPlaceholder()
+        displayData()
     }
 
-    /// データソースとデリゲートをセット
+    /// データソースとデリゲート設定
     private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
         numberOfItemPickerView.dataSource = self
@@ -86,11 +106,14 @@ class CreateNewItemViewController: UIViewController {
         supplementTextView.delegate = self
     }
 
-    /// 売り場ボタン、追加ボタン、写真の削除ボタンを非活性化
-    private func setDisableThreeButton() {
-        selectTypeOfSalesFloorButton.setDisable()
-        addButton.setDisable()
-        deletePhotoButton.setDisable()
+    /// 画面遷移してきた際に写真データの有無で写真の削除ボタンの活性化、非活性化を切り替える処理
+    private func setDisableOrEnable() {
+        // もし写真がない場合
+        if photoImageViewImage == nil {
+            deletePhotoButton.setDisable()
+        } else {
+            deletePhotoButton.setEnable()
+        }
     }
 
     /// 画面上の全てのButtonの見た目の設定メソッド
@@ -102,6 +125,59 @@ class CreateNewItemViewController: UIViewController {
         deletePhotoButton.setAppearanceWithShadow()
     }
 
+    /// データ受け渡し用のメソッド
+    func configurer(detail: ErrandDataModel) {
+        nameOfItemTextFieldText = detail.nameOfItem
+        numberOfItemPickerViewString = detail.numberOfItem
+        unitPickerViewString = detail.unit
+        selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
+        supplementTextViewText = detail.supplement
+        photoImageViewImage = detail.photoImage
+    }
+
+    /// 受け渡されたデータをそれぞれのUI部品に表示
+    private func displayData() {
+        nameOfItemTextField.text = nameOfItemTextFieldText
+        selectNumberOfItemRow(selectedNumberOfItem: numberOfItemPickerViewString)
+        selectUnitRow(selectedUnit: unitPickerViewString)
+        setSalesFloorTypeButton(salesFloorButtonRawValue: self.selectTypeOfSalesFloorButtonRawValue)
+        setSupplementLabelText(supplement: supplementTextViewText)
+        photoImageView.image = photoImageViewImage
+    }
+
+    /// numberOfItemPickerViewに表示できるように変換する
+    func selectNumberOfItemRow(selectedNumberOfItem: String) {
+        let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
+        numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
+    }
+
+    /// unitPickerViewに表示できるように変換する
+    func selectUnitRow(selectedUnit: String) {
+        let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
+        unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
+    }
+
+    /// 受け渡されたデータをSalesFloorTypeButtonに表示
+    /// - 商品名をタイトルに設定
+    /// - ボタンの背景色を設定
+    private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
+        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+        selectTypeOfSalesFloorButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
+        selectTypeOfSalesFloorButton.backgroundColor = salesFloor?.colorOfSalesFloor
+    }
+
+    /// 受け渡されたデータをsetSupplementLabelTextに表示
+    /// - 補足がなければ「""」を表示 == textViewDidBeginEditingによってプレースホルダーがセットされる
+    /// - 補足がある場合はフォントを黒にしてそのまま表示
+    private func setSupplementLabelText(supplement: String? ) {
+        if supplementTextViewText == nil {
+            supplementTextView.text = ""
+        }else{
+            supplementTextView.text = supplementTextViewText
+            supplementTextView.textColor = .black
+        }
+    }
+
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
     private func setKeyboardCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
@@ -110,6 +186,7 @@ class CreateNewItemViewController: UIViewController {
         nameOfItemTextField.inputAccessoryView = toolbar
         supplementTextView.inputAccessoryView = toolbar
     }
+
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
     @objc func doneButtonTapped() {
         view.endEditing(true)
@@ -117,7 +194,7 @@ class CreateNewItemViewController: UIViewController {
 }
 
 // MARK: ボタンタップ時のアラート関連
-extension CreateNewItemViewController {
+extension EditItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
     /// - 中止をキャンセルして画面に止まるか
@@ -126,7 +203,7 @@ extension CreateNewItemViewController {
                                                     "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
         // はいでEditShoppingListViewに戻る
         let okAction = UIAlertAction(title: "はい", style: .default, handler:  { (action) in
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         })
         // キャンセル、何もしない
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -150,14 +227,14 @@ extension CreateNewItemViewController {
             present(alertController, animated: true)
         } else {
             // ここに追加の処理
-           
-            self.dismiss(animated: true)
+
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
 
-// MARK: UIPickerViewDataSource&Delegate
-extension CreateNewItemViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+// MARK: UIPickerViewDelegate&UIPickerViewDataSource
+extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// pickerViewに表示する内容
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)
     -> String? {
@@ -170,6 +247,7 @@ extension CreateNewItemViewController: UIPickerViewDataSource, UIPickerViewDeleg
                 return nil
         }
     }
+
     /// pickerViewの列の数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -187,8 +265,9 @@ extension CreateNewItemViewController: UIPickerViewDataSource, UIPickerViewDeleg
     }
 }
 
+
 // MARK: UITextFieldDelegate
-extension CreateNewItemViewController: UITextFieldDelegate {
+extension EditItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
@@ -206,11 +285,10 @@ extension CreateNewItemViewController: UITextFieldDelegate {
 }
 
 // MARK: SelectTypeOfSalesFloorViewControllerDelegate
-extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
+extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
-    /// - addButtonを活性化
     func salesFloorButtonDidTapDone(type: SalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
@@ -219,7 +297,7 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
 }
 
 // MARK: UITextViewDelegate
-extension CreateNewItemViewController: UITextViewDelegate {
+extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
         if supplementTextView.text == "任意：３０文字以内で入力して下さい" {
@@ -235,8 +313,7 @@ extension CreateNewItemViewController: UITextViewDelegate {
         }
     }
     /// 入力制限を３０文字以内で設定
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let maxLength = 30
         let currentString: NSString = supplementTextView.text as NSString
         let updatedString = currentString.replacingCharacters(in: range, with: text)
@@ -244,13 +321,13 @@ extension CreateNewItemViewController: UITextViewDelegate {
     }
 }
 
-// MARK: UIImagePickerDelegate,UINavigationControllerDelegate
+// MARK: UIImagePickerControllerDelegate&UINavigationControllerDelegate
 // !!!: いずれPHPickerに変更しないといけないかも
 // 写真添付と削除の処理関連
-extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     /// 撮影または写真選択が終了した際のメソッド
     /// - 撮影または選択した画像をUIImageViewに表示させる
-    /// - 写真の取り消しボタンを活性化する
+    /// - 写真の取り消しボタンを有効化する
     /// - 画面を閉じてCreateNewItemViewに戻る
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -286,5 +363,4 @@ extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINaviga
 }
 
 // MARK: CameraAndPhotoActionable
-// setCameraAndPhotoActionメソッドを使用可能にする
-extension CreateNewItemViewController: CameraAndPhotoActionable {}
+extension EditItemViewController: CameraAndPhotoActionable {}
