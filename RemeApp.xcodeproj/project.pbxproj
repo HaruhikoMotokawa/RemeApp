@@ -33,6 +33,8 @@
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
+		7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */; };
+		7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */; };
 		78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3729C835D7004685F1 /* AppDelegate.swift */; };
 		78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3929C835D7004685F1 /* SceneDelegate.swift */; };
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSelectedSalesFloorViewController.swift; sourceTree = "<group>"; };
+		7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditSelectedSalesFloorView.storyboard; sourceTree = "<group>"; };
 		78AB3B3429C835D7004685F1 /* RemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
+				7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */,
 			);
 			path = EditSalesFloorMapView;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
+				7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */,
 			);
 			path = EditSalesFloorMapView;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
+				7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +452,7 @@
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
 				78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */,
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
+				7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,
 				78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */,
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
