@@ -401,7 +401,19 @@
                             <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="Fhl-cT-t6Y" secondAttribute="trailing" constant="5" id="zTj-I9-K7a"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="売り場マップ編集" id="mbw-WJ-4KE"/>
+                    <navigationItem key="navigationItem" title="売り場マップ編集" id="mbw-WJ-4KE">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="chD-0W-c6N">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="VWI-WB-x0y">
+                                <rect key="frame" x="283.66666666666669" y="5" width="93.333333333333314" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="リセット"/>
+                                <connections>
+                                    <action selector="resetSalesFloorSettings:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BSd-uP-OTH"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="blueFiveButton" destination="0NV-Ye-Ryz" id="gXN-pG-V99"/>

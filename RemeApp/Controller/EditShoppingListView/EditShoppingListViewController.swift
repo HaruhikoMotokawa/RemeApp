@@ -181,7 +181,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if editShoppingListTableView.isEditing {
             if let _ = self.editShoppingListTableView.indexPathsForSelectedRows {
-                let cell = self.editShoppingListTableView.cellForRow(at: indexPath)
+                _ = self.editShoppingListTableView.cellForRow(at: indexPath)
                 // 選択肢にチェックが一つでも入ってたら「削除」を表示する。
                 self.editButtonItem.title = "削除"
 
