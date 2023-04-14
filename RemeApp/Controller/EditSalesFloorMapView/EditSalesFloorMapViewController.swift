@@ -197,6 +197,23 @@ class EditSalesFloorMapViewController: UIViewController {
 
     }
 
+    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "", customColorOfSalesFloor: .white),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "", customColorOfSalesFloor: .white)]
 
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
@@ -221,9 +238,9 @@ class EditSalesFloorMapViewController: UIViewController {
                        greenFourButton, greenFiveButton]
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
-            let salesFloor = SalesFloorType(rawValue: index)!
-            button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
-            button?.backgroundColor = salesFloor.colorOfSalesFloor
+            let customSalesFloor = customSalesFloorList[index]
+            button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
+            button?.backgroundColor = customSalesFloor.customColorOfSalesFloor
             button?.setAppearanceWithShadow()
         }
     }
