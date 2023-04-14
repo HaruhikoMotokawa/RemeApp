@@ -21,6 +21,7 @@ struct ErrandDataModel {
     var unit:String = "個"
     /// 売り場に対応するRawValue
     var salesFloorRawValue:Int = 0
+
     /// 商品に対する補足文、nilを許容
     var supplement:String? = nil
     /// 商品の写真データパス、nilを許容
@@ -71,6 +72,7 @@ struct ErrandDataModel {
         return nil
     }
 }
+
 
 /// 売り場の詳細データ
 enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , PersistableEnum
@@ -140,30 +142,6 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
         }
     }
 
-    /// 売り場の番地、もしかしたら使わないかも？
-    var addressOfSalesFloor: String {
-        switch self {
-            case .redOne: return "赤①"
-            case .redTwo: return "赤②"
-            case .redThree: return "赤③"
-            case .redFour: return "赤④"
-            case .redFive: return "赤⑤"
-            case .blueOne: return "青①"
-            case .blueTwo: return "青②"
-            case .blueThree: return "青③"
-            case .blueFour: return "青④"
-            case .blueFive: return "青⑤"
-            case .blueSix: return "青⑥"
-            case .blueSeven: return "青⑦"
-            case .greenOne: return "緑①"
-            case .greenTwo: return "緑②"
-            case .greenThree: return "緑③"
-            case .greenFour: return "緑④"
-            case .greenFive: return "緑⑤"
-
-        }
-    }
-
     /// enumにintValueを設定
     var intValue: Int {
         return self.rawValue
@@ -175,3 +153,11 @@ enum SalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Persista
 
     }
 }
+
+
+
+
+
+
+
+
