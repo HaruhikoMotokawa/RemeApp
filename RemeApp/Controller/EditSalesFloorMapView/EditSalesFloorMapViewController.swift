@@ -221,6 +221,8 @@ class EditSalesFloorMapViewController: UIViewController {
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
     }
+
+    // MARK: 仮で修正
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 対象の売り場に購入商品がある場合は
