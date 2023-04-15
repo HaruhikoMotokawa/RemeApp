@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vxb-Bg-gmG">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--売り場マップ編集-->
+        <scene sceneID="1pd-7h-PzZ">
+            <objects>
+                <viewController storyboardIdentifier="DefaultSalesFloorMapView" id="Vxb-Bg-gmG" customClass="DefaultSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZoR-mJ-UWY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Rl-VzT" userLabel="AとBとC">
+                                <rect key="frame" x="0.0" y="20" width="375" height="525"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kMD-jM-ldr" userLabel="売り場A">
+                                        <rect key="frame" x="5" y="0.0" width="365" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69q-DZ-gbQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="60"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="A-1" cornerStyle="capsule">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMm-Dq-P4t">
+                                                <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="A-2" cornerStyle="capsule">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVM-v4-HJf">
+                                                <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="A-3" cornerStyle="capsule">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y3w-sc-yiX" userLabel="BとC">
+                                        <rect key="frame" x="5" y="70" width="365" height="455"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Kfs-uR-j93" userLabel="売り場B">
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="222.5"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTq-bR-gDe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XZ8-h5-Xc6">
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbX-zT-Hs0">
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96J-3k-8B7">
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upK-9L-KFx">
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7I-mf-Sg6">
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdj-jH-2y0">
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-AL-NRm" userLabel="売り場C">
+                                                <rect key="frame" x="0.0" y="232.5" width="365" height="222.5"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcI-51-6w6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBL-oS-8wJ">
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aI4-qk-8Yc">
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhw-6v-OMM">
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0T-H8-0xY">
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Qy-Kfj">
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRr-XG-g0E">
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="222.5"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Kfs-uR-j93" firstAttribute="leading" secondItem="y3w-sc-yiX" secondAttribute="leading" id="AUc-XQ-gPz"/>
+                                            <constraint firstAttribute="trailing" secondItem="KvP-AL-NRm" secondAttribute="trailing" id="iIs-0M-kTw"/>
+                                            <constraint firstItem="KvP-AL-NRm" firstAttribute="leading" secondItem="y3w-sc-yiX" secondAttribute="leading" id="t4w-Uo-8jE"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kfs-uR-j93" secondAttribute="trailing" id="y2f-HC-vmK"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kMD-jM-ldr" secondAttribute="trailing" constant="5" id="D6N-FY-fmh"/>
+                                    <constraint firstItem="y3w-sc-yiX" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="top" constant="70" id="Rjn-92-UhU"/>
+                                    <constraint firstAttribute="trailing" secondItem="y3w-sc-yiX" secondAttribute="trailing" constant="5" id="Vhd-G4-Wr1"/>
+                                    <constraint firstItem="y3w-sc-yiX" firstAttribute="leading" secondItem="SVg-Rl-VzT" secondAttribute="leading" constant="5" id="gK4-GF-sxU"/>
+                                    <constraint firstItem="kMD-jM-ldr" firstAttribute="leading" secondItem="SVg-Rl-VzT" secondAttribute="leading" constant="5" id="yMp-lR-e1c"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u44-9N-tXN" userLabel="レジと出入り口">
+                                <rect key="frame" x="0.0" y="555" width="375" height="58"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHo-AA-cGQ">
+                                        <rect key="frame" x="100" y="0.0" width="175" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="SRr-JJ-R0s" userLabel="出入り口">
+                                        <rect key="frame" x="50" y="34" width="275" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kG-G8-pkN">
+                                                <rect key="frame" x="0.0" y="0.0" width="98.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l64-je-Gi9">
+                                                <rect key="frame" x="176.5" y="0.0" width="98.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="SRr-JJ-R0s" firstAttribute="leading" secondItem="u44-9N-tXN" secondAttribute="leading" constant="50" id="0b0-wY-RHu"/>
+                                    <constraint firstAttribute="trailing" secondItem="lHo-AA-cGQ" secondAttribute="trailing" constant="100" id="f39-zT-X5K"/>
+                                    <constraint firstItem="lHo-AA-cGQ" firstAttribute="leading" secondItem="u44-9N-tXN" secondAttribute="leading" constant="100" id="qaZ-J2-XWd"/>
+                                    <constraint firstAttribute="trailing" secondItem="SRr-JJ-R0s" secondAttribute="trailing" constant="50" id="xMS-sZ-Rbn"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="01V-Qh-0ZK">
+                                <rect key="frame" x="5" y="550.5" width="70" height="57"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="myJ-bb-y9b">
+                                <rect key="frame" x="300" y="550.5" width="70" height="57"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LC3-vV-Cok"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="5" id="511-nX-N5s"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="myJ-bb-y9b" secondAttribute="trailing" constant="5" id="8sz-6w-Biw"/>
+                            <constraint firstItem="u44-9N-tXN" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" id="CXG-TG-gLx"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="01V-Qh-0ZK" secondAttribute="bottom" constant="10" id="EXW-hh-DhV"/>
+                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" constant="5" id="GBa-wl-feo"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="u44-9N-tXN" secondAttribute="trailing" id="JHr-UR-qhd"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="u44-9N-tXN" secondAttribute="bottom" constant="5" id="Z0K-Vp-hvx"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="myJ-bb-y9b" secondAttribute="bottom" constant="10" id="b1f-pK-bXL"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" id="iKO-nw-zng"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="01V-Qh-0ZK" secondAttribute="trailing" constant="300" id="imq-Ha-EEe"/>
+                            <constraint firstItem="myJ-bb-y9b" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="5" id="nuq-H0-32V"/>
+                            <constraint firstItem="u44-9N-tXN" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="10" id="pcf-K8-4aT"/>
+                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="SVg-Rl-VzT" secondAttribute="trailing" id="rcZ-4x-nSu"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="top" secondItem="LC3-vV-Cok" secondAttribute="top" id="sfZ-aQ-wfF"/>
+                            <constraint firstItem="myJ-bb-y9b" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" constant="300" id="yLm-4w-QyW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="売り場マップ編集" id="FbQ-zX-EQU">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="6HB-8E-MV3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="atV-qc-6eX">
+                                <rect key="frame" x="265.5" y="5" width="93.5" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="リセット"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="blueFiveButton" destination="uhw-6v-OMM" id="ZUB-np-QDJ"/>
+                        <outlet property="blueFourButton" destination="96J-3k-8B7" id="GbR-to-lXE"/>
+                        <outlet property="blueOneButton" destination="l0T-H8-0xY" id="BdM-2L-fkg"/>
+                        <outlet property="blueSevenButton" destination="vbX-zT-Hs0" id="iU1-uu-r1n"/>
+                        <outlet property="blueSixButton" destination="aI4-qk-8Yc" id="n5m-ba-zNg"/>
+                        <outlet property="blueThreeButton" destination="eMm-Dq-P4t" id="YKK-h2-4bI"/>
+                        <outlet property="blueTwoButton" destination="upK-9L-KFx" id="vaJ-0O-V32"/>
+                        <outlet property="greenFiveButton" destination="vcI-51-6w6" id="PcN-9Q-7Fq"/>
+                        <outlet property="greenFourButton" destination="DTq-bR-gDe" id="G1K-OG-BnW"/>
+                        <outlet property="greenOneButton" destination="dBL-oS-8wJ" id="S3T-Ad-2ts"/>
+                        <outlet property="greenThreeButton" destination="69q-DZ-gbQ" id="blV-6f-HxI"/>
+                        <outlet property="greenTwoButton" destination="XZ8-h5-Xc6" id="8KA-UY-0Ex"/>
+                        <outlet property="leftCartView" destination="01V-Qh-0ZK" id="d1o-85-bYM"/>
+                        <outlet property="leftEntranceLabel" destination="6kG-G8-pkN" id="ifk-yq-1WH"/>
+                        <outlet property="redFiveButton" destination="nCv-Qy-Kfj" id="FCz-Bz-eMk"/>
+                        <outlet property="redFourButton" destination="P7I-mf-Sg6" id="gCS-3S-mGH"/>
+                        <outlet property="redOneButton" destination="KRr-XG-g0E" id="reA-tS-tO5"/>
+                        <outlet property="redThreeButton" destination="DVM-v4-HJf" id="4HW-Hc-xuf"/>
+                        <outlet property="redTwoButton" destination="Jdj-jH-2y0" id="XR5-eT-IgI"/>
+                        <outlet property="registerLabel" destination="lHo-AA-cGQ" id="ShO-dh-Pff"/>
+                        <outlet property="rightEntranceLabel" destination="l64-je-Gi9" id="H7a-RD-Ciz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="saE-YH-SIv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="391" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="cart.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

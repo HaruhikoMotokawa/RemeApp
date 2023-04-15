@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nlH-X8-1vy">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -14,397 +14,149 @@
             <objects>
                 <viewController storyboardIdentifier="EditSalesFloorMapView" id="Y6W-OH-hqX" customClass="EditSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lEc-I8-uCO">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-Nh-BUo" userLabel="AとBとC">
-                                <rect key="frame" x="0.0" y="103" width="393" height="593"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Jh-Lq4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="k1c-fa-3sm" userLabel="売り場A">
-                                        <rect key="frame" x="5" y="0.0" width="383" height="60"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="886"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGm-Mb-qpc">
-                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="60"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-1" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goGreenThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="DBH-qq-VHQ"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drz-Ih-6cd">
-                                                <rect key="frame" x="129.33333333333334" y="0.0" width="124.33333333333334" height="60"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-2" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goBlueThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="nyS-ht-04a"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yg4-nN-2S8">
-                                                <rect key="frame" x="258.66666666666669" y="0.0" width="124.33333333333331" height="60"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-3" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goRedThreeList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GOz-e8-c77"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x1D-xc-gNO" userLabel="BとC">
-                                        <rect key="frame" x="5" y="70" width="383" height="523"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="SV8-17-PXM" userLabel="売り場B">
-                                                <rect key="frame" x="0.0" y="0.0" width="383" height="256.66666666666669"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="adu-CD-HoY" userLabel="使用マップ設定">
+                                                <rect key="frame" x="20" y="30" width="335" height="31"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scv-hP-2TB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="42.666666666666664" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用マップ設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeC-E7-5H9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="143" height="31"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9eg-RI-jeQ">
+                                                        <rect key="frame" x="173" y="0.0" width="162" height="32"/>
+                                                        <segments>
+                                                            <segment title="First"/>
+                                                            <segment title="Second"/>
+                                                        </segments>
                                                         <connections>
-                                                            <action selector="goGreenFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gej-tn-q5y"/>
+                                                            <action selector="changeSalesFloorMap:" destination="Y6W-OH-hqX" eventType="valueChanged" id="FC6-x8-lFv"/>
                                                         </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="037-wY-YDR">
-                                                        <rect key="frame" x="56.666666666666671" y="0.0" width="42.666666666666671" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hc5-gf-ksq"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QC7-sK-DSv">
-                                                        <rect key="frame" x="113.33333333333333" y="0.0" width="42.666666666666671" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueSevenList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hvO-rl-Uiy"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMA-kt-QfE">
-                                                        <rect key="frame" x="170" y="0.0" width="43" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lEK-6n-d9o"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2P-Rg-BGZ">
-                                                        <rect key="frame" x="227" y="0.0" width="42.666666666666686" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ElX-Sz-Wwp"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGf-T6-kF0">
-                                                        <rect key="frame" x="283.66666666666669" y="0.0" width="42.666666666666686" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedFourList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Zv1-Jx-k5b"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGe-61-dzv">
-                                                        <rect key="frame" x="340.33333333333331" y="0.0" width="42.666666666666686" height="256.66666666666669"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedTwoList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="s7E-ef-YlE"/>
-                                                        </connections>
-                                                    </button>
+                                                    </segmentedControl>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="Xyj-Pw-Uxo"/>
+                                                </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="baO-Ye-6ER" userLabel="売り場C">
-                                                <rect key="frame" x="0.0" y="266.66666666666674" width="383" height="256.33333333333326"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w8f-By-umP" userLabel="買い物ルート設定">
+                                                <rect key="frame" x="20" y="91" width="335" height="31"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXp-dq-7Bs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="42.666666666666664" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物ルート設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khG-x1-CFW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="31"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PEo-G0-cOh">
+                                                        <rect key="frame" x="173.5" y="0.0" width="161.5" height="32"/>
+                                                        <segments>
+                                                            <segment title="First"/>
+                                                            <segment title="Second"/>
+                                                        </segments>
                                                         <connections>
-                                                            <action selector="goGreenFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ijT-K8-G4A"/>
+                                                            <action selector="changeShoppingStartDirection:" destination="Y6W-OH-hqX" eventType="valueChanged" id="D22-ig-x47"/>
                                                         </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4V-hc-xLb">
-                                                        <rect key="frame" x="56.666666666666671" y="0.0" width="42.666666666666671" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3Ed-n0-ZhG"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsb-LP-K0a">
-                                                        <rect key="frame" x="113.33333333333333" y="0.0" width="42.666666666666671" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueSixList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jLm-8j-BFN"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0NV-Ye-Ryz">
-                                                        <rect key="frame" x="170" y="0.0" width="43" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HLE-bt-PV3"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3SX-ff-ni9">
-                                                        <rect key="frame" x="227" y="0.0" width="42.666666666666686" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="lfS-Xw-427"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYI-TV-vJc">
-                                                        <rect key="frame" x="283.66666666666669" y="0.0" width="42.666666666666686" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedFiveList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P14-CQ-AR6"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oG-3j-ypn">
-                                                        <rect key="frame" x="340.33333333333331" y="0.0" width="42.666666666666686" height="256.33333333333331"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedOneList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pWq-5I-KUf"/>
-                                                        </connections>
-                                                    </button>
+                                                    </segmentedControl>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="95x-i5-HF9"/>
+                                                </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カスタムマップ編集" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWa-11-ieZ">
+                                                <rect key="frame" x="20" y="152" width="335" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="gH0-YL-hPy"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HnL-L9-zHw" userLabel="スワイプ説明">
+                                                <rect key="frame" x="20" y="193" width="335" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="スワイプでデフォルトマップが見れます" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPI-m0-7Sv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.left.arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="10t-TK-0li">
+                                                        <rect key="frame" x="285" y="-1" width="50" height="52"/>
+                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="3do-ZL-nvz"/>
+                                                            <constraint firstAttribute="height" constant="50" id="beD-EH-w9G"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="iVB-Ud-cOB"/>
+                                                </constraints>
+                                            </stackView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iy-u0-WOP">
+                                                <rect key="frame" x="0.0" y="263" width="375" height="623"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="623" id="dPX-LB-5ki"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="8kV-lO-4LY" kind="embed" id="Q65-gy-CwS"/>
+                                                </connections>
+                                            </containerView>
                                         </subviews>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                         <constraints>
-                                            <constraint firstItem="baO-Ye-6ER" firstAttribute="leading" secondItem="x1D-xc-gNO" secondAttribute="leading" id="AHg-Be-eLZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="baO-Ye-6ER" secondAttribute="trailing" id="GNW-sP-ajY"/>
-                                            <constraint firstAttribute="trailing" secondItem="SV8-17-PXM" secondAttribute="trailing" id="SqV-Ze-544"/>
-                                            <constraint firstItem="SV8-17-PXM" firstAttribute="leading" secondItem="x1D-xc-gNO" secondAttribute="leading" id="Zk7-H5-Dfz"/>
+                                            <constraint firstItem="HnL-L9-zHw" firstAttribute="top" secondItem="oWa-11-ieZ" secondAttribute="bottom" constant="10" id="2Q1-1M-4WD"/>
+                                            <constraint firstItem="HnL-L9-zHw" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="AZ0-gX-1ZQ"/>
+                                            <constraint firstItem="oWa-11-ieZ" firstAttribute="top" secondItem="w8f-By-umP" secondAttribute="bottom" constant="30" id="Afx-HA-7e9"/>
+                                            <constraint firstItem="1iy-u0-WOP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" id="Bvd-7c-pue"/>
+                                            <constraint firstItem="w8f-By-umP" firstAttribute="top" secondItem="adu-CD-HoY" secondAttribute="bottom" constant="30" id="C1N-vc-4yi"/>
+                                            <constraint firstItem="adu-CD-HoY" firstAttribute="top" secondItem="Kub-xc-OWf" secondAttribute="top" constant="30" id="FKS-2u-sB4"/>
+                                            <constraint firstItem="1iy-u0-WOP" firstAttribute="top" secondItem="HnL-L9-zHw" secondAttribute="bottom" constant="20" id="KK3-8F-ZRA"/>
+                                            <constraint firstItem="oWa-11-ieZ" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="LJJ-ND-PJs"/>
+                                            <constraint firstAttribute="trailing" secondItem="1iy-u0-WOP" secondAttribute="trailing" id="Oa6-nj-ntZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="1iy-u0-WOP" secondAttribute="bottom" id="YKs-kc-ROA"/>
+                                            <constraint firstAttribute="trailing" secondItem="oWa-11-ieZ" secondAttribute="trailing" constant="20" id="Yio-VO-xXT"/>
+                                            <constraint firstAttribute="trailing" secondItem="HnL-L9-zHw" secondAttribute="trailing" constant="20" id="btl-6L-luj"/>
+                                            <constraint firstAttribute="trailing" secondItem="adu-CD-HoY" secondAttribute="trailing" constant="20" id="fEE-U0-b1f"/>
+                                            <constraint firstItem="adu-CD-HoY" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="g0n-Ju-zWB"/>
+                                            <constraint firstAttribute="trailing" secondItem="w8f-By-umP" secondAttribute="trailing" constant="20" id="nHk-cq-WDR"/>
+                                            <constraint firstItem="w8f-By-umP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="oix-f9-dnt"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="k1c-fa-3sm" firstAttribute="leading" secondItem="u8T-Nh-BUo" secondAttribute="leading" constant="5" id="DsG-tw-1r3"/>
-                                    <constraint firstItem="x1D-xc-gNO" firstAttribute="top" secondItem="u8T-Nh-BUo" secondAttribute="top" constant="70" id="Lln-JG-sS2"/>
-                                    <constraint firstItem="x1D-xc-gNO" firstAttribute="leading" secondItem="u8T-Nh-BUo" secondAttribute="leading" constant="5" id="VEc-x6-hgX"/>
-                                    <constraint firstAttribute="trailing" secondItem="x1D-xc-gNO" secondAttribute="trailing" constant="5" id="fZW-5Z-tgu"/>
-                                    <constraint firstAttribute="trailing" secondItem="k1c-fa-3sm" secondAttribute="trailing" constant="5" id="wS5-YX-JKq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kub-xc-OWf" secondAttribute="trailing" id="aJF-jo-hWB"/>
+                                    <constraint firstItem="Kub-xc-OWf" firstAttribute="leading" secondItem="WfJ-Jh-Lq4" secondAttribute="leading" id="aaC-j5-YVR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kub-xc-OWf" secondAttribute="bottom" id="chc-vf-lxM"/>
+                                    <constraint firstItem="Kub-xc-OWf" firstAttribute="width" secondItem="WfJ-Jh-Lq4" secondAttribute="width" id="d0g-X0-jjX"/>
+                                    <constraint firstItem="Kub-xc-OWf" firstAttribute="top" secondItem="WfJ-Jh-Lq4" secondAttribute="top" id="rIZ-Ha-rPg"/>
                                 </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hbg-hf-W9Q" userLabel="レジと出入り口">
-                                <rect key="frame" x="0.0" y="706" width="393" height="58"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diz-II-KsM">
-                                        <rect key="frame" x="100" y="0.0" width="193" height="24"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="0Ms-97-dEN" userLabel="出入り口">
-                                        <rect key="frame" x="50" y="34" width="293" height="24"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyq-3E-Q0O">
-                                                <rect key="frame" x="0.0" y="0.0" width="107.66666666666667" height="24"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DB-a0-yTi">
-                                                <rect key="frame" x="185.66666666666666" y="0.0" width="107.33333333333334" height="24"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Diz-II-KsM" secondAttribute="trailing" constant="100" id="NeV-tb-FyB"/>
-                                    <constraint firstAttribute="trailing" secondItem="0Ms-97-dEN" secondAttribute="trailing" constant="50" id="P8a-r9-X2f"/>
-                                    <constraint firstItem="0Ms-97-dEN" firstAttribute="leading" secondItem="hbg-hf-W9Q" secondAttribute="leading" constant="50" id="fby-KQ-L2v"/>
-                                    <constraint firstItem="Diz-II-KsM" firstAttribute="leading" secondItem="hbg-hf-W9Q" secondAttribute="leading" constant="100" id="fj4-eP-Sbq"/>
-                                </constraints>
-                            </stackView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yrh-kk-vPp">
-                                <rect key="frame" x="110" y="718" width="173" height="32"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                                <connections>
-                                    <action selector="changeShoppingStartDirection:" destination="Y6W-OH-hqX" eventType="valueChanged" id="KOm-kY-Xd3"/>
-                                </connections>
-                            </segmentedControl>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Fhl-cT-t6Y">
-                                <rect key="frame" x="300" y="702" width="88" height="56.666666666666629"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EJc-Mq-eDk">
-                                <rect key="frame" x="5" y="702" width="88" height="56.666666666666629"/>
-                            </imageView>
+                                <viewLayoutGuide key="contentLayoutGuide" id="jw1-Cf-nWG"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="I9R-Fr-PSX"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="la6-Xg-duh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="EJc-Mq-eDk" secondAttribute="trailing" constant="300" id="1i2-G8-zcM"/>
-                            <constraint firstItem="u8T-Nh-BUo" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" id="CGx-eL-io8"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="Fhl-cT-t6Y" secondAttribute="bottom" constant="10" id="IhQ-Z7-1mw"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="hbg-hf-W9Q" secondAttribute="bottom" constant="5" id="NgL-z9-3ra"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="yrh-kk-vPp" secondAttribute="bottom" constant="20" id="P3g-vw-iLt"/>
-                            <constraint firstItem="EJc-Mq-eDk" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" constant="5" id="ZxC-Jz-x2v"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="yrh-kk-vPp" secondAttribute="trailing" constant="110" id="aaJ-SO-rbr"/>
-                            <constraint firstItem="hbg-hf-W9Q" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="bJq-hO-XBV"/>
-                            <constraint firstItem="u8T-Nh-BUo" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="d0Y-cX-TGI"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="EJc-Mq-eDk" secondAttribute="bottom" constant="10" id="df1-d7-9lN"/>
-                            <constraint firstItem="yrh-kk-vPp" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" constant="110" id="fHd-yc-KHj"/>
-                            <constraint firstItem="Fhl-cT-t6Y" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" constant="300" id="gff-l4-bF4"/>
-                            <constraint firstItem="hbg-hf-W9Q" firstAttribute="top" secondItem="u8T-Nh-BUo" secondAttribute="bottom" constant="10" id="rqH-sZ-PZ3"/>
-                            <constraint firstItem="EJc-Mq-eDk" firstAttribute="top" secondItem="u8T-Nh-BUo" secondAttribute="bottom" constant="5" id="sV8-3B-neN"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="hbg-hf-W9Q" secondAttribute="trailing" id="tdM-6X-3P6"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="u8T-Nh-BUo" secondAttribute="trailing" id="v8G-YC-Nla"/>
-                            <constraint firstItem="Fhl-cT-t6Y" firstAttribute="top" secondItem="u8T-Nh-BUo" secondAttribute="bottom" constant="5" id="y6U-7v-oyt"/>
-                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="Fhl-cT-t6Y" secondAttribute="trailing" constant="5" id="zTj-I9-K7a"/>
+                            <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="WfJ-Jh-Lq4" secondAttribute="bottom" id="6ZU-ZQ-7Ue"/>
+                            <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="WfJ-Jh-Lq4" secondAttribute="trailing" id="RI9-B9-rki"/>
+                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" id="ePE-bX-pu5"/>
+                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="gzz-Mv-dWC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="売り場マップ編集" id="mbw-WJ-4KE">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="chD-0W-c6N">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="VWI-WB-x0y">
-                                <rect key="frame" x="283.66666666666669" y="5" width="93.333333333333314" height="34.333333333333336"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="VWI-WB-x0y">
+                                <rect key="frame" x="265.5" y="5" width="93.5" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="リセット"/>
@@ -415,35 +167,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="blueFiveButton" destination="0NV-Ye-Ryz" id="gXN-pG-V99"/>
-                        <outlet property="blueFourButton" destination="hMA-kt-QfE" id="wCN-Dq-4wb"/>
-                        <outlet property="blueOneButton" destination="3SX-ff-ni9" id="cNS-ex-GiY"/>
-                        <outlet property="blueSevenButton" destination="QC7-sK-DSv" id="Lku-FC-FWy"/>
-                        <outlet property="blueSixButton" destination="wsb-LP-K0a" id="ZRg-e2-R3w"/>
-                        <outlet property="blueThreeButton" destination="drz-Ih-6cd" id="vUZ-c0-dQi"/>
-                        <outlet property="blueTwoButton" destination="W2P-Rg-BGZ" id="YTh-t9-3Eq"/>
-                        <outlet property="greenFiveButton" destination="fXp-dq-7Bs" id="8w5-w6-FId"/>
-                        <outlet property="greenFourButton" destination="scv-hP-2TB" id="5gp-M6-gdE"/>
-                        <outlet property="greenOneButton" destination="g4V-hc-xLb" id="JSH-x7-CeJ"/>
-                        <outlet property="greenThreeButton" destination="YGm-Mb-qpc" id="sij-iF-dPG"/>
-                        <outlet property="greenTwoButton" destination="037-wY-YDR" id="yK7-4j-F2M"/>
-                        <outlet property="leftCartView" destination="EJc-Mq-eDk" id="Sqv-rZ-ldc"/>
-                        <outlet property="leftEntranceLabel" destination="pyq-3E-Q0O" id="qhl-dC-NJx"/>
-                        <outlet property="redFiveButton" destination="zYI-TV-vJc" id="dAO-zr-SIE"/>
-                        <outlet property="redFourButton" destination="pGf-T6-kF0" id="5eC-LF-Xmt"/>
-                        <outlet property="redOneButton" destination="8oG-3j-ypn" id="0zg-eX-t6c"/>
-                        <outlet property="redThreeButton" destination="Yg4-nN-2S8" id="yDk-LA-tD0"/>
-                        <outlet property="redTwoButton" destination="nGe-61-dzv" id="aTB-Qh-Lo6"/>
-                        <outlet property="registerLabel" destination="Diz-II-KsM" id="hkE-OX-X7E"/>
-                        <outlet property="rightCartView" destination="Fhl-cT-t6Y" id="WSj-Bm-kr3"/>
-                        <outlet property="rightEntranceLabel" destination="7DB-a0-yTi" id="e77-bp-vDt"/>
-                        <outlet property="shoppingStartDirectionSelector" destination="yrh-kk-vPp" id="yl1-Q1-K6S"/>
+                        <outlet property="shoppingStartDirectionSelector" destination="PEo-G0-cOh" id="ZlY-Zy-6ZH"/>
+                        <outlet property="useSalesFloorMapSelector" destination="9eg-RI-jeQ" id="GXy-fN-utL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066.4122137404579" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1066.4000000000001" y="-2.6986506746626691"/>
         </scene>
         <!--売り場マップ編集-->
         <scene sceneID="ayc-Oh-k1J">
@@ -452,7 +184,7 @@
                     <tabBarItem key="tabBarItem" title="売り場マップ編集" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="wwt-U3-PPD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1z5-aB-S8t">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -464,12 +196,23 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Tx9-UN-LhK">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="8kV-lO-4LY" customClass="PageViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8aX-IQ-cP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1946" y="-2"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="cart.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="arrow.left.arrow.right" catalog="system" width="120" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
