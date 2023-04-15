@@ -254,8 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
-				78B18CC129EA985300721592 /* DefaultSalesFloorMapView.storyboard */,
 				78B18CC329EA986000721592 /* CustomSalesFloorMapView.storyboard */,
+				78B18CC129EA985300721592 /* DefaultSalesFloorMapView.storyboard */,
 				7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */,
 			);
 			path = EditSalesFloorMapView;

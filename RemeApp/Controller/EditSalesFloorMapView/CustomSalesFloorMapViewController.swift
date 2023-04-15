@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomSalesMapFloorViewController: UIViewController {
-    
+
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
@@ -162,7 +162,8 @@ class CustomSalesMapFloorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateButtonAppearance()
+        setBorderAllLabel()
 
     }
 

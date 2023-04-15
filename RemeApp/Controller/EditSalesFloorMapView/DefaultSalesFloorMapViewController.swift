@@ -75,8 +75,9 @@ class DefaultSalesFloorMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateButtonAppearance()
+        setBorderAllLabel()
 
-        
     }
     
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
@@ -105,4 +106,5 @@ class DefaultSalesFloorMapViewController: UIViewController {
         }
     }
 
+    
 }

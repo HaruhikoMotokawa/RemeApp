@@ -19,16 +19,19 @@ class PageViewController: UIPageViewController {
         self.initPageView()
     }
 
-    // ②初期化（PageViewで表示するViewをセット）
+    /// ②初期化（PageViewで表示するViewをセット）
     func initPageView(){
         // PageViewControllerで表示するViewControllerをインスタンス化
-        let defaultSalesFloorMapViewStoryboard = UIStoryboard(name: "DefaultSalesFloorMapView", bundle: nil)
-        let defaultSalesFloorMapVC = defaultSalesFloorMapViewStoryboard.instantiateViewController(withIdentifier: "DefaultSalesFloorMapView") as! DefaultSalesFloorMapViewController
         let customSalesFloorMapViewStoryboard = UIStoryboard(name: "CustomSalesFloorMapView", bundle: nil)
-        let customSalesFloorMapVC = customSalesFloorMapViewStoryboard.instantiateViewController(withIdentifier: "CustomSalesFloorMapView") as! CustomSalesMapFloorViewController
+        let customSalesFloorMapVC = customSalesFloorMapViewStoryboard.instantiateViewController(
+            withIdentifier: "CustomSalesFloorMapView") as! CustomSalesMapFloorViewController
+
+        let defaultSalesFloorMapViewStoryboard = UIStoryboard(name: "DefaultSalesFloorMapView", bundle: nil)
+        let defaultSalesFloorMapVC = defaultSalesFloorMapViewStoryboard.instantiateViewController(
+            withIdentifier: "DefaultSalesFloorMapView") as! DefaultSalesFloorMapViewController
 
         // インスタンス化したViewControllerを配列に追加
-        self.controllers = [ defaultSalesFloorMapVC, customSalesFloorMapVC ]
+        self.controllers = [ customSalesFloorMapVC, defaultSalesFloorMapVC ]
 
         // 最初に表示するViewControllerを指定する
         setViewControllers([self.controllers[0]],
@@ -49,7 +52,8 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 
     // 左にスワイプした時の処理
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let index = self.controllers.firstIndex(of: viewController),
            index < self.controllers.count - 1 {
             return self.controllers[index + 1]
@@ -59,7 +63,8 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 
     // 右にスワイプした時の処理
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let index = self.controllers.firstIndex(of: viewController),
            index > 0 {
             return self.controllers[index - 1]
