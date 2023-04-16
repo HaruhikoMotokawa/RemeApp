@@ -12,21 +12,20 @@
         <!--売り場マップ編集-->
         <scene sceneID="pRz-4S-uIx">
             <objects>
-                <viewController storyboardIdentifier="CustomSalesFloorMapView" id="hHJ-fw-n8m" customClass="CustomSalesMapFloorViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomSalesFloorMapView" id="hHJ-fw-n8m" customClass="CustomSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WS3-es-oXS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カスタムマップ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j50-pN-R0R">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHT-oF-Fkr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="40"/>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="5iQ-e5-7Y9"/>
+                                    <constraint firstAttribute="height" constant="40" id="wvm-yv-Fyx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <items>
+                                    <navigationItem title="カスタムマップ" id="8WH-bM-pZ1"/>
+                                </items>
+                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5lN-F3-6Be" userLabel="AとBとC">
                                 <rect key="frame" x="0.0" y="70" width="375" height="475"/>
                                 <subviews>
@@ -377,28 +376,35 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bok-Ud-2u7">
                                 <rect key="frame" x="300" y="550.5" width="70" height="57"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dtA-Ku-jIj">
+                                <rect key="frame" x="245" y="22" width="70" height="34.5"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GFh-Nv-p8o"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="Bok-Ud-2u7" secondAttribute="trailing" constant="5" id="2aY-3Y-H41"/>
                             <constraint firstItem="Bok-Ud-2u7" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="300" id="6kT-OI-8Of"/>
+                            <constraint firstItem="5lN-F3-6Be" firstAttribute="top" secondItem="hHT-oF-Fkr" secondAttribute="bottom" constant="10" id="6wP-D7-cyC"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="ypc-H0-j50" secondAttribute="bottom" constant="5" id="8AS-BD-TUU"/>
                             <constraint firstItem="Tdx-Mj-P3t" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="5" id="8Ry-MX-Oiw"/>
                             <constraint firstItem="5lN-F3-6Be" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="AKL-2l-zLr"/>
                             <constraint firstItem="Tdx-Mj-P3t" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="5" id="Eg8-wJ-T10"/>
-                            <constraint firstItem="j50-pN-R0R" firstAttribute="top" secondItem="GFh-Nv-p8o" secondAttribute="top" id="Fvm-3Y-GTO"/>
                             <constraint firstItem="ypc-H0-j50" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="10" id="Hqv-Kh-mML"/>
                             <constraint firstItem="Bok-Ud-2u7" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="5" id="ISJ-gP-XwS"/>
+                            <constraint firstItem="dtA-Ku-jIj" firstAttribute="top" secondItem="GFh-Nv-p8o" secondAttribute="top" id="Mvd-Mw-bCb"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="5lN-F3-6Be" secondAttribute="trailing" id="SeW-1j-YLP"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="bottom" secondItem="dtA-Ku-jIj" secondAttribute="bottom" constant="2" id="T8B-vF-vGc"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="Tdx-Mj-P3t" secondAttribute="trailing" constant="300" id="U4p-k2-x2N"/>
-                            <constraint firstItem="j50-pN-R0R" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="Zvr-yi-NrA"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="Tdx-Mj-P3t" secondAttribute="bottom" constant="10" id="b0x-Hn-no9"/>
+                            <constraint firstItem="dtA-Ku-jIj" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="245" id="cQb-PO-qs3"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="e4Z-1A-YoC"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="ypc-H0-j50" secondAttribute="trailing" id="g1d-AA-6pZ"/>
                             <constraint firstItem="ypc-H0-j50" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="ibc-Na-YDz"/>
                             <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="Bok-Ud-2u7" secondAttribute="bottom" constant="10" id="jNq-0w-LjA"/>
-                            <constraint firstItem="j50-pN-R0R" firstAttribute="trailing" secondItem="GFh-Nv-p8o" secondAttribute="trailing" id="swI-Lw-apZ"/>
-                            <constraint firstItem="5lN-F3-6Be" firstAttribute="top" secondItem="j50-pN-R0R" secondAttribute="bottom" constant="10" id="vmE-Q9-Vby"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="dtA-Ku-jIj" secondAttribute="trailing" constant="60" id="pQ9-Sg-mhx"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="trailing" secondItem="GFh-Nv-p8o" secondAttribute="trailing" id="rfC-Mn-pn8"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="top" secondItem="GFh-Nv-p8o" secondAttribute="top" id="yWz-bg-bdd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="売り場マップ編集" id="Lcf-VE-mfJ">
@@ -420,6 +426,7 @@
                         <outlet property="blueSixButton" destination="XFf-0z-Lfb" id="nKB-rH-fM6"/>
                         <outlet property="blueThreeButton" destination="NIY-eE-rHT" id="pzn-VD-qXq"/>
                         <outlet property="blueTwoButton" destination="rmv-xS-lmU" id="NSL-Fo-wHw"/>
+                        <outlet property="customSelectCheckMark" destination="dtA-Ku-jIj" id="xbv-Se-ajs"/>
                         <outlet property="greenFiveButton" destination="M9E-Jw-DLb" id="an8-Zr-g0f"/>
                         <outlet property="greenFourButton" destination="wjW-cr-INt" id="8hC-Xi-WcN"/>
                         <outlet property="greenOneButton" destination="ofx-ei-hrY" id="n8T-ML-HGV"/>
@@ -439,14 +446,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAB-nI-SD6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="0.0"/>
+            <point key="canvasLocation" x="308" y="-14"/>
         </scene>
     </scenes>
     <resources>
         <image name="cart.circle.fill" catalog="system" width="128" height="123"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

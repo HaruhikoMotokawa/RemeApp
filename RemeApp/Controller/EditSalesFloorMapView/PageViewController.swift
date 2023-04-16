@@ -24,7 +24,7 @@ class PageViewController: UIPageViewController {
         // PageViewControllerで表示するViewControllerをインスタンス化
         let customSalesFloorMapViewStoryboard = UIStoryboard(name: "CustomSalesFloorMapView", bundle: nil)
         let customSalesFloorMapVC = customSalesFloorMapViewStoryboard.instantiateViewController(
-            withIdentifier: "CustomSalesFloorMapView") as! CustomSalesMapFloorViewController
+            withIdentifier: "CustomSalesFloorMapView") as! CustomSalesFloorMapViewController
 
         let defaultSalesFloorMapViewStoryboard = UIStoryboard(name: "DefaultSalesFloorMapView", bundle: nil)
         let defaultSalesFloorMapVC = defaultSalesFloorMapViewStoryboard.instantiateViewController(

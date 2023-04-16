@@ -1,5 +1,5 @@
 //
-//  CustomSalesMapViewController.swift
+//  CustomSalesFloorMapViewController.swift
 //  RemeApp
 //
 //  Created by 本川晴彦 on 2023/04/15.
@@ -7,7 +7,10 @@
 
 import UIKit
 
-class CustomSalesMapFloorViewController: UIViewController {
+class CustomSalesFloorMapViewController: UIViewController {
+
+    @IBOutlet weak var customSelectCheckMark: UIImageView!
+
 
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
@@ -160,13 +163,27 @@ class CustomSalesMapFloorViewController: UIViewController {
                                                                  CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)]
 
 
+    var isCustomSelected = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonAppearance()
         setBorderAllLabel()
-
+        setSelectCheckMar(customSelectCheckMark)
+        NotificationCenter.default.addObserver(self, selector: #selector(showCustomSelectCheckMark), name: .showCustomSelectCheckMark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideCustomSelectCheckMark), name: .hideCustomSelectCheckMark, object: nil)
     }
 
+    @objc func showCustomSelectCheckMark() {
+        isCustomSelected = true
+        customSelectCheckMark.isHidden = false
+    }
+
+    @objc func hideCustomSelectCheckMark() {
+        isCustomSelected = false
+        customSelectCheckMark.isHidden = true
+    }
+    
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()
@@ -208,4 +225,14 @@ class CustomSalesMapFloorViewController: UIViewController {
         /// EditSelectedSalesFloorViewにプッシュ遷移
         self.navigationController?.pushViewController(EditSelectedSalesFloorVC, animated: true)
     }
+
+    func setSelectCheckMar(_ view:UIImageView) {
+        let vc = EditSalesFloorMapViewController()
+        if vc.shoppingStartDirectionSelector.selectedSegmentIndex == 0 {
+            view.isHidden = false
+        } else {
+            view.isHidden = true
+        }
+    }
 }
+

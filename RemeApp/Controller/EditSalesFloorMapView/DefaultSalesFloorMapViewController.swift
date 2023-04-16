@@ -9,6 +9,9 @@ import UIKit
 
 class DefaultSalesFloorMapViewController: UIViewController {
 
+
+    @IBOutlet weak var defaultSelectCheckMark: UIImageView!
+
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
 
@@ -72,12 +75,15 @@ class DefaultSalesFloorMapViewController: UIViewController {
 
     @IBOutlet weak var rightCartView: UIImageView!
 
+    var isDefaultSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonAppearance()
         setBorderAllLabel()
-
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showDefaultSelectCheckMark), name: .showDefaultSelectCheckMark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideDefaultSelectCheckMark), name: .hideDefaultSelectCheckMark, object: nil)
     }
     
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
@@ -85,6 +91,16 @@ class DefaultSalesFloorMapViewController: UIViewController {
         registerLabel.setBorder()
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
+    }
+
+    @objc func showDefaultSelectCheckMark() {
+        isDefaultSelected = true
+        defaultSelectCheckMark.isHidden = false
+    }
+
+    @objc func hideDefaultSelectCheckMark() {
+        isDefaultSelected = false
+        defaultSelectCheckMark.isHidden = true
     }
 
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
@@ -105,6 +121,4 @@ class DefaultSalesFloorMapViewController: UIViewController {
             button?.setAppearanceWithShadow()
         }
     }
-
-    
 }
