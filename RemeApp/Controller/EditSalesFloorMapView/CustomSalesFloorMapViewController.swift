@@ -169,7 +169,6 @@ class CustomSalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         updateButtonAppearance()
         setBorderAllLabel()
-        setSelectCheckMar(customSelectCheckMark)
         NotificationCenter.default.addObserver(self, selector: #selector(showCustomSelectCheckMark), name: .showCustomSelectCheckMark, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideCustomSelectCheckMark), name: .hideCustomSelectCheckMark, object: nil)
     }
@@ -226,13 +225,6 @@ class CustomSalesFloorMapViewController: UIViewController {
         self.navigationController?.pushViewController(EditSelectedSalesFloorVC, animated: true)
     }
 
-    func setSelectCheckMar(_ view:UIImageView) {
-        let vc = EditSalesFloorMapViewController()
-        if vc.shoppingStartDirectionSelector.selectedSegmentIndex == 0 {
-            view.isHidden = false
-        } else {
-            view.isHidden = true
-        }
-    }
+
 }
 

@@ -57,6 +57,7 @@ class EditSalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setAppearance(useSalesFloorMapSelector, startIndexNumber: 1, leftTitle: "カスタム", rightTitle: "デフォルト")
         setAppearance(shoppingStartDirectionSelector, startIndexNumber: 1, leftTitle: "左回り", rightTitle: "右回り")
+
     }
  
     func setAppearance(_ segment: UISegmentedControl, startIndexNumber: Int, leftTitle: String, rightTitle: String) {
@@ -65,11 +66,6 @@ class EditSalesFloorMapViewController: UIViewController {
         segment.setTitle(rightTitle, forSegmentAt: 1)
         segment.backgroundColor = UIColor.lightGray
     }
-
-
-
-
-
 }
 
 extension NSNotification.Name {
