@@ -10,6 +10,7 @@ import UIKit
 /// F-買い物リスト編集
 class EditShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
 
@@ -29,6 +30,7 @@ class EditShoppingListViewController: UIViewController {
         self.present(createNewItemVC, animated: true)
     }
 
+    // MARK: - property
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
@@ -40,7 +42,7 @@ class EditShoppingListViewController: UIViewController {
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItem()
@@ -49,6 +51,7 @@ class EditShoppingListViewController: UIViewController {
         setAppearance(createNewItemButton)
     }
 
+    // MARK: - func
     /// UITableViewの初期設定関連
     private func setTableVIew() {
         editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
@@ -88,7 +91,7 @@ class EditShoppingListViewController: UIViewController {
         }
     }
 
-    // MARK: 編集モードに関する処理
+    // MARK: - 編集モードに関する処理
     /// 編集モードの設定==rightBarButtonItemをタップした時の動作
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -146,7 +149,7 @@ class EditShoppingListViewController: UIViewController {
     }
 }
 
-// MARK: UITableViewDataSource & Delegate
+// MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -247,7 +250,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     }
 }
 
-// MARK: ShoppingListTableViewCellDelegate
+// MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
 extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理

@@ -9,6 +9,7 @@ import UIKit
 /// I-品目編集
 class EditItemViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 商品名入力
     @IBOutlet private weak var nameOfItemTextField: UITextField!
     /// 個数入力
@@ -58,6 +59,7 @@ class EditItemViewController: UIViewController {
         addOrReEnter()
     }
 
+    // MARK: - property
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
@@ -84,7 +86,7 @@ class EditItemViewController: UIViewController {
     private var photoImageViewImage:UIImage? = nil
 
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "品目編集"
@@ -96,6 +98,7 @@ class EditItemViewController: UIViewController {
         displayData()
     }
 
+    // MARK: - func
     /// データソースとデリゲート設定
     private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
@@ -193,7 +196,7 @@ class EditItemViewController: UIViewController {
     }
 }
 
-// MARK: ボタンタップ時のアラート関連
+// MARK: - ボタンタップ時のアラート関連
 extension EditItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
@@ -233,7 +236,7 @@ extension EditItemViewController {
     }
 }
 
-// MARK: UIPickerViewDelegate&UIPickerViewDataSource
+// MARK: - UIPickerViewDelegate&DataSource
 extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// pickerViewに表示する内容
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)
@@ -266,7 +269,7 @@ extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 
-// MARK: UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 extension EditItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
@@ -284,7 +287,7 @@ extension EditItemViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: SelectTypeOfSalesFloorViewControllerDelegate
+// MARK: - SelectTypeOfSalesFloorViewControllerDelegate
 extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
@@ -296,7 +299,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     }
 }
 
-// MARK: UITextViewDelegate
+// MARK: - UITextViewDelegate
 extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -321,7 +324,7 @@ extension EditItemViewController: UITextViewDelegate {
     }
 }
 
-// MARK: UIImagePickerControllerDelegate&UINavigationControllerDelegate
+// MARK: - UIImagePickerControllerDelegate&UINavigationControllerDelegate
 // !!!: いずれPHPickerに変更しないといけないかも
 // 写真添付と削除の処理関連
 extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -362,5 +365,5 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-// MARK: CameraAndPhotoActionable
+// MARK: - CameraAndPhotoActionable
 extension EditItemViewController: CameraAndPhotoActionable {}

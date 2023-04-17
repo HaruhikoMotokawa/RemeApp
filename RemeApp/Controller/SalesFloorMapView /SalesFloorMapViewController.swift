@@ -10,6 +10,7 @@ import UIKit
 /// C-売り場マップ閲覧
 class SalesFloorMapViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
@@ -142,6 +143,7 @@ class SalesFloorMapViewController: UIViewController {
     /// 買い物ルート設定で右回りを選択した場合に表示するView
     @IBOutlet weak var rightCartView: UIImageView!
 
+    // MARK: - property
     /// 使いデータのダミーデータ
     var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
@@ -153,6 +155,7 @@ class SalesFloorMapViewController: UIViewController {
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderAllLabel()
@@ -160,6 +163,7 @@ class SalesFloorMapViewController: UIViewController {
         setCartView()
     }
 
+    // MARK: - func
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()

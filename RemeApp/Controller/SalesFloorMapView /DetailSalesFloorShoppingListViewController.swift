@@ -10,6 +10,7 @@ import UIKit
 /// E-売り場の買い物リスト詳細
 class DetailSalesFloorShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet
     /// 商品名を表示
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 必要数を表示
@@ -23,6 +24,7 @@ class DetailSalesFloorShoppingListViewController: UIViewController {
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
 
+    // MARK: - property
     /// nameOfItemLabelに表示するテキスト
     private var nameOfItemLabelText:String = ""
     /// numberOfItemLabelに表示するテキスト
@@ -36,6 +38,7 @@ class DetailSalesFloorShoppingListViewController: UIViewController {
     /// photoPathImageViewに表示する画像
     private var photoPathImage:UIImage? = nil
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         salesFloorTypeButton.setAppearance()

@@ -10,9 +10,11 @@ import UIKit
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet
     /// 買い物リストを表示する
     @IBOutlet private weak var shoppingListTableView: UITableView!
 
+    // MARK: - property
     /// 買い物リストに表示するお使いデータのダミーデータ
     private var errandDataList: [ErrandDataModel] =
     [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
@@ -25,6 +27,7 @@ class ShoppingListViewController: UIViewController {
      ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
      ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         shoppingListTableView.dataSource = self
@@ -34,6 +37,7 @@ class ShoppingListViewController: UIViewController {
         sortErrandDataList()
     }
 
+    // MARK: - func
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
@@ -56,6 +60,7 @@ class ShoppingListViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource&Delegate
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,6 +99,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
+// MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
 extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理

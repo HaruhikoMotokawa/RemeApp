@@ -12,6 +12,7 @@ class PageViewController: UIPageViewController {
     // ① PageView上で表示するViewControllerを管理する配列
     private var controllers: [UIViewController] = []
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -10,6 +10,7 @@ import UIKit
 /// H-売り場選択
 class SelectTypeOfSalesFloorViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
@@ -142,14 +143,18 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     /// 買い物ルート設定で右回りを選択した場合に表示するView
     @IBOutlet weak var rightCartView: UIImageView!
 
+    // MARK: - property
     /// CreateNewItemViewControllerのselectTypeOfSalesFloorButtonの見た目を変更するデリゲート
     var delegate: SelectTypeOfSalesFloorViewControllerDelegate?
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderForLabelAllLabel()
         updateButtonAppearance()
     }
+
+    // MARK: - func
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderForLabelAllLabel() {
         registerLabel.setBorder()
@@ -221,6 +226,8 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         leftCartView.isHidden = true
     }
 }
+
+// MARK: - SelectTypeOfSalesFloorViewControllerDelegate
 /// 「売り場選択」画面でボタンをタップした後に、
 /// 「品目新規作成」画面のボタンの見た目を変更するためのDelegate
 protocol SelectTypeOfSalesFloorViewControllerDelegate {

@@ -9,6 +9,7 @@ import UIKit
 /// B-買い物リスト詳細
 class DetailShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet
     /// 商品名を表示
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 必要数を表示
@@ -22,6 +23,7 @@ class DetailShoppingListViewController: UIViewController {
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
 
+    // MARK: - property
     /// nameOfItemLabelに表示するテキスト
     private var nameOfItemLabelText:String = ""
     /// numberOfItemLabelに表示するテキスト
@@ -35,6 +37,8 @@ class DetailShoppingListViewController: UIViewController {
     /// photoPathImageViewに表示する画像
     private var photoPathImage:UIImage? = nil
 
+
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         // UIButtonの基本設定
@@ -43,6 +47,7 @@ class DetailShoppingListViewController: UIViewController {
         self.title = "詳細"
     }
 
+    // MARK: - func
     /// データ受け渡し用のメソッド
     func configurer(detail: ErrandDataModel) {
         nameOfItemLabelText = detail.nameOfItem

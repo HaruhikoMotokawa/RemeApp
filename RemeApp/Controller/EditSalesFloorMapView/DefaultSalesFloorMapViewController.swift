@@ -9,6 +9,7 @@ import UIKit
 
 class DefaultSalesFloorMapViewController: UIViewController {
 
+    // MARK: - @IBOutlet
     /// 売り場のマップでデフォルトを選択した場合に表示するView
     @IBOutlet weak var defaultSelectCheckMark: UIImageView!
 
@@ -76,7 +77,7 @@ class DefaultSalesFloorMapViewController: UIViewController {
     /// 買い物ルート設定で右回りを選択した場合に表示するView
     @IBOutlet weak var rightCartView: UIImageView!
 
-
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonAppearance()
@@ -84,7 +85,8 @@ class DefaultSalesFloorMapViewController: UIViewController {
         setDefaultSelectCheckMark()
         setCartView()
     }
-    
+
+    // MARK: - func
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()

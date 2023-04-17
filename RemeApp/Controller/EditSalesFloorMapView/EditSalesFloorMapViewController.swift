@@ -5,12 +5,12 @@
 //  Created by 本川晴彦 on 2023/03/23.
 //
 
-import Foundation
 import UIKit
 
 /// K-売り場マップ編集
 class EditSalesFloorMapViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// カスタムマップの設定をリセットする
     @IBAction func resetSalesFloorSettings(_ sender: Any) {
         let alertController =
@@ -65,19 +65,21 @@ class EditSalesFloorMapViewController: UIViewController {
         }
     }
 
+    // MARK: - property
     /// 売り場マップの設定を保存するためのUserDefaultsに使用するキー
     let useSalesFloorTypeKey = "useSalesFloorTypeKey"
 
     /// 買い物の開始位置の設定を保存するためのUserDefaultsに使用するキー
     let shoppingStartPositionKey = "shoppingStartPositionKey"
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setUseSalesFloorMapSelector()
         setShoppingStartPositionSelector()
     }
 
+    // MARK: - func
     /// 使用マップ設定のセグメントを設定する
     /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
     /// - セグメント左のタイトルを「カスタム」に設定

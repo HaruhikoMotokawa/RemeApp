@@ -9,140 +9,147 @@ import UIKit
 /// 選択した売り場編集
 class EditSelectedSalesFloorViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
+    /// 売り場の名称を入力するテキストフィールド
     @IBOutlet weak var nameOfSalesFloorTextField: UITextField!
 
+    /// 選択された売り場の色を表示するview
     @IBOutlet weak var selectedSalesFloorColorView: UIView!
 
-
+    /// 売り場のカラーをgreenで選択するbutton
     @IBOutlet weak var greenButton: UIButton!
-
+    /// 売り場のカラーをgreenで選択する
     @IBAction func selectGreen(_ sender: Any) {
         selectColor(color: .green)
     }
 
-
+    /// 売り場のカラーをsystemTealで選択するbutton
     @IBOutlet weak var systemTealButton: UIButton!
-
+    /// 売り場のカラーをsystemTealで選択する
     @IBAction func selectSystemTeal(_ sender: Any) {
         selectColor(color: .systemTeal)
     }
 
-
+    /// 売り場のカラーをblueで選択するbutton
     @IBOutlet weak var blueButton: UIButton!
+    /// 売り場のカラーをblueで選択する
     @IBAction func selectBlue(_ sender: Any) {
         selectColor(color: .blue)
     }
 
-
+    /// 売り場のカラーをsystemPurpleで選択するbutton
     @IBOutlet weak var systemPurpleButton: UIButton!
-
+    /// 売り場のカラーをsystemPurpleで選択する
     @IBAction func selectSystemPurple(_ sender: Any) {
         selectColor(color: .systemPurple)
     }
 
+    /// 売り場のカラーをsystemPinkで選択するbutton
     @IBOutlet weak var systemPinkButton: UIButton!
-
+    /// 売り場のカラーをsystemPinkで選択する
     @IBAction func selectSystemPink(_ sender: Any) {
         selectColor(color: .systemPink)
     }
 
-
+    /// 売り場のカラーをpurpleで選択するbutton
     @IBOutlet weak var purpleButton: UIButton!
-
+    /// 売り場のカラーをpurpleで選択する
     @IBAction func selectPurple(_ sender: Any) {
         selectColor(color: .purple)
     }
 
+    /// 売り場のカラーをbrownで選択するbutton
     @IBOutlet weak var brownButton: UIButton!
-
+    /// 売り場のカラーをbrownで選択する
     @IBAction func selectBrown(_ sender: Any) {
         selectColor(color: .brown)
     }
 
+    /// 売り場のカラーをredで選択するbutton
     @IBOutlet weak var redButton: UIButton!
-
+    /// 売り場のカラーをredで選択する
     @IBAction func selectRed(_ sender: Any) {
         selectColor(color: .red)
     }
 
-
+    /// 売り場のカラーをsystemRedで選択するbutton
     @IBOutlet weak var systemRedButton: UIButton!
-
+    /// 売り場のカラーをsystemRedで選択する
     @IBAction func selectSystemRed(_ sender: Any) {
         selectColor(color: .systemRed)
     }
 
-
+    /// 売り場のカラーをmagentaで選択するbutton
     @IBOutlet weak var magentaButton: UIButton!
-
+    /// 売り場のカラーをmagentaで選択する
     @IBAction func selectMagenta(_ sender: Any) {
         selectColor(color: .magenta)
     }
 
-
+    /// 売り場のカラーをsystemGrayで選択するbutton
     @IBOutlet weak var systemGrayButton: UIButton!
-
+    /// 売り場のカラーをsystemGrayで選択する
     @IBAction func selectSystemGray(_ sender: Any) {
         selectColor(color: .systemGray)
     }
 
-
+    /// 売り場のカラーをsystemGreenで選択するbutton
     @IBOutlet weak var systemGreenButton: UIButton!
-
+    /// 売り場のカラーをsystemGreenで選択する
     @IBAction func selectSystemGreen(_ sender: Any) {
         selectColor(color: .systemGreen)
     }
 
-
+    /// 売り場のカラーをsystemIndigoで選択するbutton
     @IBOutlet weak var systemIndigoButton: UIButton!
-
+    /// 売り場のカラーをsystemIndigoで選択する
     @IBAction func selectSystemIndigo(_ sender: Any) {
         selectColor(color: .systemIndigo)
     }
 
-
+    /// 売り場のカラーをcyanで選択するbutton
     @IBOutlet weak var cyanButton: UIButton!
-
+    /// 売り場のカラーをcyanで選択する
     @IBAction func selectCyan(_ sender: Any) {
         selectColor(color: .cyan)
     }
 
-
+    /// 売り場のカラーをsystemBlueで選択するbutton
     @IBOutlet weak var systemBlueButton: UIButton!
-
+    /// 売り場のカラーをsystemBlueで選択する
     @IBAction func selectSystemBlue(_ sender: Any) {
         selectColor(color: .systemBlue)
     }
 
-
+    /// 売り場のカラーをsystemYellowで選択するbutton
     @IBOutlet weak var systemYellowButton: UIButton!
-
+    /// 売り場のカラーをsystemYellowで選択する
     @IBAction func selectSystemYellow(_ sender: Any) {
         selectColor(color: .systemYellow)
     }
 
-
+    /// 売り場のカラーをorangeで選択するbutton
     @IBOutlet weak var orangeButton: UIButton!
-
+    /// 売り場のカラーをorangeで選択する
     @IBAction func selectOrange(_ sender: Any) {
         selectColor(color: .orange)
     }
 
-
+    /// キャンセルボタン
     @IBOutlet weak var cancelButton: UIButton!
-
+    /// 編集をキャンセルして戻る
     @IBAction func cancelAction(_ sender: Any) {
         showCancelAlert()
     }
 
-
+    /// 保存ボタン
     @IBOutlet weak var saveButton: UIButton!
-
+    /// 保存して前の画面に戻る
     @IBAction func saveAction(_ sender: Any) {
         addOrReEnter()
     }
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         nameOfSalesFloorTextField.delegate = self
@@ -153,6 +160,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
         setKeyboardCloseButton()
     }
 
+    // MARK: - func
     /// 売り場選択からもらった情報を表示
     
 
@@ -190,10 +198,14 @@ class EditSelectedSalesFloorViewController: UIViewController {
         for button in buttons {
             button?.setTitle("選択", for: .normal)
             button?.setAppearanceWithShadow()
-
         }
     }
 
+    /// UIViewに見た目を設定
+    /// - 枠線を１で設定
+    /// - 枠線の色を黒に設定
+    /// - 枠線を角丸10で設定
+    /// - 境界の外側を非表示
     private func viewAppearance() {
         selectedSalesFloorColorView.layer.borderWidth = 1
         selectedSalesFloorColorView.layer.borderColor = UIColor.black.cgColor
@@ -201,6 +213,9 @@ class EditSelectedSalesFloorViewController: UIViewController {
         selectedSalesFloorColorView.clipsToBounds = true
     }
 
+    /// キャンセルボタンと保存ボタンの見た目を設定
+    /// - 両方のボタンに基本設定と影を設定
+    /// - 両方のボタンの背景色を灰色に設定
     private func setCancelAndSaveButtonAppearance() {
         cancelButton.setAppearanceWithShadow()
         cancelButton.backgroundColor = .lightGray
@@ -208,6 +223,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
         saveButton.backgroundColor = .lightGray
     }
 
+    /// 選択した色をUIViewに表示
     private func selectColor(color: UIColor) {
         selectedSalesFloorColorView.backgroundColor = color
     }
