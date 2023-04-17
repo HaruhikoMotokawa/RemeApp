@@ -71,7 +71,7 @@ class DetailSalesFloorShoppingListViewController: UIViewController {
     /// - 商品名をタイトルに設定
     /// - ボタンの背景色を設定
     private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
-        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+        let salesFloor = DefaultSalesFloorType(rawValue: salesFloorButtonRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }

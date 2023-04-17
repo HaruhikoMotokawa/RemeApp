@@ -155,7 +155,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
         nameOfSalesFloorTextField.delegate = self
         setColorForSelectionButtons()
         updateButtonAppearance()
-        viewAppearance()
+        setViewAppearance()
         setCancelAndSaveButtonAppearance()
         setKeyboardCloseButton()
     }
@@ -206,7 +206,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
     /// - 枠線の色を黒に設定
     /// - 枠線を角丸10で設定
     /// - 境界の外側を非表示
-    private func viewAppearance() {
+    private func setViewAppearance() {
         selectedSalesFloorColorView.layer.borderWidth = 1
         selectedSalesFloorColorView.layer.borderColor = UIColor.black.cgColor
         selectedSalesFloorColorView.layer.cornerRadius = 10

@@ -37,7 +37,6 @@ class EditSalesFloorMapViewController: UIViewController {
     @IBAction func changeSalesFloorMap(_ sender: Any) {
         // もしもセグメントが０だったら売り場の設定をカスタムにする
         if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
-
             saveUseSalesFloorMap(type: SalesFloorMapType.custom)
             NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
@@ -55,13 +54,14 @@ class EditSalesFloorMapViewController: UIViewController {
     @IBAction func changeShoppingStartPosition(_ sender: UISegmentedControl) {
         // もしもセグメントが０だったら買い物の開始位置を左回りにする
         if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
-
             saveShoppingStartDirection(type: ShoppingStartPositionType.left)
             NotificationCenter.default.post(name: .showLeftCartView, object: nil)
+            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
             // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
         } else {
             saveShoppingStartDirection(type: ShoppingStartPositionType.right)
             NotificationCenter.default.post(name: .showRightCartView, object: nil)
+            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
         }
     }
 
@@ -125,18 +125,4 @@ class EditSalesFloorMapViewController: UIViewController {
     func saveShoppingStartDirection(type: ShoppingStartPositionType) {
         UserDefaults.standard.setValue(type.rawValue, forKey: shoppingStartPositionKey)
     }
-}
-
-// 使用する売り場の設定によってチェックマークを切り替える通知設定
-extension NSNotification.Name {
-    static let showCustomSelectCheckMark = NSNotification.Name("showCustomSelectCheckMark")
-    static let hideCustomSelectCheckMark = NSNotification.Name("hideCustomSelectCheckMark")
-    static let showDefaultSelectCheckMark = NSNotification.Name("showDefaultSelectCheckMark")
-    static let hideDefaultSelectCheckMark = NSNotification.Name("hideDefaultSelectCheckMark")
-}
-
-// 買い物の開始位置の設定によってチェックマークを切り替える通知設定
-extension NSNotification.Name {
-    static let showLeftCartView = NSNotification.Name("showLeftCartView")
-    static let showRightCartView = NSNotification.Name("showRightCartView")
 }

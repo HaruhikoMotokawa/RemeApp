@@ -171,7 +171,7 @@ class DefaultSalesFloorMapViewController: UIViewController {
                        greenFourButton, greenFiveButton]
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
-            let salesFloor = SalesFloorType(rawValue: index)!
+            let salesFloor = DefaultSalesFloorType(rawValue: index)!
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
             button?.backgroundColor = salesFloor.colorOfSalesFloor
             button?.setAppearanceWithShadow()

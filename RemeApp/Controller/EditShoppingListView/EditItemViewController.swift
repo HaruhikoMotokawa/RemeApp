@@ -164,7 +164,7 @@ class EditItemViewController: UIViewController {
     /// - 商品名をタイトルに設定
     /// - ボタンの背景色を設定
     private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
-        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+        let salesFloor = DefaultSalesFloorType(rawValue: salesFloorButtonRawValue)
         selectTypeOfSalesFloorButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }
@@ -292,7 +292,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
-    func salesFloorButtonDidTapDone(type: SalesFloorType) {
+    func salesFloorButtonDidTapDone(type: DefaultSalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
         addButton.setEnable()

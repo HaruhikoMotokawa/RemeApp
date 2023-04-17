@@ -36,10 +36,46 @@ class ShoppingListViewController: UIViewController {
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
     }
-
     // MARK: - func
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
+    /// - NotificationCenterの受診をセット
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// -  画面ローディング時の表示をif文で切り替え
+    /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortErrandDataList() {
+        NotificationCenter.default.addObserver(self, selector: #selector(sortLeftErrandDataList),
+                                               name: .sortLeftErrandDataList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sortRightErrandDataList),
+                                               name: .sortRightErrandDataList, object: nil)
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            sortLeftErrandDataList()
+        } else {
+            sortRightErrandDataList()
+        }
+    }
+
+    /// NotificationCenterによって買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - shoppingListTableViewを再読み込み
+    @objc func sortLeftErrandDataList() {
+        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+            if a.isCheckBox != b.isCheckBox {
+                return !a.isCheckBox
+            } else {
+                return a.salesFloorRawValue > b.salesFloorRawValue
+            }
+        }
+        shoppingListTableView.reloadData()
+    }
+
+    /// NotificationCenterによって買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
+    /// - shoppingListTableViewを再読み込み
+    @objc func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -47,6 +83,7 @@ class ShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
         }
+        shoppingListTableView.reloadData()
     }
 
     /// 全てのセルがチェックされている場合にアラートを表示する

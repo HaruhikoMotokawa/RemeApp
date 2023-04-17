@@ -80,7 +80,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
     func setSalesFloorTypeButton(salesFloorRawValue: Int) {
-        let salesFloor = SalesFloorType(rawValue: salesFloorRawValue)
+        let salesFloor = DefaultSalesFloorType(rawValue: salesFloorRawValue)
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }

@@ -214,7 +214,7 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
     /// - addButtonを活性化
-    func salesFloorButtonDidTapDone(type: SalesFloorType) {
+    func salesFloorButtonDidTapDone(type: DefaultSalesFloorType) {
         selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
         addButton.setEnable()
