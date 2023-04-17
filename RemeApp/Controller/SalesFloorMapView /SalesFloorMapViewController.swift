@@ -136,6 +136,12 @@ class SalesFloorMapViewController: UIViewController {
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
+    /// 買い物ルート設定で左回りを選択した場合に表示するView
+    @IBOutlet weak var leftCartView: UIImageView!
+
+    /// 買い物ルート設定で右回りを選択した場合に表示するView
+    @IBOutlet weak var rightCartView: UIImageView!
+
     /// 使いデータのダミーデータ
     var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
@@ -149,9 +155,9 @@ class SalesFloorMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 各UILabelに枠線を設定
         setBorderAllLabel()
         updateButtonAppearance()
+        setCartView()
     }
 
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
@@ -203,8 +209,44 @@ class SalesFloorMapViewController: UIViewController {
         /// SalesFloorShoppingListViewにプッシュ遷移
         self.navigationController?.pushViewController(salesFloorShoppingListVC, animated: true)
     }
-}
 
+    /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド
+    /// - NotificationCenterの通知受信を設定
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - 画面ローディング時の表示をif文で切り替え
+    private func setCartView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView),
+                                               name: .showLeftCartView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView),
+                                               name: .showRightCartView, object: nil)
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            leftCartView.isHidden = false
+            rightCartView.isHidden = true
+        } else {
+            rightCartView.isHidden = false
+            leftCartView.isHidden = true
+        }
+    }
+
+    /// NotificationCenterによって買い物ルートを左回りに選択された場合の処理
+    /// - leftCartViewを表示にする
+    /// - rightCartViewを非表示にする
+    @objc func showLeftCartView() {
+        leftCartView.isHidden = false
+        rightCartView.isHidden = true
+    }
+
+    /// NotificationCenterによって買い物ルートを右回りに選択された場合の処理
+    /// - rightCartViewを表示にする
+    /// - leftCartViewを非表示にする
+    @objc func showRightCartView() {
+        rightCartView.isHidden = false
+        leftCartView.isHidden = true
+    }
+}
 
 
 

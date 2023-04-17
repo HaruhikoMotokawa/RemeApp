@@ -83,10 +83,6 @@ class DefaultSalesFloorMapViewController: UIViewController {
         setBorderAllLabel()
         setDefaultSelectCheckMark()
         setCartView()
-        NotificationCenter.default.addObserver(self, selector: #selector(showDefaultSelectCheckMark), name: .showDefaultSelectCheckMark, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(hideDefaultSelectCheckMark), name: .hideDefaultSelectCheckMark, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView), name: .showLeftCartView, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView), name: .showRightCartView, object: nil)
     }
     
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
@@ -94,6 +90,25 @@ class DefaultSalesFloorMapViewController: UIViewController {
         registerLabel.setBorder()
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
+    }
+
+    /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド
+    /// - NotificationCenterの通知受信を設定
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// -  画面ローディング時の表示をif文で切り替え
+    private func setDefaultSelectCheckMark() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showDefaultSelectCheckMark),
+                                               name: .showDefaultSelectCheckMark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideDefaultSelectCheckMark),
+                                               name: .hideDefaultSelectCheckMark, object: nil)
+        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        if salesFloorTypeInt == 0 {
+            defaultSelectCheckMark.isHidden = true
+        } else {
+            defaultSelectCheckMark.isHidden = false
+        }
     }
 
     /// NotificationCenterによって使用する売り場のマップをデフォルト選択された場合にdefaultSelectCheckMarkを表示にする
@@ -104,6 +119,27 @@ class DefaultSalesFloorMapViewController: UIViewController {
     /// NotificationCenterによって使用する売り場のマップをカスタムが選択された場合にdefaultSelectCheckMarkを非表示にする
     @objc func hideDefaultSelectCheckMark() {
         defaultSelectCheckMark.isHidden = true
+    }
+
+    /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド
+    /// - NotificationCenterの通知受信を設定
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - 画面ローディング時の表示をif文で切り替え
+    private func setCartView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView),
+                                               name: .showLeftCartView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView),
+                                               name: .showRightCartView, object: nil)
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            leftCartView.isHidden = false
+            rightCartView.isHidden = true
+        } else {
+            rightCartView.isHidden = false
+            leftCartView.isHidden = true
+        }
     }
 
     /// NotificationCenterによって買い物ルートを左回りに選択された場合の処理
@@ -121,37 +157,6 @@ class DefaultSalesFloorMapViewController: UIViewController {
         rightCartView.isHidden = false
         leftCartView.isHidden = true
     }
-
-    /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド（画面ローディング時のみ）
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// - if文で表示を切り替え
-    private func setDefaultSelectCheckMark() {
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        if salesFloorTypeInt == 0 {
-            defaultSelectCheckMark.isHidden = true
-        } else {
-            defaultSelectCheckMark.isHidden = false
-        }
-    }
-
-    /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド（画面ローディング時のみ）
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// - if文で表示を切り替え
-    private func setCartView() {
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
-            leftCartView.isHidden = false
-            rightCartView.isHidden = true
-        } else {
-            rightCartView.isHidden = false
-            leftCartView.isHidden = true
-        }
-    }
-
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 各ボタンに売り場の色を設定
