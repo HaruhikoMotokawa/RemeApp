@@ -16,7 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-        return true
+
+        // アプリインストール後の初回起動時に使用マップ設定をデフォルトにする処理
+        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let isInitialLaunch = UserDefaults.standard.bool(forKey: "isInitialLaunch")
+
+        if !isInitialLaunch {
+            UserDefaults.standard.set(true, forKey: "isInitialLaunch")
+            UserDefaults.standard.setValue(SalesFloorMapType.default.rawValue, forKey: useSalesFloorTypeKey)
+            UserDefaults.standard.setValue(ShoppingStartPositionType.right.rawValue, forKey: shoppingStartPositionKey)
+        }
+            return true
+
     }
 
     // MARK: UISceneSession Lifecycle

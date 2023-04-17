@@ -9,8 +9,8 @@ import UIKit
 
 class CustomSalesFloorMapViewController: UIViewController {
 
+    /// 売り場のマップでカスタムを選択した場合に表示するView
     @IBOutlet weak var customSelectCheckMark: UIImageView!
-
 
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
@@ -138,8 +138,11 @@ class CustomSalesFloorMapViewController: UIViewController {
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
+
+    /// 買い物ルート設定で左回りを選択した場合に表示するView
     @IBOutlet weak var leftCartView: UIImageView!
-    
+
+    /// 買い物ルート設定で右回りを選択した場合に表示するView
     @IBOutlet weak var rightCartView: UIImageView!
 
 
@@ -162,27 +165,44 @@ class CustomSalesFloorMapViewController: UIViewController {
                                                                  CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
                                                                  CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)]
 
-
-    var isCustomSelected = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonAppearance()
         setBorderAllLabel()
+        setCustomSelectCheckMark()
+        setCartView()
         NotificationCenter.default.addObserver(self, selector: #selector(showCustomSelectCheckMark), name: .showCustomSelectCheckMark, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideCustomSelectCheckMark), name: .hideCustomSelectCheckMark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView), name: .showLeftCartView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView), name: .showRightCartView, object: nil)
     }
 
+    /// NotificationCenterによって使用する売り場のマップをカスタムが選択された場合にcustomSelectCheckMarkを表示にする
     @objc func showCustomSelectCheckMark() {
-        isCustomSelected = true
         customSelectCheckMark.isHidden = false
     }
 
+    /// NotificationCenterによって使用する売り場のマップをデフォルトが選択された場合にcustomSelectCheckMarkを非表示にする
     @objc func hideCustomSelectCheckMark() {
-        isCustomSelected = false
         customSelectCheckMark.isHidden = true
     }
-    
+
+    /// NotificationCenterによって買い物ルートを左回りに選択された場合の処理
+    /// - leftCartViewを表示にする
+    /// - rightCartViewを非表示にする
+    @objc func showLeftCartView() {
+        leftCartView.isHidden = false
+        rightCartView.isHidden = true
+    }
+
+    /// NotificationCenterによって買い物ルートを右回りに選択された場合の処理
+    /// - rightCartViewを表示にする
+    /// - leftCartViewを非表示にする
+    @objc func showRightCartView() {
+        rightCartView.isHidden = false
+        leftCartView.isHidden = true
+    }
+
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()
@@ -214,17 +234,44 @@ class CustomSalesFloorMapViewController: UIViewController {
         }
     }
 
+    /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド（画面ローディング時のみ）
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - if文で表示を切り替え
+    private func setCustomSelectCheckMark() {
+        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        if salesFloorTypeInt == 0 {
+            customSelectCheckMark.isHidden = false
+        } else {
+            customSelectCheckMark.isHidden = true
+        }
+    }
+
+    /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド（画面ローディング時のみ）
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - if文で表示を切り替え
+    private func setCartView() {
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            leftCartView.isHidden = false
+            rightCartView.isHidden = true
+        } else {
+            rightCartView.isHidden = false
+            leftCartView.isHidden = true
+        }
+    }
+
     /// EditSelectedSalesFloorViewに選択した売り場のリストを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
     func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "EditSelectedSalesFloorView", bundle: nil)
         let EditSelectedSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
-
-        /// EditSelectedSalesFloorViewにプッシュ遷移
+        // EditSelectedSalesFloorViewにプッシュ遷移
         self.navigationController?.pushViewController(EditSelectedSalesFloorVC, animated: true)
     }
-
-
 }
 

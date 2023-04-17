@@ -20,7 +20,7 @@ class EditSalesFloorMapViewController: UIViewController {
 """, preferredStyle: .alert)
         /// リセットする処理
         let resetAction = UIAlertAction(title: "リセット", style: .default) { (action) in
-            // OKが押された時の処理
+            // TODO: リセットする処理を記述
             print("💀リセット実行💀")
         }
         // 何もしない処理
@@ -35,39 +35,97 @@ class EditSalesFloorMapViewController: UIViewController {
     @IBOutlet weak var useSalesFloorMapSelector: UISegmentedControl!
     /// 使用する売り場マップを変更するメソッド
     @IBAction func changeSalesFloorMap(_ sender: Any) {
+        // もしもセグメントが０だったら売り場の設定をカスタムにする
         if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
+
+            saveUseSalesFloorMap(type: SalesFloorMapType.custom)
             NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら売り場の設定をデフォルトにする
         } else {
+            saveUseSalesFloorMap(type: SalesFloorMapType.default)
             NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
         }
     }
 
     /// 買い物の開始位置を決めるセレクター
-    @IBOutlet weak var shoppingStartDirectionSelector: UISegmentedControl!
+    @IBOutlet weak var shoppingStartPositionSelector: UISegmentedControl!
     /// 買い物の開始位置を変更するメソッド
-    @IBAction func changeShoppingStartDirection(_ sender: UISegmentedControl) {
+    @IBAction func changeShoppingStartPosition(_ sender: UISegmentedControl) {
+        // もしもセグメントが０だったら買い物の開始位置を左回りにする
+        if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
 
+            saveShoppingStartDirection(type: ShoppingStartPositionType.left)
+            NotificationCenter.default.post(name: .showLeftCartView, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
+        } else {
+            saveShoppingStartDirection(type: ShoppingStartPositionType.right)
+            NotificationCenter.default.post(name: .showRightCartView, object: nil)
+        }
     }
 
+    /// 売り場マップの設定を保存するためのUserDefaultsに使用するキー
+    let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+
+    /// 買い物の開始位置の設定を保存するためのUserDefaultsに使用するキー
+    let shoppingStartPositionKey = "shoppingStartPositionKey"
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAppearance(useSalesFloorMapSelector, startIndexNumber: 1, leftTitle: "カスタム", rightTitle: "デフォルト")
-        setAppearance(shoppingStartDirectionSelector, startIndexNumber: 1, leftTitle: "左回り", rightTitle: "右回り")
-
+        setUseSalesFloorMapSelector()
+        setShoppingStartPositionSelector()
     }
- 
-    func setAppearance(_ segment: UISegmentedControl, startIndexNumber: Int, leftTitle: String, rightTitle: String) {
-        segment.selectedSegmentIndex = startIndexNumber
-        segment.setTitle(leftTitle, forSegmentAt: 0)
-        segment.setTitle(rightTitle, forSegmentAt: 1)
-        segment.backgroundColor = UIColor.lightGray
+
+    /// 使用マップ設定のセグメントを設定する
+    /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
+    /// - セグメント左のタイトルを「カスタム」に設定
+    /// - セグメント右のタイトルを「デフォルト」に設定
+    /// - セグメントの背景色を「ライトグレー」に設定
+    func setUseSalesFloorMapSelector() {
+        /// UserDefaultsから設定を取得
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        /// 取得した値をセグメントインデックスに代入
+        useSalesFloorMapSelector.selectedSegmentIndex = salesFloorTypeInt
+        // セグメント左のタイトル
+        useSalesFloorMapSelector.setTitle("カスタム", forSegmentAt: 0)
+        // セグメント右のタイトル
+        useSalesFloorMapSelector.setTitle("デフォルト", forSegmentAt: 1)
+        // セグメントの背景色
+        useSalesFloorMapSelector.backgroundColor = UIColor.lightGray
+    }
+
+    /// UserDefaultsに使用する売り場のマップ種類を登録するメソッド
+    func saveUseSalesFloorMap(type: SalesFloorMapType) {
+        UserDefaults.standard.setValue(type.rawValue, forKey: useSalesFloorTypeKey)
+    }
+
+    /// 買い物ルート設定のセグメントを設定する
+    /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
+    /// - セグメント左のタイトルを「左回り」に設定
+    /// - セグメント右のタイトルを「右回り」に設定
+    /// - セグメントの背景色を「ライトグレー」に設定
+    func setShoppingStartPositionSelector() {
+        /// UserDefaultsから設定を取得
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        /// 取得した値をセグメントインデックスに代入
+        shoppingStartPositionSelector.selectedSegmentIndex = shoppingStartPositionInt
+        // セグメント左のタイトル
+        shoppingStartPositionSelector.setTitle("左回り", forSegmentAt: 0)
+        // セグメント右のタイトル
+        shoppingStartPositionSelector.setTitle("右回り", forSegmentAt: 1)
+        // セグメントの背景色
+        shoppingStartPositionSelector.backgroundColor = UIColor.lightGray
+    }
+
+    /// UserDefaultsに買い物ルート設定を登録するメソッド
+    func saveShoppingStartDirection(type: ShoppingStartPositionType) {
+        UserDefaults.standard.setValue(type.rawValue, forKey: shoppingStartPositionKey)
     }
 }
 
+// 使用する売り場の設定によってチェックマークを切り替える通知設定
 extension NSNotification.Name {
     static let showCustomSelectCheckMark = NSNotification.Name("showCustomSelectCheckMark")
     static let hideCustomSelectCheckMark = NSNotification.Name("hideCustomSelectCheckMark")
@@ -75,3 +133,8 @@ extension NSNotification.Name {
     static let hideDefaultSelectCheckMark = NSNotification.Name("hideDefaultSelectCheckMark")
 }
 
+// 買い物の開始位置の設定によってチェックマークを切り替える通知設定
+extension NSNotification.Name {
+    static let showLeftCartView = NSNotification.Name("showLeftCartView")
+    static let showRightCartView = NSNotification.Name("showRightCartView")
+}

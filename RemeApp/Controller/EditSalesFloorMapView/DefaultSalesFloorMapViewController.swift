@@ -9,7 +9,7 @@ import UIKit
 
 class DefaultSalesFloorMapViewController: UIViewController {
 
-
+    /// 売り場のマップでデフォルトを選択した場合に表示するView
     @IBOutlet weak var defaultSelectCheckMark: UIImageView!
 
     /// 売り場のボタン：StoryboardのA-1
@@ -71,19 +71,22 @@ class DefaultSalesFloorMapViewController: UIViewController {
     /// 右出入り口のラベル
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
+    /// 買い物ルート設定で左回りを選択した場合に表示するView
     @IBOutlet weak var leftCartView: UIImageView!
-
+    /// 買い物ルート設定で右回りを選択した場合に表示するView
     @IBOutlet weak var rightCartView: UIImageView!
 
-    var isDefaultSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButtonAppearance()
         setBorderAllLabel()
-        
+        setDefaultSelectCheckMark()
+        setCartView()
         NotificationCenter.default.addObserver(self, selector: #selector(showDefaultSelectCheckMark), name: .showDefaultSelectCheckMark, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideDefaultSelectCheckMark), name: .hideDefaultSelectCheckMark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView), name: .showLeftCartView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView), name: .showRightCartView, object: nil)
     }
     
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
@@ -93,14 +96,60 @@ class DefaultSalesFloorMapViewController: UIViewController {
         rightEntranceLabel.setBorder()
     }
 
+    /// NotificationCenterによって使用する売り場のマップをデフォルト選択された場合にdefaultSelectCheckMarkを表示にする
     @objc func showDefaultSelectCheckMark() {
-        isDefaultSelected = true
         defaultSelectCheckMark.isHidden = false
     }
 
+    /// NotificationCenterによって使用する売り場のマップをカスタムが選択された場合にdefaultSelectCheckMarkを非表示にする
     @objc func hideDefaultSelectCheckMark() {
-        isDefaultSelected = false
         defaultSelectCheckMark.isHidden = true
+    }
+
+    /// NotificationCenterによって買い物ルートを左回りに選択された場合の処理
+    /// - leftCartViewを表示にする
+    /// - rightCartViewを非表示にする
+    @objc func showLeftCartView() {
+        leftCartView.isHidden = false
+        rightCartView.isHidden = true
+    }
+
+    /// NotificationCenterによって買い物ルートを右回りに選択された場合の処理
+    /// - rightCartViewを表示にする
+    /// - leftCartViewを非表示にする
+    @objc func showRightCartView() {
+        rightCartView.isHidden = false
+        leftCartView.isHidden = true
+    }
+
+    /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド（画面ローディング時のみ）
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - if文で表示を切り替え
+    private func setDefaultSelectCheckMark() {
+        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        if salesFloorTypeInt == 0 {
+            defaultSelectCheckMark.isHidden = true
+        } else {
+            defaultSelectCheckMark.isHidden = false
+        }
+    }
+
+    /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド（画面ローディング時のみ）
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// - if文で表示を切り替え
+    private func setCartView() {
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            leftCartView.isHidden = false
+            rightCartView.isHidden = true
+        } else {
+            rightCartView.isHidden = false
+            leftCartView.isHidden = true
+        }
     }
 
     /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド

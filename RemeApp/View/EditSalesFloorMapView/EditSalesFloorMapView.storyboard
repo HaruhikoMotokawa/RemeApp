@@ -63,7 +63,7 @@
                                                             <segment title="Second"/>
                                                         </segments>
                                                         <connections>
-                                                            <action selector="changeShoppingStartDirection:" destination="Y6W-OH-hqX" eventType="valueChanged" id="D22-ig-x47"/>
+                                                            <action selector="changeShoppingStartPosition:" destination="Y6W-OH-hqX" eventType="valueChanged" id="D22-ig-x47"/>
                                                         </connections>
                                                     </segmentedControl>
                                                 </subviews>
@@ -168,7 +168,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="shoppingStartDirectionSelector" destination="PEo-G0-cOh" id="ZlY-Zy-6ZH"/>
+                        <outlet property="shoppingStartPositionSelector" destination="PEo-G0-cOh" id="ZlY-Zy-6ZH"/>
                         <outlet property="useSalesFloorMapSelector" destination="9eg-RI-jeQ" id="GXy-fN-utL"/>
                     </connections>
                 </viewController>

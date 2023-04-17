@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		26E00A70C1A1D3B8828D1FA1 /* Pods_RemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */; };
 		78030ED229EBC79F000E40A3 /* SalesFloorMapObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED129EBC79F000E40A3 /* SalesFloorMapObserver.swift */; };
+		78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */; };
+		78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */; };
 		7804038D29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
@@ -59,6 +61,8 @@
 		43FB1983A342D2ED6D2DF3D3 /* Pods-RemeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.debug.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
 		78030ED129EBC79F000E40A3 /* SalesFloorMapObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapObserver.swift; sourceTree = "<group>"; };
+		78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapType.swift; sourceTree = "<group>"; };
+		78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingStartPositionType.swift; sourceTree = "<group>"; };
 		7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolCameraAndPhotoActionable.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
+				78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */,
+				78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */,
 				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 			);
 			path = Model;
@@ -490,8 +496,10 @@
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
+				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
+				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
 				78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
