@@ -40,12 +40,15 @@ class EditSalesFloorMapViewController: UIViewController {
             saveUseSalesFloorMap(type: SalesFloorMapType.custom)
             NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
+
             // （違うのであれば）つまりセグメントが１だったら売り場の設定をデフォルトにする
         } else {
             saveUseSalesFloorMap(type: SalesFloorMapType.default)
             NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
+
         }
+        NotificationCenter.default.post(name: .reloadTableView, object: nil)
     }
 
     /// 買い物の開始位置を決めるセレクター

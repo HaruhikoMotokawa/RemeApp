@@ -21,14 +21,16 @@ struct ErrandDataModel {
     var unit:String = "個"
     /// 売り場に対応するRawValue
     var salesFloorRawValue:Int = 0
-
     /// 商品に対する補足文、nilを許容
     var supplement:String? = nil
     /// 商品の写真データパス、nilを許容
     var photoPath:String? = nil
-    var photoImage:UIImage? = nil // テスト用であとで削除
-    /// enum SalesFloorTypeをお使いデータに登録
-    var salesFloor: DefaultSalesFloorType {
+
+    // !!!: テスト用であとで削除
+    var photoImage:UIImage? = nil
+
+    /// enum DefaultSalesFloorTypeをお使いデータに登録
+    var defaultSalesFloor: DefaultSalesFloorType {
         get {
             return DefaultSalesFloorType(rawValue: salesFloorRawValue)!
         }
@@ -36,7 +38,7 @@ struct ErrandDataModel {
             salesFloorRawValue = newValue.intValue
         }
     }
-
+    
 //    override static func primaryKey() -> String? {
 //        return "id"
 //    }

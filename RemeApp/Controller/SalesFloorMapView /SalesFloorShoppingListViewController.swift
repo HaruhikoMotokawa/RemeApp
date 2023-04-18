@@ -28,6 +28,7 @@ class SalesFloorShoppingListViewController: UIViewController {
         sortErrandDataList()
     }
 
+
     // MARK: - func
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
@@ -69,7 +70,8 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
                                  numberOfItem: errandDataModel.numberOfItem,
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
-                                 supplement: errandDataModel.supplement, image: errandDataModel.photoImage)
+                                 supplement: errandDataModel.supplement,
+                                 image: errandDataModel.photoImage)
             return cell
         }
         return UITableViewCell()
