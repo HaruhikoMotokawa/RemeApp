@@ -49,9 +49,12 @@ class EditShoppingListViewController: UIViewController {
         setTableVIew()
         setAppearance(shareShoppingListButton)
         setAppearance(createNewItemButton)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
+                                               name: .reloadTableView, object: nil)
     }
 
     // MARK: - func
+
     /// UITableViewの初期設定関連
     private func setTableVIew() {
         editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
@@ -80,7 +83,11 @@ class EditShoppingListViewController: UIViewController {
         button.addShadow()
     }
 
-    // MARK: - func
+    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
+    @objc func reloadTableView() {
+        editShoppingListTableView.reloadData()
+    }
+
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     /// - NotificationCenterの受診をセット
     /// - UserDefaultsに使用するキーを指定

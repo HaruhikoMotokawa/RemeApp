@@ -149,6 +149,38 @@ class EditSelectedSalesFloorViewController: UIViewController {
         addOrReEnter()
     }
 
+    // MARK: - property
+
+    /// 売り場に対応するRawValue
+    var customSalesFloorRawValue:Int = 0
+    
+    /// nameOfItemLabelに表示するテキスト
+    private var nameOfSalesFloorTextFieldText:String = ""
+
+    /// nameOfItemLabelに表示するテキスト
+    private var selectedSalesFloorColorViewColor:UIColor = .white
+
+    /// カスタム売り場マップのリスト
+    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
+    ]
+
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,11 +190,10 @@ class EditSelectedSalesFloorViewController: UIViewController {
         setViewAppearance()
         setCancelAndSaveButtonAppearance()
         setKeyboardCloseButton()
+        displayData()
     }
 
     // MARK: - func
-    /// 売り場選択からもらった情報を表示
-    
 
     /// 各カラー選択ボタンの背景色に色を設定
     private func setColorForSelectionButtons() {
@@ -199,6 +230,27 @@ class EditSelectedSalesFloorViewController: UIViewController {
             button?.setTitle("選択", for: .normal)
             button?.setAppearanceWithShadow()
         }
+    }
+
+    /// 売り場選択からもらった情報を表示
+    /// 受け渡されたデータをそれぞれのUI部品に表示
+    /// - 商品名の表示
+    /// - 必要数を表示
+    /// - 必要数の単位を表示
+    /// - 売り場を表示
+    /// - 補足を表示
+    /// - 写真を表示
+    private func displayData() {
+
+        nameOfSalesFloorTextField.text = nameOfSalesFloorTextFieldText
+        selectedSalesFloorColorView.backgroundColor = selectedSalesFloorColorViewColor
+    }
+
+    /// データ受け渡し用のメソッド
+    func configurer(detail: CustomSalesFloorModel) {
+        customSalesFloorRawValue = detail.customSalesFloorRawValue
+        nameOfSalesFloorTextFieldText = detail.customNameOfSalesFloor
+        selectedSalesFloorColorViewColor = detail.customColorOfSalesFloor
     }
 
     /// UIViewに見た目を設定

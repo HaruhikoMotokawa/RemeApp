@@ -277,10 +277,14 @@ class CustomSalesFloorMapViewController: UIViewController {
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
     func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "EditSelectedSalesFloorView", bundle: nil)
-        let EditSelectedSalesFloorVC = storyboard.instantiateViewController(
+        let editSelectedSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
-        // EditSelectedSalesFloorViewにプッシュ遷移
-        self.navigationController?.pushViewController(EditSelectedSalesFloorVC, animated: true)
+        let selectedFloor = customSalesFloorList.first(where: { $0.customSalesFloorRawValue == salesFloorRawValue })
+        if let selectedFloor = selectedFloor {
+            editSelectedSalesFloorVC.configurer(detail: selectedFloor)
+            
+            // EditSelectedSalesFloorViewにプッシュ遷移
+            self.navigationController?.pushViewController(editSelectedSalesFloorVC, animated: true)
+        }
     }
 }
-

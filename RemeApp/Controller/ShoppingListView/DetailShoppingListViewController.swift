@@ -56,6 +56,7 @@ class DetailShoppingListViewController: UIViewController {
                                                                  CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
                                                                  CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
     ]
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()

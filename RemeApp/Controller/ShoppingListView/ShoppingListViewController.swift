@@ -39,13 +39,13 @@ class ShoppingListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .reloadTableView, object: nil)
     }
 
+    // MARK: - func
+
     /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
     @objc func reloadTableView() {
         shoppingListTableView.reloadData()
     }
 
-
-    // MARK: - func
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     /// - NotificationCenterの受診をセット
     /// - UserDefaultsに使用するキーを指定
