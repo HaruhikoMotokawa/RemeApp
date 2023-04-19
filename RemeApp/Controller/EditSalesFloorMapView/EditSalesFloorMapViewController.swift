@@ -12,7 +12,7 @@ class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// カスタムマップの設定をリセットする
-    @IBAction func resetSalesFloorSettings(_ sender: Any) {
+    @IBAction private func resetSalesFloorSettings(_ sender: Any) {
         let alertController =
         UIAlertController(title: "確認", message:"""
 カスタムマップの設定を初期状態に
@@ -32,9 +32,9 @@ class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// 使用する売り場マップのセレクター
-    @IBOutlet weak var useSalesFloorMapSelector: UISegmentedControl!
+    @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
     /// 使用する売り場マップを変更するメソッド
-    @IBAction func changeSalesFloorMap(_ sender: Any) {
+    @IBAction private func changeSalesFloorMap(_ sender: Any) {
         // もしもセグメントが０だったら売り場の設定をカスタムにする
         if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
             saveUseSalesFloorMap(type: SalesFloorMapType.custom)
@@ -51,9 +51,9 @@ class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// 買い物の開始位置を決めるセレクター
-    @IBOutlet weak var shoppingStartPositionSelector: UISegmentedControl!
+    @IBOutlet private weak var shoppingStartPositionSelector: UISegmentedControl!
     /// 買い物の開始位置を変更するメソッド
-    @IBAction func changeShoppingStartPosition(_ sender: UISegmentedControl) {
+    @IBAction private func changeShoppingStartPosition(_ sender: UISegmentedControl) {
         // もしもセグメントが０だったら買い物の開始位置を左回りにする
         if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
             saveShoppingStartDirection(type: ShoppingStartPositionType.left)
@@ -87,7 +87,7 @@ class EditSalesFloorMapViewController: UIViewController {
     /// - セグメント左のタイトルを「カスタム」に設定
     /// - セグメント右のタイトルを「デフォルト」に設定
     /// - セグメントの背景色を「ライトグレー」に設定
-    func setUseSalesFloorMapSelector() {
+    private func setUseSalesFloorMapSelector() {
         /// UserDefaultsから設定を取得
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         /// 取得した値をセグメントインデックスに代入
@@ -101,7 +101,7 @@ class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// UserDefaultsに使用する売り場のマップ種類を登録するメソッド
-    func saveUseSalesFloorMap(type: SalesFloorMapType) {
+    private func saveUseSalesFloorMap(type: SalesFloorMapType) {
         UserDefaults.standard.setValue(type.rawValue, forKey: useSalesFloorTypeKey)
     }
 
@@ -110,7 +110,7 @@ class EditSalesFloorMapViewController: UIViewController {
     /// - セグメント左のタイトルを「左回り」に設定
     /// - セグメント右のタイトルを「右回り」に設定
     /// - セグメントの背景色を「ライトグレー」に設定
-    func setShoppingStartPositionSelector() {
+    private func setShoppingStartPositionSelector() {
         /// UserDefaultsから設定を取得
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         /// 取得した値をセグメントインデックスに代入
@@ -124,7 +124,7 @@ class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// UserDefaultsに買い物ルート設定を登録するメソッド
-    func saveShoppingStartDirection(type: ShoppingStartPositionType) {
+    private func saveShoppingStartDirection(type: ShoppingStartPositionType) {
         UserDefaults.standard.setValue(type.rawValue, forKey: shoppingStartPositionKey)
     }
 }

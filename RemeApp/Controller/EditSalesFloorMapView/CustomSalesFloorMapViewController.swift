@@ -11,7 +11,7 @@ class CustomSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// 売り場のマップでカスタムを選択した場合に表示するView
-    @IBOutlet weak var customSelectCheckMark: UIImageView!
+    @IBOutlet private weak var customSelectCheckMark: UIImageView!
 
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
@@ -141,10 +141,10 @@ class CustomSalesFloorMapViewController: UIViewController {
 
 
     /// 買い物ルート設定で左回りを選択した場合に表示するView
-    @IBOutlet weak var leftCartView: UIImageView!
+    @IBOutlet private weak var leftCartView: UIImageView!
 
     /// 買い物ルート設定で右回りを選択した場合に表示するView
-    @IBOutlet weak var rightCartView: UIImageView!
+    @IBOutlet private weak var rightCartView: UIImageView!
 
 
     // MARK: - property
@@ -220,8 +220,10 @@ class CustomSalesFloorMapViewController: UIViewController {
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         if salesFloorTypeInt == 0 {
+            // カスタム売り場マップの処理
             customSelectCheckMark.isHidden = false
         } else {
+            // デフォルト売り場マップの処理
             customSelectCheckMark.isHidden = true
         }
     }
@@ -249,8 +251,10 @@ class CustomSalesFloorMapViewController: UIViewController {
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         if shoppingStartPositionInt == 0 {
+            // 左回り設定
             leftCartView.isHidden = false
             rightCartView.isHidden = true
+            // 右回り設定
         } else {
             rightCartView.isHidden = false
             leftCartView.isHidden = true
@@ -275,14 +279,15 @@ class CustomSalesFloorMapViewController: UIViewController {
 
     /// EditSelectedSalesFloorViewに選択した売り場のリストを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
-    func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
+    private func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "EditSelectedSalesFloorView", bundle: nil)
         let editSelectedSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
+        /// 引数に渡した値に該当するカスタム売り場のデータを取得
         let selectedFloor = customSalesFloorList.first(where: { $0.customSalesFloorRawValue == salesFloorRawValue })
+        // editSelectedSalesFloorVCに該当のカスタム売り場のデータを渡す
         if let selectedFloor = selectedFloor {
             editSelectedSalesFloorVC.configurer(detail: selectedFloor)
-            
             // EditSelectedSalesFloorViewにプッシュ遷移
             self.navigationController?.pushViewController(editSelectedSalesFloorVC, animated: true)
         }

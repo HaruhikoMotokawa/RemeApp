@@ -138,10 +138,10 @@ class SalesFloorMapViewController: UIViewController {
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
     /// 買い物ルート設定で左回りを選択した場合に表示するView
-    @IBOutlet weak var leftCartView: UIImageView!
+    @IBOutlet private weak var leftCartView: UIImageView!
 
     /// 買い物ルート設定で右回りを選択した場合に表示するView
-    @IBOutlet weak var rightCartView: UIImageView!
+    @IBOutlet private weak var rightCartView: UIImageView!
 
     // MARK: - property
     /// 使いデータのダミーデータ
@@ -231,7 +231,6 @@ class SalesFloorMapViewController: UIViewController {
         let filteredCustomSalesFloorList = customSalesFloorList.filter { customSalesFloor in
             return (0...CustomSalesFloorType.allCases.count - 1).contains(customSalesFloor.customSalesFloorRawValue)
         }
-
         // buttonsに対応するcustomSalesFloorListを順に設定
         for (index, customSalesFloor) in filteredCustomSalesFloorList.enumerated() {
             let button = buttons[index]
@@ -291,7 +290,7 @@ class SalesFloorMapViewController: UIViewController {
 
     /// SalesFloorShoppingListViewに選択した売り場のリストを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
-    func goSalesFloorShoppingListView(salesFloorRawValue: Int) {
+    private func goSalesFloorShoppingListView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
         let salesFloorShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController

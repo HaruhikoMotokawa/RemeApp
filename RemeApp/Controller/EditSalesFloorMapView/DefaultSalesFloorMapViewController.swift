@@ -11,7 +11,7 @@ class DefaultSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場のマップでデフォルトを選択した場合に表示するView
-    @IBOutlet weak var defaultSelectCheckMark: UIImageView!
+    @IBOutlet private weak var defaultSelectCheckMark: UIImageView!
 
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
@@ -73,9 +73,9 @@ class DefaultSalesFloorMapViewController: UIViewController {
     @IBOutlet private weak var rightEntranceLabel: UILabel!
 
     /// 買い物ルート設定で左回りを選択した場合に表示するView
-    @IBOutlet weak var leftCartView: UIImageView!
+    @IBOutlet private weak var leftCartView: UIImageView!
     /// 買い物ルート設定で右回りを選択した場合に表示するView
-    @IBOutlet weak var rightCartView: UIImageView!
+    @IBOutlet private weak var rightCartView: UIImageView!
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {

@@ -144,7 +144,7 @@ extension CreateNewItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
     /// - 中止をキャンセルして画面に止まるか
-    func showCancelAlert() {
+    private func showCancelAlert() {
         let alertController = UIAlertController(title: "編集を中止", message:
                                                     "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
         // はいでEditShoppingListViewに戻る
@@ -162,7 +162,7 @@ extension CreateNewItemViewController {
     /// 追加ボタンをタップした時の処理
     /// - 商品名が未入力の場合はアラートを出す
     /// - 商品名が入力されていればデータを書き込み、画面を閉じる
-    func addOrReEnter() {
+    private func addOrReEnter() {
         if nameOfItemTextField.text == "" {
             // 警告アラート
             let alertController = UIAlertController(title: nil, message:
