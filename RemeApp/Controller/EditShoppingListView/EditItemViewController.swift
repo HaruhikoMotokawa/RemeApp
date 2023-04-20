@@ -9,6 +9,7 @@ import UIKit
 /// I-品目編集
 class EditItemViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 商品名入力
     @IBOutlet private weak var nameOfItemTextField: UITextField!
     /// 個数入力
@@ -58,6 +59,7 @@ class EditItemViewController: UIViewController {
         addOrReEnter()
     }
 
+    // MARK: - property
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
@@ -83,8 +85,27 @@ class EditItemViewController: UIViewController {
     /// photoImageViewに表示する画像
     private var photoImageViewImage:UIImage? = nil
 
+    /// カスタム売り場マップのリスト
+    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
+                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
+    ]
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "品目編集"
@@ -96,6 +117,7 @@ class EditItemViewController: UIViewController {
         displayData()
     }
 
+    // MARK: - func
     /// データソースとデリゲート設定
     private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
@@ -140,7 +162,7 @@ class EditItemViewController: UIViewController {
         nameOfItemTextField.text = nameOfItemTextFieldText
         selectNumberOfItemRow(selectedNumberOfItem: numberOfItemPickerViewString)
         selectUnitRow(selectedUnit: unitPickerViewString)
-        setSalesFloorTypeButton(salesFloorButtonRawValue: self.selectTypeOfSalesFloorButtonRawValue)
+        setSalesFloorTypeButton(salesFloorRawValue: selectTypeOfSalesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
         photoImageView.image = photoImageViewImage
     }
@@ -157,11 +179,49 @@ class EditItemViewController: UIViewController {
         unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
     }
 
-    /// 受け渡されたデータをSalesFloorTypeButtonに表示
-    /// - 商品名をタイトルに設定
-    /// - ボタンの背景色を設定
-    private func setSalesFloorTypeButton(salesFloorButtonRawValue: Int) {
-        let salesFloor = SalesFloorType(rawValue: salesFloorButtonRawValue)
+    /// salesFloorTypeButtonに売り場の内容を反映させる
+    /// - 売り場の名称を設定
+    /// - 売り場の色を設定
+    func setSalesFloorTypeButton(salesFloorRawValue: Int) {
+        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        // 0 -> カスタム、1(else) -> デフォルト
+        if salesFloorTypeInt == 0 {
+            // カスタムマップタイプの処理
+            setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+        } else {
+            // デフォルトマップタイプの処理
+            setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+        }
+    }
+
+    /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
+    /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
+    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+        // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
+        let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
+        let customSalesFloorModel = customSalesFloorModelList.first
+        // ボタンのタイトルと背景色を設定する
+        selectTypeOfSalesFloorButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
+        selectTypeOfSalesFloorButton.backgroundColor = customSalesFloorModel?.customColorOfSalesFloor
+    }
+
+    /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
+    /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
+    /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
+    func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
+        // 指定されたrawValueにマッチするCustomSalesFloorModelのみを保持する配列を作成する
+        let filteredList = customSalesFloorList.filter { $0.customSalesFloorRawValue == salesFloorRawValue }
+        // 絞り込まれた配列を返す
+        return filteredList
+    }
+
+    /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
+    /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
+    func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
+        // 引数で指定されたrawValueに対応するDefaultSalesFloorTypeを取得する
+        let salesFloor = DefaultSalesFloorType(rawValue: salesFloorRawValue)
+        // ボタンのタイトルと背景色を設定する
         selectTypeOfSalesFloorButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         selectTypeOfSalesFloorButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }
@@ -193,7 +253,7 @@ class EditItemViewController: UIViewController {
     }
 }
 
-// MARK: ボタンタップ時のアラート関連
+// MARK: - ボタンタップ時のアラート関連
 extension EditItemViewController {
     /// アラートで確認するメソッド
     /// - 編集を中止て前の画面に戻るか
@@ -233,7 +293,7 @@ extension EditItemViewController {
     }
 }
 
-// MARK: UIPickerViewDelegate&UIPickerViewDataSource
+// MARK: - UIPickerViewDelegate&DataSource
 extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     /// pickerViewに表示する内容
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int)
@@ -266,7 +326,7 @@ extension EditItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 
-// MARK: UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 extension EditItemViewController: UITextFieldDelegate {
     /// textFieldの文字数制限を１５文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
@@ -284,19 +344,17 @@ extension EditItemViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: SelectTypeOfSalesFloorViewControllerDelegate
+// MARK: - SelectTypeOfSalesFloorViewControllerDelegate
 extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// SelectTypeOfSalesFloorViewで各Buttonをタップした際のメソッド
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
-    func salesFloorButtonDidTapDone(type: SalesFloorType) {
-        selectTypeOfSalesFloorButton?.setTitle(type.nameOfSalesFloor, for: .normal)
-        selectTypeOfSalesFloorButton?.backgroundColor = type.colorOfSalesFloor
-        addButton.setEnable()
+    func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
+        setSalesFloorTypeButton(salesFloorRawValue: salesFloorRawValue)
     }
 }
 
-// MARK: UITextViewDelegate
+// MARK: - UITextViewDelegate
 extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -321,7 +379,7 @@ extension EditItemViewController: UITextViewDelegate {
     }
 }
 
-// MARK: UIImagePickerControllerDelegate&UINavigationControllerDelegate
+// MARK: - UIImagePickerControllerDelegate&UINavigationControllerDelegate
 // !!!: いずれPHPickerに変更しないといけないかも
 // 写真添付と削除の処理関連
 extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -362,5 +420,5 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-// MARK: CameraAndPhotoActionable
+// MARK: - CameraAndPhotoActionable
 extension EditItemViewController: CameraAndPhotoActionable {}

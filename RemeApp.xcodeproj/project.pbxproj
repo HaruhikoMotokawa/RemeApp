@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		26E00A70C1A1D3B8828D1FA1 /* Pods_RemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD7A5A3901223C712853524 /* Pods_RemeApp.framework */; };
+		78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */; };
+		78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */; };
+		78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */; };
+		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804038D29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
+		781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */; };
+		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
-		784E1F2029C8451200C9360A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F1F29C8451200C9360A /* ViewController.swift */; };
+		784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F1F29C8451200C9360A /* MainTabBarController.swift */; };
 		784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */; };
 		784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */; };
 		784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */; };
@@ -39,6 +45,11 @@
 		78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3929C835D7004685F1 /* SceneDelegate.swift */; };
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
 		78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */; };
+		78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78B18CC129EA985300721592 /* DefaultSalesFloorMapView.storyboard */; };
+		78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78B18CC329EA986000721592 /* CustomSalesFloorMapView.storyboard */; };
+		78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC529EA98CD00721592 /* PageViewController.swift */; };
+		78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */; };
+		78B18CCA29EA991B00721592 /* CustomSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */; };
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
 		78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */; };
 		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
@@ -51,12 +62,18 @@
 /* Begin PBXFileReference section */
 		43FB1983A342D2ED6D2DF3D3 /* Pods-RemeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.debug.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5D90BCC082664264496AC49F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
+		78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapType.swift; sourceTree = "<group>"; };
+		78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingStartPositionType.swift; sourceTree = "<group>"; };
+		78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorType.swift; sourceTree = "<group>"; };
+		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804038C29E3DA0B00DDF94D /* ProtocolCameraAndPhotoActionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolCameraAndPhotoActionable.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
+		781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorModel.swift; sourceTree = "<group>"; };
+		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
-		784E1F1F29C8451200C9360A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		784E1F1F29C8451200C9360A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
 		784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditSalesFloorMapView.storyboard; sourceTree = "<group>"; };
@@ -83,6 +100,11 @@
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		78AB3B4029C835D8004685F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78AB3B4529C835D8004685F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78B18CC129EA985300721592 /* DefaultSalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DefaultSalesFloorMapView.storyboard; sourceTree = "<group>"; };
+		78B18CC329EA986000721592 /* CustomSalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomSalesFloorMapView.storyboard; sourceTree = "<group>"; };
+		78B18CC529EA98CD00721592 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorMapViewController.swift; sourceTree = "<group>"; };
+		78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
 		78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectTypeOfSalesFloorView.storyboard; sourceTree = "<group>"; };
 		78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfSalesFloorViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */,
+				78B18CC529EA98CD00721592 /* PageViewController.swift */,
+				78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */,
+				78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */,
 				7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */,
 			);
 			path = EditSalesFloorMapView;
@@ -239,6 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				784E1F2729C84A6B00C9360A /* EditSalesFloorMapView.storyboard */,
+				78B18CC329EA986000721592 /* CustomSalesFloorMapView.storyboard */,
+				78B18CC129EA985300721592 /* DefaultSalesFloorMapView.storyboard */,
 				7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */,
 			);
 			path = EditSalesFloorMapView;
@@ -256,6 +283,11 @@
 			isa = PBXGroup;
 			children = (
 				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
+				78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */,
+				78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */,
+				78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */,
+				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
+				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,7 +309,7 @@
 		78F6F70029D9556500AF4DC0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				784E1F1F29C8451200C9360A /* ViewController.swift */,
+				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
 				78EDF40929DD117900A6407D /* EditShoppingListView */,
@@ -295,6 +327,7 @@
 				78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */,
 				78581B6A29E308DE00930F65 /* ExtesionUILabel.swift */,
 				7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */,
+				78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -387,8 +420,10 @@
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
+				78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
+				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
@@ -454,16 +489,25 @@
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
 				7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,
+				78B18CCA29EA991B00721592 /* CustomSalesFloorMapViewController.swift in Sources */,
 				78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */,
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
-				784E1F2029C8451200C9360A /* ViewController.swift in Sources */,
+				782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */,
+				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
+				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
+				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
+				781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
 				78F38E4B29DD8C90004972A3 /* CreateNewItemViewController.swift in Sources */,
+				78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
+				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
+				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
+				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
 				78EDF40629DC058300A6407D /* DetailSalesFloorShoppingListViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,

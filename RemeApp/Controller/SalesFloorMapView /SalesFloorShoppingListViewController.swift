@@ -10,12 +10,15 @@ import UIKit
 /// D-売り場の買い物リスト
 class SalesFloorShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet
     /// 売り場の買い物リストを表示
     @IBOutlet private weak var salesFloorShoppingListTableView: UITableView!
 
+    // MARK: - property
     /// お使いデータ
     var selectedErrandDataList: [ErrandDataModel] = []
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         salesFloorShoppingListTableView.dataSource = self
@@ -25,6 +28,8 @@ class SalesFloorShoppingListViewController: UIViewController {
         sortErrandDataList()
     }
 
+
+    // MARK: - func
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
         selectedErrandDataList = selectedErrandDataList.sorted { (a, b) -> Bool in
@@ -48,6 +53,7 @@ class SalesFloorShoppingListViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource&Delegate
 extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// salesFloorShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +70,8 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
                                  numberOfItem: errandDataModel.numberOfItem,
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
-                                 supplement: errandDataModel.supplement, image: errandDataModel.photoImage)
+                                 supplement: errandDataModel.supplement,
+                                 image: errandDataModel.photoImage)
             return cell
         }
         return UITableViewCell()
@@ -84,6 +91,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     }
 }
 
+// MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
 extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// UIColorをそのまま設定できるように拡張
 extension UIColor {
     convenience init?(hexString: String) {
         var hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)

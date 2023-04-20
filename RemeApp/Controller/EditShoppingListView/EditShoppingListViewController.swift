@@ -10,6 +10,7 @@ import UIKit
 /// F-買い物リスト編集
 class EditShoppingListViewController: UIViewController {
 
+    // MARK: - @IBOutlet & @IBAction
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
 
@@ -29,6 +30,7 @@ class EditShoppingListViewController: UIViewController {
         self.present(createNewItemVC, animated: true)
     }
 
+    // MARK: - property
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
@@ -40,14 +42,18 @@ class EditShoppingListViewController: UIViewController {
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
                                              ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
 
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItem()
         setTableVIew()
         setAppearance(shareShoppingListButton)
         setAppearance(createNewItemButton)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
+                                               name: .reloadTableView, object: nil)
     }
+
+    // MARK: - func
 
     /// UITableViewの初期設定関連
     private func setTableVIew() {
@@ -77,8 +83,50 @@ class EditShoppingListViewController: UIViewController {
         button.addShadow()
     }
 
+    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
+    @objc func reloadTableView() {
+        editShoppingListTableView.reloadData()
+    }
+
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
+    /// - NotificationCenterの受診をセット
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// -  画面ローディング時の表示をif文で切り替え
+    /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortErrandDataList() {
+        NotificationCenter.default.addObserver(self, selector: #selector(sortLeftErrandDataList),
+                                               name: .sortLeftErrandDataList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sortRightErrandDataList),
+                                               name: .sortRightErrandDataList, object: nil)
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            sortLeftErrandDataList()
+        } else {
+            sortRightErrandDataList()
+        }
+    }
+
+    /// NotificationCenterによって買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - shoppingListTableViewを再読み込み
+    @objc func sortLeftErrandDataList() {
+        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+            if a.isCheckBox != b.isCheckBox {
+                return !a.isCheckBox
+            } else {
+                return a.salesFloorRawValue > b.salesFloorRawValue
+            }
+        }
+        editShoppingListTableView.reloadData()
+    }
+
+    /// NotificationCenterによって買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
+    /// - shoppingListTableViewを再読み込み
+    @objc func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -86,9 +134,10 @@ class EditShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
         }
+        editShoppingListTableView.reloadData()
     }
 
-    // MARK: 編集モードに関する処理
+    // MARK: - 編集モードに関する処理
     /// 編集モードの設定==rightBarButtonItemをタップした時の動作
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -146,7 +195,7 @@ class EditShoppingListViewController: UIViewController {
     }
 }
 
-// MARK: UITableViewDataSource & Delegate
+// MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -247,7 +296,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     }
 }
 
-// MARK: ShoppingListTableViewCellDelegate
+// MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
 extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理

@@ -5,25 +5,25 @@
 //  Created by 本川晴彦 on 2023/03/23.
 //
 
-import Foundation
 import UIKit
 
 /// K-売り場マップ編集
 class EditSalesFloorMapViewController: UIViewController {
 
-
-    @IBAction func resetSalesFloorSettings(_ sender: Any) {
+    // MARK: - @IBOutlet & @IBAction
+    /// カスタムマップの設定をリセットする
+    @IBAction private func resetSalesFloorSettings(_ sender: Any) {
         let alertController =
         UIAlertController(title: "確認", message:"""
-売り場の設定を初期状態に
+カスタムマップの設定を初期状態に
 戻してもよろしいですか？
 """, preferredStyle: .alert)
-
+        /// リセットする処理
         let resetAction = UIAlertAction(title: "リセット", style: .default) { (action) in
-            // OKが押された時の処理
+            // TODO: リセットする処理を記述
             print("💀リセット実行💀")
         }
-        // 何もしない
+        // 何もしない処理
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
 
         alertController.addAction(resetAction)
@@ -31,211 +31,100 @@ class EditSalesFloorMapViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    /// 売り場のボタン：StoryboardのA-1
-    @IBOutlet private weak var greenThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 14)
-    }
-
-    /// 売り場のボタン：StoryboardのA-2
-    @IBOutlet private weak var blueThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 7)
-    }
-
-    /// 売り場のボタン：StoryboardのA-3
-    @IBOutlet private weak var redThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 2)
-    }
-
-    /// 売り場のボタン：StoryboardのB-1
-    @IBOutlet private weak var greenFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 15)
-    }
-
-    /// 売り場のボタン：StoryboardのB-2
-    @IBOutlet private weak var greenTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 13)
-    }
-
-    /// 売り場のボタン：StoryboardのB-3
-    @IBOutlet private weak var blueSevenButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSevenList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 11)
-    }
-
-    /// 売り場のボタン：StoryboardのB-4
-    @IBOutlet private weak var blueFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 8)
-    }
-
-    /// 売り場のボタン：StoryboardのB-5
-    @IBOutlet private weak var blueTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 6)
-    }
-
-    /// 売り場のボタン：StoryboardのB-6
-    @IBOutlet private weak var redFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 3)
-    }
-
-    /// 売り場のボタン：StoryboardのB-7
-    @IBOutlet private weak var redTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 1)
-    }
-
-    /// 売り場のボタン：StoryboardのC-1
-    @IBOutlet private weak var greenFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 16)
-    }
-
-    /// 売り場のボタン：StoryboardのC-2
-    @IBOutlet private weak var greenOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 12)
-    }
-
-    /// 売り場のボタン：StoryboardのC-3
-    @IBOutlet private weak var blueSixButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSixList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 10)
-    }
-
-    /// 売り場のボタン：StoryboardのC-4
-    @IBOutlet private weak var blueFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 9)
-    }
-
-    /// 売り場のボタン：StoryboardのC-5
-    @IBOutlet private weak var blueOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 5)
-    }
-
-    /// 売り場のボタン：StoryboardのC-6
-    @IBOutlet private weak var redFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 4)
-    }
-
-    /// 売り場のボタン：StoryboardのC-7
-    @IBOutlet private weak var redOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: 0)
-    }
-
-    /// レジのラベル
-    @IBOutlet private weak var registerLabel: UILabel!
-    /// 左出入り口のラベル
-    @IBOutlet private weak var leftEntranceLabel: UILabel!
-    /// 右出入り口のラベル
-    @IBOutlet private weak var rightEntranceLabel: UILabel!
-
-    @IBOutlet weak var shoppingStartDirectionSelector: UISegmentedControl!
-
-    @IBAction func changeShoppingStartDirection(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            leftCartView.isHidden = false
-            rightCartView.isHidden = true
+    /// 使用する売り場マップのセレクター
+    @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
+    /// 使用する売り場マップを変更するメソッド
+    @IBAction private func changeSalesFloorMap(_ sender: Any) {
+        // もしもセグメントが０だったら売り場の設定をカスタムにする
+        if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
+            saveUseSalesFloorMap(type: SalesFloorMapType.custom)
+            NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
+            NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら売り場の設定をデフォルトにする
         } else {
-            leftCartView.isHidden = true
-            rightCartView.isHidden = false
+            saveUseSalesFloorMap(type: SalesFloorMapType.default)
+            NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
+            NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
+        }
+        NotificationCenter.default.post(name: .reloadTableView, object: nil)
+        NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
+    }
+
+    /// 買い物の開始位置を決めるセレクター
+    @IBOutlet private weak var shoppingStartPositionSelector: UISegmentedControl!
+    /// 買い物の開始位置を変更するメソッド
+    @IBAction private func changeShoppingStartPosition(_ sender: UISegmentedControl) {
+        // もしもセグメントが０だったら買い物の開始位置を左回りにする
+        if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
+            saveShoppingStartDirection(type: ShoppingStartPositionType.left)
+            NotificationCenter.default.post(name: .showLeftCartView, object: nil)
+            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
+        } else {
+            saveShoppingStartDirection(type: ShoppingStartPositionType.right)
+            NotificationCenter.default.post(name: .showRightCartView, object: nil)
+            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
         }
     }
 
-    @IBOutlet weak var rightCartView: UIImageView!
+    // MARK: - property
+    /// 売り場マップの設定を保存するためのUserDefaultsに使用するキー
+    let useSalesFloorTypeKey = "useSalesFloorTypeKey"
 
-    @IBOutlet weak var leftCartView: UIImageView!
+    /// 買い物の開始位置の設定を保存するためのUserDefaultsに使用するキー
+    let shoppingStartPositionKey = "shoppingStartPositionKey"
 
-
-    var defaultSegmentIndex = 1
-
-    // MARK: viewDidLoad
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 各UILabelに枠線を設定
-        setBorderAllLabel()
-        updateButtonAppearance()
-        shoppingStartDirectionSelector.selectedSegmentIndex = defaultSegmentIndex
-        if shoppingStartDirectionSelector.selectedSegmentIndex == 0 {
-            leftCartView.isHidden = false
-            rightCartView.isHidden = true
-        } else {
-            leftCartView.isHidden = true
-            rightCartView.isHidden = false
-        }
-        shoppingStartDirectionSelector.setTitle("左周り", forSegmentAt: 0)
-        shoppingStartDirectionSelector.setTitle("右周り", forSegmentAt: 1)
-
-        shoppingStartDirectionSelector.backgroundColor = UIColor.lightGray
-
+        setUseSalesFloorMapSelector()
+        setShoppingStartPositionSelector()
     }
 
-
-    /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
-    private func setBorderAllLabel() {
-        registerLabel.setBorder()
-        leftEntranceLabel.setBorder()
-        rightEntranceLabel.setBorder()
-    }
-    /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
-    /// - 各ボタンに売り場の名称を設定
-    /// - 対象の売り場に購入商品がある場合は
-    ///    - 売り場に対応したバックグラウンドカラーを設定
-    ///    - ボタンの活性化
-    ///  - 対象の売り場に購入商品がない場合は
-    ///    - バックグラウンドカラーを白に設定
-    ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
-    private func updateButtonAppearance() {
-        /// ボタンの配列を順番に設定
-        let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
-                       blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
-                       blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
-                       greenFourButton, greenFiveButton]
-        // for文でbuttonsに順番にアクセス
-        for (index, button) in buttons.enumerated() {
-            let salesFloor = SalesFloorType(rawValue: index)!
-            button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
-            button?.backgroundColor = salesFloor.colorOfSalesFloor
-            button?.setAppearanceWithShadow()
-        }
+    // MARK: - func
+    /// 使用マップ設定のセグメントを設定する
+    /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
+    /// - セグメント左のタイトルを「カスタム」に設定
+    /// - セグメント右のタイトルを「デフォルト」に設定
+    /// - セグメントの背景色を「ライトグレー」に設定
+    private func setUseSalesFloorMapSelector() {
+        /// UserDefaultsから設定を取得
+        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
+        /// 取得した値をセグメントインデックスに代入
+        useSalesFloorMapSelector.selectedSegmentIndex = salesFloorTypeInt
+        // セグメント左のタイトル
+        useSalesFloorMapSelector.setTitle("カスタム", forSegmentAt: 0)
+        // セグメント右のタイトル
+        useSalesFloorMapSelector.setTitle("デフォルト", forSegmentAt: 1)
+        // セグメントの背景色
+        useSalesFloorMapSelector.backgroundColor = UIColor.lightGray
     }
 
-    /// EditSelectedSalesFloorViewに選択した売り場のリストを持って画面遷移する関数
-    /// - 引数：売り場に対応したSalesFloorTypeのrawValue
-    func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
-        let storyboard = UIStoryboard(name: "EditSelectedSalesFloorView", bundle: nil)
-        let EditSelectedSalesFloorVC = storyboard.instantiateViewController(
-            withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
+    /// UserDefaultsに使用する売り場のマップ種類を登録するメソッド
+    private func saveUseSalesFloorMap(type: SalesFloorMapType) {
+        UserDefaults.standard.setValue(type.rawValue, forKey: useSalesFloorTypeKey)
+    }
 
-        /// EditSelectedSalesFloorViewにプッシュ遷移
-        self.navigationController?.pushViewController(EditSelectedSalesFloorVC, animated: true)
+    /// 買い物ルート設定のセグメントを設定する
+    /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
+    /// - セグメント左のタイトルを「左回り」に設定
+    /// - セグメント右のタイトルを「右回り」に設定
+    /// - セグメントの背景色を「ライトグレー」に設定
+    private func setShoppingStartPositionSelector() {
+        /// UserDefaultsから設定を取得
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        /// 取得した値をセグメントインデックスに代入
+        shoppingStartPositionSelector.selectedSegmentIndex = shoppingStartPositionInt
+        // セグメント左のタイトル
+        shoppingStartPositionSelector.setTitle("左回り", forSegmentAt: 0)
+        // セグメント右のタイトル
+        shoppingStartPositionSelector.setTitle("右回り", forSegmentAt: 1)
+        // セグメントの背景色
+        shoppingStartPositionSelector.backgroundColor = UIColor.lightGray
+    }
+
+    /// UserDefaultsに買い物ルート設定を登録するメソッド
+    private func saveShoppingStartDirection(type: ShoppingStartPositionType) {
+        UserDefaults.standard.setValue(type.rawValue, forKey: shoppingStartPositionKey)
     }
 }

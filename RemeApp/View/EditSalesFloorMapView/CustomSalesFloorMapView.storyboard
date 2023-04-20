@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nYn-TC-hgD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,30 +9,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select Type Of Sales Floor View Controller-->
-        <scene sceneID="bRe-VJ-Gci">
+        <!--売り場マップ編集-->
+        <scene sceneID="pRz-4S-uIx">
             <objects>
-                <viewController storyboardIdentifier="SelectTypeOfSalesFloorView" id="nYn-TC-hgD" customClass="SelectTypeOfSalesFloorViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TYd-1j-jKS">
+                <viewController storyboardIdentifier="CustomSalesFloorMapView" id="hHJ-fw-n8m" customClass="CustomSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WS3-es-oXS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-4a-8iq">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHT-oF-Fkr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="3nK-dO-ICW"/>
+                                    <constraint firstAttribute="height" constant="40" id="wvm-yv-Fyx"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="売り場選択" id="L9A-q4-Vxq"/>
+                                    <navigationItem title="カスタムマップ" id="8WH-bM-pZ1"/>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X89-jQ-geJ" userLabel="AとBとC">
-                                <rect key="frame" x="0.0" y="60" width="375" height="485"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5lN-F3-6Be" userLabel="AとBとC">
+                                <rect key="frame" x="0.0" y="70" width="375" height="475"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0eq-Nv-jnT" userLabel="売り場A">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RyJ-KA-oSW" userLabel="売り場A">
                                         <rect key="frame" x="5" y="0.0" width="365" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9PB-K5-WOs">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zjq-hi-9vA">
                                                 <rect key="frame" x="0.0" y="0.0" width="118.5" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -45,10 +45,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="selectGreenThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="dd6-WF-9f7"/>
+                                                    <action selector="goGreenThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="rdO-DD-uej"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6no-QU-u5A">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIY-eE-rHT">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -61,10 +61,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="selectBlueThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="fM2-jA-Owc"/>
+                                                    <action selector="goBlueThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="mO2-ny-4ZY"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfh-gH-GQw">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzw-EQ-KiZ">
                                                 <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
@@ -77,19 +77,19 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="selectRedThree:" destination="nYn-TC-hgD" eventType="touchUpInside" id="bCF-nS-wNL"/>
+                                                    <action selector="goRedThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="pMU-T5-IQG"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jwg-Hw-bHV" userLabel="BとC">
-                                        <rect key="frame" x="5" y="70" width="365" height="415"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q82-7i-tFs" userLabel="BとC">
+                                        <rect key="frame" x="5" y="70" width="365" height="405"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="njy-Dv-mnK" userLabel="売り場B">
-                                                <rect key="frame" x="0.0" y="0.0" width="365" height="202.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-Gs-Qk8" userLabel="売り場B">
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="197.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMw-DY-lBR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjW-cr-INt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
@@ -101,11 +101,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectGreenFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="dQ4-tI-Boo"/>
+                                                            <action selector="goGreenFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="dvR-ya-wuv"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQF-jp-1Yu">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRt-5C-I0k">
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
@@ -117,11 +117,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectGreenTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="0V4-sO-dxT"/>
+                                                            <action selector="goGreenTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="QBW-bO-mmB"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-oq-c94">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kt1-W0-Dao">
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
@@ -133,11 +133,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueSeven:" destination="nYn-TC-hgD" eventType="touchUpInside" id="8vb-JA-cz4"/>
+                                                            <action selector="goBlueSevenList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="ltV-wn-HR6"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uav-Do-hTA">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tA-PX-L6Z">
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
@@ -149,11 +149,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="o0z-8r-jJh"/>
+                                                            <action selector="goBlueFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="9mt-gN-52u"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szH-B9-WH7">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmv-xS-lmU">
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
@@ -165,11 +165,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="s0v-zB-9XD"/>
+                                                            <action selector="goBlueTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="hjL-b7-FgG"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0g-cj-xtp">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv5-6q-3Pv">
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
@@ -181,11 +181,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectRedFour:" destination="nYn-TC-hgD" eventType="touchUpInside" id="1XA-nI-lfZ"/>
+                                                            <action selector="goRedFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="3SD-uy-QGC"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlE-tv-TEj">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vR-QM-Gmz">
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
@@ -197,16 +197,16 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectRedTwo:" destination="nYn-TC-hgD" eventType="touchUpInside" id="c7s-6j-3u0"/>
+                                                            <action selector="goRedTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="jvV-LX-7ol"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="DB6-AS-Tbj" userLabel="売り場C">
-                                                <rect key="frame" x="0.0" y="212.5" width="365" height="202.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-bd-FuC" userLabel="売り場C">
+                                                <rect key="frame" x="0.0" y="207.5" width="365" height="197.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4I-xs-vkd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9E-Jw-DLb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
@@ -218,11 +218,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectGreenFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="hQJ-ie-Dz8"/>
+                                                            <action selector="goGreenFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="GOe-94-BaU"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0f-JM-oDG">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofx-ei-hrY">
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
@@ -234,11 +234,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectGreenOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="XvD-oR-v4q"/>
+                                                            <action selector="goGreenOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="Cgr-i0-Dfw"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7p-MN-ohW">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFf-0z-Lfb">
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
@@ -250,11 +250,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueSix:" destination="nYn-TC-hgD" eventType="touchUpInside" id="p8L-ae-FRb"/>
+                                                            <action selector="goBlueSixList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="fl6-yz-fG1"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4A-AL-GBQ">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyf-FL-ImJ">
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
@@ -266,11 +266,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="g2j-Ay-eSL"/>
+                                                            <action selector="goBlueFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="DXG-0S-FbT"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A73-lm-d1V">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-8w-OZf">
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
@@ -282,11 +282,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectBlueOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="h59-k0-KY9"/>
+                                                            <action selector="goBlueOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="Bhb-S0-qpK"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpL-vB-rjv">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88l-IE-3t0">
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
@@ -298,11 +298,11 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectRedFive:" destination="nYn-TC-hgD" eventType="touchUpInside" id="v0z-pb-jew"/>
+                                                            <action selector="goRedFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="31r-dB-uAo"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSg-7S-tJJ">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="202.5"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-zZ-KEk">
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="197.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
@@ -314,47 +314,47 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="selectRedOne:" destination="nYn-TC-hgD" eventType="touchUpInside" id="SWM-MZ-OLB"/>
+                                                            <action selector="goRedOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="YcO-Vv-hO2"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="DB6-AS-Tbj" secondAttribute="trailing" id="XTr-pc-jIZ"/>
-                                            <constraint firstItem="njy-Dv-mnK" firstAttribute="leading" secondItem="jwg-Hw-bHV" secondAttribute="leading" id="aGh-GQ-3hc"/>
-                                            <constraint firstAttribute="trailing" secondItem="njy-Dv-mnK" secondAttribute="trailing" id="tYN-BJ-czB"/>
-                                            <constraint firstItem="DB6-AS-Tbj" firstAttribute="leading" secondItem="jwg-Hw-bHV" secondAttribute="leading" id="wyt-8g-y9y"/>
+                                            <constraint firstItem="LcU-Gs-Qk8" firstAttribute="leading" secondItem="q82-7i-tFs" secondAttribute="leading" id="QYk-gp-SLj"/>
+                                            <constraint firstAttribute="trailing" secondItem="LcU-Gs-Qk8" secondAttribute="trailing" id="SW3-cC-zaX"/>
+                                            <constraint firstItem="dRH-bd-FuC" firstAttribute="leading" secondItem="q82-7i-tFs" secondAttribute="leading" id="vVM-OO-iD7"/>
+                                            <constraint firstAttribute="trailing" secondItem="dRH-bd-FuC" secondAttribute="trailing" id="wUw-I6-nAk"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="0eq-Nv-jnT" secondAttribute="trailing" constant="5" id="1wY-ou-u27"/>
-                                    <constraint firstItem="jwg-Hw-bHV" firstAttribute="top" secondItem="X89-jQ-geJ" secondAttribute="top" constant="70" id="I8e-vs-nuo"/>
-                                    <constraint firstItem="0eq-Nv-jnT" firstAttribute="leading" secondItem="X89-jQ-geJ" secondAttribute="leading" constant="5" id="QKg-ZA-9HS"/>
-                                    <constraint firstAttribute="trailing" secondItem="jwg-Hw-bHV" secondAttribute="trailing" constant="5" id="cwG-bw-5bL"/>
-                                    <constraint firstItem="jwg-Hw-bHV" firstAttribute="leading" secondItem="X89-jQ-geJ" secondAttribute="leading" constant="5" id="xie-RI-Dpa"/>
+                                    <constraint firstItem="RyJ-KA-oSW" firstAttribute="leading" secondItem="5lN-F3-6Be" secondAttribute="leading" constant="5" id="2Gg-te-U4m"/>
+                                    <constraint firstItem="q82-7i-tFs" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="top" constant="70" id="BZj-uV-sxH"/>
+                                    <constraint firstAttribute="trailing" secondItem="q82-7i-tFs" secondAttribute="trailing" constant="5" id="Jc6-Vh-Qyt"/>
+                                    <constraint firstAttribute="trailing" secondItem="RyJ-KA-oSW" secondAttribute="trailing" constant="5" id="bdi-wQ-55T"/>
+                                    <constraint firstItem="q82-7i-tFs" firstAttribute="leading" secondItem="5lN-F3-6Be" secondAttribute="leading" constant="5" id="eKY-OA-usY"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-IR-Nyl" userLabel="レジと出入り口">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-H0-j50" userLabel="レジと出入り口">
                                 <rect key="frame" x="0.0" y="555" width="375" height="58"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0C-1p-Yaf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytJ-vg-BFV">
                                         <rect key="frame" x="100" y="0.0" width="175" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="uqV-m6-Jch" userLabel="出入り口">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="78" translatesAutoresizingMaskIntoConstraints="NO" id="hkF-pg-P76" userLabel="出入り口">
                                         <rect key="frame" x="50" y="34" width="275" height="24"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgx-dZ-e9U">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69V-rA-nyb">
                                                 <rect key="frame" x="0.0" y="0.0" width="98.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knd-gT-RZO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出入り口" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yjf-gc-O1p">
                                                 <rect key="frame" x="176.5" y="0.0" width="98.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -364,75 +364,94 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="uqV-m6-Jch" firstAttribute="leading" secondItem="FFS-IR-Nyl" secondAttribute="leading" constant="50" id="D1r-63-mwM"/>
-                                    <constraint firstAttribute="trailing" secondItem="p0C-1p-Yaf" secondAttribute="trailing" constant="100" id="HXf-sD-8qF"/>
-                                    <constraint firstAttribute="trailing" secondItem="uqV-m6-Jch" secondAttribute="trailing" constant="50" id="K5I-BJ-Pfi"/>
-                                    <constraint firstItem="p0C-1p-Yaf" firstAttribute="leading" secondItem="FFS-IR-Nyl" secondAttribute="leading" constant="100" id="N4J-gV-Hqr"/>
+                                    <constraint firstItem="hkF-pg-P76" firstAttribute="leading" secondItem="ypc-H0-j50" secondAttribute="leading" constant="50" id="7KU-f9-Nxb"/>
+                                    <constraint firstAttribute="trailing" secondItem="ytJ-vg-BFV" secondAttribute="trailing" constant="100" id="VwM-KM-3Xb"/>
+                                    <constraint firstAttribute="trailing" secondItem="hkF-pg-P76" secondAttribute="trailing" constant="50" id="pN0-H5-PGK"/>
+                                    <constraint firstItem="ytJ-vg-BFV" firstAttribute="leading" secondItem="ypc-H0-j50" secondAttribute="leading" constant="100" id="r4I-5g-Pwc"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UBd-mf-3gp">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tdx-Mj-P3t">
                                 <rect key="frame" x="5" y="550.5" width="70" height="57"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bTp-Lh-Tf7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bok-Ud-2u7">
                                 <rect key="frame" x="300" y="550.5" width="70" height="57"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dtA-Ku-jIj">
+                                <rect key="frame" x="245" y="22" width="70" height="34.5"/>
+                            </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="TPN-9W-wkN"/>
+                        <viewLayoutGuide key="safeArea" id="GFh-Nv-p8o"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="trailing" secondItem="X89-jQ-geJ" secondAttribute="trailing" id="2un-tQ-m62"/>
-                            <constraint firstItem="X89-jQ-geJ" firstAttribute="top" secondItem="Psc-4a-8iq" secondAttribute="bottom" id="41z-b2-PYb"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="bottom" secondItem="UBd-mf-3gp" secondAttribute="bottom" constant="10" id="CXa-We-83I"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="trailing" secondItem="UBd-mf-3gp" secondAttribute="trailing" constant="300" id="E8f-f3-0cQ"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="bottom" secondItem="FFS-IR-Nyl" secondAttribute="bottom" constant="5" id="Fd6-Vi-NlE"/>
-                            <constraint firstItem="UBd-mf-3gp" firstAttribute="top" secondItem="X89-jQ-geJ" secondAttribute="bottom" constant="5" id="GLW-Sv-uwx"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="trailing" secondItem="Psc-4a-8iq" secondAttribute="trailing" id="GzV-2J-ziP"/>
-                            <constraint firstItem="bTp-Lh-Tf7" firstAttribute="leading" secondItem="TPN-9W-wkN" secondAttribute="leading" constant="300" id="Pa0-uH-w4r"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="trailing" secondItem="FFS-IR-Nyl" secondAttribute="trailing" id="Pyq-nH-jQN"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="trailing" secondItem="bTp-Lh-Tf7" secondAttribute="trailing" constant="5" id="XMb-tD-gf3"/>
-                            <constraint firstItem="bTp-Lh-Tf7" firstAttribute="top" secondItem="X89-jQ-geJ" secondAttribute="bottom" constant="5" id="YOP-Ge-QsW"/>
-                            <constraint firstItem="X89-jQ-geJ" firstAttribute="leading" secondItem="TPN-9W-wkN" secondAttribute="leading" id="bau-UV-EPM"/>
-                            <constraint firstItem="FFS-IR-Nyl" firstAttribute="leading" secondItem="TPN-9W-wkN" secondAttribute="leading" id="bjM-YE-NiO"/>
-                            <constraint firstItem="Psc-4a-8iq" firstAttribute="top" secondItem="TPN-9W-wkN" secondAttribute="top" id="blK-Lc-s2x"/>
-                            <constraint firstItem="Psc-4a-8iq" firstAttribute="leading" secondItem="TPN-9W-wkN" secondAttribute="leading" id="bwO-S5-4ok"/>
-                            <constraint firstItem="FFS-IR-Nyl" firstAttribute="top" secondItem="X89-jQ-geJ" secondAttribute="bottom" constant="10" id="dcf-OA-5p3"/>
-                            <constraint firstItem="UBd-mf-3gp" firstAttribute="leading" secondItem="TPN-9W-wkN" secondAttribute="leading" constant="5" id="iv3-1v-tSr"/>
-                            <constraint firstItem="TPN-9W-wkN" firstAttribute="bottom" secondItem="bTp-Lh-Tf7" secondAttribute="bottom" constant="10" id="pS0-S1-CPa"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="Bok-Ud-2u7" secondAttribute="trailing" constant="5" id="2aY-3Y-H41"/>
+                            <constraint firstItem="Bok-Ud-2u7" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="300" id="6kT-OI-8Of"/>
+                            <constraint firstItem="5lN-F3-6Be" firstAttribute="top" secondItem="hHT-oF-Fkr" secondAttribute="bottom" constant="10" id="6wP-D7-cyC"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="ypc-H0-j50" secondAttribute="bottom" constant="5" id="8AS-BD-TUU"/>
+                            <constraint firstItem="Tdx-Mj-P3t" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="5" id="8Ry-MX-Oiw"/>
+                            <constraint firstItem="5lN-F3-6Be" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="AKL-2l-zLr"/>
+                            <constraint firstItem="Tdx-Mj-P3t" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="5" id="Eg8-wJ-T10"/>
+                            <constraint firstItem="ypc-H0-j50" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="10" id="Hqv-Kh-mML"/>
+                            <constraint firstItem="Bok-Ud-2u7" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="5" id="ISJ-gP-XwS"/>
+                            <constraint firstItem="dtA-Ku-jIj" firstAttribute="top" secondItem="GFh-Nv-p8o" secondAttribute="top" id="Mvd-Mw-bCb"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="5lN-F3-6Be" secondAttribute="trailing" id="SeW-1j-YLP"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="bottom" secondItem="dtA-Ku-jIj" secondAttribute="bottom" constant="2" id="T8B-vF-vGc"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="Tdx-Mj-P3t" secondAttribute="trailing" constant="300" id="U4p-k2-x2N"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="Tdx-Mj-P3t" secondAttribute="bottom" constant="10" id="b0x-Hn-no9"/>
+                            <constraint firstItem="dtA-Ku-jIj" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="245" id="cQb-PO-qs3"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="e4Z-1A-YoC"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="ypc-H0-j50" secondAttribute="trailing" id="g1d-AA-6pZ"/>
+                            <constraint firstItem="ypc-H0-j50" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" id="ibc-Na-YDz"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="bottom" secondItem="Bok-Ud-2u7" secondAttribute="bottom" constant="10" id="jNq-0w-LjA"/>
+                            <constraint firstItem="GFh-Nv-p8o" firstAttribute="trailing" secondItem="dtA-Ku-jIj" secondAttribute="trailing" constant="60" id="pQ9-Sg-mhx"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="trailing" secondItem="GFh-Nv-p8o" secondAttribute="trailing" id="rfC-Mn-pn8"/>
+                            <constraint firstItem="hHT-oF-Fkr" firstAttribute="top" secondItem="GFh-Nv-p8o" secondAttribute="top" id="yWz-bg-bdd"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="売り場マップ編集" id="Lcf-VE-mfJ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="LJH-Cg-7t8">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="KWL-RM-ULB">
+                                <rect key="frame" x="265.5" y="5" width="93.5" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="リセット"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="blueFiveButton" destination="M4A-AL-GBQ" id="iID-bJ-eLY"/>
-                        <outlet property="blueFourButton" destination="Uav-Do-hTA" id="ZW0-LV-DLZ"/>
-                        <outlet property="blueOneButton" destination="A73-lm-d1V" id="ZSb-Pw-YYT"/>
-                        <outlet property="blueSevenButton" destination="APQ-oq-c94" id="FyF-CL-ptw"/>
-                        <outlet property="blueSixButton" destination="L7p-MN-ohW" id="ASC-qJ-Bsh"/>
-                        <outlet property="blueThreeButton" destination="6no-QU-u5A" id="lE1-uo-oOv"/>
-                        <outlet property="blueTwoButton" destination="szH-B9-WH7" id="Qgz-Ch-QUq"/>
-                        <outlet property="greenFiveButton" destination="c4I-xs-vkd" id="ASx-dM-reO"/>
-                        <outlet property="greenFourButton" destination="lMw-DY-lBR" id="gTj-yi-STs"/>
-                        <outlet property="greenOneButton" destination="w0f-JM-oDG" id="rMu-sM-Wzz"/>
-                        <outlet property="greenThreeButton" destination="9PB-K5-WOs" id="HHQ-fU-P6t"/>
-                        <outlet property="greenTwoButton" destination="UQF-jp-1Yu" id="jKL-m6-233"/>
-                        <outlet property="leftCartView" destination="UBd-mf-3gp" id="yRR-xB-oqy"/>
-                        <outlet property="leftEntranceLabel" destination="sgx-dZ-e9U" id="rQt-6c-iAA"/>
-                        <outlet property="redFiveButton" destination="CpL-vB-rjv" id="SVc-Vj-WoQ"/>
-                        <outlet property="redFourButton" destination="M0g-cj-xtp" id="1pI-DQ-UR8"/>
-                        <outlet property="redOneButton" destination="gSg-7S-tJJ" id="TlF-Ax-BRT"/>
-                        <outlet property="redThreeButton" destination="Wfh-gH-GQw" id="fWo-gg-vDb"/>
-                        <outlet property="redTwoButton" destination="jlE-tv-TEj" id="Bko-c3-u46"/>
-                        <outlet property="registerLabel" destination="p0C-1p-Yaf" id="1fw-ka-rzj"/>
-                        <outlet property="rightCartView" destination="bTp-Lh-Tf7" id="9fA-sD-F5z"/>
-                        <outlet property="rightEntranceLabel" destination="Knd-gT-RZO" id="FHN-Bn-zW5"/>
+                        <outlet property="blueFiveButton" destination="hyf-FL-ImJ" id="GIR-ZC-Vz7"/>
+                        <outlet property="blueFourButton" destination="2tA-PX-L6Z" id="nUF-de-t7z"/>
+                        <outlet property="blueOneButton" destination="DHA-8w-OZf" id="0tm-hD-i2g"/>
+                        <outlet property="blueSevenButton" destination="Kt1-W0-Dao" id="Gl3-vP-Pgg"/>
+                        <outlet property="blueSixButton" destination="XFf-0z-Lfb" id="nKB-rH-fM6"/>
+                        <outlet property="blueThreeButton" destination="NIY-eE-rHT" id="pzn-VD-qXq"/>
+                        <outlet property="blueTwoButton" destination="rmv-xS-lmU" id="NSL-Fo-wHw"/>
+                        <outlet property="customSelectCheckMark" destination="dtA-Ku-jIj" id="xbv-Se-ajs"/>
+                        <outlet property="greenFiveButton" destination="M9E-Jw-DLb" id="an8-Zr-g0f"/>
+                        <outlet property="greenFourButton" destination="wjW-cr-INt" id="8hC-Xi-WcN"/>
+                        <outlet property="greenOneButton" destination="ofx-ei-hrY" id="n8T-ML-HGV"/>
+                        <outlet property="greenThreeButton" destination="Zjq-hi-9vA" id="dSW-Ho-Ckn"/>
+                        <outlet property="greenTwoButton" destination="wRt-5C-I0k" id="W23-iJ-ZqH"/>
+                        <outlet property="leftCartView" destination="Tdx-Mj-P3t" id="dIK-Ey-kYa"/>
+                        <outlet property="leftEntranceLabel" destination="69V-rA-nyb" id="92i-Zv-cPC"/>
+                        <outlet property="redFiveButton" destination="88l-IE-3t0" id="CpX-5F-2PQ"/>
+                        <outlet property="redFourButton" destination="xv5-6q-3Pv" id="VWb-cB-Ptv"/>
+                        <outlet property="redOneButton" destination="4Tx-zZ-KEk" id="01s-Oi-kp3"/>
+                        <outlet property="redThreeButton" destination="hzw-EQ-KiZ" id="DVX-pe-Ccd"/>
+                        <outlet property="redTwoButton" destination="6vR-QM-Gmz" id="GRB-Ds-86X"/>
+                        <outlet property="registerLabel" destination="ytJ-vg-BFV" id="vRw-jj-nPN"/>
+                        <outlet property="rightCartView" destination="Bok-Ud-2u7" id="YO1-IW-oQF"/>
+                        <outlet property="rightEntranceLabel" destination="Yjf-gc-O1p" id="6mC-Os-Ay2"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xug-eQ-ZqO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KAB-nI-SD6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1289" y="-58"/>
+            <point key="canvasLocation" x="308" y="-14"/>
         </scene>
     </scenes>
     <resources>
         <image name="cart.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

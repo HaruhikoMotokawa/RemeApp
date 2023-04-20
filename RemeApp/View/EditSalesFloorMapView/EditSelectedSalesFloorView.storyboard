@@ -29,7 +29,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lh4-ry-oHW">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="１０文字以内で入力" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lh4-ry-oHW">
                                                 <rect key="frame" x="142" y="0.0" width="213" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -39,8 +39,14 @@
                                             <constraint firstAttribute="height" constant="50" id="tPx-Lb-jni"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="１０文字以内で入力してください" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAi-63-WsE">
+                                        <rect key="frame" x="0.0" y="60" width="355" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="yuE-YW-T76" userLabel="売り場の色">
-                                        <rect key="frame" x="0.0" y="60" width="355" height="50"/>
+                                        <rect key="frame" x="0.0" y="87" width="355" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="売り場の色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlY-fv-cAf">
                                                 <rect key="frame" x="0.0" y="0.0" width="87" height="50"/>
@@ -58,79 +64,79 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aii-OZ-tuT" userLabel="売り場カラー選択">
-                                        <rect key="frame" x="0.0" y="120" width="355" height="447"/>
+                                        <rect key="frame" x="0.0" y="147" width="355" height="420"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4zT-H8-wIw" userLabel="左の列">
-                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="447"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="420"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWe-yS-Oug">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="greenButton"/>
                                                         <connections>
                                                             <action selector="selectGreen:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FzW-su-soX"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC3-OT-X0w">
-                                                        <rect key="frame" x="0.0" y="51" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemTealButton"/>
                                                         <connections>
                                                             <action selector="selectSystemTeal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PCB-Wx-r6p"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wps-u7-9ZD">
-                                                        <rect key="frame" x="0.0" y="101.5" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="blueButton"/>
                                                         <connections>
                                                             <action selector="selectBlue:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qPv-5N-6JI"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-hO-4MN">
-                                                        <rect key="frame" x="0.0" y="152.5" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="143.5" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemPurpleButton"/>
                                                         <connections>
                                                             <action selector="selectSystemPurple:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vZ4-mV-qKN"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="by4-Y5-zbZ">
-                                                        <rect key="frame" x="0.0" y="203" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="191" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemPinkButton"/>
                                                         <connections>
                                                             <action selector="selectSystemPink:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="feP-zW-gOh"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-eM-03x">
-                                                        <rect key="frame" x="0.0" y="254" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="239" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="purpleButton"/>
                                                         <connections>
                                                             <action selector="selectPurple:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RlY-LI-joo"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rup-U2-lLs">
-                                                        <rect key="frame" x="0.0" y="304.5" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="286.5" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="brownButton"/>
                                                         <connections>
                                                             <action selector="selectBrown:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NFo-BJ-Fsf"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-ac-MmX">
-                                                        <rect key="frame" x="0.0" y="355.5" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="334.5" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="redButton"/>
                                                         <connections>
                                                             <action selector="selectRed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Qal-Tz-exg"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-Qf-ex1">
-                                                        <rect key="frame" x="0.0" y="406" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="382" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemRedButton"/>
                                                         <connections>
                                                             <action selector="selectSystemRed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="g1f-Ou-OyA"/>
                                                         </connections>
@@ -138,74 +144,74 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WWM-8O-PI1" userLabel="右の列">
-                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="447"/>
+                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="420"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1b6-VV-3aM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="magentaButton"/>
                                                         <connections>
                                                             <action selector="selectMagenta:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Xob-61-Hm9"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-7g-VW2">
-                                                        <rect key="frame" x="0.0" y="51" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="48" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemGrayButton"/>
                                                         <connections>
                                                             <action selector="selectSystemGray:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RrK-a2-eju"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu9-Ry-nya">
-                                                        <rect key="frame" x="0.0" y="101.5" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemGreenButton"/>
                                                         <connections>
                                                             <action selector="selectSystemGreen:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UOA-cS-Vgu"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vF-sS-8z6">
-                                                        <rect key="frame" x="0.0" y="152.5" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="143.5" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemIndigoButton"/>
                                                         <connections>
                                                             <action selector="selectSystemIndigo:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7ze-Go-Bk4"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a01-OL-Njf">
-                                                        <rect key="frame" x="0.0" y="203" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="191" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="cyanButton"/>
                                                         <connections>
                                                             <action selector="selectCyan:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FrL-Wc-JQm"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAa-JM-lpj">
-                                                        <rect key="frame" x="0.0" y="254" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="239" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemBlueButton"/>
                                                         <connections>
                                                             <action selector="selectSystemBlue:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="c7a-mF-699"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDf-LC-BJj">
-                                                        <rect key="frame" x="0.0" y="304.5" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="286.5" width="172.5" height="38"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="systemYellowButton"/>
                                                         <connections>
                                                             <action selector="selectSystemYellow:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vIC-WQ-Ovw"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-lk-OCw">
-                                                        <rect key="frame" x="0.0" y="355.5" width="172.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="334.5" width="172.5" height="37.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="orangeButton"/>
                                                         <connections>
                                                             <action selector="selectOrange:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qWU-fS-QeP"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-h9-Xiv">
-                                                        <rect key="frame" x="0.0" y="406" width="172.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="382" width="172.5" height="38"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
