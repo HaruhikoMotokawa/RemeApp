@@ -4,7 +4,6 @@
 //
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
-
 import UIKit
 
 /// A-買い物リスト

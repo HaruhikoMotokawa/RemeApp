@@ -6,6 +6,7 @@ target 'RemeApp' do
   use_frameworks!
 pod "Hero"
 pod 'IQKeyboardManagerSwift'
+pod 'RealmSwift', '~>10'
 
   # Pods for RemeApp
 
