@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 /// 選択した売り場編集
 class EditSelectedSalesFloorViewController: UIViewController {
 
@@ -20,119 +22,119 @@ class EditSelectedSalesFloorViewController: UIViewController {
     @IBOutlet private weak var greenButton: UIButton!
     /// 売り場のカラーをgreenで選択する
     @IBAction private func selectGreen(_ sender: Any) {
-        selectColor(color: .green)
+        selectColor(type: .green)
     }
 
     /// 売り場のカラーをsystemTealで選択するbutton
     @IBOutlet private weak var systemTealButton: UIButton!
     /// 売り場のカラーをsystemTealで選択する
     @IBAction private func selectSystemTeal(_ sender: Any) {
-        selectColor(color: .systemTeal)
+        selectColor(type: .systemTeal)
     }
 
     /// 売り場のカラーをblueで選択するbutton
     @IBOutlet private weak var blueButton: UIButton!
     /// 売り場のカラーをblueで選択する
     @IBAction private func selectBlue(_ sender: Any) {
-        selectColor(color: .blue)
+        selectColor(type: .blue)
     }
 
     /// 売り場のカラーをsystemPurpleで選択するbutton
     @IBOutlet private weak var systemPurpleButton: UIButton!
     /// 売り場のカラーをsystemPurpleで選択する
     @IBAction private func selectSystemPurple(_ sender: Any) {
-        selectColor(color: .systemPurple)
+        selectColor(type: .systemPurple)
     }
 
     /// 売り場のカラーをsystemPinkで選択するbutton
     @IBOutlet private weak var systemPinkButton: UIButton!
     /// 売り場のカラーをsystemPinkで選択する
     @IBAction private func selectSystemPink(_ sender: Any) {
-        selectColor(color: .systemPink)
+        selectColor(type: .systemPink)
     }
 
     /// 売り場のカラーをpurpleで選択するbutton
     @IBOutlet private weak var purpleButton: UIButton!
     /// 売り場のカラーをpurpleで選択する
     @IBAction private func selectPurple(_ sender: Any) {
-        selectColor(color: .purple)
+        selectColor(type: .purple)
     }
 
     /// 売り場のカラーをbrownで選択するbutton
     @IBOutlet private weak var brownButton: UIButton!
     /// 売り場のカラーをbrownで選択する
     @IBAction private func selectBrown(_ sender: Any) {
-        selectColor(color: .brown)
+        selectColor(type: .brown)
     }
 
     /// 売り場のカラーをredで選択するbutton
     @IBOutlet private weak var redButton: UIButton!
     /// 売り場のカラーをredで選択する
     @IBAction private func selectRed(_ sender: Any) {
-        selectColor(color: .red)
+        selectColor(type: .red)
     }
 
     /// 売り場のカラーをsystemRedで選択するbutton
     @IBOutlet private weak var systemRedButton: UIButton!
     /// 売り場のカラーをsystemRedで選択する
     @IBAction private func selectSystemRed(_ sender: Any) {
-        selectColor(color: .systemRed)
+        selectColor(type: .systemRed)
     }
 
     /// 売り場のカラーをmagentaで選択するbutton
     @IBOutlet private weak var magentaButton: UIButton!
     /// 売り場のカラーをmagentaで選択する
     @IBAction func selectMagenta(_ sender: Any) {
-        selectColor(color: .magenta)
+        selectColor(type: .magenta)
     }
 
     /// 売り場のカラーをsystemGrayで選択するbutton
     @IBOutlet private weak var systemGrayButton: UIButton!
     /// 売り場のカラーをsystemGrayで選択する
     @IBAction private func selectSystemGray(_ sender: Any) {
-        selectColor(color: .systemGray)
+        selectColor(type: .systemGray)
     }
 
     /// 売り場のカラーをsystemGreenで選択するbutton
     @IBOutlet private weak var systemGreenButton: UIButton!
     /// 売り場のカラーをsystemGreenで選択する
     @IBAction private func selectSystemGreen(_ sender: Any) {
-        selectColor(color: .systemGreen)
+        selectColor(type: .systemGreen)
     }
 
     /// 売り場のカラーをsystemIndigoで選択するbutton
     @IBOutlet private weak var systemIndigoButton: UIButton!
     /// 売り場のカラーをsystemIndigoで選択する
     @IBAction private func selectSystemIndigo(_ sender: Any) {
-        selectColor(color: .systemIndigo)
+        selectColor(type: .systemIndigo)
     }
 
     /// 売り場のカラーをcyanで選択するbutton
     @IBOutlet private weak var cyanButton: UIButton!
     /// 売り場のカラーをcyanで選択する
     @IBAction private func selectCyan(_ sender: Any) {
-        selectColor(color: .cyan)
+        selectColor(type: .cyan)
     }
 
     /// 売り場のカラーをsystemBlueで選択するbutton
     @IBOutlet private weak var systemBlueButton: UIButton!
     /// 売り場のカラーをsystemBlueで選択する
     @IBAction private func selectSystemBlue(_ sender: Any) {
-        selectColor(color: .systemBlue)
+        selectColor(type: .systemBlue)
     }
 
     /// 売り場のカラーをsystemYellowで選択するbutton
     @IBOutlet private weak var systemYellowButton: UIButton!
     /// 売り場のカラーをsystemYellowで選択する
     @IBAction private func selectSystemYellow(_ sender: Any) {
-        selectColor(color: .systemYellow)
+        selectColor(type: .systemYellow)
     }
 
     /// 売り場のカラーをorangeで選択するbutton
     @IBOutlet private weak var orangeButton: UIButton!
     /// 売り場のカラーをorangeで選択する
     @IBAction private func selectOrange(_ sender: Any) {
-        selectColor(color: .orange)
+        selectColor(type: .orange)
     }
 
     /// キャンセルボタン
@@ -157,11 +159,14 @@ class EditSelectedSalesFloorViewController: UIViewController {
     /// nameOfItemLabelに表示するテキスト
     private var nameOfSalesFloorTextFieldText:String = ""
 
-    /// nameOfItemLabelに表示するテキスト
-    private var selectedSalesFloorColorViewColor:UIColor = .white
+    /// selectedSalesFloorColorViewに表示する色
+    private var selectedSalesFloorColorViewColor:CustomSalesFloorColor = .green
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
+
+    // selectedFloorを受け取るプロパティを定義
+    var selectedFloor: CustomSalesFloorModel?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -177,25 +182,25 @@ class EditSelectedSalesFloorViewController: UIViewController {
 
     // MARK: - func
 
-    /// 各カラー選択ボタンの背景色に色を設定
+    // 各カラー選択ボタンの背景色に色を設定
     private func setColorForSelectionButtons() {
-        greenButton.backgroundColor = .green
-        systemTealButton.backgroundColor = .systemTeal
-        blueButton.backgroundColor = .blue
-        systemPurpleButton.backgroundColor = .systemPurple
-        systemPinkButton.backgroundColor = .systemPink
-        purpleButton.backgroundColor = .purple
-        brownButton.backgroundColor = .brown
-        redButton.backgroundColor = .red
-        systemRedButton.backgroundColor = .systemRed
-        magentaButton.backgroundColor = .magenta
-        systemGrayButton.backgroundColor = .systemGray
-        systemGreenButton.backgroundColor = .systemGreen
-        systemIndigoButton.backgroundColor = .systemIndigo
-        cyanButton.backgroundColor = .cyan
-        systemBlueButton.backgroundColor = .systemBlue
-        systemYellowButton.backgroundColor = .systemYellow
-        orangeButton.backgroundColor = .orange
+        greenButton.backgroundColor = CustomSalesFloorColor.green.color
+        systemTealButton.backgroundColor = CustomSalesFloorColor.systemTeal.color
+        blueButton.backgroundColor = CustomSalesFloorColor.blue.color
+        systemPurpleButton.backgroundColor = CustomSalesFloorColor.systemPurple.color
+        systemPinkButton.backgroundColor = CustomSalesFloorColor.systemPink.color
+        purpleButton.backgroundColor = CustomSalesFloorColor.purple.color
+        brownButton.backgroundColor = CustomSalesFloorColor.brown.color
+        redButton.backgroundColor = CustomSalesFloorColor.red.color
+        systemRedButton.backgroundColor = CustomSalesFloorColor.systemRed.color
+        magentaButton.backgroundColor = CustomSalesFloorColor.magenta.color
+        systemGrayButton.backgroundColor = CustomSalesFloorColor.systemGray.color
+        systemGreenButton.backgroundColor = CustomSalesFloorColor.systemGreen.color
+        systemIndigoButton.backgroundColor = CustomSalesFloorColor.systemIndigo.color
+        cyanButton.backgroundColor = CustomSalesFloorColor.cyan.color
+        systemBlueButton.backgroundColor = CustomSalesFloorColor.systemBlue.color
+        systemYellowButton.backgroundColor = CustomSalesFloorColor.systemYellow.color
+        orangeButton.backgroundColor = CustomSalesFloorColor.orange.color
     }
 
     /// 各カラー選択ボタンに背景色以外の項目を設定
@@ -225,14 +230,16 @@ class EditSelectedSalesFloorViewController: UIViewController {
     private func displayData() {
 
         nameOfSalesFloorTextField.text = nameOfSalesFloorTextFieldText
-        selectedSalesFloorColorView.backgroundColor = selectedSalesFloorColorViewColor
+        selectedSalesFloorColorView.backgroundColor = selectedSalesFloorColorViewColor.color
     }
 
     /// データ受け渡し用のメソッド
     func configurer(detail: CustomSalesFloorModel) {
-        customSalesFloorRawValue = detail.customSalesFloorRawValue
+        selectedFloor = detail
+        customSalesFloorData = detail
+//        customSalesFloorRawValue = detail.customSalesFloorRawValue
         nameOfSalesFloorTextFieldText = detail.customNameOfSalesFloor
-        selectedSalesFloorColorViewColor = detail.customSalesFloorColor.color
+        selectedSalesFloorColorViewColor = detail.customSalesFloorColor
     }
 
     /// UIViewに見た目を設定
@@ -258,8 +265,9 @@ class EditSelectedSalesFloorViewController: UIViewController {
     }
 
     /// 選択した色をUIViewに表示
-    private func selectColor(color: UIColor) {
-        selectedSalesFloorColorView.backgroundColor = color
+    private func selectColor(type: CustomSalesFloorColor) {
+        selectedSalesFloorColorView.backgroundColor = type.color
+        selectedSalesFloorColorViewColor = type
     }
 
     /// アラートで確認するメソッド
@@ -288,13 +296,22 @@ class EditSelectedSalesFloorViewController: UIViewController {
             // 警告アラート
             let alertController = UIAlertController(title: nil, message:
                                                         "売り場の名称は必ず入力してください", preferredStyle: .alert)
-            // 何もしない
+            // 何も処理をしないで画面を閉じる
             let reEnterAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            // ここに追加の処理
-
+            // 編集されたデータを保存する
+            let realm = try! Realm()
+            try! realm.write {
+                selectedFloor!.customNameOfSalesFloor = nameOfSalesFloorTextField.text!
+                selectedFloor!.customSalesFloorColor = selectedSalesFloorColorViewColor
+            }
+            // 変更を売り場マップに送信
+            NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
+            // 変更を買い物リストと
+            NotificationCenter.default.post(name: .reloadTableView, object: nil)
+            // 画面を閉じて前画面に戻る
             self.navigationController?.popViewController(animated: true)
         }
     }

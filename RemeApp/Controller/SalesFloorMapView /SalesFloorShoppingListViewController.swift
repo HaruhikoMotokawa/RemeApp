@@ -26,10 +26,13 @@ class SalesFloorShoppingListViewController: UIViewController {
         salesFloorShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                                  forCellReuseIdentifier: "ShoppingListTableViewCell")
         sortErrandDataList()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
+                                               name: .reloadTableView, object: nil)
     }
 
 
     // MARK: - func
+
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
         selectedErrandDataList = selectedErrandDataList.sorted { (a, b) -> Bool in
@@ -50,6 +53,11 @@ class SalesFloorShoppingListViewController: UIViewController {
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
         }
+    }
+
+    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
+    @objc func reloadTableView() {
+        salesFloorShoppingListTableView.reloadData()
     }
 }
 

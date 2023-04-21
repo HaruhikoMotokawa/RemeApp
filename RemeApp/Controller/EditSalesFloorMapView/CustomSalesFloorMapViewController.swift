@@ -154,10 +154,14 @@ class CustomSalesFloorMapViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateButtonAppearance()
         setBorderAllLabel()
         setCustomSelectCheckMark()
         setCartView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateButtonAppearance()
     }
 
     // MARK: - func
