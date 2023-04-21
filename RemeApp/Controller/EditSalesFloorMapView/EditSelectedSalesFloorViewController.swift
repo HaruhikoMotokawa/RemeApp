@@ -161,7 +161,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
     private var selectedSalesFloorColorViewColor:UIColor = .white
 
     /// カスタム売り場マップのリスト
-    private var customSalesFloorList: [CustomSalesFloorModel] = []
+    private var customSalesFloorData = CustomSalesFloorModel()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -232,7 +232,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
     func configurer(detail: CustomSalesFloorModel) {
         customSalesFloorRawValue = detail.customSalesFloorRawValue
         nameOfSalesFloorTextFieldText = detail.customNameOfSalesFloor
-        selectedSalesFloorColorViewColor = detail.customColorOfSalesFloor
+        selectedSalesFloorColorViewColor = detail.customSalesFloorColor.color
     }
 
     /// UIViewに見た目を設定

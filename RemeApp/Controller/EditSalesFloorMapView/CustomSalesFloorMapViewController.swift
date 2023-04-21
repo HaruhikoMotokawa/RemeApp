@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CustomSalesFloorMapViewController: UIViewController {
 
@@ -148,7 +149,7 @@ class CustomSalesFloorMapViewController: UIViewController {
 
 
     // MARK: - property
-    private var customSalesFloorList: [CustomSalesFloorModel] = []
+    private var customSalesFloorData = CustomSalesFloorModel()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -182,14 +183,22 @@ class CustomSalesFloorMapViewController: UIViewController {
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
                        blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
                        greenFourButton, greenFiveButton]
+
+        let realm = try! Realm()
+        // カスタム売り場モデルのオブジェクトからフィルターメソッドを使ってcustomSalesFloorRawValueが０〜１６に合うモデルを抽出
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
+            .sorted(byKeyPath: "customSalesFloorRawValue")
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
-            let customSalesFloor = customSalesFloorList[index]
+            let customSalesFloor = results[index]
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
-            button?.backgroundColor = customSalesFloor.customColorOfSalesFloor
+            button?.backgroundColor = customSalesFloor.customSalesFloorColor.color
             button?.setAppearanceWithShadow()
         }
     }
+
+
 
     /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド
     /// - NotificationCenterの通知受信を設定
@@ -268,7 +277,9 @@ class CustomSalesFloorMapViewController: UIViewController {
         let editSelectedSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
         /// 引数に渡した値に該当するカスタム売り場のデータを取得
-        let selectedFloor = customSalesFloorList.first(where: { $0.customSalesFloorRawValue == salesFloorRawValue })
+        let realm = try! Realm()
+        let selectedFloor = realm.objects(CustomSalesFloorModel.self).filter("customSalesFloorRawValue == %@",
+                                                                             salesFloorRawValue).first
         // editSelectedSalesFloorVCに該当のカスタム売り場のデータを渡す
         if let selectedFloor = selectedFloor {
             editSelectedSalesFloorVC.configurer(detail: selectedFloor)
