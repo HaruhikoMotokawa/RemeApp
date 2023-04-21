@@ -157,6 +157,9 @@ class CustomSalesFloorMapViewController: UIViewController {
         setBorderAllLabel()
         setCustomSelectCheckMark()
         setCartView()
+        // カスタムマップ編集での内容をリセットした際に画面に反映するための通知の受信設定
+        NotificationCenter.default.addObserver(self, selector: #selector(updateButtonAppearance),
+                                               name: .updateButtonAppearance, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -172,16 +175,11 @@ class CustomSalesFloorMapViewController: UIViewController {
         rightEntranceLabel.setBorder()
     }
     // MARK: 仮で修正
-    /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
+    /// 各UIButtonに装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
-    /// - 対象の売り場に購入商品がある場合は
-    ///    - 売り場に対応したバックグラウンドカラーを設定
-    ///    - ボタンの活性化
-    ///  - 対象の売り場に購入商品がない場合は
-    ///    - バックグラウンドカラーを白に設定
-    ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
-    private func updateButtonAppearance() {
+    /// - 売り場に対応したバックグラウンドカラーを設定
+    /// - 基本装飾と影の設定
+    @objc func updateButtonAppearance() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,

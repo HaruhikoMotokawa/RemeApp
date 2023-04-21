@@ -26,6 +26,9 @@ extension NSNotification.Name {
 
     // 使用する売り場マップの設定によってマップのボタンタイトルと背景色を変更する通知
     static let exchangeAllSalesFloorButton = NSNotification.Name("exchangeAllSalesFloorButton")
+
+    // カスタムマップ編集でリセットの処理を行った際にボタンの見た目をリセット後の表示に更新する通知
+    static let updateButtonAppearance = NSNotification.Name("updateButtonAppearance")
 }
 
 
