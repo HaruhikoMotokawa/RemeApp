@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 /// D-売り場の買い物リスト
 class SalesFloorShoppingListViewController: UIViewController {
 
@@ -79,7 +80,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
-                                 image: errandDataModel.photoImage)
+                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()

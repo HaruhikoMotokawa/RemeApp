@@ -146,16 +146,7 @@ class SalesFloorMapViewController: UIViewController {
 
     // MARK: - property
     /// 使いデータのダミーデータ
-    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15, supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))
-    ]
+    var errandDataList: [ErrandDataModel] = []
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
@@ -164,15 +155,28 @@ class SalesFloorMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderAllLabel()
-        exchangeAllSalesFloorButton()
+       
         setCartView()
         NotificationCenter.default.addObserver(self, selector: #selector(exchangeAllSalesFloorButton),
                                                name: .exchangeAllSalesFloorButton, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setErrandData()
+        exchangeAllSalesFloorButton()
+    }
 
     
     // MARK: - func
+
+    /// 保存されたお使いデータをセットする
+    func setErrandData() {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result)
+    }
+
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()

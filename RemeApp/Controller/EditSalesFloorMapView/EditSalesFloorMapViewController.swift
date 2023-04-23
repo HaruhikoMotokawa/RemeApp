@@ -21,7 +21,6 @@ class EditSalesFloorMapViewController: UIViewController {
 """, preferredStyle: .alert)
         /// リセットする処理
         let resetAction = UIAlertAction(title: "リセット", style: .default) { (action) in
-            // TODO: リセットする処理を記述
             // データベースの初期化
             let realm = try! Realm()
             try! realm.write {
@@ -44,6 +43,7 @@ class EditSalesFloorMapViewController: UIViewController {
                     CustomSalesFloorModel(salesFloorRawValue: 15, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 15),
                     CustomSalesFloorModel(salesFloorRawValue: 16, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 16)
                 ]
+
                 realm.deleteAll()
                 realm.add(customSalesFloors)
                 NotificationCenter.default.post(name: .reloadTableView, object: nil)

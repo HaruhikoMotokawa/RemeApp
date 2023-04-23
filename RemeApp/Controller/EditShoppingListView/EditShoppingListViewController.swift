@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 /// F-買い物リスト編集
 class EditShoppingListViewController: UIViewController {
@@ -27,20 +28,14 @@ class EditShoppingListViewController: UIViewController {
         let storyboard = UIStoryboard(name: "CreateNewItemView", bundle: nil)
         let createNewItemVC = storyboard.instantiateViewController(
             withIdentifier: "CreateNewItemView") as! CreateNewItemViewController
+        createNewItemVC.delegate = self
         self.present(createNewItemVC, animated: true)
     }
 
     // MARK: - property
     /// お使いデータ
-    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15, supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))]
+    var errandDataList: [ErrandDataModel] = []
+
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -51,8 +46,15 @@ class EditShoppingListViewController: UIViewController {
         setAppearance(createNewItemButton)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
                                                name: .reloadTableView, object: nil)
+        saveItem()
     }
 
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setErrandData()
+        sortErrandDataList()
+    }
     // MARK: - func
 
     /// UITableViewの初期設定関連
@@ -62,7 +64,15 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.delegate = self
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                            forCellReuseIdentifier: "ShoppingListTableViewCell")
-        sortErrandDataList()
+
+
+    }
+
+    /// 保存されたお使いデータをセットする
+    func setErrandData() {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result)
     }
 
     /// rightBarButtonItems関連の設定
@@ -214,7 +224,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
-                                 image: errandDataModel.photoImage)
+                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()
@@ -305,8 +315,20 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = editShoppingListTableView.indexPath(for: cell) else { return }
         let isChecked = !errandDataList[indexPath.row].isCheckBox
+        // Realmのトランザクションを開始
+        let realm = try! Realm()
+        realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
         sortErrandDataList()
         editShoppingListTableView.reloadData()
     }
 }
+
+extension EditShoppingListViewController: CreateNewItemViewControllerDelegate {
+    func saveItem() {
+        setErrandData()
+        editShoppingListTableView.reloadData()
+        print("🤔")
+    }
+}
+

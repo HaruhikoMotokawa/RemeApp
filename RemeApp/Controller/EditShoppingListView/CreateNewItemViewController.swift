@@ -29,6 +29,9 @@ class CreateNewItemViewController: UIViewController {
         selectTypeOfSalesFloorVC.delegate = self
         self.present(selectTypeOfSalesFloorVC, animated: true)
     }
+
+    /// 補足文のプレースホルダー
+    @IBOutlet weak var placeholderLabel: UILabel!
     /// 補足入力
     @IBOutlet private weak var supplementTextView: UITextView!
     /// 写真選択ボタン
@@ -72,6 +75,14 @@ class CreateNewItemViewController: UIViewController {
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
+    ///  売り場を保存するための一時置き場
+    private var selectedSalesFloorRawValue: Int = 0
+    /// お使いデータ
+    var errandData = ErrandDataModel()
+
+    // デリゲート
+    var delegate: CreateNewItemViewControllerDelegate?
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +90,7 @@ class CreateNewItemViewController: UIViewController {
         setKeyboardCloseButton()
         setAppearanceAllButton()
         setDisableThreeButton()
-        supplementTextView.setAppearanceAndPlaceholder()
+        supplementTextView.setAppearance()
     }
 
     // MARK: - func
@@ -156,9 +167,29 @@ extension CreateNewItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
             // ここに追加の処理
-           
+           let realm = try! Realm()
+            try! realm.write {
+                errandData.nameOfItem = nameOfItemTextField.text!
+                errandData.numberOfItem = selectedNumberOfItem // unitPickerView
+                errandData.unit = selectedUnit // selectTypeOfSalesFloorButton
+                errandData.salesFloorRawValue = selectedSalesFloorRawValue // supplementTextView
+                errandData.supplement = supplementTextView.text
+                errandData.setImage(image: photoImageView.image, path: "shopping_photo.jpg")
+                realm.add(errandData)
+            }
+            print("\(errandData.nameOfItem)")
+            print("\(errandData.numberOfItem)")
+            print("\( errandData.unit)")
+            print("\(errandData.salesFloorRawValue)")
+            print("\(errandData.supplement ?? "nilです")")
+            print("\(errandData.setImage(image: photoImageView.image, path: "shopping_photo.jpg"))")
             self.dismiss(animated: true)
+            delegate?.saveItem()
         }
     }
 }
@@ -231,6 +262,7 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
             setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
             addButton.setEnable()
         }
+        selectedSalesFloorRawValue = salesFloorRawValue
     }
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
@@ -259,7 +291,8 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
     func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
         let realm = try! Realm()
         // カスタム売り場モデルのオブジェクトからフィルターメソッドを使って条件に合うモデルを抽出
-        let results = realm.objects(CustomSalesFloorModel.self).filter("customSalesFloorRawValue == %@", salesFloorRawValue)
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue == %@", salesFloorRawValue)
         // 抽出した結果を戻り値に返却
         return Array(results)
     }
@@ -269,16 +302,14 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
 extension CreateNewItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if supplementTextView.text == "任意：３０文字以内で入力して下さい" {
-            supplementTextView.text = ""
-            supplementTextView.textColor = .black
+        if supplementTextView.text != "" {
+            placeholderLabel.isHidden = true
         }
     }
     /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
     func textViewDidEndEditing(_ textView: UITextView) {
         if supplementTextView.text == "" {
-            supplementTextView.text = "任意：３０文字以内で入力して下さい"
-            supplementTextView.textColor = .lightGray
+            placeholderLabel.isHidden = false
         }
     }
     /// 入力制限を３０文字以内で設定
@@ -335,3 +366,8 @@ extension CreateNewItemViewController: UIImagePickerControllerDelegate, UINaviga
 // MARK: - CameraAndPhotoActionable
 // setCameraAndPhotoActionメソッドを使用可能にする
 extension CreateNewItemViewController: CameraAndPhotoActionable {}
+
+//
+protocol CreateNewItemViewControllerDelegate {
+    func saveItem()
+}

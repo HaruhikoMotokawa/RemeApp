@@ -6,28 +6,30 @@
 //
 
 import UIKit
+import RealmSwift
 
 /// お使いデータモデル
-struct ErrandDataModel {
+class ErrandDataModel: Object {
+
     /// データのID
-    var id:String = UUID().uuidString
+    @objc dynamic var id:String = UUID().uuidString
     /// 商品の購入判定
-    var isCheckBox:Bool = false
+    @objc dynamic var isCheckBox:Bool = false
     /// 商品名
-    var nameOfItem:String = ""
+    @objc dynamic var nameOfItem:String = ""
     /// 商品の必要数
-    var numberOfItem = "1"
+    @objc dynamic var numberOfItem = "1"
     /// 商品の必要数に対する単位
-    var unit:String = "個"
+    @objc dynamic var unit:String = "個"
     /// 売り場に対応するRawValue
-    var salesFloorRawValue:Int = 0
+    @objc dynamic var salesFloorRawValue:Int = 0
     /// 商品に対する補足文、nilを許容
-    var supplement:String? = nil
+    @objc dynamic var supplement:String? = nil
     /// 商品の写真データパス、nilを許容
-    var photoPath:String? = nil
+    @objc dynamic var photoPath:String? = nil
 
     // !!!: テスト用であとで削除
-    var photoImage:UIImage? = nil
+//    var photoImage:UIImage? = nil
 
     /// enum DefaultSalesFloorTypeをお使いデータに登録
     var defaultSalesFloor: DefaultSalesFloorType {
@@ -39,12 +41,12 @@ struct ErrandDataModel {
         }
     }
     
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 
     ///
-    mutating func setImage(image: UIImage?, path: String?) {
+    func setImage(image: UIImage?, path: String?) {
         if let image = image {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileName = UUID().uuidString + ".jpeg"

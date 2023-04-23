@@ -59,7 +59,7 @@ class DetailShoppingListViewController: UIViewController {
         unitLabelText = detail.unit
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
-        photoPathImage = detail.photoImage
+        photoPathImage = detail.getImage()
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示

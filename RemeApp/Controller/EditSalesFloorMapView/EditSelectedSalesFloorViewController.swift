@@ -228,7 +228,6 @@ class EditSelectedSalesFloorViewController: UIViewController {
     /// - 補足を表示
     /// - 写真を表示
     private func displayData() {
-
         nameOfSalesFloorTextField.text = nameOfSalesFloorTextFieldText
         selectedSalesFloorColorView.backgroundColor = selectedSalesFloorColorViewColor.color
     }
@@ -237,7 +236,6 @@ class EditSelectedSalesFloorViewController: UIViewController {
     func configurer(detail: CustomSalesFloorModel) {
         selectedFloor = detail
         customSalesFloorData = detail
-//        customSalesFloorRawValue = detail.customSalesFloorRawValue
         nameOfSalesFloorTextFieldText = detail.customNameOfSalesFloor
         selectedSalesFloorColorViewColor = detail.customSalesFloorColor
     }

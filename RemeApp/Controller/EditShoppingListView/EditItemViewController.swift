@@ -98,7 +98,7 @@ class EditItemViewController: UIViewController {
         setKeyboardCloseButton()
         setAppearanceAllButton()
         setDisableOrEnable()
-        supplementTextView.setAppearanceAndPlaceholder()
+        supplementTextView.setAppearance()
         displayData()
     }
 
@@ -139,7 +139,7 @@ class EditItemViewController: UIViewController {
         unitPickerViewString = detail.unit
         selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
-        photoImageViewImage = detail.photoImage
+        photoImageViewImage = detail.getImage()
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示

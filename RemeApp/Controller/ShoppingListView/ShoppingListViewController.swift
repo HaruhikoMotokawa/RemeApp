@@ -5,6 +5,7 @@
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
 import UIKit
+import RealmSwift
 
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
@@ -15,17 +16,7 @@ class ShoppingListViewController: UIViewController {
 
     // MARK: - property
     /// 買い物リストに表示するお使いデータのダミーデータ
-    private var errandDataList: [ErrandDataModel] =
-    [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15,supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))
-    ]
+    private var errandDataList: [ErrandDataModel] = []
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -34,11 +25,24 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
-        sortErrandDataList()
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .reloadTableView, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setErrandData()
+        shoppingListTableView.reloadData()
+        sortErrandDataList()
+    }
     // MARK: - func
+
+    /// 保存されたお使いデータをセットする
+    func setErrandData() {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result)
+    }
 
     /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
     @objc func reloadTableView() {
@@ -124,7 +128,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
-                                 image: errandDataModel.photoImage)
+                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()
