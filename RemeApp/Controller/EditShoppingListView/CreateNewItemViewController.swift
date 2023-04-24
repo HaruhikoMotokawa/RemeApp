@@ -167,29 +167,46 @@ extension CreateNewItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
             // ここに追加の処理
-           let realm = try! Realm()
-            try! realm.write {
-                errandData.nameOfItem = nameOfItemTextField.text!
-                errandData.numberOfItem = selectedNumberOfItem // unitPickerView
-                errandData.unit = selectedUnit // selectTypeOfSalesFloorButton
-                errandData.salesFloorRawValue = selectedSalesFloorRawValue // supplementTextView
-                errandData.supplement = supplementTextView.text
-                errandData.setImage(image: photoImageView.image, path: "shopping_photo.jpg")
-                realm.add(errandData)
-            }
-            print("\(errandData.nameOfItem)")
-            print("\(errandData.numberOfItem)")
-            print("\( errandData.unit)")
-            print("\(errandData.salesFloorRawValue)")
-            print("\(errandData.supplement ?? "nilです")")
-            print("\(errandData.setImage(image: photoImageView.image, path: "shopping_photo.jpg"))")
+            saveData()
             self.dismiss(animated: true)
-            delegate?.saveItem()
+            delegate?.savedReload()
+        }
+    }
+
+    func saveData() {
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+
+        let path = "shopping_photo.jpg"
+        let realm = try! Realm()
+        try! realm.write {
+            errandData.nameOfItem = nameOfItemTextField.text!
+            print("\(errandData.nameOfItem)")
+
+            errandData.numberOfItem = selectedNumberOfItem
+            print("\(errandData.numberOfItem)")
+
+            errandData.unit = selectedUnit
+            print("\( errandData.unit)")
+
+            errandData.salesFloorRawValue = selectedSalesFloorRawValue
+            print("\(errandData.salesFloorRawValue)")
+
+            if supplementTextView.text == "" {
+                errandData.supplement = nil
+            } else {
+                errandData.supplement = supplementTextView.text
+            }
+            print("\(errandData.supplement ?? "nilです")")
+            errandData.setImage(image: photoImageView.image, path: path)
+            errandData.photoPath = path
+
+            realm.add(errandData)
+            print("\(errandData)")
+
         }
     }
 }
@@ -300,16 +317,16 @@ extension CreateNewItemViewController:SelectTypeOfSalesFloorViewControllerDelega
 
 // MARK: - UITextViewDelegate
 extension CreateNewItemViewController: UITextViewDelegate {
-    /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
+    /// 入力があったらプレースホルダーのラベルを非表示
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if supplementTextView.text != "" {
             placeholderLabel.isHidden = true
-        }
     }
     /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
     func textViewDidEndEditing(_ textView: UITextView) {
         if supplementTextView.text == "" {
             placeholderLabel.isHidden = false
+        } else {
+            placeholderLabel.isHidden = true
         }
     }
     /// 入力制限を３０文字以内で設定
@@ -369,5 +386,5 @@ extension CreateNewItemViewController: CameraAndPhotoActionable {}
 
 //
 protocol CreateNewItemViewControllerDelegate {
-    func saveItem()
+    func savedReload()
 }

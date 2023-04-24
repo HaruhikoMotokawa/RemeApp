@@ -46,7 +46,7 @@ class EditShoppingListViewController: UIViewController {
         setAppearance(createNewItemButton)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
                                                name: .reloadTableView, object: nil)
-        saveItem()
+        savedReload()
     }
 
 
@@ -325,7 +325,7 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
 }
 
 extension EditShoppingListViewController: CreateNewItemViewControllerDelegate {
-    func saveItem() {
+    func savedReload() {
         setErrandData()
         editShoppingListTableView.reloadData()
         print("🤔")
