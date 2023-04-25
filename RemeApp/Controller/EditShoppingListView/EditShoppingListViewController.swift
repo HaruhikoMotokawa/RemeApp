@@ -225,6 +225,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
                                  image: errandDataModel.getImage())
+            
             return cell
         }
         return UITableViewCell()

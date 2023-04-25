@@ -150,6 +150,22 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// cellのsetPhotoPathImageViewに内容を反映させる
     /// - 写真がなければそのままnilを入れる
     /// - 写真がある場合はサイズを縦横幅50にリサイズして表示する
+//    func setPhotoPathImageView(photoPath: String?) {
+//        print(photoPath ?? "ないです")
+//        if let path = photoPath {
+//            let errandDataModel = ErrandDataModel()
+//            let image = errandDataModel.getImage(path: path)
+//            if image == nil {
+//                photoPathImageView.image = image
+//            } else {
+//                let resizedImage = image?.resize(to: CGSize(width: 50, height: 50))
+//                photoPathImageView.image = resizedImage
+//            }
+//        } else {
+//            photoPathImageView.image = nil
+//        }
+//    }
+
     func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
             photoPathImageView.image = image

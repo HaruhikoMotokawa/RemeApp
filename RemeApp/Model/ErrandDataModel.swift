@@ -49,12 +49,15 @@ class ErrandDataModel: Object {
     func setImage(image: UIImage?, path: String?) {
         if let image = image {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            print("保存📀documentsDirectory:\(documentsDirectory)")
             let fileName = UUID().uuidString + ".jpeg"
+            print("保存📀fileName:\(fileName)")
             let fileURL = documentsDirectory.appendingPathComponent(fileName)
             if let data = image.jpegData(compressionQuality: 1.0) {
                 do {
                     try data.write(to: fileURL)
                     self.photoPath = fileName
+                    print(fileName)
                 } catch {
                     print("Error saving image: \\(error.localizedDescription)")
                 }
@@ -65,7 +68,9 @@ class ErrandDataModel: Object {
     func getImage() -> UIImage? {
         if let path = self.photoPath {
             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            print("呼び出し🔔documentsDirectory:\(documentsDirectory)")
             let fileURL = documentsDirectory.appendingPathComponent(path)
+            print("呼び出し🔔fileName:\(fileURL)")
             do {
                 let imageData = try Data(contentsOf: fileURL)
                 return UIImage(data: imageData)
