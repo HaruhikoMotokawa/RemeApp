@@ -179,9 +179,9 @@ extension CreateNewItemViewController {
         let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
         // numberOfItemPickerViewで選択された値を取得
         let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-        let fileName = UUID().uuidString + ".jpeg"
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
+
+
 //        let path = "shopping_photo.jpg"
         let realm = try! Realm()
         try! realm.write {
@@ -203,8 +203,8 @@ extension CreateNewItemViewController {
                 errandData.supplement = supplementTextView.text
             }
             print("\(errandData.supplement ?? "nilです")")
-            errandData.setImage(image: photoImageView.image, path: fileURL.path())
-            errandData.photoPath = fileName
+
+            errandData.photoFileName = errandData.setImage(image: photoImageView.image)
 
             realm.add(errandData)
             print("\(errandData)")
