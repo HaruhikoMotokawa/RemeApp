@@ -74,9 +74,8 @@ class ErrandDataModel: Object {
     /// - ファイルのURLを取得
     /// - ファイルからデータを読み込み、UIImageに変換して返却する
     func getImage() -> UIImage? {
-
+        // photoFileNameがnilならnilを返却して抜ける
         guard let path = self.photoFileName else { return nil }
-        print("🔥\(String(describing: self.photoFileName))")
             // ドキュメントディレクトリのURLを取得
             let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             // ファイルのURLを取得

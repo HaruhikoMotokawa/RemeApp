@@ -236,7 +236,8 @@ class SalesFloorMapViewController: UIViewController {
                 continue
             }
 
-            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.intValue }) {
+            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.intValue }) &&
+                (errandDataList.first(where: {$0.salesFloorRawValue == index})?.isCheckBox == false) {
                 button?.isEnabled = true
             } else {
                 button?.isEnabled = false
@@ -262,7 +263,8 @@ class SalesFloorMapViewController: UIViewController {
             // 各ボタンに売り場の名称を設定
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
             // お使いデータの中に対象の売り場があるかどうかで、ボタンの状態を変更する
-            if (errandDataList.first(where: {$0.salesFloorRawValue == index})?.salesFloorRawValue) != nil {
+            if (errandDataList.first(where: {$0.salesFloorRawValue == index})?.salesFloorRawValue) != nil &&
+                (errandDataList.first(where: {$0.salesFloorRawValue == index})?.isCheckBox == false) {
                 // ある場合はバックグラウンドカラーを設定した色に変更し、ボタンを有効化する
                 button?.backgroundColor = salesFloor.colorOfSalesFloor
                 button?.isEnabled = true
