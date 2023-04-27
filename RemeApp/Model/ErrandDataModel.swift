@@ -48,25 +48,23 @@ class ErrandDataModel: Object {
     /// - 保存するデータをjpegに変換
     /// - ファイルURLにデータを保存
     /// - ファイル名を出力
-    func setImage(image: UIImage?) -> String {
+    func setImage(image: UIImage?) -> String? {
+        // 画像がnilだったらnilを返却して処理から抜ける
+        guard let image = image else { return nil }
         // ファイル名をUUIDで生成し、拡張子を".jpeg"にする
         let fileName = UUID().uuidString + ".jpeg"
-        // 画像がnilでなければ
-        if let image = image {
-            // ドキュメントディレクトリのURLを取得
-            let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            // ファイルのURLを作成
-            let fileURL = documentsDirectoryURL.appendingPathComponent(fileName)
-            // UIImageをJPEGデータに変換
-            if let data = image.jpegData(compressionQuality: 1.0) {
-                // JPEGデータをファイルに書き込み
-                do {
-                    try data.write(to: fileURL)
-                    print(fileName)
-                } catch {
-                    print("💀エラー")
-                }
-            }
+        // ドキュメントディレクトリのURLを取得
+        let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        // ファイルのURLを作成
+        let fileURL = documentsDirectoryURL.appendingPathComponent(fileName)
+        // UIImageをJPEGデータに変換
+        let data = image.jpegData(compressionQuality: 1.0)
+        // JPEGデータをファイルに書き込み
+        do {
+            try data!.write(to: fileURL)
+            print(fileName)
+        } catch {
+            print("💀エラー")
         }
         return fileName
     }
@@ -76,8 +74,9 @@ class ErrandDataModel: Object {
     /// - ファイルのURLを取得
     /// - ファイルからデータを読み込み、UIImageに変換して返却する
     func getImage() -> UIImage? {
-        //
-        if let path = self.photoFileName {
+
+        guard let path = self.photoFileName else { return nil }
+        print("🔥\(String(describing: self.photoFileName))")
             // ドキュメントディレクトリのURLを取得
             let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             // ファイルのURLを取得
@@ -89,8 +88,7 @@ class ErrandDataModel: Object {
                 return UIImage(data: imageData)
             } catch {
                 print("💀エラー")
+                return nil
             }
         }
-        return nil
-    }
 }

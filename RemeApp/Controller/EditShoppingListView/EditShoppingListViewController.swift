@@ -198,7 +198,18 @@ class EditShoppingListViewController: UIViewController {
         // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
         let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
         for indexPathList in sortedIndexPaths {
-            errandDataList.remove(at: indexPathList.row) // 選択肢のindexPathから配列の要素を削除
+            do {
+                // Realmに保存されているErrandDataModelを取得して、削除する
+                let realm = try Realm()
+                let errandData = realm.objects(ErrandDataModel.self).filter("id = %@", errandDataList[indexPathList.row].id).first
+                try realm.write {
+                    realm.delete(errandData!)
+                }
+                // 選択肢のindexPathから配列の要素を削除
+                errandDataList.remove(at: indexPathList.row)
+            } catch {
+                print("Error: \\(error.localizedDescription)")
+            }
         }
         // tableViewの行を削除
         editShoppingListTableView.deleteRows(at: sortedIndexPaths, with: UITableView.RowAnimation.automatic)
@@ -268,6 +279,18 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             (action, view, completionHandler) in
             // お使いデータの対象のインデックス番号を削除
             self.errandDataList.remove(at: indexPath.row)
+
+            // Realmのデータベースからも削除
+            let realm = try! Realm()
+            let target = realm.objects(ErrandDataModel.self)[indexPath.row]
+            do {
+                try realm.write {
+                    realm.delete(target)
+                }
+            } catch {
+                print("Error deleting item, \\(error)")
+            }
+
             // テーブルビューから視覚的に削除
             tableView.deleteRows(at: [indexPath], with: .automatic)
             // アクション完了を報告

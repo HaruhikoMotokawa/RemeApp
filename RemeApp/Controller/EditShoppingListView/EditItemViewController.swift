@@ -82,13 +82,16 @@ class EditItemViewController: UIViewController {
     private var unitPickerViewString:String = ""
 
     /// selectTypeOfSalesFloorButtonに表示する売り場の種類を指定するためのRawValue
-    private var selectTypeOfSalesFloorButtonRawValue:Int = 0
+    private var selectedSalesFloorRawValue:Int = 0
 
     /// supplementTextViewに表示するテキスト
     private var supplementTextViewText:String? = nil
 
     /// photoImageViewに表示する画像
     private var photoImageViewImage:UIImage? = nil
+
+    /// お使いデータ
+    var errandData = ErrandDataModel()
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
@@ -137,10 +140,11 @@ class EditItemViewController: UIViewController {
 
     /// データ受け渡し用のメソッド
     func configurer(detail: ErrandDataModel) {
+        errandData = detail
         nameOfItemTextFieldText = detail.nameOfItem
         numberOfItemPickerViewString = detail.numberOfItem
         unitPickerViewString = detail.unit
-        selectTypeOfSalesFloorButtonRawValue = detail.salesFloorRawValue
+        selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
         photoImageViewImage = detail.getImage()
     }
@@ -150,7 +154,7 @@ class EditItemViewController: UIViewController {
         nameOfItemTextField.text = nameOfItemTextFieldText
         selectNumberOfItemRow(selectedNumberOfItem: numberOfItemPickerViewString)
         selectUnitRow(selectedUnit: unitPickerViewString)
-        setSalesFloorTypeButton(salesFloorRawValue: selectTypeOfSalesFloorButtonRawValue)
+        setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
         photoImageView.image = photoImageViewImage
     }
@@ -278,8 +282,31 @@ extension EditItemViewController {
             present(alertController, animated: true)
         } else {
             // ここに追加の処理
-
+            saveData()
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    func saveData() {
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+
+        let realm = try! Realm()
+        try! realm.write {
+            errandData.nameOfItem = nameOfItemTextField.text!
+            errandData.numberOfItem = selectedNumberOfItem
+            errandData.unit = selectedUnit
+            errandData.salesFloorRawValue = selectedSalesFloorRawValue
+            if supplementTextView.text == "" {
+                errandData.supplement = nil
+            } else {
+                errandData.supplement = supplementTextView.text
+            }
+            errandData.photoFileName = errandData.setImage(image: photoImageView.image)
+            realm.add(errandData)
+            print("\(errandData)")
         }
     }
 }
@@ -341,6 +368,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
     func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
+        selectedSalesFloorRawValue = salesFloorRawValue
         setSalesFloorTypeButton(salesFloorRawValue: salesFloorRawValue)
     }
 }
