@@ -150,21 +150,6 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// cellのsetPhotoPathImageViewに内容を反映させる
     /// - 写真がなければそのままnilを入れる
     /// - 写真がある場合はサイズを縦横幅50にリサイズして表示する
-//    func setPhotoPathImageView(photoPath: String?) {
-//        print(photoPath ?? "ないです")
-//        if let path = photoPath {
-//            let errandDataModel = ErrandDataModel()
-//            let image = errandDataModel.getImage(path: path)
-//            if image == nil {
-//                photoPathImageView.image = image
-//            } else {
-//                let resizedImage = image?.resize(to: CGSize(width: 50, height: 50))
-//                photoPathImageView.image = resizedImage
-//            }
-//        } else {
-//            photoPathImageView.image = nil
-//        }
-//    }
 
     func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
@@ -185,13 +170,9 @@ class ShoppingListTableViewCellController: UITableViewCell  {
             supplementLabel.textColor = UIColor.gray
             supplementLabel.text = "補足：" + (supplement ?? "")
         }
-        // realm導入時にはこちらに差し替え
-        //        if let photoPath = photoPath {
-        //             let errandDataModel = ErrandDataModel(photoPath: photoPath)
-        //            photoPathImageView.image = errandDataModel.getImage()
-        //        }
     }
 }
+
 /// チェックボックスがタップされた場合の挙動を指定するデリゲート
 protocol ShoppingListTableViewCellDelegate: AnyObject {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController)

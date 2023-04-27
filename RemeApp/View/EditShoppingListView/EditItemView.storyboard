@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YKY-dh-ejj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -202,13 +201,22 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任意：３０文字以内で入力" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivx-cV-L9j">
+                                        <rect key="frame" x="70" y="270" width="275" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ivx-cV-L9j" secondAttribute="trailing" constant="10" id="3AI-yp-Mg6"/>
                                     <constraint firstAttribute="bottom" secondItem="b65-50-ent" secondAttribute="bottom" id="7TL-SV-0gO"/>
                                     <constraint firstItem="b65-50-ent" firstAttribute="width" secondItem="A2q-s9-lyS" secondAttribute="width" id="DTA-ju-OGJ"/>
                                     <constraint firstAttribute="trailing" secondItem="b65-50-ent" secondAttribute="trailing" id="Msn-nb-eqo"/>
                                     <constraint firstItem="b65-50-ent" firstAttribute="top" secondItem="A2q-s9-lyS" secondAttribute="top" id="Run-6P-mdH"/>
+                                    <constraint firstItem="Ivx-cV-L9j" firstAttribute="top" secondItem="A2q-s9-lyS" secondAttribute="top" constant="270" id="S0D-Mg-nwq"/>
                                     <constraint firstItem="b65-50-ent" firstAttribute="leading" secondItem="A2q-s9-lyS" secondAttribute="leading" id="d9X-CJ-Cnb"/>
+                                    <constraint firstItem="Ivx-cV-L9j" firstAttribute="leading" secondItem="A2q-s9-lyS" secondAttribute="leading" constant="70" id="wrw-7k-UAX"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="K4e-81-08F"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Ef0-5H-TTx"/>
@@ -237,6 +245,7 @@
                         <outlet property="nameOfItemTextField" destination="OOK-tz-FCP" id="fzp-Ej-SsY"/>
                         <outlet property="numberOfItemPickerView" destination="HDF-5N-9Xp" id="tHH-fq-hN4"/>
                         <outlet property="photoImageView" destination="UWJ-nA-tkm" id="4rq-KZ-fJ6"/>
+                        <outlet property="placeholderLabel" destination="Ivx-cV-L9j" id="eKD-V6-k9k"/>
                         <outlet property="selectPhotoButton" destination="NfO-8j-GCP" id="K7m-h5-cJ9"/>
                         <outlet property="selectTypeOfSalesFloorButton" destination="E4l-Pc-8Z3" id="5bK-JG-kP9"/>
                         <outlet property="supplementTextView" destination="ofb-Mj-YwS" id="jr9-qc-LPR"/>

@@ -30,6 +30,9 @@ class EditItemViewController: UIViewController {
         selectTypeOfSalesFloorVC.delegate = self
         self.present(selectTypeOfSalesFloorVC, animated: true)
     }
+
+    /// 補足文のプレースホルダー
+    @IBOutlet weak var placeholderLabel: UILabel!
     /// 補足入力
     @IBOutlet private weak var supplementTextView: UITextView!
     /// 写真選択ボタン
@@ -218,10 +221,11 @@ class EditItemViewController: UIViewController {
     /// - 補足がある場合はフォントを黒にしてそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementTextViewText == nil {
-            supplementTextView.text = ""
+            placeholderLabel.isHidden = false
         }else{
             supplementTextView.text = supplementTextViewText
             supplementTextView.textColor = .black
+            placeholderLabel.isHidden = true
         }
     }
 
@@ -343,18 +347,16 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
 
 // MARK: - UITextViewDelegate
 extension EditItemViewController: UITextViewDelegate {
-    /// 入力があったらプレースホルダー削除、フォントカラーをブラックにする
+    /// 入力があったらプレースホルダーのラベルを非表示
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if supplementTextView.text == "任意：３０文字以内で入力して下さい" {
-            supplementTextView.text = ""
-            supplementTextView.textColor = .black
-        }
+        placeholderLabel.isHidden = true
     }
-    /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
+    /// 何も入力されていなかったらプレースホルダーをセット
     func textViewDidEndEditing(_ textView: UITextView) {
         if supplementTextView.text == "" {
-            supplementTextView.text = "任意：３０文字以内で入力して下さい"
-            supplementTextView.textColor = .lightGray
+            placeholderLabel.isHidden = false
+        } else {
+            placeholderLabel.isHidden = true
         }
     }
     /// 入力制限を３０文字以内で設定

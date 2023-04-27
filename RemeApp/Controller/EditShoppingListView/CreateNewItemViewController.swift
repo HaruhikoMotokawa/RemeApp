@@ -68,18 +68,15 @@ class CreateNewItemViewController: UIViewController {
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
     /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
-    private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
+    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
     /// 写真のURLパス
     private var imageFilePath: URL?
-
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
-
     ///  売り場を保存するための一時置き場
     private var selectedSalesFloorRawValue: Int = 0
     /// お使いデータ
     var errandData = ErrandDataModel()
-
     // デリゲート
     var delegate: CreateNewItemViewControllerDelegate?
 
@@ -180,35 +177,20 @@ extension CreateNewItemViewController {
         // numberOfItemPickerViewで選択された値を取得
         let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
 
-
-
-//        let path = "shopping_photo.jpg"
         let realm = try! Realm()
         try! realm.write {
             errandData.nameOfItem = nameOfItemTextField.text!
-            print("\(errandData.nameOfItem)")
-
             errandData.numberOfItem = selectedNumberOfItem
-            print("\(errandData.numberOfItem)")
-
             errandData.unit = selectedUnit
-            print("\( errandData.unit)")
-
             errandData.salesFloorRawValue = selectedSalesFloorRawValue
-            print("\(errandData.salesFloorRawValue)")
-
             if supplementTextView.text == "" {
                 errandData.supplement = nil
             } else {
                 errandData.supplement = supplementTextView.text
             }
-            print("\(errandData.supplement ?? "nilです")")
-
             errandData.photoFileName = errandData.setImage(image: photoImageView.image)
-
             realm.add(errandData)
             print("\(errandData)")
-
         }
     }
 }
@@ -323,7 +305,7 @@ extension CreateNewItemViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
             placeholderLabel.isHidden = true
     }
-    /// 何も入力されていなかったらプレースホルダーをセット、フォントカラーライトグレー
+    /// 編集終了後、何も入力されていなかったらプレースホルダーをセット
     func textViewDidEndEditing(_ textView: UITextView) {
         if supplementTextView.text == "" {
             placeholderLabel.isHidden = false
