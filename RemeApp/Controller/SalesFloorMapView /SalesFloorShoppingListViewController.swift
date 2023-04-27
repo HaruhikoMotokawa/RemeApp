@@ -19,6 +19,8 @@ class SalesFloorShoppingListViewController: UIViewController {
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = []
 
+    var salesFloorRawValue: Int = 0
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,7 @@ class SalesFloorShoppingListViewController: UIViewController {
         salesFloorShoppingListTableView.delegate = self
         salesFloorShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                                  forCellReuseIdentifier: "ShoppingListTableViewCell")
+        setSelectedErrandDataList(salesFloorRawValue: salesFloorRawValue)
         sortErrandDataList()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
                                                name: .reloadTableView, object: nil)
@@ -33,6 +36,12 @@ class SalesFloorShoppingListViewController: UIViewController {
 
 
     // MARK: - func
+
+    func setSelectedErrandDataList(salesFloorRawValue: Int) {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result.filter { $0.salesFloorRawValue == salesFloorRawValue })
+    }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
@@ -112,6 +121,7 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
         let isChecked = !errandDataList[indexPath.row].isCheckBox
         // Realmのトランザクションを開始
         let realm = try! Realm()
+        realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
         realm.add(errandDataList[indexPath.row], update: .modified)
         do {

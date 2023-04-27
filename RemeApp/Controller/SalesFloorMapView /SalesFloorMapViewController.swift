@@ -276,16 +276,14 @@ class SalesFloorMapViewController: UIViewController {
         }
     }
 
-    /// SalesFloorShoppingListViewに選択した売り場のリストを持って画面遷移する関数
+    /// SalesFloorShoppingListViewに選択した売り場のrawValueを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
     private func goSalesFloorShoppingListView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
         let salesFloorShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController
-        /// 引数に対応した売り場に該当するお使いデータをクロージャで抽出
-        let salesFloorList = errandDataList.filter { $0.salesFloorRawValue == salesFloorRawValue }
-        /// 抽出したお使いデータをSalesFloorShoppingListViewControllerのお使いデータに代入
-        salesFloorShoppingListVC.errandDataList = salesFloorList
+        // 選択した売り場のrawValueをSalesFloorShoppingListViewのsalesFloorRawValueに渡す
+        salesFloorShoppingListVC.salesFloorRawValue = salesFloorRawValue
         /// SalesFloorShoppingListViewにプッシュ遷移
         self.navigationController?.pushViewController(salesFloorShoppingListVC, animated: true)
     }
