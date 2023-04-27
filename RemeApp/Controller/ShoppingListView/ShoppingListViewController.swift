@@ -158,7 +158,16 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         let isChecked = !errandDataList[indexPath.row].isCheckBox
+        // Realmのトランザクションを開始
+        let realm = try! Realm()
+        realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
+        realm.add(errandDataList[indexPath.row], update: .modified)
+        do {
+            try realm.commitWrite()
+        } catch {
+            print("Error committing write transaction: \\(error)")
+        }
         sortErrandDataList()
         completionAlert()
         shoppingListTableView.reloadData()

@@ -36,7 +36,6 @@ class EditShoppingListViewController: UIViewController {
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = []
 
-
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -343,11 +342,18 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
         let realm = try! Realm()
         realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
+        realm.add(errandDataList[indexPath.row], update: .modified)
+        do {
+            try realm.commitWrite()
+        } catch {
+            print("Error committing write transaction: \\(error)")
+        }
         sortErrandDataList()
         editShoppingListTableView.reloadData()
     }
 }
 
+// 編集が終了した後にテーブルビューを再読み込みさせる処理
 extension EditShoppingListViewController: CreateNewItemViewControllerDelegate {
     func savedReload() {
         setErrandData()

@@ -176,7 +176,7 @@ extension CreateNewItemViewController {
         let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
         // numberOfItemPickerViewで選択された値を取得
         let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-
+        // データベースに保存
         let realm = try! Realm()
         try! realm.write {
             errandData.nameOfItem = nameOfItemTextField.text!

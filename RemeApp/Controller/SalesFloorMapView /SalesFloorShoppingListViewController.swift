@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 
 /// D-売り場の買い物リスト
 class SalesFloorShoppingListViewController: UIViewController {
@@ -17,7 +17,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - property
     /// お使いデータ
-    var selectedErrandDataList: [ErrandDataModel] = []
+    var errandDataList: [ErrandDataModel] = []
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortErrandDataList() {
-        selectedErrandDataList = selectedErrandDataList.sorted { (a, b) -> Bool in
+        errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
             } else {
@@ -47,7 +47,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     /// 全てのセルがチェックされている場合にアラートを表示する
     private func completionSalesFloorAlert() {
-        if selectedErrandDataList.allSatisfy({ $0.isCheckBox }) {
+        if errandDataList.allSatisfy({ $0.isCheckBox }) {
             let alertController = UIAlertController(title: "この売り場の買い物が完了しました！", message: nil,
                                                     preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -66,14 +66,14 @@ class SalesFloorShoppingListViewController: UIViewController {
 extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// salesFloorShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedErrandDataList.count
+        return errandDataList.count
     }
     /// salesFloorShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = salesFloorShoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
-            let errandDataModel: ErrandDataModel = selectedErrandDataList[indexPath.row]
+            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
             cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
                                  nameOfItem: errandDataModel.nameOfItem,
                                  numberOfItem: errandDataModel.numberOfItem,
@@ -93,7 +93,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
         let storyboard = UIStoryboard(name: "DetailSalesFloorShoppingListView", bundle: nil)
         let detailSalesFloorShoppingListViewController = storyboard.instantiateViewController(
             withIdentifier: "DetailSalesFloorShoppingListView") as! DetailSalesFloorShoppingListViewController
-        let errandData = selectedErrandDataList[indexPath.row]
+        let errandData = errandDataList[indexPath.row]
         detailSalesFloorShoppingListViewController.configurer(detail: errandData)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(detailSalesFloorShoppingListViewController, animated: true)
@@ -109,8 +109,16 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
     /// - テーブルビューを再読み込みして表示する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = salesFloorShoppingListTableView.indexPath(for: cell) else { return }
-        let isChecked = !selectedErrandDataList[indexPath.row].isCheckBox
-        selectedErrandDataList[indexPath.row].isCheckBox = isChecked
+        let isChecked = !errandDataList[indexPath.row].isCheckBox
+        // Realmのトランザクションを開始
+        let realm = try! Realm()
+        errandDataList[indexPath.row].isCheckBox = isChecked
+        realm.add(errandDataList[indexPath.row], update: .modified)
+        do {
+            try realm.commitWrite()
+        } catch {
+            print("Error committing write transaction: \\(error)")
+        }
         sortErrandDataList()
         completionSalesFloorAlert()
         salesFloorShoppingListTableView.reloadData()

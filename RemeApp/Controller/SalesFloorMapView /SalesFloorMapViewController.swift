@@ -285,7 +285,7 @@ class SalesFloorMapViewController: UIViewController {
         /// 引数に対応した売り場に該当するお使いデータをクロージャで抽出
         let salesFloorList = errandDataList.filter { $0.salesFloorRawValue == salesFloorRawValue }
         /// 抽出したお使いデータをSalesFloorShoppingListViewControllerのお使いデータに代入
-        salesFloorShoppingListVC.selectedErrandDataList = salesFloorList
+        salesFloorShoppingListVC.errandDataList = salesFloorList
         /// SalesFloorShoppingListViewにプッシュ遷移
         self.navigationController?.pushViewController(salesFloorShoppingListVC, animated: true)
     }
