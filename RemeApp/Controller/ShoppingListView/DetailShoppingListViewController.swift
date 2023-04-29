@@ -12,6 +12,10 @@ import RealmSwift
 class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
+    /// 画面と閉じて戻る
+    @IBAction func closeView(_ sender: Any) {
+        dismiss(animated: true)
+    }
     /// 商品名を表示
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 必要数を表示
@@ -42,13 +46,15 @@ class DetailShoppingListViewController: UIViewController {
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
+    var delegate: DetailShoppingListViewControllerDelegate?
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         // UIButtonの基本設定
         salesFloorTypeButton.setAppearance()
-        displayData()
         self.title = "詳細"
+        displayData()
     }
 
     // MARK: - func
@@ -139,4 +145,9 @@ class DetailShoppingListViewController: UIViewController {
             supplementLabel.text = supplementLabelText
         }
     }
+}
+
+// デリゲートプロトコルを追加
+protocol DetailShoppingListViewControllerDelegate{
+    func isDimmedViewEnabled(_ viewController: DetailShoppingListViewController)
 }

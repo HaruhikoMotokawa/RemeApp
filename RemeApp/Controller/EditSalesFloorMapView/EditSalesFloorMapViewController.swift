@@ -50,8 +50,7 @@ class EditSalesFloorMapViewController: UIViewController {
             try! realm.write {
                 realm.add(customSalesFloors)
             }
-            // 変更内容の通知を送信
-            NotificationCenter.default.post(name: .reloadTableView, object: nil)
+
             NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
             NotificationCenter.default.post(name: .updateButtonAppearance, object: nil)
             print("💀リセット実行💀")
@@ -79,7 +78,7 @@ class EditSalesFloorMapViewController: UIViewController {
             NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
         }
-        NotificationCenter.default.post(name: .reloadTableView, object: nil)
+
         NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
     }
 

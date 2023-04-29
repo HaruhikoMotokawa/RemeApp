@@ -155,9 +155,7 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderForLabelAllLabel()
-        exchangeAllSalesFloorButton()
-        NotificationCenter.default.addObserver(self, selector: #selector(exchangeAllSalesFloorButton),
-                                               name: .exchangeAllSalesFloorButton, object: nil)
+        setAllSalesFloorButton()
     }
 
     // MARK: - func
@@ -173,7 +171,7 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     /// - 各ボタンに売り場の名称を設定
     /// - 背景色の設定
     /// - 装飾の設定
-    @objc func exchangeAllSalesFloorButton() {
+    func setAllSalesFloorButton() {
         // - UserDefaultsに使用するキーを指定
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         // - UserDefaultsから設定を取得

@@ -155,19 +155,13 @@ class SalesFloorMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderAllLabel()
-       
         setCartView()
+        setErrandData()
+        exchangeAllSalesFloorButton()
         NotificationCenter.default.addObserver(self, selector: #selector(exchangeAllSalesFloorButton),
                                                name: .exchangeAllSalesFloorButton, object: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setErrandData()
-        exchangeAllSalesFloorButton()
-    }
-
-    
     // MARK: - func
 
     /// 保存されたお使いデータをセットする

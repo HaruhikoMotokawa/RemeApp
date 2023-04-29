@@ -90,6 +90,11 @@ class CreateNewItemViewController: UIViewController {
         supplementTextView.setAppearance()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
     // MARK: - func
     /// データソースとデリゲートをセット
     private func setDataSourceAndDelegate() {

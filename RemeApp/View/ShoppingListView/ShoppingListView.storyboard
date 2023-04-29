@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BtC-Oj-U4d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -17,9 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pmw-hl-DVM">
-                                <rect key="frame" x="0.0" y="103" width="430" height="746"/>
+                                <rect key="frame" x="0.0" y="150" width="430" height="699"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pw-KH-Mtd">
+                                <rect key="frame" x="0.0" y="103" width="430" height="47"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items/>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8x9-sd-6aX">
+                                <rect key="frame" x="154" y="115" width="122.33333333333331" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -27,10 +38,16 @@
                             <constraint firstItem="pmw-hl-DVM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2Ed-oh-Yy9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pmw-hl-DVM" secondAttribute="bottom" id="6Vm-6I-TDo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pmw-hl-DVM" secondAttribute="trailing" id="DnS-Mt-ajB"/>
-                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GJq-nd-cdd"/>
+                            <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="F6y-cf-4FD"/>
+                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="3pw-KH-Mtd" secondAttribute="bottom" id="QsO-RG-i49"/>
+                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Vn1-oK-KzV"/>
+                            <constraint firstItem="8x9-sd-6aX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nQO-5a-r5g"/>
+                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rSz-4t-wN6"/>
+                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="11" id="t2n-XC-blq"/>
+                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vzx-yr-nK9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="買い物リスト" id="71J-9S-fjx"/>
+                    <tabBarItem key="tabBarItem" title="買い物リスト" image="list.bullet.clipboard" catalog="system" id="i2Y-eK-2Nx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -39,26 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080.8" y="-2.2488755622188905"/>
-        </scene>
-        <!--買い物リスト-->
-        <scene sceneID="cRH-7X-ew9">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BtC-Oj-U4d" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="買い物リスト" image="list.bullet.clipboard" catalog="system" id="i2Y-eK-2Nx"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pJH-rp-Fj3">
-                        <rect key="frame" x="0.0" y="59" width="430" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="8zK-ui-TzN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xiD-sR-VmE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="141.59999999999999" y="-2.2488755622188905"/>
+            <point key="canvasLocation" x="1080" y="-2.5751072961373391"/>
         </scene>
     </scenes>
     <resources>

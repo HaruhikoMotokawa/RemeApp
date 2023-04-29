@@ -23,11 +23,12 @@ class EditShoppingListViewController: UIViewController {
 
     /// 新規作成ボタン
     @IBOutlet private weak var createNewItemButton: UIButton!
-    /// 「G-品目新規作成」画面にモール遷移
+    /// 「G-品目新規作成」画面にモールダ遷移
     @IBAction private func goCreateNewItemView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "CreateNewItemView", bundle: nil)
         let createNewItemVC = storyboard.instantiateViewController(
             withIdentifier: "CreateNewItemView") as! CreateNewItemViewController
+        createNewItemVC.modalPresentationStyle = .fullScreen
         createNewItemVC.delegate = self
         self.present(createNewItemVC, animated: true)
     }
@@ -43,9 +44,6 @@ class EditShoppingListViewController: UIViewController {
         setTableVIew()
         setAppearance(shareShoppingListButton)
         setAppearance(createNewItemButton)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
-                                               name: .reloadTableView, object: nil)
-        savedReload()
     }
 
 
@@ -63,8 +61,6 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.delegate = self
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                            forCellReuseIdentifier: "ShoppingListTableViewCell")
-
-
     }
 
     /// 保存されたお使いデータをセットする
@@ -92,11 +88,6 @@ class EditShoppingListViewController: UIViewController {
         button.addShadow()
     }
 
-    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
-    @objc func reloadTableView() {
-        editShoppingListTableView.reloadData()
-    }
-
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     /// - NotificationCenterの受診をセット
     /// - UserDefaultsに使用するキーを指定
@@ -105,10 +96,6 @@ class EditShoppingListViewController: UIViewController {
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortErrandDataList() {
-        NotificationCenter.default.addObserver(self, selector: #selector(sortLeftErrandDataList),
-                                               name: .sortLeftErrandDataList, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sortRightErrandDataList),
-                                               name: .sortRightErrandDataList, object: nil)
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         if shoppingStartPositionInt == 0 {
@@ -118,10 +105,10 @@ class EditShoppingListViewController: UIViewController {
         }
     }
 
-    /// NotificationCenterによって買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortLeftErrandDataList() {
+    func sortLeftErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -132,10 +119,10 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.reloadData()
     }
 
-    /// NotificationCenterによって買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortRightErrandDataList() {
+    func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -357,6 +344,7 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
 extension EditShoppingListViewController: CreateNewItemViewControllerDelegate {
     func savedReload() {
         setErrandData()
+        sortErrandDataList()
         editShoppingListTableView.reloadData()
         print("🤔")
     }

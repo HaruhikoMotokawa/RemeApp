@@ -28,12 +28,14 @@ class SalesFloorShoppingListViewController: UIViewController {
         salesFloorShoppingListTableView.delegate = self
         salesFloorShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                                  forCellReuseIdentifier: "ShoppingListTableViewCell")
-        setSelectedErrandDataList(salesFloorRawValue: salesFloorRawValue)
-        sortErrandDataList()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView),
-                                               name: .reloadTableView, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setSelectedErrandDataList(salesFloorRawValue: salesFloorRawValue)
+        sortErrandDataList()
+        salesFloorShoppingListTableView.reloadData()
+    }
 
     // MARK: - func
 
@@ -65,10 +67,6 @@ class SalesFloorShoppingListViewController: UIViewController {
         }
     }
 
-    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
-    @objc func reloadTableView() {
-        salesFloorShoppingListTableView.reloadData()
-    }
 }
 
 // MARK: - UITableViewDataSource&Delegate
@@ -99,13 +97,15 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailSalesFloorShoppingListView", bundle: nil)
-        let detailSalesFloorShoppingListViewController = storyboard.instantiateViewController(
-            withIdentifier: "DetailSalesFloorShoppingListView") as! DetailSalesFloorShoppingListViewController
+        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
+        let detailShoppingListViewController = storyboard.instantiateViewController(
+            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let errandData = errandDataList[indexPath.row]
-        detailSalesFloorShoppingListViewController.configurer(detail: errandData)
+        detailShoppingListViewController.configurer(detail: errandData)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(detailSalesFloorShoppingListViewController, animated: true)
+        detailShoppingListViewController.modalPresentationStyle = .overCurrentContext // 重なり合うように表示
+        detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
+        self.present(detailShoppingListViewController, animated: true)
     }
 }
 

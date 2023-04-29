@@ -25,15 +25,13 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
-
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .reloadTableView, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setErrandData()
-        shoppingListTableView.reloadData()
         sortErrandDataList()
+        shoppingListTableView.reloadData()
     }
     // MARK: - func
 
@@ -44,23 +42,13 @@ class ShoppingListViewController: UIViewController {
         errandDataList = Array(result)
     }
 
-    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
-    @objc func reloadTableView() {
-        shoppingListTableView.reloadData()
-    }
-
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - NotificationCenterの受診をセット
     /// - UserDefaultsに使用するキーを指定
     /// - UserDefaultsから設定を取得
     /// -  画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortErrandDataList() {
-        NotificationCenter.default.addObserver(self, selector: #selector(sortLeftErrandDataList),
-                                               name: .sortLeftErrandDataList, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sortRightErrandDataList),
-                                               name: .sortRightErrandDataList, object: nil)
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         if shoppingStartPositionInt == 0 {
@@ -70,10 +58,10 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
-    /// NotificationCenterによって買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortLeftErrandDataList() {
+    func sortLeftErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -84,10 +72,10 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.reloadData()
     }
 
-    /// NotificationCenterによって買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortRightErrandDataList() {
+    func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -144,7 +132,10 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         let errandData = errandDataList[indexPath.row]
         detailShoppingListViewController.configurer(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
+        detailShoppingListViewController.modalPresentationStyle = .overCurrentContext // 重なり合うように表示
+        detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
+
+        self.present(detailShoppingListViewController, animated: true)
     }
 }
 
@@ -173,6 +164,3 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         shoppingListTableView.reloadData()
     }
 }
-
-
-
