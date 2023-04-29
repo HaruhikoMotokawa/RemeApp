@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nlH-X8-1vy">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,23 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8I-dR-VXl">
+                                <rect key="frame" x="0.0" y="59" width="375" height="44"/>
+                                <items/>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップ編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsq-xB-oYB">
+                                <rect key="frame" x="144.33333333333334" y="69" width="86.666666666666657" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Jh-Lq4">
-                                <rect key="frame" x="0.0" y="64" width="375" height="887"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="886"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="903"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="adu-CD-HoY" userLabel="使用マップ設定">
-                                                <rect key="frame" x="20" y="30" width="335" height="31"/>
+                                                <rect key="frame" x="20" y="10" width="335" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用マップ設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeC-E7-5H9">
-                                                        <rect key="frame" x="0.0" y="0.0" width="143" height="31"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="31"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9eg-RI-jeQ">
-                                                        <rect key="frame" x="173" y="0.0" width="162" height="32"/>
+                                                        <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="32"/>
                                                         <segments>
                                                             <segment title="First"/>
                                                             <segment title="Second"/>
@@ -48,16 +57,16 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w8f-By-umP" userLabel="買い物ルート設定">
-                                                <rect key="frame" x="20" y="91" width="335" height="31"/>
+                                                <rect key="frame" x="20" y="71" width="335" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物ルート設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khG-x1-CFW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="163.33333333333334" height="31"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PEo-G0-cOh">
-                                                        <rect key="frame" x="173.5" y="0.0" width="161.5" height="32"/>
+                                                        <rect key="frame" x="173.33333333333337" y="0.0" width="161.66666666666663" height="32"/>
                                                         <segments>
                                                             <segment title="First"/>
                                                             <segment title="Second"/>
@@ -72,7 +81,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カスタムマップ編集" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWa-11-ieZ">
-                                                <rect key="frame" x="20" y="152" width="335" height="31"/>
+                                                <rect key="frame" x="20" y="132" width="335" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="gH0-YL-hPy"/>
                                                 </constraints>
@@ -81,7 +90,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HnL-L9-zHw" userLabel="スワイプ説明">
-                                                <rect key="frame" x="20" y="193" width="335" height="50"/>
+                                                <rect key="frame" x="20" y="173" width="335" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップを右スワイプすると　　　　　　　　デフォルトマップが見れます" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPI-m0-7Sv">
                                                         <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
@@ -90,7 +99,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.left.arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="10t-TK-0li">
-                                                        <rect key="frame" x="285" y="-1" width="50" height="52"/>
+                                                        <rect key="frame" x="285" y="-0.3333333333333357" width="50" height="51.333333333333336"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="3do-ZL-nvz"/>
@@ -103,9 +112,9 @@
                                                 </constraints>
                                             </stackView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iy-u0-WOP">
-                                                <rect key="frame" x="0.0" y="263" width="375" height="623"/>
+                                                <rect key="frame" x="0.0" y="243" width="375" height="650"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="623" id="dPX-LB-5ki"/>
+                                                    <constraint firstAttribute="width" secondItem="1iy-u0-WOP" secondAttribute="height" multiplier="15:26" id="m1p-h5-kac"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="8kV-lO-4LY" kind="embed" id="Q65-gy-CwS"/>
@@ -118,11 +127,11 @@
                                             <constraint firstItem="oWa-11-ieZ" firstAttribute="top" secondItem="w8f-By-umP" secondAttribute="bottom" constant="30" id="Afx-HA-7e9"/>
                                             <constraint firstItem="1iy-u0-WOP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" id="Bvd-7c-pue"/>
                                             <constraint firstItem="w8f-By-umP" firstAttribute="top" secondItem="adu-CD-HoY" secondAttribute="bottom" constant="30" id="C1N-vc-4yi"/>
-                                            <constraint firstItem="adu-CD-HoY" firstAttribute="top" secondItem="Kub-xc-OWf" secondAttribute="top" constant="30" id="FKS-2u-sB4"/>
+                                            <constraint firstItem="adu-CD-HoY" firstAttribute="top" secondItem="Kub-xc-OWf" secondAttribute="top" constant="10" id="FKS-2u-sB4"/>
                                             <constraint firstItem="1iy-u0-WOP" firstAttribute="top" secondItem="HnL-L9-zHw" secondAttribute="bottom" constant="20" id="KK3-8F-ZRA"/>
                                             <constraint firstItem="oWa-11-ieZ" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="LJJ-ND-PJs"/>
                                             <constraint firstAttribute="trailing" secondItem="1iy-u0-WOP" secondAttribute="trailing" id="Oa6-nj-ntZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="1iy-u0-WOP" secondAttribute="bottom" id="YKs-kc-ROA"/>
+                                            <constraint firstAttribute="bottom" secondItem="1iy-u0-WOP" secondAttribute="bottom" constant="10" id="YKs-kc-ROA"/>
                                             <constraint firstAttribute="trailing" secondItem="oWa-11-ieZ" secondAttribute="trailing" constant="20" id="Yio-VO-xXT"/>
                                             <constraint firstAttribute="trailing" secondItem="HnL-L9-zHw" secondAttribute="trailing" constant="20" id="btl-6L-luj"/>
                                             <constraint firstAttribute="trailing" secondItem="adu-CD-HoY" secondAttribute="trailing" constant="20" id="fEE-U0-b1f"/>
@@ -146,25 +155,18 @@
                         <viewLayoutGuide key="safeArea" id="la6-Xg-duh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="P8I-dR-VXl" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="3Y1-g3-59W"/>
                             <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="WfJ-Jh-Lq4" secondAttribute="bottom" id="6ZU-ZQ-7Ue"/>
+                            <constraint firstItem="rsq-xB-oYB" firstAttribute="centerX" secondItem="lEc-I8-uCO" secondAttribute="centerX" id="La6-lA-gew"/>
                             <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="WfJ-Jh-Lq4" secondAttribute="trailing" id="RI9-B9-rki"/>
-                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" id="ePE-bX-pu5"/>
+                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="P8I-dR-VXl" secondAttribute="bottom" id="bAr-ga-nh4"/>
+                            <constraint firstItem="P8I-dR-VXl" firstAttribute="trailing" secondItem="la6-Xg-duh" secondAttribute="trailing" id="eVx-hi-62W"/>
                             <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="gzz-Mv-dWC"/>
+                            <constraint firstItem="rsq-xB-oYB" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" constant="10" id="obF-OH-nz8"/>
+                            <constraint firstItem="P8I-dR-VXl" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" id="pTi-EA-dQ4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="売り場マップ編集" id="mbw-WJ-4KE">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="chD-0W-c6N">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="VWI-WB-x0y">
-                                <rect key="frame" x="265.5" y="5" width="93.5" height="34.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="リセット"/>
-                                <connections>
-                                    <action selector="resetSalesFloorSettings:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BSd-uP-OTH"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="売り場マップ編集" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="wwt-U3-PPD"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
@@ -174,26 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066.4000000000001" y="-2.6986506746626691"/>
-        </scene>
-        <!--売り場マップ編集-->
-        <scene sceneID="ayc-Oh-k1J">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nlH-X8-1vy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="売り場マップ編集" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="wwt-U3-PPD"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1z5-aB-S8t">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="bCO-et-seO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SKJ-76-PP6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1033" y="-3"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="Tx9-UN-LhK">

@@ -69,7 +69,7 @@ class EditItemViewController: UIViewController {
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
     /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
-    private let unitArray: Array<String> = ["個", "本", "袋", "グラム", "パック"]
+    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
     /// 写真のURLパス
     private var imageFilePath: URL?
     /// nameOfItemTextFieldに表示するテキスト
