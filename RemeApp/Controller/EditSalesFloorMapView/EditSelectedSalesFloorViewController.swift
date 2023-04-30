@@ -276,7 +276,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
                                                     "編集内容を破棄してもよろしいですか？", preferredStyle: .alert)
         // はいでEditSalesFloorMapViewに戻る
         let okAction = UIAlertAction(title: "はい", style: .default, handler:  { (action) in
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
         })
         // キャンセル、何もしない
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)

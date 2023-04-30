@@ -18,13 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト編集" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwj-Md-Zw5">
-                                <rect key="frame" x="118" y="30" width="139" height="21"/>
+                                <rect key="frame" x="118" y="30" width="139" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3S-mX-kxR">
+                                <rect key="frame" x="272" y="25" width="98" height="35.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="setEditing:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5V4-Ap-BXe"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dg6-dk-nnA">
-                                <rect key="frame" x="0.0" y="61" width="375" height="557"/>
+                                <rect key="frame" x="0.0" y="60.5" width="375" height="557.5"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.94901960780000005" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wy-wG-LSR">
@@ -45,14 +53,18 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="H3S-mX-kxR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="134-8f-6rE"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="zwj-Md-Zw5" secondAttribute="bottom" constant="10" id="J77-Th-4wj"/>
+                            <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="H3S-mX-kxR" secondAttribute="bottom" id="MF3-8f-U8x"/>
                             <constraint firstItem="zwj-Md-Zw5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="RWO-rK-mfh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="H3S-mX-kxR" secondAttribute="trailing" constant="5" id="TAX-fN-3Q6"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="YZm-cb-OLJ"/>
                             <constraint firstItem="zwj-Md-Zw5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Yvl-5B-lnH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Wy-wG-LSR" secondAttribute="trailing" constant="30" id="aMh-qf-r3y"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="chD-Y2-IsN"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXf-o2-UU1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Wy-wG-LSR" secondAttribute="bottom" constant="30" id="ojL-Fo-yYx"/>
+                            <constraint firstItem="H3S-mX-kxR" firstAttribute="leading" secondItem="zwj-Md-Zw5" secondAttribute="trailing" constant="15" id="wZS-uf-rNK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="買い物リスト編集" image="pencil.circle" catalog="system" selectedImage="pencil.circle" id="RWg-p1-Lm8"/>
@@ -60,6 +72,7 @@
                     <connections>
                         <outlet property="createNewItemButton" destination="6Wy-wG-LSR" id="iT2-SK-iYY"/>
                         <outlet property="editShoppingListTableView" destination="Dg6-dk-nnA" id="AEE-yz-b6L"/>
+                        <outlet property="multipleDeletionsButton" destination="H3S-mX-kxR" id="E6B-Ph-uSs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

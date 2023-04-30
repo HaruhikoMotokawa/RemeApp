@@ -12,6 +12,10 @@ import RealmSwift
 class EditShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+
+    /// 複数削除ボタン
+    @IBOutlet weak var multipleDeletionsButton: UIButton!
+
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
 
@@ -31,13 +35,15 @@ class EditShoppingListViewController: UIViewController {
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = []
 
+    var isEditingMode: Bool = false
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationItem()
         setTableVIew()
         setAppearance(createNewItemButton)
-
+        multipleDeletionsButton.setTitle("複数削除", for: .normal)
+        multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 
 
@@ -62,12 +68,6 @@ class EditShoppingListViewController: UIViewController {
         let realm = try! Realm()
         let result = realm.objects(ErrandDataModel.self)
         errandDataList = Array(result)
-    }
-
-    /// rightBarButtonItems関連の設定
-    private func setNavigationItem() {
-        navigationItem.rightBarButtonItems = [editButtonItem]
-        navigationItem.rightBarButtonItem?.title = "複数削除"
     }
 
     /// ボタンの背景色を変更するメソッド
@@ -128,14 +128,17 @@ class EditShoppingListViewController: UIViewController {
     }
 
     // MARK: - 編集モードに関する処理
-    /// 編集モードの設定==rightBarButtonItemをタップした時の動作
+    /// 編集モードの設定==multipleDeletionsButtonをタップした時の動作
+    @objc func buttonTapped() {
+        isEditingMode = !isEditingMode
+        setEditing(isEditingMode, animated: true)
+    }
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         // 編集開始
-
         if editing {
-            // rightBarButtonItemのタイトルを変更
-            editButtonItem.title = "完了"
+            // multipleDeletionsButtonのタイトルを変更
+            multipleDeletionsButton.setTitle("完了", for: .normal)
 
             for cell in editShoppingListTableView.visibleCells {
                 if let shoppingListCell = cell as? ShoppingListTableViewCellController {
@@ -150,9 +153,8 @@ class EditShoppingListViewController: UIViewController {
             }
             // 編集終了
         } else {
-            // rightBarButtonItemのタイトルを変更
-            editButtonItem.title = "複数削除"
-
+            // multipleDeletionsButtonのタイトルを変更
+            multipleDeletionsButton.setTitle("複数削除", for: .normal)
             for cell in editShoppingListTableView.visibleCells {
                 if let shoppingListCell = cell as? ShoppingListTableViewCellController {
                     //アニメーションの設定
