@@ -19,12 +19,12 @@ class EditShoppingListViewController: UIViewController {
     @IBOutlet private weak var createNewItemButton: UIButton!
     /// 「G-品目新規作成」画面にモールダ遷移
     @IBAction private func goCreateNewItemView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "CreateNewItemView", bundle: nil)
-        let createNewItemVC = storyboard.instantiateViewController(
-            withIdentifier: "CreateNewItemView") as! CreateNewItemViewController
-        createNewItemVC.modalPresentationStyle = .fullScreen
-        createNewItemVC.delegate = self
-        self.present(createNewItemVC, animated: true)
+        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
+        let editItemVC = storyboard.instantiateViewController(
+            withIdentifier: "EditItemView") as! EditItemViewController
+        editItemVC.modalPresentationStyle = .fullScreen
+        editItemVC.delegate = self
+        self.present(editItemVC, animated: true)
     }
 
     // MARK: - property
@@ -235,21 +235,21 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                 _ = self.editShoppingListTableView.cellForRow(at: indexPath)
                 // 選択肢にチェックが一つでも入ってたら「削除」を表示する。
                 self.editButtonItem.title = "削除"
-
             } else {
                 // 何もチェックされていないときは完了を表示
                 self.editButtonItem.title = "完了"
             }
         } else {
-                let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
-                let editItemVC = storyboard.instantiateViewController(
-                    withIdentifier: "EditItemView") as! EditItemViewController
-                let errandData = errandDataList[indexPath.row]
-                editItemVC.configurer(detail: errandData)
-                editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-                self.navigationController?.pushViewController(editItemVC, animated: true)
-            }
+            let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
+            let editItemVC = storyboard.instantiateViewController(
+                withIdentifier: "EditItemView") as! EditItemViewController
+            let errandData = errandDataList[indexPath.row]
+            editItemVC.configurer(detail: errandData)
+            editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+            editItemVC.delegate = self
+            self.present(editItemVC, animated: true)
         }
+    }
 
     /// スワイプして削除する処理
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
@@ -335,7 +335,7 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
 }
 
 // 編集が終了した後にテーブルビューを再読み込みさせる処理
-extension EditShoppingListViewController: CreateNewItemViewControllerDelegate {
+extension EditShoppingListViewController: EditItemViewControllerDelegate {
     func savedReload() {
         setErrandData()
         sortErrandDataList()
