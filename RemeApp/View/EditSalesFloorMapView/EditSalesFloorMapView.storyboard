@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="103" width="375" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="903"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="952.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="adu-CD-HoY" userLabel="使用マップ設定">
                                                 <rect key="frame" x="20" y="10" width="335" height="31"/>
@@ -89,8 +89,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFV-Ve-ARN">
+                                                <rect key="frame" x="30" y="193" width="315" height="34.333333333333343"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="カスタムマップ設定リセット"/>
+                                                <connections>
+                                                    <action selector="resetCustomMap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SZ9-aP-X7u"/>
+                                                </connections>
+                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HnL-L9-zHw" userLabel="スワイプ説明">
-                                                <rect key="frame" x="20" y="173" width="335" height="50"/>
+                                                <rect key="frame" x="20" y="257.33333333333331" width="335" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップを右スワイプすると　　　　　　　　デフォルトマップが見れます" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPI-m0-7Sv">
                                                         <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
@@ -112,7 +122,7 @@
                                                 </constraints>
                                             </stackView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iy-u0-WOP">
-                                                <rect key="frame" x="0.0" y="243" width="375" height="650"/>
+                                                <rect key="frame" x="10" y="327.33333333333331" width="355" height="615.33333333333348"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1iy-u0-WOP" secondAttribute="height" multiplier="15:26" id="m1p-h5-kac"/>
                                                 </constraints>
@@ -122,15 +132,17 @@
                                             </containerView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="HnL-L9-zHw" firstAttribute="top" secondItem="oWa-11-ieZ" secondAttribute="bottom" constant="10" id="2Q1-1M-4WD"/>
+                                            <constraint firstItem="HnL-L9-zHw" firstAttribute="top" secondItem="bFV-Ve-ARN" secondAttribute="bottom" constant="30" id="2Q1-1M-4WD"/>
                                             <constraint firstItem="HnL-L9-zHw" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="AZ0-gX-1ZQ"/>
                                             <constraint firstItem="oWa-11-ieZ" firstAttribute="top" secondItem="w8f-By-umP" secondAttribute="bottom" constant="30" id="Afx-HA-7e9"/>
-                                            <constraint firstItem="1iy-u0-WOP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" id="Bvd-7c-pue"/>
+                                            <constraint firstItem="1iy-u0-WOP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="10" id="Bvd-7c-pue"/>
                                             <constraint firstItem="w8f-By-umP" firstAttribute="top" secondItem="adu-CD-HoY" secondAttribute="bottom" constant="30" id="C1N-vc-4yi"/>
                                             <constraint firstItem="adu-CD-HoY" firstAttribute="top" secondItem="Kub-xc-OWf" secondAttribute="top" constant="10" id="FKS-2u-sB4"/>
+                                            <constraint firstItem="bFV-Ve-ARN" firstAttribute="top" secondItem="oWa-11-ieZ" secondAttribute="bottom" constant="30" id="JZ8-Tg-j6Y"/>
                                             <constraint firstItem="1iy-u0-WOP" firstAttribute="top" secondItem="HnL-L9-zHw" secondAttribute="bottom" constant="20" id="KK3-8F-ZRA"/>
                                             <constraint firstItem="oWa-11-ieZ" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="LJJ-ND-PJs"/>
-                                            <constraint firstAttribute="trailing" secondItem="1iy-u0-WOP" secondAttribute="trailing" id="Oa6-nj-ntZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="1iy-u0-WOP" secondAttribute="trailing" constant="10" id="Oa6-nj-ntZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="bFV-Ve-ARN" secondAttribute="trailing" constant="30" id="QtH-v2-mYL"/>
                                             <constraint firstAttribute="bottom" secondItem="1iy-u0-WOP" secondAttribute="bottom" constant="10" id="YKs-kc-ROA"/>
                                             <constraint firstAttribute="trailing" secondItem="oWa-11-ieZ" secondAttribute="trailing" constant="20" id="Yio-VO-xXT"/>
                                             <constraint firstAttribute="trailing" secondItem="HnL-L9-zHw" secondAttribute="trailing" constant="20" id="btl-6L-luj"/>
@@ -138,13 +150,14 @@
                                             <constraint firstItem="adu-CD-HoY" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="g0n-Ju-zWB"/>
                                             <constraint firstAttribute="trailing" secondItem="w8f-By-umP" secondAttribute="trailing" constant="20" id="nHk-cq-WDR"/>
                                             <constraint firstItem="w8f-By-umP" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="20" id="oix-f9-dnt"/>
+                                            <constraint firstItem="bFV-Ve-ARN" firstAttribute="leading" secondItem="Kub-xc-OWf" secondAttribute="leading" constant="30" id="voR-Wg-9Kp"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Kub-xc-OWf" secondAttribute="bottom" constant="10" id="OpM-2a-QSk"/>
                                     <constraint firstAttribute="trailing" secondItem="Kub-xc-OWf" secondAttribute="trailing" id="aJF-jo-hWB"/>
                                     <constraint firstItem="Kub-xc-OWf" firstAttribute="leading" secondItem="WfJ-Jh-Lq4" secondAttribute="leading" id="aaC-j5-YVR"/>
-                                    <constraint firstAttribute="bottom" secondItem="Kub-xc-OWf" secondAttribute="bottom" id="chc-vf-lxM"/>
                                     <constraint firstItem="Kub-xc-OWf" firstAttribute="width" secondItem="WfJ-Jh-Lq4" secondAttribute="width" id="d0g-X0-jjX"/>
                                     <constraint firstItem="Kub-xc-OWf" firstAttribute="top" secondItem="WfJ-Jh-Lq4" secondAttribute="top" id="rIZ-Ha-rPg"/>
                                 </constraints>
@@ -170,6 +183,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="containerView" destination="1iy-u0-WOP" id="dss-sI-sT8"/>
+                        <outlet property="resetButton" destination="bFV-Ve-ARN" id="nwz-Qf-cd2"/>
                         <outlet property="shoppingStartPositionSelector" destination="PEo-G0-cOh" id="ZlY-Zy-6ZH"/>
                         <outlet property="useSalesFloorMapSelector" destination="9eg-RI-jeQ" id="GXy-fN-utL"/>
                     </connections>

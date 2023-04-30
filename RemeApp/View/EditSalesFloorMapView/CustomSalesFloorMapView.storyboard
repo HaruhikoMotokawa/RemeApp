@@ -29,7 +29,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5lN-F3-6Be" userLabel="AとBとC">
-                                <rect key="frame" x="0.0" y="40.5" width="375" height="558.5"/>
+                                <rect key="frame" x="0.0" y="40.5" width="375" height="553.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RyJ-KA-oSW" userLabel="売り場A">
                                         <rect key="frame" x="5" y="0.0" width="365" height="60"/>
@@ -85,13 +85,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q82-7i-tFs" userLabel="BとC">
-                                        <rect key="frame" x="5" y="70" width="365" height="488.5"/>
+                                        <rect key="frame" x="5" y="70" width="365" height="483.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-Gs-Qk8" userLabel="売り場B">
-                                                <rect key="frame" x="0.0" y="0.0" width="365" height="239.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="237"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjW-cr-INt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="239.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
@@ -107,7 +107,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRt-5C-I0k">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="239.5"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
@@ -123,7 +123,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kt1-W0-Dao">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="239.5"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
@@ -139,7 +139,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tA-PX-L6Z">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="239.5"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
@@ -155,7 +155,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmv-xS-lmU">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="239.5"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
@@ -171,7 +171,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv5-6q-3Pv">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="239.5"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
@@ -187,7 +187,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vR-QM-Gmz">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="239.5"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="237"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
@@ -205,10 +205,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-bd-FuC" userLabel="売り場C">
-                                                <rect key="frame" x="0.0" y="249.5" width="365" height="239"/>
+                                                <rect key="frame" x="0.0" y="247" width="365" height="236.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9E-Jw-DLb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="239"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
@@ -224,7 +224,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofx-ei-hrY">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="239"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
@@ -240,7 +240,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFf-0z-Lfb">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="239"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
@@ -256,7 +256,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyf-FL-ImJ">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="239"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
@@ -272,7 +272,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-8w-OZf">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="239"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
@@ -288,7 +288,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88l-IE-3t0">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="239"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
@@ -304,7 +304,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-zZ-KEk">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="239"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="236.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
@@ -339,7 +339,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-H0-j50" userLabel="レジと出入り口">
-                                <rect key="frame" x="0.0" y="609" width="375" height="58"/>
+                                <rect key="frame" x="0.0" y="604" width="375" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytJ-vg-BFV">
                                         <rect key="frame" x="100" y="0.0" width="175" height="24"/>
@@ -373,10 +373,10 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tdx-Mj-P3t">
-                                <rect key="frame" x="5" y="604.5" width="70" height="52"/>
+                                <rect key="frame" x="5" y="599.5" width="70" height="57"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bok-Ud-2u7">
-                                <rect key="frame" x="300" y="604.5" width="70" height="52"/>
+                                <rect key="frame" x="300" y="599.5" width="70" height="57"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GFh-Nv-p8o"/>
@@ -387,7 +387,7 @@
                             <constraint firstItem="Zlz-Ni-fD8" firstAttribute="top" secondItem="WS3-es-oXS" secondAttribute="top" constant="10" id="44K-CA-6QT"/>
                             <constraint firstItem="dtA-Ku-jIj" firstAttribute="centerX" secondItem="WS3-es-oXS" secondAttribute="centerX" constant="90" id="4ON-2X-wtJ"/>
                             <constraint firstItem="Bok-Ud-2u7" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="300" id="6kT-OI-8Of"/>
-                            <constraint firstAttribute="bottom" secondItem="ypc-H0-j50" secondAttribute="bottom" id="8AS-BD-TUU"/>
+                            <constraint firstAttribute="bottom" secondItem="ypc-H0-j50" secondAttribute="bottom" constant="5" id="8AS-BD-TUU"/>
                             <constraint firstItem="Tdx-Mj-P3t" firstAttribute="leading" secondItem="GFh-Nv-p8o" secondAttribute="leading" constant="5" id="8Ry-MX-Oiw"/>
                             <constraint firstItem="5lN-F3-6Be" firstAttribute="leading" secondItem="WS3-es-oXS" secondAttribute="leading" id="AKL-2l-zLr"/>
                             <constraint firstItem="Tdx-Mj-P3t" firstAttribute="top" secondItem="5lN-F3-6Be" secondAttribute="bottom" constant="5" id="Eg8-wJ-T10"/>

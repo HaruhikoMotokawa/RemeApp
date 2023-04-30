@@ -307,9 +307,8 @@ class EditSelectedSalesFloorViewController: UIViewController {
             }
             // 変更を売り場マップに送信
             NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
-
             // 画面を閉じて前画面に戻る
-            self.navigationController?.popViewController(animated: true)
+            dismiss(animated: true)
         }
     }
 

@@ -286,7 +286,7 @@ class CustomSalesFloorMapViewController: UIViewController {
         if let selectedFloor = selectedFloor {
             editSelectedSalesFloorVC.configurer(detail: selectedFloor)
             // EditSelectedSalesFloorViewにプッシュ遷移
-            self.navigationController?.pushViewController(editSelectedSalesFloorVC, animated: true)
+            self.present(editSelectedSalesFloorVC, animated: true)
         }
     }
 }

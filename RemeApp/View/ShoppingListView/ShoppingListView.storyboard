@@ -20,11 +20,6 @@
                                 <rect key="frame" x="0.0" y="147" width="430" height="702"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pw-KH-Mtd">
-                                <rect key="frame" x="0.0" y="103" width="430" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items/>
-                            </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8x9-sd-6aX">
                                 <rect key="frame" x="163" y="115" width="104" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -39,12 +34,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pmw-hl-DVM" secondAttribute="bottom" id="6Vm-6I-TDo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pmw-hl-DVM" secondAttribute="trailing" id="DnS-Mt-ajB"/>
                             <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="F6y-cf-4FD"/>
-                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="3pw-KH-Mtd" secondAttribute="bottom" id="QsO-RG-i49"/>
-                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Vn1-oK-KzV"/>
                             <constraint firstItem="8x9-sd-6aX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nQO-5a-r5g"/>
-                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rSz-4t-wN6"/>
                             <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="11" id="t2n-XC-blq"/>
-                            <constraint firstItem="3pw-KH-Mtd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vzx-yr-nK9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="買い物リスト" image="list.bullet.clipboard" catalog="system" id="i2Y-eK-2Nx"/>

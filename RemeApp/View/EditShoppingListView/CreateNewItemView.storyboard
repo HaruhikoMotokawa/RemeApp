@@ -17,13 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rtu-z2-TOB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="barTintColor" systemColor="systemBackgroundColor"/>
-                                <items>
-                                    <navigationItem title="品目新規作成" id="rcW-c6-UOj"/>
-                                </items>
-                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品目新規作成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZr-Ke-uuS">
+                                <rect key="frame" x="135.5" y="30" width="104" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PbW-xU-eP7" userLabel="品目名">
                                 <rect key="frame" x="10" y="74" width="355" height="34"/>
                                 <subviews>
@@ -235,13 +234,12 @@
                             <constraint firstItem="6cx-Oj-M3S" firstAttribute="top" secondItem="PbW-xU-eP7" secondAttribute="bottom" constant="10" id="07o-6h-v08"/>
                             <constraint firstItem="PbW-xU-eP7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="2bV-c1-lD2"/>
                             <constraint firstItem="bYf-74-CS5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="33c-kG-NK2"/>
-                            <constraint firstItem="Rtu-z2-TOB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="CK6-Xb-msK"/>
+                            <constraint firstItem="OZr-Ke-uuS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="A7C-qF-j5I"/>
+                            <constraint firstItem="OZr-Ke-uuS" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="INn-3i-QUY"/>
                             <constraint firstItem="bYf-74-CS5" firstAttribute="top" secondItem="6cx-Oj-M3S" secondAttribute="bottom" constant="10" id="JFR-JZ-2Vl"/>
-                            <constraint firstItem="Rtu-z2-TOB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="O36-MZ-Rai"/>
-                            <constraint firstItem="Rtu-z2-TOB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="VZq-qF-lNT"/>
+                            <constraint firstItem="PbW-xU-eP7" firstAttribute="top" secondItem="OZr-Ke-uuS" secondAttribute="bottom" constant="23.5" id="Y4V-V3-mmi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bYf-74-CS5" secondAttribute="trailing" constant="10" id="bth-Q5-Brk"/>
                             <constraint firstItem="6cx-Oj-M3S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="hGc-8s-0t0"/>
-                            <constraint firstItem="PbW-xU-eP7" firstAttribute="top" secondItem="Rtu-z2-TOB" secondAttribute="bottom" constant="10" id="hu4-QJ-UcF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PbW-xU-eP7" secondAttribute="trailing" constant="10" id="k5G-yp-Y8c"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bYf-74-CS5" secondAttribute="bottom" constant="10" id="sD7-nX-To5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6cx-Oj-M3S" secondAttribute="trailing" constant="10" id="sfk-oa-Vwe"/>

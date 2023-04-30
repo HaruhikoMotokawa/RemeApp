@@ -15,12 +15,6 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
 
-    /// 買い物リストの共有ボタン
-    @IBOutlet private weak var shareShoppingListButton: UIButton!
-    /// 買い物リストを共有するアクション
-    @IBAction private func shareShoppingList(_ sender: Any) {
-    }
-
     /// 新規作成ボタン
     @IBOutlet private weak var createNewItemButton: UIButton!
     /// 「G-品目新規作成」画面にモールダ遷移
@@ -42,8 +36,8 @@ class EditShoppingListViewController: UIViewController {
         super.viewDidLoad()
         setNavigationItem()
         setTableVIew()
-        setAppearance(shareShoppingListButton)
         setAppearance(createNewItemButton)
+
     }
 
 

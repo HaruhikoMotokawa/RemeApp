@@ -12,10 +12,49 @@ import RealmSwift
 class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+    /// 使用する売り場マップのセレクター
+    @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
+    /// 使用する売り場マップを変更するメソッド
+    @IBAction private func changeSalesFloorMap(_ sender: Any) {
+        // もしもセグメントが０だったら売り場の設定をカスタムにする
+        if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
+            saveUseSalesFloorMap(type: SalesFloorMapType.custom)
+            NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
+            NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら売り場の設定をデフォルトにする
+        } else {
+            saveUseSalesFloorMap(type: SalesFloorMapType.default)
+            NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
+            NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
+        }
+
+        NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
+    }
+
+    /// 買い物の開始位置を決めるセレクター
+    @IBOutlet private weak var shoppingStartPositionSelector: UISegmentedControl!
+    /// 買い物の開始位置を変更するメソッド
+    @IBAction private func changeShoppingStartPosition(_ sender: UISegmentedControl) {
+        // もしもセグメントが０だったら買い物の開始位置を左回りにする
+        if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
+            saveShoppingStartDirection(type: ShoppingStartPositionType.left)
+            NotificationCenter.default.post(name: .showLeftCartView, object: nil)
+            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
+            // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
+        } else {
+            saveShoppingStartDirection(type: ShoppingStartPositionType.right)
+            NotificationCenter.default.post(name: .showRightCartView, object: nil)
+            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
+        }
+    }
+
+    /// リセットボタン
+    @IBOutlet weak var resetButton: UIButton!
     /// カスタムマップの設定をリセットする
-    @IBAction private func resetSalesFloorSettings(_ sender: Any) {
+    @IBAction func resetCustomMap(_ sender: Any) {
         let alertController =
-        UIAlertController(title: "確認", message:"""
+        UIAlertController(title: "確認", message:
+"""
 カスタムマップの設定を初期状態に
 戻してもよろしいですか？
 """, preferredStyle: .alert)
@@ -63,41 +102,7 @@ class EditSalesFloorMapViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    /// 使用する売り場マップのセレクター
-    @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
-    /// 使用する売り場マップを変更するメソッド
-    @IBAction private func changeSalesFloorMap(_ sender: Any) {
-        // もしもセグメントが０だったら売り場の設定をカスタムにする
-        if useSalesFloorMapSelector.selectedSegmentIndex == 0 {
-            saveUseSalesFloorMap(type: SalesFloorMapType.custom)
-            NotificationCenter.default.post(name: .showCustomSelectCheckMark, object: nil)
-            NotificationCenter.default.post(name: .hideDefaultSelectCheckMark, object: nil)
-            // （違うのであれば）つまりセグメントが１だったら売り場の設定をデフォルトにする
-        } else {
-            saveUseSalesFloorMap(type: SalesFloorMapType.default)
-            NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
-            NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
-        }
-
-        NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
-    }
-
-    /// 買い物の開始位置を決めるセレクター
-    @IBOutlet private weak var shoppingStartPositionSelector: UISegmentedControl!
-    /// 買い物の開始位置を変更するメソッド
-    @IBAction private func changeShoppingStartPosition(_ sender: UISegmentedControl) {
-        // もしもセグメントが０だったら買い物の開始位置を左回りにする
-        if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
-            saveShoppingStartDirection(type: ShoppingStartPositionType.left)
-            NotificationCenter.default.post(name: .showLeftCartView, object: nil)
-            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
-            // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
-        } else {
-            saveShoppingStartDirection(type: ShoppingStartPositionType.right)
-            NotificationCenter.default.post(name: .showRightCartView, object: nil)
-            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
-        }
-    }
+    @IBOutlet weak var containerView: UIView!
 
     // MARK: - property
     /// 売り場マップの設定を保存するためのUserDefaultsに使用するキー
@@ -111,6 +116,10 @@ class EditSalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setUseSalesFloorMapSelector()
         setShoppingStartPositionSelector()
+        resetButton.setAppearanceWithShadow()
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.cornerRadius = 10
     }
 
     // MARK: - func
