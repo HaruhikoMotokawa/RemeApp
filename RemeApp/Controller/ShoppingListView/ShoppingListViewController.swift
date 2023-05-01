@@ -25,6 +25,7 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
+        print("🤪")
     }
 
     override func viewWillAppear(_ animated: Bool) {

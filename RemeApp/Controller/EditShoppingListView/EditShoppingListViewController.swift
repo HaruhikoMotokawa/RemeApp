@@ -44,6 +44,7 @@ class EditShoppingListViewController: UIViewController {
         setAppearance(createNewItemButton)
         multipleDeletionsButton.setTitle("複数削除", for: .normal)
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        print("🫣")
     }
 
 
@@ -51,6 +52,7 @@ class EditShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         setErrandData()
         sortErrandDataList()
+
     }
     // MARK: - func
 

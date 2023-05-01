@@ -151,20 +151,29 @@ class CustomSalesFloorMapViewController: UIViewController {
     // MARK: - property
     private var customSalesFloorData = CustomSalesFloorModel()
 
+
+    // Realmの監視用トークン
+    var notificationToken: NotificationToken?
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderAllLabel()
         setCustomSelectCheckMark()
         setCartView()
+        let results = fetchCustomSalesFloors()
+        updateButtonAppearance(with: results)
+
         // カスタムマップ編集での内容をリセットした際に画面に反映するための通知の受信設定
-        NotificationCenter.default.addObserver(self, selector: #selector(updateButtonAppearance),
-                                               name: .updateButtonAppearance, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateButtonAppearance),
+//                                               name: .updateButtonAppearance, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateButtonAppearance()
+
+
+        setupNotification()
     }
 
     // MARK: - func
@@ -174,23 +183,40 @@ class CustomSalesFloorMapViewController: UIViewController {
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
     }
+
+    // CustomSalesFloorModelの監視用メソッド
+    private func setupNotification() {
+        let realm = try! Realm()
+        // 監視対象のオブジェクトを取得
+        let results = realm.objects(CustomSalesFloorModel.self)
+        // Realmの通知機能で変更を監視する
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let self = self else { return }
+            let updatedResults = fetchCustomSalesFloors()
+            updateButtonAppearance(with: updatedResults)
+        }
+    }
+
+    func fetchCustomSalesFloors() -> Results<CustomSalesFloorModel> {
+        let realm = try! Realm()
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
+            .sorted(byKeyPath: "customSalesFloorRawValue")
+        return results
+    }
+
     // MARK: 仮で修正
     /// 各UIButtonに装飾を設定するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 売り場に対応したバックグラウンドカラーを設定
     /// - 基本装飾と影の設定
-    @objc func updateButtonAppearance() {
-        /// ボタンの配列を順番に設定
+    func updateButtonAppearance(with results: Results<CustomSalesFloorModel>) {
+        /// ボタンの配列をに設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
                        blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
                        greenFourButton, greenFiveButton]
 
-        let realm = try! Realm()
-        // カスタム売り場モデルのオブジェクトからフィルターメソッドを使ってcustomSalesFloorRawValueが０〜１６に合うモデルを抽出
-        let results = realm.objects(CustomSalesFloorModel.self)
-            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
-            .sorted(byKeyPath: "customSalesFloorRawValue")
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
             let customSalesFloor = results[index]
