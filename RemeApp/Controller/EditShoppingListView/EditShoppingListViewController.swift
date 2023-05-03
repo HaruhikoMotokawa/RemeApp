@@ -31,16 +31,16 @@ class EditShoppingListViewController: UIViewController {
 
     // MARK: - property
     /// 編集モードのフラグ
-    var isEditingMode: Bool = false
+    private var isEditingMode: Bool = false
 
     /// お使いデータ
-    var errandDataList: [ErrandDataModel] = []
+    private var errandDataList: [ErrandDataModel] = []
 
     /// Realmから取得したErrandDataModelの結果セットを保持するプロパティ
-    var errandDataModel: Results<ErrandDataModel>?
+    private var errandDataModel: Results<ErrandDataModel>?
 
     // Realmの監視用トークン
-    var notificationToken: NotificationToken?
+    private var notificationToken: NotificationToken?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
