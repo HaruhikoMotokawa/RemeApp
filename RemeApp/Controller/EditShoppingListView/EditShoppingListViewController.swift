@@ -26,16 +26,21 @@ class EditShoppingListViewController: UIViewController {
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
-        editItemVC.modalPresentationStyle = .fullScreen
-        editItemVC.delegate = self
         self.present(editItemVC, animated: true)
     }
 
     // MARK: - property
+    /// 編集モードのフラグ
+    var isEditingMode: Bool = false
+
     /// お使いデータ
     var errandDataList: [ErrandDataModel] = []
 
-    var isEditingMode: Bool = false
+    /// Realmから取得したErrandDataModelの結果セットを保持するプロパティ
+    var errandDataModel: Results<ErrandDataModel>?
+
+    // Realmの監視用トークン
+    var notificationToken: NotificationToken?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -44,16 +49,22 @@ class EditShoppingListViewController: UIViewController {
         setAppearance(createNewItemButton)
         multipleDeletionsButton.setTitle("複数削除", for: .normal)
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        print("🫣")
+        setErrandData()
+        sortErrandDataList()
     }
-
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setErrandData()
-        sortErrandDataList()
-
+        setupNotification()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 通知の解除
+        print("解除やで")
+        notificationToken?.invalidate()
+    }
+
     // MARK: - func
 
     /// UITableViewの初期設定関連
@@ -66,11 +77,39 @@ class EditShoppingListViewController: UIViewController {
     }
 
     /// 保存されたお使いデータをセットする
-    func setErrandData() {
+    private func setErrandData() {
         let realm = try! Realm()
         let result = realm.objects(ErrandDataModel.self)
+        errandDataModel = realm.objects(ErrandDataModel.self)
         errandDataList = Array(result)
     }
+
+    /// CustomSalesFloorModelの監視用メソッド
+    private func setupNotification() {
+        // Realmの通知機能で変更を監視する
+        // 変更通知を受け取る
+        notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+                case .initial:
+                    self?.setErrandData()
+                    self?.sortErrandDataList()
+                    print("初めてなんだなぁ😊")
+
+                case .update(let errandDataModel,let deletions,let insertions,let modifications):
+                    print(errandDataModel)
+                    print(deletions)
+                    print(insertions)
+                    print(modifications)
+                    self?.setErrandData()
+                    self?.sortErrandDataList()
+                    print("変更があったデー✋🏻")
+
+                case .error:
+                    print("困ったことが起きました😱")
+            }
+        }
+    }
+    
 
     /// ボタンの背景色を変更するメソッド
     ///- 背景色を灰色に設定
@@ -135,6 +174,7 @@ class EditShoppingListViewController: UIViewController {
         isEditingMode = !isEditingMode
         setEditing(isEditingMode, animated: true)
     }
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         // 編集開始
@@ -155,6 +195,8 @@ class EditShoppingListViewController: UIViewController {
             }
             // 編集終了
         } else {
+            // 選択した行を削除する
+            deleteRows()
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("複数削除", for: .normal)
             for cell in editShoppingListTableView.visibleCells {
@@ -168,8 +210,6 @@ class EditShoppingListViewController: UIViewController {
                     })
                 }
             }
-            // 選択した行を削除する
-            deleteRows()
         }
         // 編集モード時のみ複数選択可能とする
         editShoppingListTableView.isEditing = editing
@@ -181,25 +221,22 @@ class EditShoppingListViewController: UIViewController {
         guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else { return }
         // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
         let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
-        for indexPathList in sortedIndexPaths {
-            do {
-                // Realmに保存されているErrandDataModelを取得して、削除する
-                let realm = try Realm()
+        let realm = try! Realm()
+        try! realm.write {
+            // 降順に繰り返す
+            for indexPathList in sortedIndexPaths {
+                // indexPathListに該当するidのErrandDataModelを取得
                 let errandData = realm.objects(ErrandDataModel.self).filter("id = %@", errandDataList[indexPathList.row].id).first
-                try realm.write {
-                    realm.delete(errandData!)
-                }
-                // 選択肢のindexPathから配列の要素を削除
+                // 削除
+                realm.delete(errandData!)
+                // indexPathListに該当するerrandDataListの配列の要素を削除
                 errandDataList.remove(at: indexPathList.row)
-            } catch {
-                print("Error: \\(error.localizedDescription)")
             }
         }
         // tableViewの行を削除
         editShoppingListTableView.deleteRows(at: sortedIndexPaths, with: UITableView.RowAnimation.automatic)
     }
 }
-
 // MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
@@ -250,7 +287,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             let errandData = errandDataList[indexPath.row]
             editItemVC.configurer(detail: errandData)
             editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-            editItemVC.delegate = self
             self.present(editItemVC, animated: true)
         }
     }
@@ -263,18 +299,12 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             (action, view, completionHandler) in
             // お使いデータの対象のインデックス番号を削除
             self.errandDataList.remove(at: indexPath.row)
-
             // Realmのデータベースからも削除
             let realm = try! Realm()
             let target = realm.objects(ErrandDataModel.self)[indexPath.row]
-            do {
-                try realm.write {
-                    realm.delete(target)
-                }
-            } catch {
-                print("Error deleting item, \\(error)")
+            try! realm.write {
+                realm.delete(target)
             }
-
             // テーブルビューから視覚的に削除
             tableView.deleteRows(at: [indexPath], with: .automatic)
             // アクション完了を報告
@@ -319,7 +349,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
 extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理
     /// - チェックしたものは下に移動する
-    /// - テーブルビューを再読み込みして表示する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = editShoppingListTableView.indexPath(for: cell) else { return }
         let isChecked = !errandDataList[indexPath.row].isCheckBox
@@ -328,23 +357,7 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
         realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
         realm.add(errandDataList[indexPath.row], update: .modified)
-        do {
-            try realm.commitWrite()
-        } catch {
-            print("Error committing write transaction: \\(error)")
-        }
-        sortErrandDataList()
-        editShoppingListTableView.reloadData()
-    }
-}
-
-// 編集が終了した後にテーブルビューを再読み込みさせる処理
-extension EditShoppingListViewController: EditItemViewControllerDelegate {
-    func savedReload() {
-        setErrandData()
-        sortErrandDataList()
-        editShoppingListTableView.reloadData()
-        print("🤔")
+        try! realm.commitWrite()
     }
 }
 

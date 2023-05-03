@@ -164,16 +164,18 @@ class CustomSalesFloorMapViewController: UIViewController {
         let results = fetchCustomSalesFloors()
         updateButtonAppearance(with: results)
 
-        // カスタムマップ編集での内容をリセットした際に画面に反映するための通知の受信設定
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateButtonAppearance),
-//                                               name: .updateButtonAppearance, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-
         setupNotification()
+    }
+
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 通知の解除
+        notificationToken?.invalidate()
     }
 
     // MARK: - func
@@ -184,19 +186,23 @@ class CustomSalesFloorMapViewController: UIViewController {
         rightEntranceLabel.setBorder()
     }
 
-    // CustomSalesFloorModelの監視用メソッド
+    /// CustomSalesFloorModelの監視用メソッド
+    /// - カスタムマップ設定が上書き、リセットされた場合にボタンの表示を再配置する
     private func setupNotification() {
         let realm = try! Realm()
         // 監視対象のオブジェクトを取得
         let results = realm.objects(CustomSalesFloorModel.self)
         // Realmの通知機能で変更を監視する
         notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            // 変更がなければ処理を終わらせる
             guard let self = self else { return }
+            // 変更があればカスタムマップの設定を読み込み、各ボタンに再配置する
             let updatedResults = fetchCustomSalesFloors()
             updateButtonAppearance(with: updatedResults)
         }
     }
 
+    /// カスタムマップ設定の売り場オブジェクトを取得して昇順に並べて、返却する
     func fetchCustomSalesFloors() -> Results<CustomSalesFloorModel> {
         let realm = try! Realm()
         let results = realm.objects(CustomSalesFloorModel.self)
@@ -207,6 +213,7 @@ class CustomSalesFloorMapViewController: UIViewController {
 
     // MARK: 仮で修正
     /// 各UIButtonに装飾を設定するメソッド
+    /// - 引数にfetchCustomSalesFloorsメソッドで取得した配列を使用する
     /// - 各ボタンに売り場の名称を設定
     /// - 売り場に対応したバックグラウンドカラーを設定
     /// - 基本装飾と影の設定

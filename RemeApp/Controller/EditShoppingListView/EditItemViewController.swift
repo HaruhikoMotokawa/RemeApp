@@ -109,8 +109,6 @@ class EditItemViewController: UIViewController {
 
     /// お使いデータ
     var errandData = ErrandDataModel()
-    // デリゲート
-    var delegate: EditItemViewControllerDelegate?
 
     /// nameOfItemTextFieldに表示するテキスト
     private var nameOfItemTextFieldText:String? = nil
@@ -332,7 +330,6 @@ extension EditItemViewController {
             // ここに追加の処理
             saveData()
             self.dismiss(animated: true)
-            delegate?.savedReload()
         }
     }
 
@@ -497,7 +494,3 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-// MARK: - EditItemViewControllerDelegate
-protocol EditItemViewControllerDelegate {
-    func savedReload()
-}

@@ -46,7 +46,7 @@ class DetailShoppingListViewController: UIViewController {
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
-    var delegate: DetailShoppingListViewControllerDelegate?
+    weak var delegate: DetailShoppingListViewControllerDelegate?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -148,6 +148,6 @@ class DetailShoppingListViewController: UIViewController {
 }
 
 // デリゲートプロトコルを追加
-protocol DetailShoppingListViewControllerDelegate{
+protocol DetailShoppingListViewControllerDelegate: AnyObject {
     func isDimmedViewEnabled(_ viewController: DetailShoppingListViewController)
 }
