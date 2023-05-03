@@ -156,10 +156,12 @@ class SalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setBorderAllLabel()
         setCartView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setErrandData()
         exchangeAllSalesFloorButton()
-        NotificationCenter.default.addObserver(self, selector: #selector(exchangeAllSalesFloorButton),
-                                               name: .exchangeAllSalesFloorButton, object: nil)
     }
 
     // MARK: - func
@@ -187,7 +189,7 @@ class SalesFloorMapViewController: UIViewController {
     ///    - バックグラウンドカラーを白に設定
     ///    - ボタンの非活性化
     ///  - 購入商品の有無に関わらない装飾の設定
-    @objc func exchangeAllSalesFloorButton() {
+    func exchangeAllSalesFloorButton() {
         // - UserDefaultsに使用するキーを指定
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         // - UserDefaultsから設定を取得

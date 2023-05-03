@@ -352,7 +352,6 @@ extension EditItemViewController {
             }
             errandData.photoFileName = errandData.setImage(image: photoImageView.image)
             realm.add(errandData)
-            print("\(errandData)")
         }
     }
 }

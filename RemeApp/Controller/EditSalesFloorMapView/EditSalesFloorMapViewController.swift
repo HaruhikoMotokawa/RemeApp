@@ -27,8 +27,6 @@ class EditSalesFloorMapViewController: UIViewController {
             NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
         }
-
-        NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
     }
 
     /// 買い物の開始位置を決めるセレクター
@@ -39,12 +37,10 @@ class EditSalesFloorMapViewController: UIViewController {
         if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
             saveShoppingStartDirection(type: ShoppingStartPositionType.left)
             NotificationCenter.default.post(name: .showLeftCartView, object: nil)
-            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
             // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
         } else {
             saveShoppingStartDirection(type: ShoppingStartPositionType.right)
             NotificationCenter.default.post(name: .showRightCartView, object: nil)
-            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
         }
     }
 
