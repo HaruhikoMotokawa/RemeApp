@@ -31,7 +31,6 @@ class ShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         setErrandData()
         sortErrandDataList()
-        shoppingListTableView.reloadData()
     }
     // MARK: - func
 
@@ -161,6 +160,5 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         }
         sortErrandDataList()
         completionAlert()
-        shoppingListTableView.reloadData()
     }
 }

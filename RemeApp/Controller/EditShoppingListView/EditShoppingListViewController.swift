@@ -177,43 +177,32 @@ class EditShoppingListViewController: UIViewController {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+
+        let section = 0
+        // 0からTableViewの指定されたセクションの行数未満までの整数rowに対して以下の処理を実行する。
+        for row in 0..<editShoppingListTableView.numberOfRows(inSection: section) {
+            // TableViewのIndexPathで指定された位置のセルをShoppingListTableViewCellControllerにダウンキャストし、cellに代入する。
+            if let cell = editShoppingListTableView.cellForRow(at: IndexPath(row: row, section: section))
+                as? ShoppingListTableViewCellController {
+                // editingの状態とcheckBoxButton.isHiddeの状態を同じにする
+                cell.checkBoxButton.isHidden = editing
+            }
+        }
         // 編集開始
         if editing {
             // multipleDeletionsButtonのタイトルを変更
-            multipleDeletionsButton.setTitle("完了", for: .normal)
-
-            for cell in editShoppingListTableView.visibleCells {
-                if let shoppingListCell = cell as? ShoppingListTableViewCellController {
-                    //アニメーションの設定
-                    UIView.animate(withDuration: 0.5, animations: {
-                        shoppingListCell.checkBoxButton.alpha = 0.0
-                    }, completion: { _ in
-                        // checkBoxButtonを非表示にする
-                        shoppingListCell.checkBoxButton.isHidden = true
-                    })
-                }
-            }
+            multipleDeletionsButton.setTitle("削除実行", for: .normal)
             // 編集終了
         } else {
             // 選択した行を削除する
             deleteRows()
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("複数削除", for: .normal)
-            for cell in editShoppingListTableView.visibleCells {
-                if let shoppingListCell = cell as? ShoppingListTableViewCellController {
-                    //アニメーションの設定
-                    UIView.animate(withDuration: 0.5, animations: {
-                        shoppingListCell.checkBoxButton.alpha = 1.0
-                    }, completion: { _ in
-                        // checkBoxButtonを表示する
-                        shoppingListCell.checkBoxButton.isHidden = false
-                    })
-                }
-            }
         }
         // 編集モード時のみ複数選択可能とする
         editShoppingListTableView.isEditing = editing
     }
+
 
     /// 選択した行を削除する
     private func deleteRows() {
@@ -248,6 +237,9 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = editShoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            print("[\(cell.id)] 🔵\(#function)")
+            // 編集モードの状態によってチェックボックスの表示を切り替える
+            cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
             let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
             cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
@@ -257,7 +249,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
                                  image: errandDataModel.getImage())
-            
             return cell
         }
         return UITableViewCell()

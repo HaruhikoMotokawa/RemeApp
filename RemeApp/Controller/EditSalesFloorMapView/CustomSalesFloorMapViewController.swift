@@ -171,7 +171,6 @@ class CustomSalesFloorMapViewController: UIViewController {
         setupNotification()
     }
 
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // 通知の解除
@@ -241,8 +240,6 @@ class CustomSalesFloorMapViewController: UIViewController {
             button?.setAppearanceWithShadow()
         }
     }
-
-
 
     /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド
     /// - NotificationCenterの通知受信を設定

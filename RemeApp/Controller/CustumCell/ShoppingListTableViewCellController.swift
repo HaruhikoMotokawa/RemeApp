@@ -52,6 +52,24 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
+    static var count = 0
+
+    var id = 0
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        id = Self.count
+
+        Self.count += 1
+
+        print("[\(id)] 🔴\(#function)")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("[\(id)] 🟢\(#function)")
+    }
+
     // MARK: - awakeFromNib
 
     override func awakeFromNib() {
