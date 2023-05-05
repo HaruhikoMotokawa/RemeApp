@@ -103,7 +103,6 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
         let errandData = errandDataList[indexPath.row]
         detailShoppingListViewController.configurer(detail: errandData)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListViewController.modalPresentationStyle = .overCurrentContext // 重なり合うように表示
         detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
         self.present(detailShoppingListViewController, animated: true)
     }

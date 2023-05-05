@@ -13,10 +13,10 @@ class EditShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// 複数削除モードの解除ボタン
-    @IBOutlet weak var cancelEditButton: UIButton!
+    @IBOutlet private weak var cancelEditButton: UIButton!
 
     /// 複数削除モードを中断して終了する
-    @IBAction func isCancelEdit(_ sender: Any) {
+    @IBAction private func isCancelEdit(_ sender: Any) {
         // 選択された行のIndexPathの配列を取得し、一つ一つのIndexPathに対して以下の処理を実行する。
         editShoppingListTableView.indexPathsForSelectedRows?.forEach {
             // TableViewで選択されている行の選択を解除する
@@ -25,10 +25,10 @@ class EditShoppingListViewController: UIViewController {
         isEditingMode = false
     }
     /// 複数削除ボタン
-    @IBOutlet weak var multipleDeletionsButton: UIButton!
+    @IBOutlet private weak var multipleDeletionsButton: UIButton!
 
     /// 画面タイトルラベル
-    @IBOutlet weak var viewTitleLabel: UILabel!
+    @IBOutlet private weak var viewTitleLabel: UILabel!
 
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
@@ -62,9 +62,9 @@ class EditShoppingListViewController: UIViewController {
         setTableVIew()
         setAppearance(createNewItemButton)
         multipleDeletionsButton.setTitle("複数削除", for: .normal)
+        multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.setTitle("キャンセル", for: .normal)
         cancelEditButton.isHidden = true
-        multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         setErrandData()
         sortErrandDataList()
     }
@@ -193,14 +193,12 @@ class EditShoppingListViewController: UIViewController {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
         let section = 0
         // 0からTableViewの指定されたセクションの行数未満までの整数rowに対して以下の処理を実行する。
         for row in 0..<editShoppingListTableView.numberOfRows(inSection: section) {
             // TableViewのIndexPathで指定された位置のセルをShoppingListTableViewCellControllerにダウンキャストし、cellに代入する。
             if let cell = editShoppingListTableView.cellForRow(at: IndexPath(row: row, section: section))
                 as? ShoppingListTableViewCellController {
-                // editingの状態とcheckBoxButton.isHiddeの状態を同じにする
                 cell.checkBoxButton.isHidden = editing
             }
         }
@@ -222,7 +220,6 @@ class EditShoppingListViewController: UIViewController {
         // 編集モード時のみ複数選択可能とする
         editShoppingListTableView.isEditing = editing
     }
-
 
     /// 選択した行を削除する
     private func deleteRows() {
@@ -246,6 +243,7 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.deleteRows(at: sortedIndexPaths, with: UITableView.RowAnimation.automatic)
     }
 }
+
 // MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
@@ -306,25 +304,39 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
     UISwipeActionsConfiguration? {
         /// スワイプした時の処理を定義
-        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") {
+        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [self]
             (action, view, completionHandler) in
-            // お使いデータの対象のインデックス番号を削除
-            self.errandDataList.remove(at: indexPath.row)
+//            notificationToken?.invalidate()
             // Realmのデータベースからも削除
             let realm = try! Realm()
+
             let target = realm.objects(ErrandDataModel.self)[indexPath.row]
+            print("🟥抽出した: \(target)")
+
             try! realm.write {
                 realm.delete(target)
+                print("🟦削除したRealmオブジェクト: \(target)")
+                // お使いデータの対象のインデックス番号を削除
+                errandDataList.remove(at: indexPath.row)
+//                print("🟨削除したerrandDataListの配列: \(errandDataList[indexPath.row])")
             }
+
+            // お使いデータの対象のインデックス番号を削除
+//            self.errandDataList.remove(at: indexPath.row)
+//            print("🟨削除したerrandDataListの配列: \(self.errandDataList[indexPath.row])")
             // テーブルビューから視覚的に削除
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             // アクション完了を報告
             completionHandler(true)
+
         }
+
         // スワイプアクション時の画像を設定
         destructiveAction.image = UIImage(systemName: "trash.fill")
         // 定義した削除処理を設定
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+
+
         // 実行するように返却
         return configuration
     }
