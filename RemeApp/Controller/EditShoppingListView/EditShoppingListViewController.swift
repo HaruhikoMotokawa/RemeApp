@@ -12,9 +12,23 @@ import RealmSwift
 class EditShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+    /// 複数削除モードの解除ボタン
+    @IBOutlet weak var cancelEditButton: UIButton!
 
+    /// 複数削除モードを中断して終了する
+    @IBAction func isCancelEdit(_ sender: Any) {
+        // 選択された行のIndexPathの配列を取得し、一つ一つのIndexPathに対して以下の処理を実行する。
+        editShoppingListTableView.indexPathsForSelectedRows?.forEach {
+            // TableViewで選択されている行の選択を解除する
+            editShoppingListTableView.deselectRow(at: $0, animated: true)
+        }
+        isEditingMode = false
+    }
     /// 複数削除ボタン
     @IBOutlet weak var multipleDeletionsButton: UIButton!
+
+    /// 画面タイトルラベル
+    @IBOutlet weak var viewTitleLabel: UILabel!
 
     /// 買い物リストを表示
     @IBOutlet private weak var editShoppingListTableView: UITableView!
@@ -48,6 +62,8 @@ class EditShoppingListViewController: UIViewController {
         setTableVIew()
         setAppearance(createNewItemButton)
         multipleDeletionsButton.setTitle("複数削除", for: .normal)
+        cancelEditButton.setTitle("キャンセル", for: .normal)
+        cancelEditButton.isHidden = true
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         setErrandData()
         sortErrandDataList()
@@ -192,12 +208,16 @@ class EditShoppingListViewController: UIViewController {
         if editing {
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("削除実行", for: .normal)
+            viewTitleLabel.text = "複数削除モード"
+            cancelEditButton.isHidden = false
             // 編集終了
         } else {
             // 選択した行を削除する
             deleteRows()
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("複数削除", for: .normal)
+            viewTitleLabel.text = "買い物リスト編集"
+            cancelEditButton.isHidden = true
         }
         // 編集モード時のみ複数選択可能とする
         editShoppingListTableView.isEditing = editing
