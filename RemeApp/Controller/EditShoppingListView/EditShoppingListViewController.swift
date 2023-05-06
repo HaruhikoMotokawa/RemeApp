@@ -123,6 +123,14 @@ class EditShoppingListViewController: UIViewController {
                     self?.setErrandData()
                     self?.sortErrandDataList()
                     print("変更があったデー✋🏻")
+//                    UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCurlDown], animations: {
+//                        self!.editShoppingListTableView.beginUpdates()
+//                        for i in 0..<self!.errandDataList.count {
+//                            let indexPath = IndexPath(row: i, section: 0)
+//                            self!.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: i, section: 0))
+//                        }
+//                        self!.editShoppingListTableView.endUpdates()
+//                    }, completion: nil)
 
                 case .error:
                     print("困ったことが起きました😱")
@@ -339,6 +347,28 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
         errandDataList[indexPath.row].isCheckBox = isChecked
         realm.add(errandDataList[indexPath.row], update: .modified)
         try! realm.commitWrite()
+
+        // タップされたcellだけにアニメーションを実行する
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+            self.editShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+            if isChecked {
+                var lastUncheckedRowIndex: Int?
+                for (index, errandData) in self.errandDataList.enumerated() {
+                    if !errandData.isCheckBox && index < indexPath.row {
+                        lastUncheckedRowIndex = index
+                    }
+                }
+                guard let lastRow = lastUncheckedRowIndex else {
+                    return
+                }
+                if lastRow < indexPath.row {
+                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+                        self.errandDataList.swapAt(i, i - 1)
+                    }
+                    self.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                }
+            }
+        }, completion: nil)
     }
 }
 
