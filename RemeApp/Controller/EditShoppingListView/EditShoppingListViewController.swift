@@ -47,6 +47,8 @@ class EditShoppingListViewController: UIViewController {
     /// 編集モードのフラグ
     private var isEditingMode: Bool = false
 
+    let errandData = ErrandDataModel()
+
     /// お使いデータ
     private var errandDataList: [ErrandDataModel] = []
 
@@ -66,7 +68,6 @@ class EditShoppingListViewController: UIViewController {
         cancelEditButton.setTitle("キャンセル", for: .normal)
         cancelEditButton.isHidden = true
         setErrandData()
-        sortErrandDataList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -107,8 +108,11 @@ class EditShoppingListViewController: UIViewController {
         notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
             switch changes {
                 case .initial:
+                    print("🟠\(self!.errandDataList)")
                     self?.setErrandData()
+                    print("🟣\(self!.errandDataList)")
                     self?.sortErrandDataList()
+                    print("⚫️\(self!.errandDataList)")
                     print("初めてなんだなぁ😊")
 
                 case .update(let errandDataModel,let deletions,let insertions,let modifications):
@@ -274,30 +278,21 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
 
     /// editShoppingListTableViewのcellがタップされた時の挙動を定義
     /// - 編集モードのとき
-    ///     - 一つでもセルがタップされたらeditButtonItemのタイトルを"削除"にする
-    ///     - 何もタップされていなければ"完了"にする
+    ///     - 何もしない
     /// - 編集モードではないとき
     ///     - タップされた商品のデータをEditItemViewに渡す
     ///     - EditItemViewにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if editShoppingListTableView.isEditing {
-            if let _ = self.editShoppingListTableView.indexPathsForSelectedRows {
-                _ = self.editShoppingListTableView.cellForRow(at: indexPath)
-                // 選択肢にチェックが一つでも入ってたら「削除」を表示する。
-                self.editButtonItem.title = "削除"
-            } else {
-                // 何もチェックされていないときは完了を表示
-                self.editButtonItem.title = "完了"
-            }
-        } else {
-            let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
-            let editItemVC = storyboard.instantiateViewController(
-                withIdentifier: "EditItemView") as! EditItemViewController
-            let errandData = errandDataList[indexPath.row]
-            editItemVC.configurer(detail: errandData)
-            editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-            self.present(editItemVC, animated: true)
-        }
+        // 編集モード時の処理を行わない
+        guard !editShoppingListTableView.isEditing else { return }
+        // 通常時の処理
+        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
+        let editItemVC = storyboard.instantiateViewController(
+            withIdentifier: "EditItemView") as! EditItemViewController
+        let errandData = errandDataList[indexPath.row]
+        editItemVC.configurer(detail: errandData)
+        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        self.present(editItemVC, animated: true)
     }
 
     /// スワイプして削除する処理
@@ -306,64 +301,27 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         /// スワイプした時の処理を定義
         let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [self]
             (action, view, completionHandler) in
-//            notificationToken?.invalidate()
-            // Realmのデータベースからも削除
             let realm = try! Realm()
+            print("🟥抽出した \(indexPath.row)")
 
-            let target = realm.objects(ErrandDataModel.self)[indexPath.row]
-            print("🟥抽出した: \(target)")
-
-            try! realm.write {
+            let target = self.errandDataList[indexPath.row]
+            print("🟦レルムで削除するオブジェクト \(target)")
+            try! realm.write(withoutNotifying: [self.notificationToken!]) {
                 realm.delete(target)
-                print("🟦削除したRealmオブジェクト: \(target)")
-                // お使いデータの対象のインデックス番号を削除
-                errandDataList.remove(at: indexPath.row)
-//                print("🟨削除したerrandDataListの配列: \(errandDataList[indexPath.row])")
             }
-
             // お使いデータの対象のインデックス番号を削除
-//            self.errandDataList.remove(at: indexPath.row)
-//            print("🟨削除したerrandDataListの配列: \(self.errandDataList[indexPath.row])")
+            self.errandDataList.remove(at: indexPath.row)
             // テーブルビューから視覚的に削除
-            editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
             // アクション完了を報告
             completionHandler(true)
-
         }
-
         // スワイプアクション時の画像を設定
         destructiveAction.image = UIImage(systemName: "trash.fill")
         // 定義した削除処理を設定
         let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
-
-
         // 実行するように返却
         return configuration
-    }
-
-    /// 編集モード時に削除する処理
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        // もし編集モードが削除だったら
-        if editingStyle == .delete {
-            // お使いデータから指定されたインデックス番号を削除する
-            errandDataList.remove(at: indexPath.row)
-            // テーブルビューから指定されたインデックス番号を削除する
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-
-    /// テーブルビューのセルがタップされるたびに呼ばれる処理
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        // 編集モードじゃない場合はreturn
-        guard editShoppingListTableView.isEditing else { return }
-
-        if let _ = self.editShoppingListTableView.indexPathsForSelectedRows {
-            self.editButtonItem.title = "削除"
-        } else {
-            // 何もチェックされていないときは完了を表示
-            self.editButtonItem.title = "完了"
-        }
     }
 }
 
