@@ -54,6 +54,7 @@ class SalesFloorShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
         }
+        salesFloorShoppingListTableView.reloadData()
     }
 
     /// 全てのセルがチェックされている場合にアラートを表示する
@@ -123,14 +124,38 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
         realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
         realm.add(errandDataList[indexPath.row], update: .modified)
-        do {
-            try realm.commitWrite()
-        } catch {
-            print("Error committing write transaction: \\(error)")
-        }
+        try! realm.commitWrite()
+
+        // タップされたcellだけにアニメーションを実行する
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+            // cellをリロードする
+            self.salesFloorShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+            if isChecked {
+                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+                var lastUncheckedRowIndex: Int?
+                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+                for (index, errandData) in self.errandDataList.enumerated() {
+                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+                    if !errandData.isCheckBox && index < indexPath.row {
+                        lastUncheckedRowIndex = index
+                    }
+                }
+                // 移動するcellの範囲が決定したら、移動する
+                guard let lastRow = lastUncheckedRowIndex else { return }
+
+                if lastRow < indexPath.row {
+                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+                        // iとi-1の要素を入れ替える
+                        self.errandDataList.swapAt(i, i - 1)
+                    }
+                    // 指定されたindexPathの行を、別のindexPathの行に移動する
+                    self.salesFloorShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                }
+            }
+        }, completion: nil)
         sortErrandDataList()
         completionSalesFloorAlert()
-        salesFloorShoppingListTableView.reloadData()
     }
 }
 
