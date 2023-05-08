@@ -21,8 +21,8 @@
                                 <items/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップ編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsq-xB-oYB">
-                                <rect key="frame" x="144.33333333333334" y="69" width="86.666666666666657" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <rect key="frame" x="139" y="69" width="97" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="103" width="375" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="952.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="948.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="adu-CD-HoY" userLabel="使用マップ設定">
                                                 <rect key="frame" x="20" y="10" width="335" height="31"/>
@@ -90,17 +90,17 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFV-Ve-ARN">
-                                                <rect key="frame" x="30" y="193" width="315" height="34.333333333333343"/>
+                                                <rect key="frame" x="30" y="193" width="315" height="30"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="カスタムマップ設定リセット"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="カスタムマップ設定リセット"/>
                                                 <connections>
                                                     <action selector="resetCustomMap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SZ9-aP-X7u"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HnL-L9-zHw" userLabel="スワイプ説明">
-                                                <rect key="frame" x="20" y="257.33333333333331" width="335" height="50"/>
+                                                <rect key="frame" x="20" y="253" width="335" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップを右スワイプすると　　　　　　　　デフォルトマップが見れます" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPI-m0-7Sv">
                                                         <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
@@ -122,7 +122,7 @@
                                                 </constraints>
                                             </stackView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iy-u0-WOP">
-                                                <rect key="frame" x="10" y="327.33333333333331" width="355" height="615.33333333333348"/>
+                                                <rect key="frame" x="10" y="323.00000000000006" width="355" height="615.33333333333348"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1iy-u0-WOP" secondAttribute="height" multiplier="15:26" id="m1p-h5-kac"/>
                                                 </constraints>

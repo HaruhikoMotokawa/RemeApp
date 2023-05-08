@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_72" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,16 +13,16 @@
             <objects>
                 <viewController storyboardIdentifier="ShoppingListView" id="Y6W-OH-hqX" customClass="ShoppingListViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pmw-hl-DVM">
-                                <rect key="frame" x="0.0" y="147" width="430" height="702"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="511"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8x9-sd-6aX">
-                                <rect key="frame" x="163" y="115" width="104" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <rect key="frame" x="129.5" y="74" width="116" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -33,9 +33,9 @@
                             <constraint firstItem="pmw-hl-DVM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2Ed-oh-Yy9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pmw-hl-DVM" secondAttribute="bottom" id="6Vm-6I-TDo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pmw-hl-DVM" secondAttribute="trailing" id="DnS-Mt-ajB"/>
-                            <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="F6y-cf-4FD"/>
+                            <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="F6y-cf-4FD"/>
                             <constraint firstItem="8x9-sd-6aX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nQO-5a-r5g"/>
-                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="11" id="t2n-XC-blq"/>
+                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="10" id="t2n-XC-blq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="買い物リスト" image="list.bullet.clipboard" catalog="system" id="i2Y-eK-2Nx"/>

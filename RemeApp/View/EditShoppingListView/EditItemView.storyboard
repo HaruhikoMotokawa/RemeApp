@@ -43,24 +43,24 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="bYf-74-CS5" userLabel="キャンセルと保存">
-                                <rect key="frame" x="10" y="955.5" width="355" height="34.5"/>
+                                <rect key="frame" x="10" y="960" width="355" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhN-gr-wUb">
-                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="キャンセル"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="キャンセル"/>
                                         <connections>
                                             <action selector="cancelAndReturn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="e1J-4V-4ni"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gp-pl-7fB">
-                                        <rect key="frame" x="192.5" y="0.0" width="162.5" height="34.5"/>
+                                        <rect key="frame" x="192.5" y="0.0" width="162.5" height="30"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="追加"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="追加"/>
                                         <connections>
                                             <action selector="addAndReturn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="B2q-X7-PIp"/>
                                         </connections>
@@ -68,7 +68,7 @@
                                 </subviews>
                             </stackView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cx-Oj-M3S">
-                                <rect key="frame" x="10" y="118" width="355" height="827.5"/>
+                                <rect key="frame" x="10" y="118" width="355" height="832"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xGz-Od-6Hz" userLabel="全体">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="930.5"/>
@@ -123,8 +123,8 @@
                                                         <rect key="frame" x="62" y="0.0" width="293" height="34"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="商品名を入力してから選択"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="商品名を入力してから選択"/>
                                                         <connections>
                                                             <action selector="goSelectTypeOfSalesFloorView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cBz-rl-SST"/>
                                                         </connections>
@@ -172,8 +172,8 @@
                                                         <rect key="frame" x="60" y="0.0" width="295" height="34"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="任意：タップして写真を添付"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="任意：タップして写真を添付"/>
                                                         <connections>
                                                             <action selector="addPhoto:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hfP-bf-8ep"/>
                                                         </connections>
@@ -189,11 +189,11 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34.5" id="w16-mC-JjP"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="写真を取り消す">
-                                                    <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
-                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="写真を取り消す">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="deletePhoto:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NMy-Nw-xDX"/>
                                                 </connections>

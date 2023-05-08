@@ -326,11 +326,11 @@ class EditSelectedSalesFloorViewController: UIViewController {
 
 // MARK: UITextFieldDelegate
 extension EditSelectedSalesFloorViewController: UITextFieldDelegate {
-    /// textFieldの文字数制限を１０文字以内に設定
+    /// textFieldの文字数制限を８文字以内に設定
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        return newLength <= 10
+        return newLength <= 8
     }
 }

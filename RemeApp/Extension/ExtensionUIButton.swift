@@ -23,7 +23,7 @@ extension UIButton {
         // 文字色を黒に設定
         self.setTitleColor(.black, for: .normal)
         // フォントをボールド、サイズを２０に設定
-        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         // 枠線の幅を１で設定
         self.layer.borderWidth = 1
         // 枠線のカラーを黒に設定
@@ -76,5 +76,41 @@ extension UIButton {
     func setEnable() {
         self.isEnabled = true
         self.backgroundColor = .lightGray
+    }
+
+    /// 売り場マップで使用する縦長ボタンの設定用メソッド
+    /// - フォントカラーを黒に設定
+    /// - フォントサイズを３０に設定
+    /// - 改行無制限
+    /// - 枠線の設定
+    /// - ボタンに影を設定
+    func setVerticalButtonAppearance() {
+        self.setTitleColor(.black, for: .normal) // フォントの色を黒に設定
+        titleLabel?.font = UIFont.systemFont(ofSize: 30) // フォントサイズ
+        titleLabel?.numberOfLines = 0 // 改行無制限
+        self.layer.borderWidth = 1 // 枠線の幅を１に設定
+        self.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
+        self.layer.cornerRadius = 10.0 // バックグラウンドを角丸１０に設定
+        addShadow()
+    }
+
+    /// 売り場マップで使用する縦長ボタンの設定用メソッド
+    /// - フォントカラーを黒に設定
+    /// - フォントサイズを３０に設定
+    /// - 改行をなし、１行のみに設定
+    /// - 枠線から出るようなら縮小する設定
+    /// - 縮小率を0.５に設定
+    /// - 枠線の設定
+    /// - ボタンに影を設定
+    func setHorizontalButtonAppearance() {
+        self.setTitleColor(.black, for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: 30)
+        titleLabel?.numberOfLines = 1
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.minimumScaleFactor = 0.5
+        self.layer.borderWidth = 1 // 枠線の幅を１に設定
+        self.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
+        self.layer.cornerRadius = 10.0 // バックグラウンドを角丸１０に設定
+        addShadow()
     }
 }

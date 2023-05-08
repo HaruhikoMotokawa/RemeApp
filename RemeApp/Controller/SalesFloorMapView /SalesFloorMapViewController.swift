@@ -156,6 +156,8 @@ class SalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setBorderAllLabel()
         setCartView()
+        setVerticalSalesFloorButtonAppearance()
+        setHorizontalSalesFloorButtonAppearance()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -178,6 +180,26 @@ class SalesFloorMapViewController: UIViewController {
         registerLabel.setBorder()
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
+    }
+
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            // 枠線、影、縮小、
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+///
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
     }
 
     /// 使用する売り場マップの設定によってマップのボタンタイトルと背景色を変更し、購入商品の有無によって装飾を設定するメソッド
@@ -221,7 +243,6 @@ class SalesFloorMapViewController: UIViewController {
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
             let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
             button?.backgroundColor = customSalesFloorColor?.color
-            button?.setAppearanceWithShadow()
         }
         // salesFloorRawValueがerrandDataListに存在しないボタンを無効にして背景色を白にする
         for (index, button) in buttons.enumerated() {
@@ -242,11 +263,10 @@ class SalesFloorMapViewController: UIViewController {
         }
     }
 
-    /// デフォルト売り場マップを全てのボタンをセットする
+    /// デフォルト売り場マップを全てのボタンにセットする
     /// - 名称を設定
     /// - お使いデータに対象の売り場の品目の有無によって背景色を設定
     /// - お使いデータに対象の売り場の品目の有無によってボタンの有効化と無効化を設定
-    /// - 基本装飾と影を設定
     private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -269,8 +289,6 @@ class SalesFloorMapViewController: UIViewController {
                 button?.backgroundColor = UIColor.white
                 button?.isEnabled = false
             }
-            // 最後に全てのボタンに基本の装飾と影を設定する
-            button?.setAppearanceWithShadow()
         }
     }
 
