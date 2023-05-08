@@ -186,12 +186,11 @@ class SalesFloorMapViewController: UIViewController {
     private func setHorizontalSalesFloorButtonAppearance() {
         let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
         horizontalButtons.forEach { button in
-            // 枠線、影、縮小、
             button!.setHorizontalButtonAppearance()
         }
     }
 
-///
+    /// 売り場の縦長ボタンに設定する見た目
     private func setVerticalSalesFloorButtonAppearance() {
         let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
                                blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,

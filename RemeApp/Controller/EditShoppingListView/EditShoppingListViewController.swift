@@ -35,7 +35,7 @@ class EditShoppingListViewController: UIViewController {
 
     /// 新規作成ボタン
     @IBOutlet private weak var createNewItemButton: UIButton!
-    /// 「G-品目新規作成」画面にモールダ遷移
+    /// 「G-品目新規作成」画面にモーダル遷移
     @IBAction private func goCreateNewItemView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
@@ -123,15 +123,6 @@ class EditShoppingListViewController: UIViewController {
                     self?.setErrandData()
                     self?.sortErrandDataList()
                     print("変更があったデー✋🏻")
-//                    UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCurlDown], animations: {
-//                        self!.editShoppingListTableView.beginUpdates()
-//                        for i in 0..<self!.errandDataList.count {
-//                            let indexPath = IndexPath(row: i, section: 0)
-//                            self!.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: i, section: 0))
-//                        }
-//                        self!.editShoppingListTableView.endUpdates()
-//                    }, completion: nil)
-
                 case .error:
                     print("困ったことが起きました😱")
             }
@@ -171,7 +162,7 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortLeftErrandDataList() {
+    private func sortLeftErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -185,7 +176,7 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortRightErrandDataList() {
+    private func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -244,7 +235,8 @@ class EditShoppingListViewController: UIViewController {
             // 降順に繰り返す
             for indexPathList in sortedIndexPaths {
                 // indexPathListに該当するidのErrandDataModelを取得
-                let errandData = realm.objects(ErrandDataModel.self).filter("id = %@", errandDataList[indexPathList.row].id).first
+                let errandData = realm.objects(ErrandDataModel.self).filter("id = %@",
+                                                                            errandDataList[indexPathList.row].id).first
                 // 削除
                 realm.delete(errandData!)
                 // indexPathListに該当するerrandDataListの配列の要素を削除

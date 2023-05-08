@@ -80,7 +80,9 @@ class DefaultSalesFloorMapViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateButtonAppearance()
+        setHorizontalSalesFloorButtonAppearance()
+        setVerticalSalesFloorButtonAppearance()
+        setDefaultSalesFloorButton()
         setBorderAllLabel()
         setDefaultSelectCheckMark()
         setCartView()
@@ -159,11 +161,29 @@ class DefaultSalesFloorMapViewController: UIViewController {
         rightCartView.isHidden = false
         leftCartView.isHidden = true
     }
-    /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
-    /// - 各ボタンに売り場の名称を設定
-    /// - 各ボタンに売り場の色を設定
-    /// - 各ボタンに装飾の設定
-    private func updateButtonAppearance() {
+
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+    /// 売り場の縦長ボタンに設定する見た目
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
+    }
+    /// デフォルト売り場マップの見た目にボタンをセットする
+    /// - 名称を設定
+    /// - 背景色を設定
+    private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
@@ -172,9 +192,10 @@ class DefaultSalesFloorMapViewController: UIViewController {
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
             let salesFloor = DefaultSalesFloorType(rawValue: index)!
+            // 各ボタンに売り場の名称を設定
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
+            // バックグラウンドカラーを設定した色に変更し、ボタンを有効化する
             button?.backgroundColor = salesFloor.colorOfSalesFloor
-            button?.setAppearanceWithShadow()
         }
     }
 }

@@ -13,7 +13,7 @@
             <objects>
                 <viewController storyboardIdentifier="EditSalesFloorMapView" id="Y6W-OH-hqX" customClass="EditSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lEc-I8-uCO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8I-dR-VXl">
@@ -21,16 +21,16 @@
                                 <items/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップ編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsq-xB-oYB">
-                                <rect key="frame" x="139" y="69" width="97" height="23"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                <rect key="frame" x="144.33333333333334" y="69" width="86.666666666666657" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Jh-Lq4">
-                                <rect key="frame" x="0.0" y="103" width="375" height="814"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="1014"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="948.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1164"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="adu-CD-HoY" userLabel="使用マップ設定">
                                                 <rect key="frame" x="20" y="10" width="335" height="31"/>
@@ -122,9 +122,9 @@
                                                 </constraints>
                                             </stackView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iy-u0-WOP">
-                                                <rect key="frame" x="10" y="323.00000000000006" width="355" height="615.33333333333348"/>
+                                                <rect key="frame" x="10" y="323" width="355" height="831"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="1iy-u0-WOP" secondAttribute="height" multiplier="15:26" id="m1p-h5-kac"/>
+                                                    <constraint firstAttribute="height" constant="831" id="3hx-90-Ycp"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="8kV-lO-4LY" kind="embed" id="Q65-gy-CwS"/>
@@ -181,7 +181,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="売り場マップ編集" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="wwt-U3-PPD"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <size key="freeformSize" width="375" height="1000"/>
+                    <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="containerView" destination="1iy-u0-WOP" id="dss-sI-sT8"/>
                         <outlet property="resetButton" destination="bFV-Ve-ARN" id="nwz-Qf-cd2"/>

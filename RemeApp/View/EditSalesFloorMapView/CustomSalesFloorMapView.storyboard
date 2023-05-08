@@ -388,6 +388,7 @@
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="blueFiveButton" destination="hyf-FL-ImJ" id="GIR-ZC-Vz7"/>
                         <outlet property="blueFourButton" destination="2tA-PX-L6Z" id="nUF-de-t7z"/>

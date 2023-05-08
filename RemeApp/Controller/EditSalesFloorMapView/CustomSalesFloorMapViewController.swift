@@ -163,6 +163,8 @@ class CustomSalesFloorMapViewController: UIViewController {
         setBorderAllLabel()
         setCustomSelectCheckMark()
         setCartView()
+        setVerticalSalesFloorButtonAppearance()
+        setHorizontalSalesFloorButtonAppearance()
         updateButtonAppearance(with: fetchCustomSalesFloors())
     }
 
@@ -202,29 +204,36 @@ class CustomSalesFloorMapViewController: UIViewController {
                     print(modifications)
                     self?.updateButtonAppearance(with: (self?.fetchCustomSalesFloors())!)
                     print("変更があったデー✋🏻")
-
                 case .error:
                     print("困ったことが起きました😱")
             }
         }
     }
 
-    /// カスタムマップ設定の売り場オブジェクトを取得して昇順に並べて、返却する
-    private func fetchCustomSalesFloors() -> Results<CustomSalesFloorModel> {
-        let realm = try! Realm()
-        let results = realm.objects(CustomSalesFloorModel.self)
-            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
-            .sorted(byKeyPath: "customSalesFloorRawValue")
-        customSalesFloorList = results
-        return customSalesFloorList!
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+    /// 売り場の縦長ボタンに設定する見た目
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
     }
 
     // MARK: 仮で修正
-    /// 各UIButtonに装飾を設定するメソッド
+    /// 各UIButtonにカスタム売り場を表示するメソッド
     /// - 引数にfetchCustomSalesFloorsメソッドで取得した配列を使用する
     /// - 各ボタンに売り場の名称を設定
     /// - 売り場に対応したバックグラウンドカラーを設定
-    /// - 基本装飾と影の設定
     private func updateButtonAppearance(with results: Results<CustomSalesFloorModel>) {
         /// ボタンの配列をに設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -237,8 +246,17 @@ class CustomSalesFloorMapViewController: UIViewController {
             let customSalesFloor = results[index]
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
             button?.backgroundColor = customSalesFloor.customSalesFloorColor.color
-            button?.setAppearanceWithShadow()
         }
+    }
+
+    /// カスタムマップ設定の売り場オブジェクトを取得して昇順に並べて、返却する
+    private func fetchCustomSalesFloors() -> Results<CustomSalesFloorModel> {
+        let realm = try! Realm()
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
+            .sorted(byKeyPath: "customSalesFloorRawValue")
+        customSalesFloorList = results
+        return customSalesFloorList!
     }
 
     /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド

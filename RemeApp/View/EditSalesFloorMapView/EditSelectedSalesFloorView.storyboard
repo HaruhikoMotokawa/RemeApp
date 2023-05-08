@@ -17,10 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-bE-Uhi" userLabel="全体">
-                                <rect key="frame" x="10" y="30" width="355" height="627"/>
+                                <rect key="frame" x="10" y="10" width="355" height="647"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カスタムマップ編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dc2-28-tky">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Dc2-28-tky" secondAttribute="height" multiplier="71:4" id="027-wp-aYY"/>
+                                            <constraint firstAttribute="height" constant="20.5" id="22T-pV-H9x"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-U8-cgV" userLabel="売り場名称">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="50"/>
+                                        <rect key="frame" x="0.0" y="30.5" width="355" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="売り場の名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWR-8e-fGn">
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="50"/>
@@ -35,17 +45,22 @@
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="tPx-Lb-jni"/>
+                                            <constraint firstAttribute="width" secondItem="GIJ-U8-cgV" secondAttribute="height" multiplier="355:34" id="Oxo-2k-2Kg"/>
+                                            <constraint firstAttribute="height" constant="50" id="uXO-10-AhS"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="８文字以内で入力してください" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAi-63-WsE">
-                                        <rect key="frame" x="0.0" y="60" width="355" height="17"/>
+                                        <rect key="frame" x="0.0" y="90.5" width="355" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="QAi-63-WsE" secondAttribute="height" multiplier="355:17" id="Bi1-5t-ygN"/>
+                                            <constraint firstAttribute="height" constant="17" id="qne-b3-8s1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="yuE-YW-T76" userLabel="売り場の色">
-                                        <rect key="frame" x="0.0" y="87" width="355" height="50"/>
+                                        <rect key="frame" x="0.0" y="117.5" width="355" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="売り場の色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlY-fv-cAf">
                                                 <rect key="frame" x="0.0" y="0.0" width="87" height="50"/>
@@ -59,17 +74,18 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="q7E-3F-k2M"/>
+                                            <constraint firstAttribute="width" secondItem="yuE-YW-T76" secondAttribute="height" multiplier="71:10" id="F8B-Sr-sYn"/>
+                                            <constraint firstAttribute="height" constant="50" id="tdp-o2-WFe"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aii-OZ-tuT" userLabel="売り場カラー選択">
-                                        <rect key="frame" x="0.0" y="147" width="355" height="420"/>
+                                        <rect key="frame" x="0.0" y="177.5" width="355" height="409.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4zT-H8-wIw" userLabel="左の列">
-                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="420"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="409.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWe-yS-Oug">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="greenButton"/>
                                                         <connections>
@@ -77,7 +93,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC3-OT-X0w">
-                                                        <rect key="frame" x="0.0" y="48" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="46.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemTealButton"/>
                                                         <connections>
@@ -85,7 +101,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wps-u7-9ZD">
-                                                        <rect key="frame" x="0.0" y="95.5" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="93" width="172.5" height="37"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="blueButton"/>
                                                         <connections>
@@ -93,7 +109,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-hO-4MN">
-                                                        <rect key="frame" x="0.0" y="143.5" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="140" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemPurpleButton"/>
                                                         <connections>
@@ -101,7 +117,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="by4-Y5-zbZ">
-                                                        <rect key="frame" x="0.0" y="191" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="186.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemPinkButton"/>
                                                         <connections>
@@ -109,7 +125,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-eM-03x">
-                                                        <rect key="frame" x="0.0" y="239" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="233" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="purpleButton"/>
                                                         <connections>
@@ -117,7 +133,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rup-U2-lLs">
-                                                        <rect key="frame" x="0.0" y="286.5" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="279.5" width="172.5" height="37"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="brownButton"/>
                                                         <connections>
@@ -125,7 +141,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-ac-MmX">
-                                                        <rect key="frame" x="0.0" y="334.5" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="326.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="redButton"/>
                                                         <connections>
@@ -133,7 +149,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-Qf-ex1">
-                                                        <rect key="frame" x="0.0" y="382" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="373" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemRedButton"/>
                                                         <connections>
@@ -143,10 +159,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WWM-8O-PI1" userLabel="右の列">
-                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="420"/>
+                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="409.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1b6-VV-3aM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="magentaButton"/>
                                                         <connections>
@@ -154,7 +170,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-7g-VW2">
-                                                        <rect key="frame" x="0.0" y="48" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="46.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemGrayButton"/>
                                                         <connections>
@@ -162,7 +178,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu9-Ry-nya">
-                                                        <rect key="frame" x="0.0" y="95.5" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="93" width="172.5" height="37"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemGreenButton"/>
                                                         <connections>
@@ -170,7 +186,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vF-sS-8z6">
-                                                        <rect key="frame" x="0.0" y="143.5" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="140" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemIndigoButton"/>
                                                         <connections>
@@ -178,7 +194,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a01-OL-Njf">
-                                                        <rect key="frame" x="0.0" y="191" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="186.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="cyanButton"/>
                                                         <connections>
@@ -186,7 +202,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAa-JM-lpj">
-                                                        <rect key="frame" x="0.0" y="239" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="233" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemBlueButton"/>
                                                         <connections>
@@ -194,7 +210,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDf-LC-BJj">
-                                                        <rect key="frame" x="0.0" y="286.5" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="279.5" width="172.5" height="37"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemYellowButton"/>
                                                         <connections>
@@ -202,7 +218,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-lk-OCw">
-                                                        <rect key="frame" x="0.0" y="334.5" width="172.5" height="37.5"/>
+                                                        <rect key="frame" x="0.0" y="326.5" width="172.5" height="36.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="orangeButton"/>
                                                         <connections>
@@ -210,7 +226,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-h9-Xiv">
-                                                        <rect key="frame" x="0.0" y="382" width="172.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="373" width="172.5" height="36.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -219,14 +235,14 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="4zT-H8-wIw" secondAttribute="bottom" id="8i7-JA-lbI"/>
-                                            <constraint firstItem="4zT-H8-wIw" firstAttribute="top" secondItem="aii-OZ-tuT" secondAttribute="top" id="Cbx-xI-nUW"/>
-                                            <constraint firstItem="WWM-8O-PI1" firstAttribute="top" secondItem="aii-OZ-tuT" secondAttribute="top" id="JyF-Bb-mcz"/>
-                                            <constraint firstAttribute="bottom" secondItem="WWM-8O-PI1" secondAttribute="bottom" id="f5Y-I3-KR7"/>
+                                            <constraint firstItem="WWM-8O-PI1" firstAttribute="top" secondItem="aii-OZ-tuT" secondAttribute="top" id="0bV-Be-RFe"/>
+                                            <constraint firstItem="4zT-H8-wIw" firstAttribute="top" secondItem="aii-OZ-tuT" secondAttribute="top" id="UaB-j6-puC"/>
+                                            <constraint firstAttribute="bottom" secondItem="4zT-H8-wIw" secondAttribute="bottom" id="Xwh-zT-ra8"/>
+                                            <constraint firstAttribute="bottom" secondItem="WWM-8O-PI1" secondAttribute="bottom" id="t1K-Z4-nzh"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SRf-v1-13J" userLabel="キャンセル＆保存">
-                                        <rect key="frame" x="0.0" y="577" width="355" height="50"/>
+                                        <rect key="frame" x="0.0" y="597" width="355" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7es-hb-QMT">
                                                 <rect key="frame" x="0.0" y="0.0" width="172.5" height="50"/>
@@ -246,16 +262,21 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="nzc-qk-MQR"/>
+                                            <constraint firstAttribute="height" constant="50" id="4WV-Jk-EDM"/>
+                                            <constraint firstAttribute="width" secondItem="SRf-v1-13J" secondAttribute="height" multiplier="71:10" id="ssW-Dr-1EA"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Dc2-28-tky" secondAttribute="trailing" id="50Q-Pj-vjT"/>
+                                    <constraint firstItem="Dc2-28-tky" firstAttribute="leading" secondItem="IyO-bE-Uhi" secondAttribute="leading" id="exD-Xq-Zlj"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IyO-bE-Uhi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="Bqx-ib-PPA"/>
+                            <constraint firstItem="IyO-bE-Uhi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="10" id="9Kk-wh-ofF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="IyO-bE-Uhi" secondAttribute="bottom" constant="10" id="Rkb-Z3-51t"/>
                             <constraint firstItem="IyO-bE-Uhi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="Wgk-ni-Iev"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="IyO-bE-Uhi" secondAttribute="trailing" constant="10" id="dAZ-xg-hgf"/>

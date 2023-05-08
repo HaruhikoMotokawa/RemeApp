@@ -107,7 +107,7 @@ extension UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 30)
         titleLabel?.numberOfLines = 1
         titleLabel?.adjustsFontSizeToFitWidth = true
-        titleLabel?.minimumScaleFactor = 0.5
+        titleLabel?.minimumScaleFactor = 0.3
         self.layer.borderWidth = 1 // 枠線の幅を１に設定
         self.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
         self.layer.cornerRadius = 10.0 // バックグラウンドを角丸１０に設定

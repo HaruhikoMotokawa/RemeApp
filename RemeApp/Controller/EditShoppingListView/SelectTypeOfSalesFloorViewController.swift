@@ -154,6 +154,8 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHorizontalSalesFloorButtonAppearance()
+        setVerticalSalesFloorButtonAppearance()
         setBorderForLabelAllLabel()
         setAllSalesFloorButton()
     }
@@ -167,6 +169,24 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
         setCartView()
     }
 
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+    /// 売り場の縦長ボタンに設定する見た目
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
+    }
     /// 使用する売り場マップの設定によってマップのボタンタイトルと背景色を変更するメソッド
     /// - 各ボタンに売り場の名称を設定
     /// - 背景色の設定
@@ -204,14 +224,12 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
             let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
             button?.backgroundColor = customSalesFloorColor?.color
-            button?.setAppearanceWithShadow()
         }
     }
 
-    /// デフォルト売り場マップの見た目に全てのボタンをセットする
+    /// デフォルト売り場マップの見た目にボタンをセットする
     /// - 名称を設定
     /// - 背景色を設定
-    /// - 基本装飾と影を設定
     private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -225,8 +243,6 @@ class SelectTypeOfSalesFloorViewController: UIViewController {
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
             // バックグラウンドカラーを設定した色に変更し、ボタンを有効化する
             button?.backgroundColor = salesFloor.colorOfSalesFloor
-            // 全てのボタンに基本の装飾と影を設定する
-            button?.setAppearanceWithShadow()
         }
     }
 

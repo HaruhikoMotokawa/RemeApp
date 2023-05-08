@@ -81,6 +81,9 @@ class EditItemViewController: UIViewController {
         // 添付した写真を削除するメソッド
         setDeletePhotoAction()
     }
+
+    /// 写真の背景
+    @IBOutlet private weak var photoBackgroundImage: UIImageView!
     /// 選択した写真を添付する
     @IBOutlet private weak var photoImageView: UIImageView!
     /// キャンセルボタン
@@ -100,10 +103,13 @@ class EditItemViewController: UIViewController {
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
                                                     "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
+
     /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
     private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
+
     /// 写真のURLパス
     private var imageFilePath: URL?
+
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
@@ -179,8 +185,10 @@ class EditItemViewController: UIViewController {
         // もし写真がない場合
         if photoImageView.image == nil {
             deletePhotoButton.setDisable()
+            photoBackgroundImage.isHidden = false
         } else {
             deletePhotoButton.setEnable()
+            photoBackgroundImage.isHidden = true
         }
     }
 
@@ -261,7 +269,7 @@ class EditItemViewController: UIViewController {
     private func setSupplementLabelText(supplement: String? ) {
         if supplementTextViewText == nil {
             placeholderLabel.isHidden = false
-        }else{
+        } else {
             supplementTextView.text = supplementTextViewText
             supplementTextView.textColor = .black
             placeholderLabel.isHidden = true
