@@ -12,7 +12,7 @@ import RealmSwift
 class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
-    /// 画面と閉じて戻る
+    /// 画面閉じて戻る
     @IBAction func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -24,6 +24,18 @@ class DetailShoppingListViewController: UIViewController {
     @IBOutlet private weak var unitLabel: UILabel!
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
+
+    /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
+    @IBAction func goSalesFloorMapView(_ sender: Any) {
+        self.dismiss(animated: true) {
+            if let windowScene = UIApplication.shared.connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+               let tabBarController = windowScene.windows.first?.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 1
+            }
+        }
+    }
+
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
     /// 写真を表示
@@ -46,13 +58,10 @@ class DetailShoppingListViewController: UIViewController {
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
-    weak var delegate: DetailShoppingListViewControllerDelegate?
-
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // UIButtonの基本設定
-        salesFloorTypeButton.setAppearance()
+        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
         self.title = "詳細"
         displayData()
     }
@@ -145,9 +154,4 @@ class DetailShoppingListViewController: UIViewController {
             supplementLabel.text = supplementLabelText
         }
     }
-}
-
-// デリゲートプロトコルを追加
-protocol DetailShoppingListViewControllerDelegate: AnyObject {
-    func isDimmedViewEnabled(_ viewController: DetailShoppingListViewController)
 }

@@ -159,11 +159,11 @@ class EditItemViewController: UIViewController {
 
     /// 画面上の全てのButtonの見た目の設定メソッド
     private func setAppearanceAllButton() {
-        selectTypeOfSalesFloorButton.setAppearanceWithShadow()
-        selectPhotoButton.setAppearanceWithShadow()
-        cancelButton.setAppearanceWithShadow()
-        addButton.setAppearanceWithShadow()
-        deletePhotoButton.setAppearanceWithShadow()
+        selectTypeOfSalesFloorButton.setAppearanceWithShadow(fontColor: .black)
+        selectPhotoButton.setAppearanceWithShadow(fontColor: .white)
+        cancelButton.setAppearanceWithShadow(fontColor: .white)
+        addButton.setAppearanceWithShadow(fontColor: .black)
+        deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
     }
 
     private func setTitleLabel() {
@@ -472,6 +472,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         photoImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         deletePhotoButton.setEnable()
+        photoBackgroundImage.isHidden = true
         dismiss(animated: true)
     }
 
@@ -486,6 +487,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
             // OKが押された時の処理
             self.photoImageView.image = nil
             self.deletePhotoButton.setDisable()
+            self.photoBackgroundImage.isHidden = false
             if let filePath = self.imageFilePath {
                 do {
                     try FileManager.default.removeItem(at: filePath)

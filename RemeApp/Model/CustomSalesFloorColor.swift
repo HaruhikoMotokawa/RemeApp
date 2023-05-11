@@ -50,7 +50,7 @@ enum CustomSalesFloorColor: Int {
             case .magenta:
                 return UIColor.magenta
             case .systemGray:
-                return UIColor.systemGray
+                return UIColor.systemMint
             case .systemGreen:
                 return UIColor.systemGreen
             case .systemIndigo:

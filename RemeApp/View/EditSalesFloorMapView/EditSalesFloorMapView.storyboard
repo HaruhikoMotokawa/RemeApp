@@ -16,18 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8I-dR-VXl">
-                                <rect key="frame" x="0.0" y="59" width="375" height="44"/>
-                                <items/>
-                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F60-ia-s3E" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="94.333333333333329"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="マップ編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsq-xB-oYB">
-                                <rect key="frame" x="144.33333333333334" y="69" width="86.666666666666657" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <rect key="frame" x="144.33333333333334" y="64" width="86.666666666666657" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Jh-Lq4">
-                                <rect key="frame" x="0.0" y="103" width="375" height="1014"/>
+                                <rect key="frame" x="0.0" y="104.33333333333331" width="375" height="1012.6666666666667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kub-xc-OWf" userLabel="全体">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1164"/>
@@ -57,7 +57,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w8f-By-umP" userLabel="買い物ルート設定">
-                                                <rect key="frame" x="20" y="71" width="335" height="31"/>
+                                                <rect key="frame" x="20" y="71.000000000000014" width="335" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物ルート設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khG-x1-CFW">
                                                         <rect key="frame" x="0.0" y="0.0" width="163.33333333333334" height="31"/>
@@ -168,15 +168,16 @@
                         <viewLayoutGuide key="safeArea" id="la6-Xg-duh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="P8I-dR-VXl" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="3Y1-g3-59W"/>
                             <constraint firstItem="la6-Xg-duh" firstAttribute="bottom" secondItem="WfJ-Jh-Lq4" secondAttribute="bottom" id="6ZU-ZQ-7Ue"/>
+                            <constraint firstAttribute="trailing" secondItem="F60-ia-s3E" secondAttribute="trailing" id="E1F-ns-zGa"/>
                             <constraint firstItem="rsq-xB-oYB" firstAttribute="centerX" secondItem="lEc-I8-uCO" secondAttribute="centerX" id="La6-lA-gew"/>
                             <constraint firstItem="la6-Xg-duh" firstAttribute="trailing" secondItem="WfJ-Jh-Lq4" secondAttribute="trailing" id="RI9-B9-rki"/>
-                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="P8I-dR-VXl" secondAttribute="bottom" id="bAr-ga-nh4"/>
-                            <constraint firstItem="P8I-dR-VXl" firstAttribute="trailing" secondItem="la6-Xg-duh" secondAttribute="trailing" id="eVx-hi-62W"/>
+                            <constraint firstItem="F60-ia-s3E" firstAttribute="top" secondItem="lEc-I8-uCO" secondAttribute="top" id="V4z-vq-evA"/>
+                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="F60-ia-s3E" secondAttribute="bottom" constant="10" id="aNl-ky-nXv"/>
+                            <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="top" secondItem="rsq-xB-oYB" secondAttribute="bottom" constant="20" id="bAr-ga-nh4"/>
+                            <constraint firstItem="F60-ia-s3E" firstAttribute="leading" secondItem="lEc-I8-uCO" secondAttribute="leading" id="goi-PJ-nQn"/>
                             <constraint firstItem="WfJ-Jh-Lq4" firstAttribute="leading" secondItem="la6-Xg-duh" secondAttribute="leading" id="gzz-Mv-dWC"/>
-                            <constraint firstItem="rsq-xB-oYB" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" constant="10" id="obF-OH-nz8"/>
-                            <constraint firstItem="P8I-dR-VXl" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" id="pTi-EA-dQ4"/>
+                            <constraint firstItem="rsq-xB-oYB" firstAttribute="top" secondItem="la6-Xg-duh" secondAttribute="top" constant="5" id="obF-OH-nz8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="売り場マップ編集" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="wwt-U3-PPD"/>

@@ -19,9 +19,9 @@ extension UIButton {
     /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
     /// - ラベルの自動調整の際に縮小率を0.５に設定
     /// - ラベルの自動調整の際に必ず１行になるように設定
-    func setAppearance() {
+    func setAppearance(fontColor: UIColor) {
         // 文字色を黒に設定
-        self.setTitleColor(.black, for: .normal)
+        self.setTitleColor(fontColor, for: .normal)
         // フォントをボールド、サイズを２０に設定
         self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         // 枠線の幅を１で設定
@@ -57,8 +57,8 @@ extension UIButton {
     /// UIButtonに基本装飾と影を設定
     /// - setAppearance(to: button)
     /// - addShadow(to: button)
-    func setAppearanceWithShadow() {
-        setAppearance()
+    func setAppearanceWithShadow(fontColor: UIColor) {
+        setAppearance(fontColor: fontColor)
         addShadow()
     }
 
@@ -68,6 +68,7 @@ extension UIButton {
     func setDisable() {
         self.isEnabled = false
         self.backgroundColor = .white
+        self.setTitleColor(.black, for: .normal)
     }
 
     /// ボタンを活性化させる
@@ -76,6 +77,7 @@ extension UIButton {
     func setEnable() {
         self.isEnabled = true
         self.backgroundColor = .lightGray
+        self.setTitleColor(.white, for: .normal)
     }
 
     /// 売り場マップで使用する縦長ボタンの設定用メソッド

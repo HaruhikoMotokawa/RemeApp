@@ -215,7 +215,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
         // for文でbuttonsに順番にアクセス
         for button in buttons {
             button?.setTitle("選択", for: .normal)
-            button?.setAppearanceWithShadow()
+            button?.setAppearanceWithShadow(fontColor: .black)
         }
     }
 
@@ -256,9 +256,9 @@ class EditSelectedSalesFloorViewController: UIViewController {
     /// - 両方のボタンに基本設定と影を設定
     /// - 両方のボタンの背景色を灰色に設定
     private func setCancelAndSaveButtonAppearance() {
-        cancelButton.setAppearanceWithShadow()
+        cancelButton.setAppearanceWithShadow(fontColor: .white)
         cancelButton.backgroundColor = .lightGray
-        saveButton.setAppearanceWithShadow()
+        saveButton.setAppearanceWithShadow(fontColor: .white)
         saveButton.backgroundColor = .lightGray
     }
 

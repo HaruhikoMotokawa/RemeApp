@@ -30,9 +30,6 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     @IBOutlet private weak var unitLabel: UILabel!
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
-    // !!!: 現状は使用していない、後で消すかも
-    @IBAction private func salesFloorTypeButton(_ sender: Any) {
-    }
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
     /// 写真を表示
@@ -59,9 +56,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         id = Self.count
-
         Self.count += 1
-
         print("[\(id)] 🔴\(#function)")
     }
 
@@ -75,7 +70,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     override func awakeFromNib() {
         super.awakeFromNib()
         // UIButtonの基本設定
-        salesFloorTypeButton.setAppearance()
+        salesFloorTypeButton.setAppearance(fontColor: .black)
     }
 
     // MARK: - setSelected

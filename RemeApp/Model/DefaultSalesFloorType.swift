@@ -65,7 +65,7 @@ enum DefaultSalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , P
             case .blueThree: return .red
             case .blueFour: return .systemRed
             case .blueFive: return .magenta
-            case .blueSix: return .systemGray
+            case .blueSix: return .systemMint
             case .blueSeven: return .systemGreen
             case .greenOne: return .systemIndigo
             case .greenTwo: return .cyan

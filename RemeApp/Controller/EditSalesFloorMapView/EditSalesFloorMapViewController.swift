@@ -109,7 +109,7 @@ class EditSalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setUseSalesFloorMapSelector()
         setShoppingStartPositionSelector()
-        resetButton.setAppearanceWithShadow()
+        resetButton.setAppearanceWithShadow(fontColor: .white)
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.black.cgColor
         containerView.layer.cornerRadius = 10

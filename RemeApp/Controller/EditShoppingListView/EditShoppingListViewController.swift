@@ -136,9 +136,12 @@ class EditShoppingListViewController: UIViewController {
     ///- tintColorを黒に設定
     ///- 影を追加
     private func setAppearance(_ button: UIButton) {
-        button.backgroundColor = .gray
-        button.layer.cornerRadius = 20
-        button.tintColor = .black
+        // 枠線の幅を１で設定
+        button.layer.borderWidth = 1
+        // 枠線のカラーを黒に設定
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.cornerRadius = 25
+
         button.addShadow()
     }
 
