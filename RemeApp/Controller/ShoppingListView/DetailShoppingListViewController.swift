@@ -13,11 +13,13 @@ class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 画面閉じて戻る
-    @IBAction func closeView(_ sender: Any) {
+    @IBAction private func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
     /// 商品名を表示
     @IBOutlet private weak var nameOfItemLabel: UILabel!
+    /// 必要数と単位と売り場の入ったstackView
+    @IBOutlet private weak var stackView: UIStackView!
     /// 必要数を表示
     @IBOutlet private weak var numberOfItemLabel: UILabel!
     /// 必要数の単位を表示
@@ -26,7 +28,7 @@ class DetailShoppingListViewController: UIViewController {
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
 
     /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
-    @IBAction func goSalesFloorMapView(_ sender: Any) {
+    @IBAction private func goSalesFloorMapView(_ sender: Any) {
         self.dismiss(animated: true) {
             if let windowScene = UIApplication.shared.connectedScenes
                 .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
@@ -61,9 +63,15 @@ class DetailShoppingListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
-        self.title = "詳細"
         displayData()
+        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
+        nameOfItemLabel.setAppearance()
+        nameOfItemLabel.setBorder()
+        numberOfItemLabel.setAppearance()
+        unitLabel.setAppearance()
+        supplementLabel.setAppearance()
+        stackView.layer.cornerRadius = 10
+        stackView.clipsToBounds = true
     }
 
     // MARK: - func
@@ -90,14 +98,13 @@ class DetailShoppingListViewController: UIViewController {
         unitLabel.text = unitLabelText
         setSalesFloorTypeButton(salesFloorRawValue: salesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementLabelText)
-        photoPathImageView.image = photoPathImage
-
+        setPhotoPathImageView(image: photoPathImage)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
-    func setSalesFloorTypeButton(salesFloorRawValue: Int) {
+    private func setSalesFloorTypeButton(salesFloorRawValue: Int) {
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         // 0 -> カスタム、1(else) -> デフォルト
@@ -112,7 +119,7 @@ class DetailShoppingListViewController: UIViewController {
 
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
-    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+    private func setCustomSalesFloorButton(salesFloorRawValue: Int) {
         // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
         let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
         let customSalesFloorModel = customSalesFloorModelList.first
@@ -124,7 +131,7 @@ class DetailShoppingListViewController: UIViewController {
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
     /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
     /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
-    func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
+    private func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
         let realm = try! Realm()
         // カスタム売り場モデルのオブジェクトからフィルターメソッドを使って条件に合うモデルを抽出
         let results = realm.objects(CustomSalesFloorModel.self)
@@ -135,7 +142,7 @@ class DetailShoppingListViewController: UIViewController {
 
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
-    func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
+    private func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
         // 引数で指定されたrawValueに対応するDefaultSalesFloorTypeを取得する
         let salesFloor = DefaultSalesFloorType(rawValue: salesFloorRawValue)
         // ボタンのタイトルと背景色を設定する
@@ -148,10 +155,21 @@ class DetailShoppingListViewController: UIViewController {
     /// - 補足がある場合はそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementLabelText == nil {
-            supplementLabel.textColor = UIColor.gray
-            supplementLabel.text = "なし"
-        }else{
             supplementLabel.text = supplementLabelText
+        } else {
+            supplementLabel.text = "補足：" + supplementLabelText!
+            supplementLabel.setBorder()
+        }
+    }
+
+    private func setPhotoPathImageView(image: UIImage?) {
+        if image == nil {
+            photoPathImageView.image = image
+        } else {
+            let resizedImage = image?.resize(to: CGSize(width: 325, height: 325))
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
         }
     }
 }

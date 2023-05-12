@@ -15,4 +15,17 @@ extension UIImage {
         draw(in: CGRect(origin: .zero, size: size))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+
+    func roundedAndBordered(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage? {
+        let size = CGSize(width: self.size.width + borderWidth * 2, height: self.size.height + borderWidth * 2)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            let clipPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: borderWidth, y: borderWidth), size: self.size), cornerRadius: cornerRadius)
+            borderColor.setStroke()
+            clipPath.lineWidth = borderWidth
+            clipPath.stroke()
+            clipPath.addClip()
+            self.draw(at: CGPoint(x: borderWidth, y: borderWidth))
+        }
+    }
 }

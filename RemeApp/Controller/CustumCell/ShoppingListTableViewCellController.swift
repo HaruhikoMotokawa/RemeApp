@@ -169,7 +169,9 @@ class ShoppingListTableViewCellController: UITableViewCell  {
             photoPathImageView.image = image
         } else {
             let resizedImage = image?.resize(to: CGSize(width: 50, height: 50))
-            photoPathImageView.image = resizedImage
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
         }
     }
 
