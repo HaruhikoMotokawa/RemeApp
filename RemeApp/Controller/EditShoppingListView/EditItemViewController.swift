@@ -276,6 +276,9 @@ class EditItemViewController: UIViewController {
         }
     }
 
+    /// 受け取った写真データを変換して表示するためのメソッド
+    ///  - イメージがnilだったらそのままからを表示
+    ///  - イメージがある場合はサイズを調整し、角丸にして表示する
     private func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
             photoPathImageView.image = image
@@ -481,7 +484,8 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     /// - 画面を閉じてCreateNewItemViewに戻る
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        photoPathImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        setPhotoPathImageView(image: image)
         deletePhotoButton.setEnable()
         photoBackgroundImage.isHidden = true
         dismiss(animated: true)
