@@ -70,7 +70,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     override func awakeFromNib() {
         super.awakeFromNib()
         // UIButtonの基本設定
-        salesFloorTypeButton.setAppearance(fontColor: .black)
+        setSalesFloorButtonAppearance()
     }
 
     // MARK: - setSelected
@@ -80,6 +80,33 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     // MARK: - func
 
+    /// UIButtonの装飾基本設定
+    /// - 文字色を黒に設定
+    /// - フォントをボールドにサイズを２０に設定
+    /// - 枠線の幅を１で設定
+    /// - 枠線のカラーを黒に設定
+    /// - バックグラウンドを角丸１０に設定
+    /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
+    /// - ラベルの自動調整の際に縮小率を0.５に設定
+    /// - ラベルの自動調整の際に必ず１行になるように設定
+    func setSalesFloorButtonAppearance() {
+        // 文字色を黒に設定
+        salesFloorTypeButton.setTitleColor(.black, for: .normal)
+        // フォントをボールド、サイズを２０に設定
+        salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        // 枠線の幅を１で設定
+        salesFloorTypeButton.layer.borderWidth = 1
+        // 枠線のカラーを黒に設定
+        salesFloorTypeButton.layer.borderColor = UIColor.black.cgColor
+        // バックグラウンドを角丸１０に設定
+        salesFloorTypeButton.layer.cornerRadius = 10.0
+        // ラベルのテキストをボタンの幅に合わせて自動的に調整
+        salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        // ラベルの自動調整の際に縮小率を0.５に設定
+        salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
+        // ラベルの自動調整の際に必ず１行になるように設定
+        salesFloorTypeButton.titleLabel?.numberOfLines = 1
+    }
     /// 買い物リストのデータをセルの各パーツにセットする
      func setShoppingList(isCheckBox: Bool,
                           nameOfItem: String,
