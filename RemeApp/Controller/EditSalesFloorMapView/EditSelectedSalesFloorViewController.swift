@@ -256,9 +256,9 @@ class EditSelectedSalesFloorViewController: UIViewController {
     /// - 両方のボタンに基本設定と影を設定
     /// - 両方のボタンの背景色を灰色に設定
     private func setCancelAndSaveButtonAppearance() {
-        cancelButton.setAppearanceWithShadow(fontColor: .white)
+        cancelButton.setAppearanceWithShadow(fontColor: .black)
         cancelButton.backgroundColor = .lightGray
-        saveButton.setAppearanceWithShadow(fontColor: .white)
+        saveButton.setAppearanceWithShadow(fontColor: .black)
         saveButton.backgroundColor = .lightGray
     }
 

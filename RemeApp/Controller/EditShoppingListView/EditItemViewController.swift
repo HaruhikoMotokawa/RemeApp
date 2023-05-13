@@ -85,7 +85,7 @@ class EditItemViewController: UIViewController {
     /// 写真の背景
     @IBOutlet private weak var photoBackgroundImage: UIImageView!
     /// 選択した写真を添付する
-    @IBOutlet private weak var photoImageView: UIImageView!
+    @IBOutlet private weak var photoPathImageView: UIImageView!
     /// キャンセルボタン
     @IBOutlet private weak var cancelButton: UIButton!
     /// 編集を終了してEditShoppingListViewに戻る遷移
@@ -132,7 +132,7 @@ class EditItemViewController: UIViewController {
     private var supplementTextViewText:String? = nil
 
     /// photoImageViewに表示する画像
-    private var photoImageViewImage:UIImage? = nil
+    private var photoPathImage:UIImage? = nil
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -160,8 +160,8 @@ class EditItemViewController: UIViewController {
     /// 画面上の全てのButtonの見た目の設定メソッド
     private func setAppearanceAllButton() {
         selectTypeOfSalesFloorButton.setAppearanceWithShadow(fontColor: .black)
-        selectPhotoButton.setAppearanceWithShadow(fontColor: .white)
-        cancelButton.setAppearanceWithShadow(fontColor: .white)
+        selectPhotoButton.setAppearanceWithShadow(fontColor: .black)
+        cancelButton.setAppearanceWithShadow(fontColor: .black)
         addButton.setAppearanceWithShadow(fontColor: .black)
         deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
     }
@@ -183,7 +183,7 @@ class EditItemViewController: UIViewController {
             addButton.setEnable()
         }
         // もし写真がない場合
-        if photoImageView.image == nil {
+        if photoPathImageView.image == nil {
             deletePhotoButton.setDisable()
             photoBackgroundImage.isHidden = false
         } else {
@@ -200,7 +200,7 @@ class EditItemViewController: UIViewController {
         unitPickerViewString = detail.unit
         selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
-        photoImageViewImage = detail.getImage()
+        photoPathImage = detail.getImage()
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
@@ -210,13 +210,13 @@ class EditItemViewController: UIViewController {
         selectUnitRow(selectedUnit: unitPickerViewString)
         setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
-        photoImageView.image = photoImageViewImage
+        setPhotoPathImageView(image: photoPathImage)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
-    func setSalesFloorTypeButton(salesFloorRawValue: Int?) {
+    private func setSalesFloorTypeButton(salesFloorRawValue: Int?) {
         guard let salesFloorRawValue else { return }
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
@@ -232,7 +232,7 @@ class EditItemViewController: UIViewController {
 
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
-    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+    private func setCustomSalesFloorButton(salesFloorRawValue: Int) {
         // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
         let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
         let customSalesFloorModel = customSalesFloorModelList.first
@@ -244,7 +244,7 @@ class EditItemViewController: UIViewController {
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
     /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
     /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
-    func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
+    private func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
         let realm = try! Realm()
         // カスタム売り場モデルのオブジェクトからフィルターメソッドを使って条件に合うモデルを抽出
         let results = realm.objects(CustomSalesFloorModel.self)
@@ -255,7 +255,7 @@ class EditItemViewController: UIViewController {
 
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
-    func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
+    private func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
         // 引数で指定されたrawValueに対応するDefaultSalesFloorTypeを取得する
         let salesFloor = DefaultSalesFloorType(rawValue: salesFloorRawValue)
         // ボタンのタイトルと背景色を設定する
@@ -276,14 +276,25 @@ class EditItemViewController: UIViewController {
         }
     }
 
+    private func setPhotoPathImageView(image: UIImage?) {
+        if image == nil {
+            photoPathImageView.image = image
+        } else {
+            let resizedImage = image?.resize(to: CGSize(width: 355, height: 500))
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
+        }
+    }
+
     /// numberOfItemPickerViewに表示できるように変換する
-    func selectNumberOfItemRow(selectedNumberOfItem: String) {
+    private func selectNumberOfItemRow(selectedNumberOfItem: String) {
         let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
         numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
     }
 
     /// unitPickerViewに表示できるように変換する
-    func selectUnitRow(selectedUnit: String) {
+    private func selectUnitRow(selectedUnit: String) {
         let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
         unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
     }
@@ -341,7 +352,7 @@ extension EditItemViewController {
         }
     }
 
-    func saveData() {
+    private func saveData() {
         // numberOfItemPickerViewで選択された値を取得
         let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
         // numberOfItemPickerViewで選択された値を取得
@@ -358,7 +369,7 @@ extension EditItemViewController {
             } else {
                 errandData.supplement = supplementTextView.text
             }
-            errandData.photoFileName = errandData.setImage(image: photoImageView.image)
+            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
             realm.add(errandData)
         }
     }
@@ -470,7 +481,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     /// - 画面を閉じてCreateNewItemViewに戻る
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        photoImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        photoPathImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         deletePhotoButton.setEnable()
         photoBackgroundImage.isHidden = true
         dismiss(animated: true)
@@ -485,7 +496,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
                                                 preferredStyle: .alert)
         let okAction = UIAlertAction(title: "削除する", style: .default) { (action) in
             // OKが押された時の処理
-            self.photoImageView.image = nil
+            self.photoPathImageView.image = nil
             self.deletePhotoButton.setDisable()
             self.photoBackgroundImage.isHidden = false
             if let filePath = self.imageFilePath {

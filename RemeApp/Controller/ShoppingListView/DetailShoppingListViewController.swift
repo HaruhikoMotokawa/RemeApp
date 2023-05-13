@@ -16,14 +16,7 @@ class DetailShoppingListViewController: UIViewController {
     @IBAction private func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
-    /// 商品名を表示
-    @IBOutlet private weak var nameOfItemLabel: UILabel!
-    /// 必要数と単位と売り場の入ったstackView
-    @IBOutlet private weak var stackView: UIStackView!
-    /// 必要数を表示
-    @IBOutlet private weak var numberOfItemLabel: UILabel!
-    /// 必要数の単位を表示
-    @IBOutlet private weak var unitLabel: UILabel!
+
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
 
@@ -38,10 +31,19 @@ class DetailShoppingListViewController: UIViewController {
         }
     }
 
-    /// 補足を表示
-    @IBOutlet private weak var supplementLabel: UILabel!
+    /// 詳細のView
+    @IBOutlet weak var detailView: UIView!
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
+    /// 商品名を表示
+    @IBOutlet private weak var nameOfItemLabel: UILabel!
+    /// 必要数を表示
+    @IBOutlet private weak var numberOfItemLabel: UILabel!
+    /// 必要数の単位を表示
+    @IBOutlet private weak var unitLabel: UILabel!
+
+    /// 補足を表示
+    @IBOutlet private weak var supplementLabel: UILabel!
 
     // MARK: - property
     /// nameOfItemLabelに表示するテキスト
@@ -66,12 +68,10 @@ class DetailShoppingListViewController: UIViewController {
         displayData()
         salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
         nameOfItemLabel.setAppearance()
-        nameOfItemLabel.setBorder()
+        setDetailView()
         numberOfItemLabel.setAppearance()
         unitLabel.setAppearance()
         supplementLabel.setAppearance()
-        stackView.layer.cornerRadius = 10
-        stackView.clipsToBounds = true
     }
 
     // MARK: - func
@@ -83,6 +83,14 @@ class DetailShoppingListViewController: UIViewController {
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
         photoPathImage = detail.getImage()
+    }
+
+    /// detailViewに枠線をつけるメソッド
+    private func setDetailView() {
+        detailView.layer.borderColor = UIColor.black.cgColor
+        detailView.layer.borderWidth = 2
+        detailView.layer.cornerRadius = 10
+        detailView.clipsToBounds = true
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
@@ -158,15 +166,14 @@ class DetailShoppingListViewController: UIViewController {
             supplementLabel.text = supplementLabelText
         } else {
             supplementLabel.text = "補足：" + supplementLabelText!
-            supplementLabel.setBorder()
         }
     }
 
     private func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
-            photoPathImageView.image = image
+            return
         } else {
-            let resizedImage = image?.resize(to: CGSize(width: 325, height: 325))
+            let resizedImage = image?.resize(to: CGSize(width: 410, height: 410))
             let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage

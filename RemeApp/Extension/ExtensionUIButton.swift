@@ -77,7 +77,7 @@ extension UIButton {
     func setEnable() {
         self.isEnabled = true
         self.backgroundColor = .lightGray
-        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(.black, for: .normal)
     }
 
     /// 売り場マップで使用する縦長ボタンの設定用メソッド

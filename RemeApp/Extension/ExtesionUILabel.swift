@@ -15,8 +15,11 @@ extension UILabel {
     /// - 枠線を角丸に設定
     /// - サイズを枠線に合わせる
     func setBorder() {
+        let borderColor = UIColor.black.cgColor
+        self.layer.borderColor = borderColor
+        self.layer.borderWidth = 2
         self.layer.cornerRadius = 10
-        self.clipsToBounds = true
+        self.sizeToFit()
     }
 
     func setAppearance() {
