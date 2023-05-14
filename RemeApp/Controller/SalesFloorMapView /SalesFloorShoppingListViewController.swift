@@ -57,14 +57,18 @@ class SalesFloorShoppingListViewController: UIViewController {
         salesFloorShoppingListTableView.reloadData()
     }
 
-    /// 全てのセルがチェックされている場合にアラートを表示する
+    /// 全てのセルがチェックされている場合にアラートを表示、OKをタップして一つ前の画面に戻る
     private func completionSalesFloorAlert() {
         if errandDataList.allSatisfy({ $0.isCheckBox }) {
             let alertController = UIAlertController(title: "この売り場の買い物が完了しました！", message: nil,
                                                     preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.navigationController?.popViewController(animated: true)
+            }
+
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
+
         }
     }
 
