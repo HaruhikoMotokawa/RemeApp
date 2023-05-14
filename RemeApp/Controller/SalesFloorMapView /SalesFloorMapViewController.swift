@@ -146,7 +146,7 @@ class SalesFloorMapViewController: UIViewController {
 
     // MARK: - property
     /// 使いデータのダミーデータ
-    var errandDataList: [ErrandDataModel] = []
+    private var errandDataList: [ErrandDataModel] = []
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
@@ -169,7 +169,7 @@ class SalesFloorMapViewController: UIViewController {
     // MARK: - func
 
     /// 保存されたお使いデータをセットする
-    func setErrandData() {
+    private func setErrandData() {
         let realm = try! Realm()
         let result = realm.objects(ErrandDataModel.self)
         errandDataList = Array(result)
@@ -209,7 +209,7 @@ class SalesFloorMapViewController: UIViewController {
     ///  - 対象の売り場に購入商品がない場合は
     ///    - バックグラウンドカラーを白に設定
     ///    - ボタンの非活性化
-    func exchangeAllSalesFloorButton() {
+    private func exchangeAllSalesFloorButton() {
         // - UserDefaultsに使用するキーを指定
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         // - UserDefaultsから設定を取得
@@ -231,37 +231,35 @@ class SalesFloorMapViewController: UIViewController {
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
                        blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
                        greenFourButton, greenFiveButton]
+
         let realm = try! Realm()
         // カスタム売り場モデルのオブジェクトからフィルターメソッドを使ってcustomSalesFloorRawValueが０〜１６に合うモデルを抽出
         let results = realm.objects(CustomSalesFloorModel.self)
             .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
-        // buttonsに対応するcustomSalesFloorListを順に設定
+
+        // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
+            // 取得したカスタム売り場を配列として定義
             let customSalesFloor = results[index]
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
+            // customSalesFloorのcustomColorOfSalesFloorRawValueの値から対応する色を取得
             let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
-            button?.backgroundColor = customSalesFloorColor?.color
-        }
-        // salesFloorRawValueがerrandDataListに存在しないボタンを無効にして背景色を白にする
-        for (index, button) in buttons.enumerated() {
-            guard let salesFloor = DefaultSalesFloorType(rawValue: index) else {
-                button?.setTitle("", for: .normal)
-                button?.backgroundColor = .white
-                button?.isEnabled = false
-                continue
-            }
-
-            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.intValue }) &&
-                (errandDataList.first(where: {$0.salesFloorRawValue == index})?.isCheckBox == false) {
+            // salesFloorRawValueがerrandDataListに存在するボタンを有効にして背景色を設定された色にする
+            if errandDataList.contains(where: { $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue }) {
+                button?.backgroundColor = customSalesFloorColor?.color
                 button?.isEnabled = true
-            } else {
+                // もし上記に該当するデータの中でisCheckBoxが全てtrueのものは無効化にする
+                if errandDataList.filter({ $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue })
+                    .allSatisfy({ $0.isCheckBox }) {
+                    button?.backgroundColor = UIColor.white
+                    button?.isEnabled = false
+                }
+            } else { // ない場合は、ボタンを無効にして、背景色を白に設定
                 button?.isEnabled = false
                 button?.backgroundColor = .white
             }
         }
     }
-
-
 
     private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定

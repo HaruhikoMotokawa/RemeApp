@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomSalesFloorType: Int, CaseIterable {// PersistableEnum
+enum CustomSalesFloorType: Int, CaseIterable {
 
     /// 売り場の番地、赤１〜５と青１〜７、緑１〜５
     case redOne
