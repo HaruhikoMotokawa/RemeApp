@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト編集" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwj-Md-Zw5">
-                                <rect key="frame" x="118" y="25" width="139" height="23"/>
+                                <rect key="frame" x="118" y="25" width="139" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dg6-dk-nnA">
-                                <rect key="frame" x="0.0" y="58" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wy-wG-LSR">
@@ -71,8 +71,8 @@
                             <constraint firstItem="H3S-mX-kxR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="134-8f-6rE"/>
                             <constraint firstItem="ZdX-Bs-mTo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="5" id="CVB-vO-nMo"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="zwj-Md-Zw5" secondAttribute="bottom" constant="10" id="J77-Th-4wj"/>
-                            <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="H3S-mX-kxR" secondAttribute="bottom" id="MF3-8f-U8x"/>
-                            <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="ZdX-Bs-mTo" secondAttribute="bottom" id="Ny4-uC-gg3"/>
+                            <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="H3S-mX-kxR" secondAttribute="bottom" constant="10" id="MF3-8f-U8x"/>
+                            <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="ZdX-Bs-mTo" secondAttribute="bottom" constant="10" id="Ny4-uC-gg3"/>
                             <constraint firstItem="zwj-Md-Zw5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="RWO-rK-mfh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="H3S-mX-kxR" secondAttribute="trailing" constant="5" id="TAX-fN-3Q6"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="YZm-cb-OLJ"/>

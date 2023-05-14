@@ -209,7 +209,6 @@ class SalesFloorMapViewController: UIViewController {
     ///  - 対象の売り場に購入商品がない場合は
     ///    - バックグラウンドカラーを白に設定
     ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
     func exchangeAllSalesFloorButton() {
         // - UserDefaultsに使用するキーを指定
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
@@ -262,10 +261,8 @@ class SalesFloorMapViewController: UIViewController {
         }
     }
 
-    /// デフォルト売り場マップを全てのボタンにセットする
-    /// - 名称を設定
-    /// - お使いデータに対象の売り場の品目の有無によって背景色を設定
-    /// - お使いデータに対象の売り場の品目の有無によってボタンの有効化と無効化を設定
+
+
     private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -277,14 +274,18 @@ class SalesFloorMapViewController: UIViewController {
             let salesFloor = DefaultSalesFloorType(rawValue: index)!
             // 各ボタンに売り場の名称を設定
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
-            // お使いデータの中に対象の売り場があるかどうかで、ボタンの状態を変更する
-            if (errandDataList.first(where: {$0.salesFloorRawValue == index})?.salesFloorRawValue) != nil &&
-                (errandDataList.first(where: {$0.salesFloorRawValue == index})?.isCheckBox == false) {
-                // ある場合はバックグラウンドカラーを設定した色に変更し、ボタンを有効化する
+
+            // errandDataListにsalesFloorRawValueに該当するものがある場合は、ボタンを有効にして、背景色を設定
+            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.rawValue }) {
                 button?.backgroundColor = salesFloor.colorOfSalesFloor
                 button?.isEnabled = true
-            } else {
-                // ない場合はバックグラウンドカラーを白に設定し、ボタンを無効化する
+                // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
+                if errandDataList.filter({ $0.salesFloorRawValue == salesFloor.rawValue })
+                    .allSatisfy({ $0.isCheckBox }) {
+                    button?.backgroundColor = UIColor.white
+                    button?.isEnabled = false
+                }
+            } else { // ない場合は、ボタンを無効にして、背景色を白に設定
                 button?.backgroundColor = UIColor.white
                 button?.isEnabled = false
             }

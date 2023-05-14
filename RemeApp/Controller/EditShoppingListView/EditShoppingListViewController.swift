@@ -63,9 +63,9 @@ class EditShoppingListViewController: UIViewController {
         super.viewDidLoad()
         setTableVIew()
         setAppearance(createNewItemButton)
-        multipleDeletionsButton.setTitle("複数削除", for: .normal)
+        setEditButtonAppearance(button: multipleDeletionsButton, title: "複数削除")
+        setEditButtonAppearance(button: cancelEditButton, title: "キャンセル")
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        cancelEditButton.setTitle("キャンセル", for: .normal)
         cancelEditButton.isHidden = true
         setErrandData()
     }
@@ -84,6 +84,26 @@ class EditShoppingListViewController: UIViewController {
 
     // MARK: - func
 
+    /// 編集モード用のUIButtonの装飾基本設定
+    /// - ボタンのタイトルを引数で設定
+    /// - フォントサイズを１７に設定
+    /// - 枠線の幅を１で設定
+    /// - 枠線のカラーを白に設定
+    /// - バックグラウンドを角丸１０に設定
+    func setEditButtonAppearance(button: UIButton ,title: String) {
+        button.setTitle(title, for: .normal)
+        // 文字色を黒に設定
+        button.setTitleColor(.white, for: .normal)
+        // フォントをボールド、サイズを２０に設定
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        // 枠線の幅を１で設定
+        button.layer.borderWidth = 1
+        // 枠線のカラーを黒に設定
+        button.layer.borderColor = UIColor.white.cgColor
+        // バックグラウンドを角丸１０に設定
+        button.layer.cornerRadius = 10.0
+
+    }
     /// UITableViewの初期設定関連
     private func setTableVIew() {
         editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
