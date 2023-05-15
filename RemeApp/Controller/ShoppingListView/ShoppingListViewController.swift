@@ -132,7 +132,6 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         detailShoppingListViewController.configurer(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-
         self.present(detailShoppingListViewController, animated: true)
     }
 }

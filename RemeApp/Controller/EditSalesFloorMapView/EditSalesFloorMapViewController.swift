@@ -85,7 +85,6 @@ class EditSalesFloorMapViewController: UIViewController {
                 // 作成した初期値を書き込み
                 realm.add(newCustomSalesFloors)
             }
-            print("💀リセット実行💀")
         }
         // 何もしない処理
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -110,12 +109,22 @@ class EditSalesFloorMapViewController: UIViewController {
         setUseSalesFloorMapSelector()
         setShoppingStartPositionSelector()
         resetButton.setAppearanceWithShadow(fontColor: .black)
-        containerView.layer.borderWidth = 1
-        containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.cornerRadius = 10
+        setContainerViewAppearance()
     }
 
     // MARK: - func
+    /// containerViewの枠線設定メソッド
+    /// - 枠線幅１に設定
+    /// - 枠線を黒に設定
+    /// - 枠線を角丸に設定
+    /// - 角丸の後ろを切り抜く
+    private func setContainerViewAppearance() {
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.cornerRadius = 10
+        containerView.clipsToBounds = true
+    }
+
     /// 使用マップ設定のセグメントを設定する
     /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
     /// - セグメント左のタイトルを「カスタム」に設定

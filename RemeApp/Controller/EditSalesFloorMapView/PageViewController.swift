@@ -15,7 +15,6 @@ class PageViewController: UIPageViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // ②初期化
         self.initPageView()
     }

@@ -21,7 +21,6 @@ class DefaultSalesFloorMapViewController: UIViewController {
 
     /// 売り場のボタン：StoryboardのA-3
     @IBOutlet private weak var redThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-3をタップして売り場の買い物リストに画面遷移
 
     /// 売り場のボタン：StoryboardのB-1
     @IBOutlet private weak var greenFourButton: UIButton!

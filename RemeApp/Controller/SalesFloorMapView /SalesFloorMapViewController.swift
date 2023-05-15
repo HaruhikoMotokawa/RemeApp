@@ -217,7 +217,7 @@ class SalesFloorMapViewController: UIViewController {
         // 0 -> カスタム、1(else) -> デフォルト
         if salesFloorTypeInt == 0 {
             // カスタムマップタイプの処理
-            setCustomAllSalesFloorButton()
+            setCustomSalesFloorButton()
         } else {
             // デフォルトマップタイプの処理
             setDefaultSalesFloorButton()
@@ -225,7 +225,7 @@ class SalesFloorMapViewController: UIViewController {
     }
 
     /// カスタム売り場マップの見た目に全てのボタンをセットする
-    private func setCustomAllSalesFloorButton() {
+    private func setCustomSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
@@ -244,11 +244,11 @@ class SalesFloorMapViewController: UIViewController {
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
             // customSalesFloorのcustomColorOfSalesFloorRawValueの値から対応する色を取得
             let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
-            // salesFloorRawValueがerrandDataListに存在するボタンを有効にして背景色を設定された色にする
+            // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
             if errandDataList.contains(where: { $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue }) {
                 button?.backgroundColor = customSalesFloorColor?.color
                 button?.isEnabled = true
-                // もし上記に該当するデータの中でisCheckBoxが全てtrueのものは無効化にする
+                // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
                 if errandDataList.filter({ $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue })
                     .allSatisfy({ $0.isCheckBox }) {
                     button?.backgroundColor = UIColor.white
@@ -273,7 +273,7 @@ class SalesFloorMapViewController: UIViewController {
             // 各ボタンに売り場の名称を設定
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
 
-            // errandDataListにsalesFloorRawValueに該当するものがある場合は、ボタンを有効にして、背景色を設定
+            // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
             if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.rawValue }) {
                 button?.backgroundColor = salesFloor.colorOfSalesFloor
                 button?.isEnabled = true
@@ -283,7 +283,7 @@ class SalesFloorMapViewController: UIViewController {
                     button?.backgroundColor = UIColor.white
                     button?.isEnabled = false
                 }
-            } else { // ない場合は、ボタンを無効にして、背景色を白に設定
+            } else { // errandDataListにsalesFloorRawValueに該当するものがない場合は、ボタンを無効にして、背景色を白に設定
                 button?.backgroundColor = UIColor.white
                 button?.isEnabled = false
             }

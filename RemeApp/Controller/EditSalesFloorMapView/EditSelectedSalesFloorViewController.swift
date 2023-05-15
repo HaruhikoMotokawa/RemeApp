@@ -78,7 +78,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
     @IBOutlet private weak var systemRedButton: UIButton!
     /// 売り場のカラーをsystemRedで選択する
     @IBAction private func selectSystemRed(_ sender: Any) {
-        selectColor(type: .systemRed)
+        selectColor(type: .yellow)
     }
 
     /// 売り場のカラーをmagentaで選択するbutton
@@ -192,7 +192,7 @@ class EditSelectedSalesFloorViewController: UIViewController {
         purpleButton.backgroundColor = CustomSalesFloorColor.purple.color
         brownButton.backgroundColor = CustomSalesFloorColor.brown.color
         redButton.backgroundColor = CustomSalesFloorColor.red.color
-        systemRedButton.backgroundColor = CustomSalesFloorColor.systemRed.color
+        systemRedButton.backgroundColor = CustomSalesFloorColor.yellow.color
         magentaButton.backgroundColor = CustomSalesFloorColor.magenta.color
         systemGrayButton.backgroundColor = CustomSalesFloorColor.systemGray.color
         systemGreenButton.backgroundColor = CustomSalesFloorColor.systemGreen.color

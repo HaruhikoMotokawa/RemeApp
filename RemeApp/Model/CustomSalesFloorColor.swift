@@ -17,7 +17,7 @@ enum CustomSalesFloorColor: Int {
     case purple
     case brown
     case red
-    case systemRed
+    case yellow
     case magenta
     case systemGray
     case systemGreen
@@ -45,8 +45,8 @@ enum CustomSalesFloorColor: Int {
                 return UIColor.brown
             case .red:
                 return UIColor.red
-            case .systemRed:
-                return UIColor.systemRed
+            case .yellow:
+                return UIColor.yellow
             case .magenta:
                 return UIColor.magenta
             case .systemGray:

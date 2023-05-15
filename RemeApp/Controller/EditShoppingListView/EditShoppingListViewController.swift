@@ -14,7 +14,6 @@ class EditShoppingListViewController: UIViewController {
     // MARK: - @IBOutlet & @IBAction
     /// 複数削除モードの解除ボタン
     @IBOutlet private weak var cancelEditButton: UIButton!
-
     /// 複数削除モードを中断して終了する
     @IBAction private func isCancelEdit(_ sender: Any) {
         // 選択された行のIndexPathの配列を取得し、一つ一つのIndexPathに対して以下の処理を実行する。
@@ -24,6 +23,7 @@ class EditShoppingListViewController: UIViewController {
         }
         isEditingMode = false
     }
+
     /// 複数削除ボタン
     @IBOutlet private weak var multipleDeletionsButton: UIButton!
 
@@ -46,25 +46,22 @@ class EditShoppingListViewController: UIViewController {
     // MARK: - property
     /// 編集モードのフラグ
     private var isEditingMode: Bool = false
-
-    let errandData = ErrandDataModel()
-
+    /// お使いデータのインスタンス化
+    private let errandData = ErrandDataModel()
     /// お使いデータ
     private var errandDataList: [ErrandDataModel] = []
-
     /// Realmから取得したErrandDataModelの結果セットを保持するプロパティ
     private var errandDataModel: Results<ErrandDataModel>?
-
-    // Realmの監視用トークン
+    /// Realmの監視用トークン
     private var notificationToken: NotificationToken?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableVIew()
-        setAppearance(createNewItemButton)
-        setEditButtonAppearance(button: multipleDeletionsButton, title: "複数削除")
-        setEditButtonAppearance(button: cancelEditButton, title: "キャンセル")
+        setCreateNewItemButtonAppearance()
+        setEditButtonAppearance(multipleDeletionsButton, title: "複数削除")
+        setEditButtonAppearance(cancelEditButton, title: "キャンセル")
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
         setErrandData()
@@ -72,14 +69,12 @@ class EditShoppingListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNotification()
+        setupNotification() // realmのNotificationをセット
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // 通知の解除
-        print("解除やで")
-        notificationToken?.invalidate()
+        notificationToken?.invalidate() // realmのNotificationの解除
     }
 
     // MARK: - func
@@ -90,7 +85,7 @@ class EditShoppingListViewController: UIViewController {
     /// - 枠線の幅を１で設定
     /// - 枠線のカラーを白に設定
     /// - バックグラウンドを角丸１０に設定
-    func setEditButtonAppearance(button: UIButton ,title: String) {
+    private func setEditButtonAppearance(_ button: UIButton ,title: String) {
         button.setTitle(title, for: .normal)
         // 文字色を黒に設定
         button.setTitleColor(.white, for: .normal)
@@ -102,8 +97,8 @@ class EditShoppingListViewController: UIViewController {
         button.layer.borderColor = UIColor.white.cgColor
         // バックグラウンドを角丸１０に設定
         button.layer.cornerRadius = 10.0
-
     }
+
     /// UITableViewの初期設定関連
     private func setTableVIew() {
         editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
@@ -111,6 +106,19 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.delegate = self
         editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                            forCellReuseIdentifier: "ShoppingListTableViewCell")
+    }
+
+
+    /// CreateNewItemButtonの装飾処理をするメソッド
+    ///- 枠線の幅を１に設定
+    ///- 枠線の色を黒に設定
+    ///- 背景を角丸２５に設定
+    ///- 影を追加
+    private func setCreateNewItemButtonAppearance() {
+        createNewItemButton.layer.borderWidth = 1 // 枠線の幅を１で設定
+        createNewItemButton.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
+        createNewItemButton.layer.cornerRadius = 25 // 角丸の値
+        createNewItemButton.addShadow() // 影
     }
 
     /// 保存されたお使いデータをセットする
@@ -127,14 +135,11 @@ class EditShoppingListViewController: UIViewController {
         // 変更通知を受け取る
         notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
             switch changes {
+                    //　画面遷移時の初回実行処理（画面移動後に毎回実施）
                 case .initial:
-                    print("🟠\(self!.errandDataList)")
                     self?.setErrandData()
-                    print("🟣\(self!.errandDataList)")
                     self?.sortErrandDataList()
-                    print("⚫️\(self!.errandDataList)")
-                    print("初めてなんだなぁ😊")
-
+                    // 新規と追加処理の際の処理
                 case .update(let errandDataModel,let deletions,let insertions,let modifications):
                     print(errandDataModel)
                     print(deletions)
@@ -142,27 +147,11 @@ class EditShoppingListViewController: UIViewController {
                     print(modifications)
                     self?.setErrandData()
                     self?.sortErrandDataList()
-                    print("変更があったデー✋🏻")
+                    // エラー時の処理
                 case .error:
                     print("困ったことが起きました😱")
             }
         }
-    }
-    
-
-    /// ボタンの背景色を変更するメソッド
-    ///- 背景色を灰色に設定
-    ///- 背景を角丸２０に設定
-    ///- tintColorを黒に設定
-    ///- 影を追加
-    private func setAppearance(_ button: UIButton) {
-        // 枠線の幅を１で設定
-        button.layer.borderWidth = 1
-        // 枠線のカラーを黒に設定
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.cornerRadius = 25
-
-        button.addShadow()
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
@@ -282,7 +271,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = editShoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
-            print("[\(cell.id)] 🔵\(#function)")
             // 編集モードの状態によってチェックボックスの表示を切り替える
             cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
@@ -325,10 +313,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [self]
             (action, view, completionHandler) in
             let realm = try! Realm()
-            print("🟥抽出した \(indexPath.row)")
-
             let target = self.errandDataList[indexPath.row]
-            print("🟦レルムで削除するオブジェクト \(target)")
             try! realm.write(withoutNotifying: [self.notificationToken!]) {
                 realm.delete(target)
             }

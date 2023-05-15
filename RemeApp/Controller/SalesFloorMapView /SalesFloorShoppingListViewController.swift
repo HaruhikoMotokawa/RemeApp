@@ -17,7 +17,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - property
     /// お使いデータ
-    var errandDataList: [ErrandDataModel] = []
+    private var errandDataList: [ErrandDataModel] = []
 
     var salesFloorRawValue: Int = 0
 
@@ -39,7 +39,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - func
 
-    func setSelectedErrandDataList(salesFloorRawValue: Int) {
+    private func setSelectedErrandDataList(salesFloorRawValue: Int) {
         let realm = try! Realm()
         let result = realm.objects(ErrandDataModel.self)
         errandDataList = Array(result.filter { $0.salesFloorRawValue == salesFloorRawValue })
@@ -65,10 +65,8 @@ class SalesFloorShoppingListViewController: UIViewController {
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
                 self.navigationController?.popViewController(animated: true)
             }
-
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
-
         }
     }
 
@@ -100,7 +98,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
 
     /// salesFloorShoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
-    /// - detailShoppingListViewControllerにプッシュ遷移
+    /// - detailShoppingListViewControllerにモーダル遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
         let detailShoppingListViewController = storyboard.instantiateViewController(

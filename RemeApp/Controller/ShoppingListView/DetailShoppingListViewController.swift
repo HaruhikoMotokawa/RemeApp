@@ -169,6 +169,9 @@ class DetailShoppingListViewController: UIViewController {
         }
     }
 
+    /// 受け渡されたデータをphotoPathImageViewに表示
+    /// - 画像がなければ抜ける
+    /// - 画像があればリサイズと角丸処理をして表示する
     private func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
             return

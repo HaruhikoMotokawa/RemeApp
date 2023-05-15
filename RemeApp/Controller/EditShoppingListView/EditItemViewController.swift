@@ -166,6 +166,8 @@ class EditItemViewController: UIViewController {
         deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
     }
 
+    /// 遷移時にヘッダータイトルを変更するメソッド
+    /// - nameOfItemTextField.textの有無で変更
     private func setTitleLabel() {
         if nameOfItemTextField.text == "" {
             titleLabel.text = "新規作成"
@@ -174,15 +176,18 @@ class EditItemViewController: UIViewController {
         }
     }
 
-    /// 画面遷移してきた際に写真データの有無で写真の削除ボタンの活性化、非活性化を切り替える処理
+    /// 画面遷移してきた際にデータの有無によってボタンの活性化を切り替えるメソッド
+    /// - 商品名のデータがある場合はaddButtonを活性化
+    /// - 写真データがある場合はdeletePhotoButtonを活性化、photoBackgroundImageを非表示
     private func setDisableOrEnable() {
+        // 追加ボタンの切り替え
         if nameOfItemTextField.text == "" {
             selectTypeOfSalesFloorButton.setDisable()
             addButton.setDisable()
         } else {
             addButton.setEnable()
         }
-        // もし写真がない場合
+        // 添付写真削除ボタンの切り替えと背景写真イメージの切り替え
         if photoPathImageView.image == nil {
             deletePhotoButton.setDisable()
             photoBackgroundImage.isHidden = false
@@ -211,6 +216,18 @@ class EditItemViewController: UIViewController {
         setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
         setPhotoPathImageView(image: photoPathImage)
+    }
+
+    /// numberOfItemPickerViewに表示できるように変換する
+    private func selectNumberOfItemRow(selectedNumberOfItem: String) {
+        let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
+        numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
+    }
+
+    /// unitPickerViewに表示できるように変換する
+    private func selectUnitRow(selectedUnit: String) {
+        let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
+        unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
@@ -288,18 +305,6 @@ class EditItemViewController: UIViewController {
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage
         }
-    }
-
-    /// numberOfItemPickerViewに表示できるように変換する
-    private func selectNumberOfItemRow(selectedNumberOfItem: String) {
-        let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
-        numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
-    }
-
-    /// unitPickerViewに表示できるように変換する
-    private func selectUnitRow(selectedUnit: String) {
-        let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
-        unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド

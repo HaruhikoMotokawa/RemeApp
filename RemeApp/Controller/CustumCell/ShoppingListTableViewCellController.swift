@@ -14,9 +14,10 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     /// チェックボックスのUIButton
     @IBOutlet  weak var checkBoxButton: CheckBox!
+
     /// チェックボックスがタプされた際のメソッド
     /// - cellのバックグラウンドカラーをグレイに変更
-        @IBAction private func isCheckBoxButton(_ sender: Any) {
+    @IBAction private func isCheckBoxButton(_ sender: Any) {
         changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
         isChecked = !isChecked
         delegate?.didTapCheckBoxButton(self)
@@ -57,12 +58,10 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         super.init(coder: coder)
         id = Self.count
         Self.count += 1
-        print("[\(id)] 🔴\(#function)")
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        print("[\(id)] 🟢\(#function)")
     }
 
     // MARK: - awakeFromNib
@@ -92,7 +91,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     func setSalesFloorButtonAppearance() {
         // 文字色を黒に設定
         salesFloorTypeButton.setTitleColor(.black, for: .normal)
-        // フォントをボールド、サイズを２０に設定
+        // フォントをボールド、サイズを１７に設定
         salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         // 枠線の幅を１で設定
         salesFloorTypeButton.layer.borderWidth = 1
@@ -108,13 +107,13 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
     }
     /// 買い物リストのデータをセルの各パーツにセットする
-     func setShoppingList(isCheckBox: Bool,
-                          nameOfItem: String,
-                          numberOfItem: String,
-                          unit: String,
-                          salesFloorRawValue:Int,
-                          supplement: String?,
-                          image: UIImage?) {
+    func setShoppingList(isCheckBox: Bool,
+                         nameOfItem: String,
+                         numberOfItem: String,
+                         unit: String,
+                         salesFloorRawValue:Int,
+                         supplement: String?,
+                         image: UIImage?) {
         changeBackgroundColor(isCheckBox: isCheckBox)
         nameOfItemLabel.text = nameOfItem
         numberOfItemLabel.text = numberOfItem
@@ -156,13 +155,13 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
-     func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
         // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
         let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
         let customSalesFloorModel = customSalesFloorModelList.first
         // ボタンのタイトルと背景色を設定する
         salesFloorTypeButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
-         salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
+        salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
     }
 
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数

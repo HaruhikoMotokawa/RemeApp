@@ -63,7 +63,7 @@ enum DefaultSalesFloorType: Int, CaseIterable {
             case .blueOne: return .purple
             case .blueTwo: return .brown
             case .blueThree: return .red
-            case .blueFour: return .systemRed
+            case .blueFour: return .yellow
             case .blueFive: return .magenta
             case .blueSix: return .systemMint
             case .blueSeven: return .systemGreen
