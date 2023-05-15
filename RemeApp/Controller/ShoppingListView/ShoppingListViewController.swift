@@ -4,8 +4,8 @@
 //
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
-
 import UIKit
+import RealmSwift
 
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
@@ -16,17 +16,7 @@ class ShoppingListViewController: UIViewController {
 
     // MARK: - property
     /// 買い物リストに表示するお使いデータのダミーデータ
-    private var errandDataList: [ErrandDataModel] =
-    [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15,supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-     ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))
-    ]
+    private var errandDataList: [ErrandDataModel] = []
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -35,29 +25,29 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
-        sortErrandDataList()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: .reloadTableView, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setErrandData()
+        sortErrandDataList()
+    }
     // MARK: - func
 
-    /// EditSalesFloorMapViewControllerのchangeSalesFloorMapメソッドからNotificationCenterの受信を受けた時の処理
-    @objc func reloadTableView() {
-        shoppingListTableView.reloadData()
+    /// 保存されたお使いデータをセットする
+    func setErrandData() {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result)
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - NotificationCenterの受診をセット
     /// - UserDefaultsに使用するキーを指定
     /// - UserDefaultsから設定を取得
     /// -  画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortErrandDataList() {
-        NotificationCenter.default.addObserver(self, selector: #selector(sortLeftErrandDataList),
-                                               name: .sortLeftErrandDataList, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sortRightErrandDataList),
-                                               name: .sortRightErrandDataList, object: nil)
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         if shoppingStartPositionInt == 0 {
@@ -67,10 +57,10 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
-    /// NotificationCenterによって買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortLeftErrandDataList() {
+    func sortLeftErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -81,10 +71,10 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.reloadData()
     }
 
-    /// NotificationCenterによって買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    @objc func sortRightErrandDataList() {
+    func sortRightErrandDataList() {
         errandDataList = errandDataList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -125,7 +115,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
                                  supplement: errandDataModel.supplement,
-                                 image: errandDataModel.photoImage)
+                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()
@@ -141,7 +131,8 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         let errandData = errandDataList[indexPath.row]
         detailShoppingListViewController.configurer(detail: errandData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(detailShoppingListViewController, animated: true)
+        detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
+        self.present(detailShoppingListViewController, animated: true)
     }
 }
 
@@ -155,12 +146,42 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         let isChecked = !errandDataList[indexPath.row].isCheckBox
+        // Realmのトランザクションを開始
+        let realm = try! Realm()
+        realm.beginWrite()
         errandDataList[indexPath.row].isCheckBox = isChecked
+        realm.add(errandDataList[indexPath.row], update: .modified)
+        try! realm.commitWrite()
+
+        // タップされたcellだけにアニメーションを実行する
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+            // cellをリロードする
+            self.shoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+            if isChecked {
+                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+                var lastUncheckedRowIndex: Int?
+                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+                for (index, errandData) in self.errandDataList.enumerated() {
+                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+                    if !errandData.isCheckBox && index < indexPath.row {
+                        lastUncheckedRowIndex = index
+                    }
+                }
+                // 移動するcellの範囲が決定したら、移動する
+                guard let lastRow = lastUncheckedRowIndex else { return }
+
+                if lastRow < indexPath.row {
+                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+                        // iとi-1の要素を入れ替える
+                        self.errandDataList.swapAt(i, i - 1)
+                    }
+                    // 指定されたindexPathの行を、別のindexPathの行に移動する
+                    self.shoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                }
+            }
+        }, completion: nil)
         sortErrandDataList()
         completionAlert()
-        shoppingListTableView.reloadData()
     }
 }
-
-
-

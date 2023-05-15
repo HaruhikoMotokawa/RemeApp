@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 /// 売り場の詳細データ
-enum DefaultSalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , PersistableEnum
+enum DefaultSalesFloorType: Int, CaseIterable {
 
     /// 売り場の番地、赤１〜５と青１〜７、緑１〜５
     case redOne
@@ -63,9 +63,9 @@ enum DefaultSalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , P
             case .blueOne: return .purple
             case .blueTwo: return .brown
             case .blueThree: return .red
-            case .blueFour: return .systemRed
+            case .blueFour: return .yellow
             case .blueFive: return .magenta
-            case .blueSix: return .systemGray
+            case .blueSix: return .systemMint
             case .blueSeven: return .systemGreen
             case .greenOne: return .systemIndigo
             case .greenTwo: return .cyan

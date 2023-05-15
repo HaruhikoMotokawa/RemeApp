@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CustomSalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , PersistableEnum
+enum CustomSalesFloorType: Int, CaseIterable {
 
     /// 売り場の番地、赤１〜５と青１〜７、緑１〜５
     case redOne
@@ -36,6 +36,5 @@ enum CustomSalesFloorType: Int, CaseIterable { // Realm実装時に追記-> , Pe
     /// intValueからenumを設定する
     init?(intValue: Int) {
         self.init(rawValue: intValue)
-
     }
 }

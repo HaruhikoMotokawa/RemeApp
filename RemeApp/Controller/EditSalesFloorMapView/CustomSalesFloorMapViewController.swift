@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CustomSalesFloorMapViewController: UIViewController {
 
@@ -148,31 +149,34 @@ class CustomSalesFloorMapViewController: UIViewController {
 
 
     // MARK: - property
-    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)]
+    private var customSalesFloorData = CustomSalesFloorModel()
+
+    /// Realmから取得したErrandDataModelの結果セットを保持するプロパティ
+    private var customSalesFloorList: Results<CustomSalesFloorModel>?
+
+    // Realmの監視用トークン
+    private var notificationToken: NotificationToken?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateButtonAppearance()
         setBorderAllLabel()
         setCustomSelectCheckMark()
         setCartView()
+        setVerticalSalesFloorButtonAppearance()
+        setHorizontalSalesFloorButtonAppearance()
+        updateButtonAppearance(with: fetchCustomSalesFloors())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNotification()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 通知の解除
+        notificationToken?.invalidate()
     }
 
     // MARK: - func
@@ -182,29 +186,77 @@ class CustomSalesFloorMapViewController: UIViewController {
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
     }
+
+    /// CustomSalesFloorModelの監視用メソッド
+    /// - カスタムマップ設定が上書き、リセットされた場合にボタンの表示を再配置する
+    private func setupNotification() {
+        // Realmの通知機能で変更を監視する
+        notificationToken = customSalesFloorList?.observe { [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+                case .initial:
+                    self?.updateButtonAppearance(with: (self?.fetchCustomSalesFloors())!)
+                    print("初めてなんだなぁ😊")
+
+                case .update(let errandDataModel,let deletions,let insertions,let modifications):
+                    print(errandDataModel)
+                    print(deletions)
+                    print(insertions)
+                    print(modifications)
+                    self?.updateButtonAppearance(with: (self?.fetchCustomSalesFloors())!)
+                    print("変更があったデー✋🏻")
+                case .error:
+                    print("困ったことが起きました😱")
+            }
+        }
+    }
+
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+    /// 売り場の縦長ボタンに設定する見た目
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
+    }
+
     // MARK: 仮で修正
-    /// 各UIButtonに購入商品の有無によって装飾を設定するメソッド
+    /// 各UIButtonにカスタム売り場を表示するメソッド
+    /// - 引数にfetchCustomSalesFloorsメソッドで取得した配列を使用する
     /// - 各ボタンに売り場の名称を設定
-    /// - 対象の売り場に購入商品がある場合は
-    ///    - 売り場に対応したバックグラウンドカラーを設定
-    ///    - ボタンの活性化
-    ///  - 対象の売り場に購入商品がない場合は
-    ///    - バックグラウンドカラーを白に設定
-    ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
-    private func updateButtonAppearance() {
-        /// ボタンの配列を順番に設定
+    /// - 売り場に対応したバックグラウンドカラーを設定
+    private func updateButtonAppearance(with results: Results<CustomSalesFloorModel>) {
+        /// ボタンの配列をに設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
                        blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
                        greenFourButton, greenFiveButton]
+
         // for文でbuttonsに順番にアクセス
         for (index, button) in buttons.enumerated() {
-            let customSalesFloor = customSalesFloorList[index]
+            let customSalesFloor = results[index]
             button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
-            button?.backgroundColor = customSalesFloor.customColorOfSalesFloor
-            button?.setAppearanceWithShadow()
+            button?.backgroundColor = customSalesFloor.customSalesFloorColor.color
         }
+    }
+
+    /// カスタムマップ設定の売り場オブジェクトを取得して昇順に並べて、返却する
+    private func fetchCustomSalesFloors() -> Results<CustomSalesFloorModel> {
+        let realm = try! Realm()
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
+            .sorted(byKeyPath: "customSalesFloorRawValue")
+        customSalesFloorList = results
+        return customSalesFloorList!
     }
 
     /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド
@@ -284,12 +336,14 @@ class CustomSalesFloorMapViewController: UIViewController {
         let editSelectedSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "EditSelectedSalesFloorView") as! EditSelectedSalesFloorViewController
         /// 引数に渡した値に該当するカスタム売り場のデータを取得
-        let selectedFloor = customSalesFloorList.first(where: { $0.customSalesFloorRawValue == salesFloorRawValue })
+        let realm = try! Realm()
+        let selectedFloor = realm.objects(CustomSalesFloorModel.self).filter("customSalesFloorRawValue == %@",
+                                                                             salesFloorRawValue).first
         // editSelectedSalesFloorVCに該当のカスタム売り場のデータを渡す
         if let selectedFloor = selectedFloor {
             editSelectedSalesFloorVC.configurer(detail: selectedFloor)
             // EditSelectedSalesFloorViewにプッシュ遷移
-            self.navigationController?.pushViewController(editSelectedSalesFloorVC, animated: true)
+            self.present(editSelectedSalesFloorVC, animated: true)
         }
     }
 }

@@ -2,14 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vxb-Bg-gmG">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--売り場マップ編集-->
+        <!--Default Sales Floor Map View Controller-->
         <scene sceneID="1pd-7h-PzZ">
             <objects>
                 <viewController storyboardIdentifier="DefaultSalesFloorMapView" id="Vxb-Bg-gmG" customClass="DefaultSalesFloorMapViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,20 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVg-XC-E5j">
-                                <rect key="frame" x="0.0" y="20" width="375" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="EST-c9-D4G"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="デフォルトマップ" id="YKQ-eP-A4I"/>
-                                </items>
-                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htC-sb-GPO" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="デフォルトマップ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Or7-Ja-yIn">
+                                <rect key="frame" x="0.0" y="20" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oc1-9g-Iao">
-                                <rect key="frame" x="245" y="22" width="70" height="34.5"/>
+                                <rect key="frame" x="262.5" y="7" width="30.5" height="47"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30.5" id="54H-yD-RUh"/>
+                                </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-Rl-VzT" userLabel="AとBとC">
-                                <rect key="frame" x="0.0" y="70" width="375" height="475"/>
+                                <rect key="frame" x="0.0" y="60.5" width="375" height="533.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kMD-jM-ldr" userLabel="売り場A">
                                         <rect key="frame" x="5" y="0.0" width="365" height="60"/>
@@ -38,10 +42,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69q-DZ-gbQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="118.5" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-1" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="A-1"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="10"/>
@@ -51,10 +54,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMm-Dq-P4t">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-2" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="A-2"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="10"/>
@@ -64,10 +66,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVM-v4-HJf">
                                                 <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="A-3" cornerStyle="capsule">
-                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                </buttonConfiguration>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="A-3"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="10"/>
@@ -77,18 +78,17 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="y3w-sc-yiX" userLabel="BとC">
-                                        <rect key="frame" x="5" y="70" width="365" height="405"/>
+                                        <rect key="frame" x="5" y="70" width="365" height="463.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Kfs-uR-j93" userLabel="売り場B">
-                                                <rect key="frame" x="0.0" y="0.0" width="365" height="197.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="227"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTq-bR-gDe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-1" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-1"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -96,12 +96,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XZ8-h5-Xc6">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="197.5"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-2" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-2"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -109,12 +108,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbX-zT-Hs0">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-3" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-3"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -122,12 +120,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96J-3k-8B7">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-4" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-4"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -135,12 +132,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upK-9L-KFx">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-5" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-5"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -148,12 +144,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7I-mf-Sg6">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="197.5"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-6" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-6"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -161,12 +156,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdj-jH-2y0">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="227"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="B-7" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="B-7"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -176,15 +170,14 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-AL-NRm" userLabel="売り場C">
-                                                <rect key="frame" x="0.0" y="207.5" width="365" height="197.5"/>
+                                                <rect key="frame" x="0.0" y="237" width="365" height="226.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcI-51-6w6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-1" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-1"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -192,12 +185,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBL-oS-8wJ">
-                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="197.5"/>
+                                                        <rect key="frame" x="54" y="0.0" width="40.5" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-2" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-2"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -205,12 +197,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aI4-qk-8Yc">
-                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="40" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-3" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-3"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -218,12 +209,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhw-6v-OMM">
-                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="162.5" y="0.0" width="40" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-4" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-4"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -231,12 +221,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0T-H8-0xY">
-                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="216.5" y="0.0" width="40" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-5" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-5"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -244,12 +233,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-Qy-Kfj">
-                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="197.5"/>
+                                                        <rect key="frame" x="270.5" y="0.0" width="40.5" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-6" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-6"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -257,12 +245,11 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRr-XG-g0E">
-                                                        <rect key="frame" x="325" y="0.0" width="40" height="197.5"/>
+                                                        <rect key="frame" x="325" y="0.0" width="40" height="226.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="C-7" cornerStyle="capsule">
-                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="C-7"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -289,7 +276,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u44-9N-tXN" userLabel="レジと出入り口">
-                                <rect key="frame" x="0.0" y="555" width="375" height="58"/>
+                                <rect key="frame" x="0.0" y="604" width="375" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レジ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHo-AA-cGQ">
                                         <rect key="frame" x="100" y="0.0" width="175" height="24"/>
@@ -322,50 +309,39 @@
                                     <constraint firstAttribute="trailing" secondItem="SRr-JJ-R0s" secondAttribute="trailing" constant="50" id="xMS-sZ-Rbn"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="01V-Qh-0ZK">
-                                <rect key="frame" x="5" y="550.5" width="70" height="57"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftCart" translatesAutoresizingMaskIntoConstraints="NO" id="01V-Qh-0ZK">
+                                <rect key="frame" x="5" y="596.5" width="48" height="48"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="myJ-bb-y9b">
-                                <rect key="frame" x="300" y="550.5" width="70" height="57"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightCart" translatesAutoresizingMaskIntoConstraints="NO" id="myJ-bb-y9b">
+                                <rect key="frame" x="322" y="596.5" width="48" height="48"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LC3-vV-Cok"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="5" id="511-nX-N5s"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="myJ-bb-y9b" secondAttribute="trailing" constant="5" id="8sz-6w-Biw"/>
-                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="top" secondItem="jVg-XC-E5j" secondAttribute="bottom" constant="10" id="9Rs-NC-CQf"/>
-                            <constraint firstItem="u44-9N-tXN" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" id="CXG-TG-gLx"/>
-                            <constraint firstItem="oc1-9g-Iao" firstAttribute="top" secondItem="LC3-vV-Cok" secondAttribute="top" id="EVX-lN-tEv"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="01V-Qh-0ZK" secondAttribute="bottom" constant="10" id="EXW-hh-DhV"/>
-                            <constraint firstItem="jVg-XC-E5j" firstAttribute="bottom" secondItem="oc1-9g-Iao" secondAttribute="bottom" constant="2" id="FCo-mX-SEk"/>
-                            <constraint firstItem="oc1-9g-Iao" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" constant="245" id="FQZ-AU-0TR"/>
-                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" constant="5" id="GBa-wl-feo"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="oc1-9g-Iao" secondAttribute="trailing" constant="60" id="IdJ-tZ-oSQ"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="u44-9N-tXN" secondAttribute="trailing" id="JHr-UR-qhd"/>
-                            <constraint firstItem="jVg-XC-E5j" firstAttribute="top" secondItem="LC3-vV-Cok" secondAttribute="top" id="U8E-aA-Y9F"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="u44-9N-tXN" secondAttribute="bottom" constant="5" id="Z0K-Vp-hvx"/>
-                            <constraint firstItem="jVg-XC-E5j" firstAttribute="trailing" secondItem="LC3-vV-Cok" secondAttribute="trailing" id="aOG-mW-e9d"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="bottom" secondItem="myJ-bb-y9b" secondAttribute="bottom" constant="10" id="b1f-pK-bXL"/>
-                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" id="iKO-nw-zng"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="01V-Qh-0ZK" secondAttribute="trailing" constant="300" id="imq-Ha-EEe"/>
-                            <constraint firstItem="myJ-bb-y9b" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="5" id="nuq-H0-32V"/>
-                            <constraint firstItem="jVg-XC-E5j" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" id="p2X-3W-mbw"/>
-                            <constraint firstItem="u44-9N-tXN" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="10" id="pcf-K8-4aT"/>
-                            <constraint firstItem="LC3-vV-Cok" firstAttribute="trailing" secondItem="SVg-Rl-VzT" secondAttribute="trailing" id="rcZ-4x-nSu"/>
-                            <constraint firstItem="myJ-bb-y9b" firstAttribute="leading" secondItem="LC3-vV-Cok" secondAttribute="leading" constant="300" id="yLm-4w-QyW"/>
+                            <constraint firstAttribute="trailing" secondItem="myJ-bb-y9b" secondAttribute="trailing" constant="5" id="0Qx-QS-cr4"/>
+                            <constraint firstItem="Or7-Ja-yIn" firstAttribute="top" secondItem="ZoR-mJ-UWY" secondAttribute="top" constant="20" id="24H-Kl-pzk"/>
+                            <constraint firstAttribute="trailing" secondItem="SVg-Rl-VzT" secondAttribute="trailing" id="5p8-bt-d4X"/>
+                            <constraint firstItem="myJ-bb-y9b" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="2.5" id="7gz-ij-3kh"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="top" secondItem="oc1-9g-Iao" secondAttribute="bottom" constant="5" id="C1x-vp-VWi"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="leading" secondItem="ZoR-mJ-UWY" secondAttribute="leading" id="C4A-05-3UD"/>
+                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="leading" secondItem="ZoR-mJ-UWY" secondAttribute="leading" constant="5" id="GBa-wl-feo"/>
+                            <constraint firstItem="htC-sb-GPO" firstAttribute="top" secondItem="ZoR-mJ-UWY" secondAttribute="top" id="GSR-Pl-ig3"/>
+                            <constraint firstItem="u44-9N-tXN" firstAttribute="leading" secondItem="ZoR-mJ-UWY" secondAttribute="leading" id="Gvb-2t-F4w"/>
+                            <constraint firstItem="htC-sb-GPO" firstAttribute="leading" secondItem="ZoR-mJ-UWY" secondAttribute="leading" id="ODq-ME-MfW"/>
+                            <constraint firstItem="Or7-Ja-yIn" firstAttribute="centerX" secondItem="ZoR-mJ-UWY" secondAttribute="centerX" id="QJy-4P-K9q"/>
+                            <constraint firstAttribute="trailing" secondItem="u44-9N-tXN" secondAttribute="trailing" id="W1m-fp-mzE"/>
+                            <constraint firstItem="oc1-9g-Iao" firstAttribute="centerX" secondItem="ZoR-mJ-UWY" secondAttribute="centerX" constant="90" id="ciq-n7-sGT"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="top" secondItem="Or7-Ja-yIn" secondAttribute="bottom" constant="20" id="gks-eA-HX6"/>
+                            <constraint firstAttribute="bottom" secondItem="u44-9N-tXN" secondAttribute="bottom" constant="5" id="iqR-WZ-g2k"/>
+                            <constraint firstItem="SVg-Rl-VzT" firstAttribute="top" secondItem="htC-sb-GPO" secondAttribute="bottom" constant="10" id="jXO-jt-gFG"/>
+                            <constraint firstItem="01V-Qh-0ZK" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="2.5" id="nRp-Lc-6RN"/>
+                            <constraint firstItem="oc1-9g-Iao" firstAttribute="top" secondItem="ZoR-mJ-UWY" secondAttribute="top" constant="5" id="vtK-fk-HdF"/>
+                            <constraint firstAttribute="trailing" secondItem="htC-sb-GPO" secondAttribute="trailing" id="xJV-uv-9LO"/>
+                            <constraint firstItem="u44-9N-tXN" firstAttribute="top" secondItem="SVg-Rl-VzT" secondAttribute="bottom" constant="10" id="ynZ-aw-11N"/>
+                            <constraint firstItem="Or7-Ja-yIn" firstAttribute="leading" secondItem="ZoR-mJ-UWY" secondAttribute="leading" id="zot-3E-aGP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="売り場マップ編集" id="FbQ-zX-EQU">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="6HB-8E-MV3">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="atV-qc-6eX">
-                                <rect key="frame" x="265.5" y="5" width="93.5" height="34.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="リセット"/>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="blueFiveButton" destination="uhw-6v-OMM" id="ZUB-np-QDJ"/>
@@ -399,8 +375,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart.circle.fill" catalog="system" width="128" height="123"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="leftCart" width="48" height="48"/>
+        <image name="rightCart" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

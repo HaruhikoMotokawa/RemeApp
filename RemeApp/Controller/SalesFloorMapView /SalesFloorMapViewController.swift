@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 /// C-売り場マップ閲覧
 class SalesFloorMapViewController: UIViewController {
@@ -145,55 +146,59 @@ class SalesFloorMapViewController: UIViewController {
 
     // MARK: - property
     /// 使いデータのダミーデータ
-    var errandDataList: [ErrandDataModel] = [ErrandDataModel(isCheckBox: false ,nameOfItem: "あそこで売ってるうまいやつ", numberOfItem: "１０" ,unit: "パック", salesFloorRawValue: 6, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "牛肉", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 7, supplement:  "総量５００gくらい", photoImage:UIImage(named: "beef")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "おいしい牛乳", numberOfItem: "2" ,unit: "本", salesFloorRawValue: 14, supplement: nil, photoImage:UIImage(named: "milk")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "卵", numberOfItem: "１" ,unit: "パック", salesFloorRawValue: 15, supplement: "なるべく賞味期限長いもの", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "スタバのカフェラテっぽいやつ", numberOfItem: "１０" ,unit: "個", salesFloorRawValue: 12, supplement: nil, photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "マクドのいちごシェイク", numberOfItem: "１" ,unit: "個", salesFloorRawValue: 15, supplement: "子供用のストローをもらってきてください。", photoImage: nil),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "玉ねぎ", numberOfItem: "３" ,unit: "個", salesFloorRawValue: 0, supplement: nil, photoImage:UIImage(named: "onion")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "カラフルゼリー５種", numberOfItem: "５" ,unit: "袋", salesFloorRawValue: 9, supplement: "種類が沢山入ってるやつ", photoImage:UIImage(named: "jelly")),
-                                             ErrandDataModel(isCheckBox: false ,nameOfItem: "インスタントコーヒー", numberOfItem: "２" ,unit: "袋", salesFloorRawValue: 11, supplement: "詰め替えよう", photoImage:UIImage(named: "coffee"))
-    ]
+    private var errandDataList: [ErrandDataModel] = []
 
     /// カスタム売り場マップのリスト
-    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
-    ]
+    private var customSalesFloorData = CustomSalesFloorModel()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderAllLabel()
-        exchangeAllSalesFloorButton()
         setCartView()
-        NotificationCenter.default.addObserver(self, selector: #selector(exchangeAllSalesFloorButton),
-                                               name: .exchangeAllSalesFloorButton, object: nil)
+        setVerticalSalesFloorButtonAppearance()
+        setHorizontalSalesFloorButtonAppearance()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setErrandData()
+        exchangeAllSalesFloorButton()
+    }
 
-    
     // MARK: - func
+
+    /// 保存されたお使いデータをセットする
+    private func setErrandData() {
+        let realm = try! Realm()
+        let result = realm.objects(ErrandDataModel.self)
+        errandDataList = Array(result)
+    }
+
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()
         leftEntranceLabel.setBorder()
         rightEntranceLabel.setBorder()
+    }
+
+    /// 売り場の横長ボタンに設定する見た目
+    private func setHorizontalSalesFloorButtonAppearance() {
+        let horizontalButtons = [greenThreeButton, blueThreeButton, redThreeButton]
+        horizontalButtons.forEach { button in
+            button!.setHorizontalButtonAppearance()
+        }
+    }
+
+    /// 売り場の縦長ボタンに設定する見た目
+    private func setVerticalSalesFloorButtonAppearance() {
+        let verticalButtons = [redOneButton, redTwoButton, redFourButton, redFiveButton,
+                               blueOneButton, blueTwoButton, blueFourButton, blueFiveButton,
+                               blueSixButton, blueSevenButton, greenOneButton, greenTwoButton,
+                               greenFourButton, greenFiveButton]
+        verticalButtons.forEach { button in
+            button!.setVerticalButtonAppearance()
+        }
     }
 
     /// 使用する売り場マップの設定によってマップのボタンタイトルと背景色を変更し、購入商品の有無によって装飾を設定するメソッド
@@ -204,8 +209,7 @@ class SalesFloorMapViewController: UIViewController {
     ///  - 対象の売り場に購入商品がない場合は
     ///    - バックグラウンドカラーを白に設定
     ///    - ボタンの非活性化
-    ///  - 購入商品の有無に関わらない装飾の設定
-    @objc func exchangeAllSalesFloorButton() {
+    private func exchangeAllSalesFloorButton() {
         // - UserDefaultsに使用するキーを指定
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         // - UserDefaultsから設定を取得
@@ -213,7 +217,7 @@ class SalesFloorMapViewController: UIViewController {
         // 0 -> カスタム、1(else) -> デフォルト
         if salesFloorTypeInt == 0 {
             // カスタムマップタイプの処理
-            setCustomAllSalesFloorButton()
+            setCustomSalesFloorButton()
         } else {
             // デフォルトマップタイプの処理
             setDefaultSalesFloorButton()
@@ -221,47 +225,42 @@ class SalesFloorMapViewController: UIViewController {
     }
 
     /// カスタム売り場マップの見た目に全てのボタンをセットする
-    private func setCustomAllSalesFloorButton() {
+    private func setCustomSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
                        blueOneButton, blueTwoButton, blueThreeButton, blueFourButton, blueFiveButton,
                        blueSixButton, blueSevenButton, greenOneButton, greenTwoButton, greenThreeButton,
                        greenFourButton, greenFiveButton]
-        // buttonsに対応するcustomSalesFloorListを取得
-        let filteredCustomSalesFloorList = customSalesFloorList.filter { customSalesFloor in
-            return (0...CustomSalesFloorType.allCases.count - 1).contains(customSalesFloor.customSalesFloorRawValue)
-        }
-        // buttonsに対応するcustomSalesFloorListを順に設定
-        for (index, customSalesFloor) in filteredCustomSalesFloorList.enumerated() {
-            let button = buttons[index]
-            button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
-            button?.backgroundColor = customSalesFloor.customColorOfSalesFloor
-            button?.isEnabled = true
-            button?.setAppearanceWithShadow()
-        }
-        // salesFloorRawValueがerrandDataListに存在しないボタンを無効にして背景色を白にする
-        for (index, button) in buttons.enumerated() {
-            guard let salesFloor = DefaultSalesFloorType(rawValue: index) else {
-                button?.setTitle("", for: .normal)
-                button?.backgroundColor = .white
-                button?.isEnabled = false
-                continue
-            }
 
-            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.intValue }) {
+        let realm = try! Realm()
+        // カスタム売り場モデルのオブジェクトからフィルターメソッドを使ってcustomSalesFloorRawValueが０〜１６に合うモデルを抽出
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue >= 0 AND customSalesFloorRawValue <= 16")
+
+        // for文でbuttonsに順番にアクセス
+        for (index, button) in buttons.enumerated() {
+            // 取得したカスタム売り場を配列として定義
+            let customSalesFloor = results[index]
+            button?.setTitle(customSalesFloor.customNameOfSalesFloor, for: .normal)
+            // customSalesFloorのcustomColorOfSalesFloorRawValueの値から対応する色を取得
+            let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
+            // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
+            if errandDataList.contains(where: { $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue }) {
+                button?.backgroundColor = customSalesFloorColor?.color
                 button?.isEnabled = true
-            } else {
+                // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
+                if errandDataList.filter({ $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue })
+                    .allSatisfy({ $0.isCheckBox }) {
+                    button?.backgroundColor = UIColor.white
+                    button?.isEnabled = false
+                }
+            } else { // ない場合は、ボタンを無効にして、背景色を白に設定
                 button?.isEnabled = false
                 button?.backgroundColor = .white
             }
         }
     }
 
-    /// デフォルト売り場マップを全てのボタンをセットする
-    /// - 名称を設定
-    /// - お使いデータに対象の売り場の品目の有無によって背景色を設定
-    /// - お使いデータに対象の売り場の品目の有無によってボタンの有効化と無効化を設定
-    /// - 基本装飾と影を設定
     private func setDefaultSalesFloorButton() {
         /// ボタンの配列を順番に設定
         let buttons = [redOneButton, redTwoButton, redThreeButton, redFourButton, redFiveButton,
@@ -273,31 +272,32 @@ class SalesFloorMapViewController: UIViewController {
             let salesFloor = DefaultSalesFloorType(rawValue: index)!
             // 各ボタンに売り場の名称を設定
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
-            // お使いデータの中に対象の売り場があるかどうかで、ボタンの状態を変更する
-            if (errandDataList.first(where: {$0.salesFloorRawValue == index})?.salesFloorRawValue) != nil {
-                // ある場合はバックグラウンドカラーを設定した色に変更し、ボタンを有効化する
+
+            // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
+            if errandDataList.contains(where: { $0.salesFloorRawValue == salesFloor.rawValue }) {
                 button?.backgroundColor = salesFloor.colorOfSalesFloor
                 button?.isEnabled = true
-            } else {
-                // ない場合はバックグラウンドカラーを白に設定し、ボタンを無効化する
+                // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
+                if errandDataList.filter({ $0.salesFloorRawValue == salesFloor.rawValue })
+                    .allSatisfy({ $0.isCheckBox }) {
+                    button?.backgroundColor = UIColor.white
+                    button?.isEnabled = false
+                }
+            } else { // errandDataListにsalesFloorRawValueに該当するものがない場合は、ボタンを無効にして、背景色を白に設定
                 button?.backgroundColor = UIColor.white
                 button?.isEnabled = false
             }
-            // 最後に全てのボタンに基本の装飾と影を設定する
-            button?.setAppearanceWithShadow()
         }
     }
 
-    /// SalesFloorShoppingListViewに選択した売り場のリストを持って画面遷移する関数
+    /// SalesFloorShoppingListViewに選択した売り場のrawValueを持って画面遷移する関数
     /// - 引数：売り場に対応したSalesFloorTypeのrawValue
     private func goSalesFloorShoppingListView(salesFloorRawValue: Int) {
         let storyboard = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
         let salesFloorShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "SalesFloorShoppingListView") as! SalesFloorShoppingListViewController
-        /// 引数に対応した売り場に該当するお使いデータをクロージャで抽出
-        let salesFloorList = errandDataList.filter { $0.salesFloorRawValue == salesFloorRawValue }
-        /// 抽出したお使いデータをSalesFloorShoppingListViewControllerのお使いデータに代入
-        salesFloorShoppingListVC.selectedErrandDataList = salesFloorList
+        // 選択した売り場のrawValueをSalesFloorShoppingListViewのsalesFloorRawValueに渡す
+        salesFloorShoppingListVC.salesFloorRawValue = salesFloorRawValue
         /// SalesFloorShoppingListViewにプッシュ遷移
         self.navigationController?.pushViewController(salesFloorShoppingListVC, animated: true)
     }

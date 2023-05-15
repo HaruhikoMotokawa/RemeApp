@@ -6,22 +6,44 @@
 //
 
 import UIKit
+import RealmSwift
+
 /// B-買い物リスト詳細
 class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
+    /// 画面閉じて戻る
+    @IBAction private func closeView(_ sender: Any) {
+        dismiss(animated: true)
+    }
+
+    /// 売り場を表示
+    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+
+    /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
+    @IBAction private func goSalesFloorMapView(_ sender: Any) {
+        self.dismiss(animated: true) {
+            if let windowScene = UIApplication.shared.connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+               let tabBarController = windowScene.windows.first?.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 1
+            }
+        }
+    }
+
+    /// 詳細のView
+    @IBOutlet weak var detailView: UIView!
+    /// 写真を表示
+    @IBOutlet private weak var photoPathImageView: UIImageView!
     /// 商品名を表示
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 必要数を表示
     @IBOutlet private weak var numberOfItemLabel: UILabel!
     /// 必要数の単位を表示
     @IBOutlet private weak var unitLabel: UILabel!
-    /// 売り場を表示
-    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
-    /// 写真を表示
-    @IBOutlet private weak var photoPathImageView: UIImageView!
 
     // MARK: - property
     /// nameOfItemLabelに表示するテキスト
@@ -38,32 +60,18 @@ class DetailShoppingListViewController: UIViewController {
     private var photoPathImage:UIImage? = nil
 
     /// カスタム売り場マップのリスト
-    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
-    ]
+    private var customSalesFloorData = CustomSalesFloorModel()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // UIButtonの基本設定
-        salesFloorTypeButton.setAppearance()
         displayData()
-        self.title = "詳細"
+        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
+        nameOfItemLabel.setAppearance()
+        setDetailView()
+        numberOfItemLabel.setAppearance()
+        unitLabel.setAppearance()
+        supplementLabel.setAppearance()
     }
 
     // MARK: - func
@@ -74,7 +82,15 @@ class DetailShoppingListViewController: UIViewController {
         unitLabelText = detail.unit
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
-        photoPathImage = detail.photoImage
+        photoPathImage = detail.getImage()
+    }
+
+    /// detailViewに枠線をつけるメソッド
+    private func setDetailView() {
+        detailView.layer.borderColor = UIColor.black.cgColor
+        detailView.layer.borderWidth = 2
+        detailView.layer.cornerRadius = 10
+        detailView.clipsToBounds = true
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
@@ -90,14 +106,13 @@ class DetailShoppingListViewController: UIViewController {
         unitLabel.text = unitLabelText
         setSalesFloorTypeButton(salesFloorRawValue: salesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementLabelText)
-        photoPathImageView.image = photoPathImage
-
+        setPhotoPathImageView(image: photoPathImage)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
-    func setSalesFloorTypeButton(salesFloorRawValue: Int) {
+    private func setSalesFloorTypeButton(salesFloorRawValue: Int) {
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         // 0 -> カスタム、1(else) -> デフォルト
@@ -112,28 +127,30 @@ class DetailShoppingListViewController: UIViewController {
 
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
-    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+    private func setCustomSalesFloorButton(salesFloorRawValue: Int) {
         // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
         let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
         let customSalesFloorModel = customSalesFloorModelList.first
         // ボタンのタイトルと背景色を設定する
         salesFloorTypeButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
-        salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customColorOfSalesFloor
+        salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
     }
 
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
     /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
     /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
-    func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
-        // 指定されたrawValueにマッチするCustomSalesFloorModelのみを保持する配列を作成する
-        let filteredList = customSalesFloorList.filter { $0.customSalesFloorRawValue == salesFloorRawValue }
-        // 絞り込まれた配列を返す
-        return filteredList
+    private func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
+        let realm = try! Realm()
+        // カスタム売り場モデルのオブジェクトからフィルターメソッドを使って条件に合うモデルを抽出
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue == %@", salesFloorRawValue)
+        // 抽出した結果を戻り値に返却
+        return Array(results)
     }
 
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
-    func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
+    private func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
         // 引数で指定されたrawValueに対応するDefaultSalesFloorTypeを取得する
         let salesFloor = DefaultSalesFloorType(rawValue: salesFloorRawValue)
         // ボタンのタイトルと背景色を設定する
@@ -146,10 +163,23 @@ class DetailShoppingListViewController: UIViewController {
     /// - 補足がある場合はそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementLabelText == nil {
-            supplementLabel.textColor = UIColor.gray
-            supplementLabel.text = "なし"
-        }else{
             supplementLabel.text = supplementLabelText
+        } else {
+            supplementLabel.text = "補足：" + supplementLabelText!
+        }
+    }
+
+    /// 受け渡されたデータをphotoPathImageViewに表示
+    /// - 画像がなければ抜ける
+    /// - 画像があればリサイズと角丸処理をして表示する
+    private func setPhotoPathImageView(image: UIImage?) {
+        if image == nil {
+            return
+        } else {
+            let resizedImage = image?.resize(to: CGSize(width: 410, height: 410))
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
         }
     }
 }

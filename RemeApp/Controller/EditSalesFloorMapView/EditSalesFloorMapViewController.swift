@@ -6,31 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 /// K-売り場マップ編集
 class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
-    /// カスタムマップの設定をリセットする
-    @IBAction private func resetSalesFloorSettings(_ sender: Any) {
-        let alertController =
-        UIAlertController(title: "確認", message:"""
-カスタムマップの設定を初期状態に
-戻してもよろしいですか？
-""", preferredStyle: .alert)
-        /// リセットする処理
-        let resetAction = UIAlertAction(title: "リセット", style: .default) { (action) in
-            // TODO: リセットする処理を記述
-            print("💀リセット実行💀")
-        }
-        // 何もしない処理
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-
-        alertController.addAction(resetAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
-    }
-
     /// 使用する売り場マップのセレクター
     @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
     /// 使用する売り場マップを変更するメソッド
@@ -46,8 +27,6 @@ class EditSalesFloorMapViewController: UIViewController {
             NotificationCenter.default.post(name: .hideCustomSelectCheckMark, object: nil)
             NotificationCenter.default.post(name: .showDefaultSelectCheckMark, object: nil)
         }
-        NotificationCenter.default.post(name: .reloadTableView, object: nil)
-        NotificationCenter.default.post(name: .exchangeAllSalesFloorButton, object: nil)
     }
 
     /// 買い物の開始位置を決めるセレクター
@@ -58,14 +37,64 @@ class EditSalesFloorMapViewController: UIViewController {
         if shoppingStartPositionSelector.selectedSegmentIndex == 0 {
             saveShoppingStartDirection(type: ShoppingStartPositionType.left)
             NotificationCenter.default.post(name: .showLeftCartView, object: nil)
-            NotificationCenter.default.post(name: .sortLeftErrandDataList, object: nil)
             // （違うのであれば）つまりセグメントが１だったら買い物の開始位置を右回りにする
         } else {
             saveShoppingStartDirection(type: ShoppingStartPositionType.right)
             NotificationCenter.default.post(name: .showRightCartView, object: nil)
-            NotificationCenter.default.post(name: .sortRightErrandDataList, object: nil)
         }
     }
+
+    /// リセットボタン
+    @IBOutlet weak var resetButton: UIButton!
+    /// カスタムマップの設定をリセットする
+    @IBAction func resetCustomMap(_ sender: Any) {
+        let alertController =
+        UIAlertController(title: "確認", message:
+"""
+カスタムマップの設定を初期状態に
+戻してもよろしいですか？
+""", preferredStyle: .alert)
+        /// リセットする処理
+        let resetAction = UIAlertAction(title: "リセット", style: .default) { (action) in
+            // データベースからカスタムした売り場のデータを全て取得し、そのデータを元に上書き
+            let realm = try! Realm()
+            let customSalesFloors = Array(realm.objects(CustomSalesFloorModel.self))
+            try! realm.write {
+                // 最初に変更されたデータを削除
+                realm.delete(customSalesFloors)
+                // 初期値を定義
+                let newCustomSalesFloors: [CustomSalesFloorModel] = [
+                    CustomSalesFloorModel(salesFloorRawValue: 0, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 0),
+                    CustomSalesFloorModel(salesFloorRawValue: 1, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 1),
+                    CustomSalesFloorModel(salesFloorRawValue: 2, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 2),
+                    CustomSalesFloorModel(salesFloorRawValue: 3, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 3),
+                    CustomSalesFloorModel(salesFloorRawValue: 4, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 4),
+                    CustomSalesFloorModel(salesFloorRawValue: 5, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 5),
+                    CustomSalesFloorModel(salesFloorRawValue: 6, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 6),
+                    CustomSalesFloorModel(salesFloorRawValue: 7, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 7),
+                    CustomSalesFloorModel(salesFloorRawValue: 8, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 8),
+                    CustomSalesFloorModel(salesFloorRawValue: 9, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 9),
+                    CustomSalesFloorModel(salesFloorRawValue: 10, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 10),
+                    CustomSalesFloorModel(salesFloorRawValue: 11, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 11),
+                    CustomSalesFloorModel(salesFloorRawValue: 12, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 12),
+                    CustomSalesFloorModel(salesFloorRawValue: 13, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 13),
+                    CustomSalesFloorModel(salesFloorRawValue: 14, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 14),
+                    CustomSalesFloorModel(salesFloorRawValue: 15, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 15),
+                    CustomSalesFloorModel(salesFloorRawValue: 16, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 16)
+                ]
+                // 作成した初期値を書き込み
+                realm.add(newCustomSalesFloors)
+            }
+        }
+        // 何もしない処理
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+
+        alertController.addAction(resetAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    @IBOutlet weak var containerView: UIView!
 
     // MARK: - property
     /// 売り場マップの設定を保存するためのUserDefaultsに使用するキー
@@ -79,9 +108,23 @@ class EditSalesFloorMapViewController: UIViewController {
         super.viewDidLoad()
         setUseSalesFloorMapSelector()
         setShoppingStartPositionSelector()
+        resetButton.setAppearanceWithShadow(fontColor: .black)
+        setContainerViewAppearance()
     }
 
     // MARK: - func
+    /// containerViewの枠線設定メソッド
+    /// - 枠線幅１に設定
+    /// - 枠線を黒に設定
+    /// - 枠線を角丸に設定
+    /// - 角丸の後ろを切り抜く
+    private func setContainerViewAppearance() {
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.cornerRadius = 10
+        containerView.clipsToBounds = true
+    }
+
     /// 使用マップ設定のセグメントを設定する
     /// - UserDefaultsから設定を取得し、セグメントインデックスに代入
     /// - セグメント左のタイトルを「カスタム」に設定

@@ -6,19 +6,23 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ShoppingListTableViewCellController: UITableViewCell  {
-    /// tableViewのcellがタップされた際のデリーゲート
-    weak var delegate: ShoppingListTableViewCellDelegate?
+
+    // MARK: - @IBOutlet,@IBAction
+
     /// チェックボックスのUIButton
     @IBOutlet  weak var checkBoxButton: CheckBox!
+
     /// チェックボックスがタプされた際のメソッド
     /// - cellのバックグラウンドカラーをグレイに変更
-        @IBAction private func isCheckBoxButton(_ sender: Any) {
+    @IBAction private func isCheckBoxButton(_ sender: Any) {
         changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
         isChecked = !isChecked
         delegate?.didTapCheckBoxButton(self)
     }
+    
     /// 商品名を表示する
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 商品の必要数を表示
@@ -27,56 +31,89 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     @IBOutlet private weak var unitLabel: UILabel!
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
-    // !!!: 現状は使用していない、後で消すかも
-    @IBAction private func salesFloorTypeButton(_ sender: Any) {
-    }
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
+
+    // MARK: - property
+
+    /// tableViewのcellがタップされた際のデリーゲート
+    weak var delegate: ShoppingListTableViewCellDelegate?
+
     /// チェックボックスのフラグ
     private var isChecked:Bool = false
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // UIButtonの基本設定
-        salesFloorTypeButton.setAppearance()
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     /// お使いデータモデル
     var errandDataList: Array<ErrandDataModel> = []
 
     /// カスタム売り場マップのリスト
-    private var customSalesFloorList: [CustomSalesFloorModel] = [CustomSalesFloorModel(customSalesFloorRawValue: 0, customNameOfSalesFloor: "コメ", customColorOfSalesFloor: .cyan),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 1, customNameOfSalesFloor: "味噌", customColorOfSalesFloor: .blue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 2, customNameOfSalesFloor: "野菜", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 3, customNameOfSalesFloor: "人参", customColorOfSalesFloor: .orange),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 4, customNameOfSalesFloor: "椎茸", customColorOfSalesFloor: .systemBlue),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 5, customNameOfSalesFloor: "しめじ", customColorOfSalesFloor: .systemFill),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 6, customNameOfSalesFloor: "のり", customColorOfSalesFloor: .systemPink),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 7, customNameOfSalesFloor: "砂糖", customColorOfSalesFloor: .systemTeal),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 8, customNameOfSalesFloor: "塩", customColorOfSalesFloor: .systemGray3),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 9, customNameOfSalesFloor: "坦々麺", customColorOfSalesFloor: .systemMint),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 10, customNameOfSalesFloor: "プリン", customColorOfSalesFloor: .systemIndigo),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 11, customNameOfSalesFloor: "冷凍おにぎり", customColorOfSalesFloor: .systemBrown),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 12, customNameOfSalesFloor: "八つ切りパン", customColorOfSalesFloor: .red),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 13, customNameOfSalesFloor: "ピザ", customColorOfSalesFloor: .yellow),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 14, customNameOfSalesFloor: "ビール", customColorOfSalesFloor: .green),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 15, customNameOfSalesFloor: "ポカリ", customColorOfSalesFloor: .magenta),
-                                                                 CustomSalesFloorModel(customSalesFloorRawValue: 16, customNameOfSalesFloor: "午後ティー", customColorOfSalesFloor: .brown)
-    ]
+    private var customSalesFloorData = CustomSalesFloorModel()
 
+    static var count = 0
 
+    var id = 0
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        id = Self.count
+        Self.count += 1
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+
+    // MARK: - awakeFromNib
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // UIButtonの基本設定
+        setSalesFloorButtonAppearance()
+    }
+
+    // MARK: - setSelected
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+    // MARK: - func
+
+    /// UIButtonの装飾基本設定
+    /// - 文字色を黒に設定
+    /// - フォントをボールドにサイズを２０に設定
+    /// - 枠線の幅を１で設定
+    /// - 枠線のカラーを黒に設定
+    /// - バックグラウンドを角丸１０に設定
+    /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
+    /// - ラベルの自動調整の際に縮小率を0.５に設定
+    /// - ラベルの自動調整の際に必ず１行になるように設定
+    func setSalesFloorButtonAppearance() {
+        // 文字色を黒に設定
+        salesFloorTypeButton.setTitleColor(.black, for: .normal)
+        // フォントをボールド、サイズを１７に設定
+        salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        // 枠線の幅を１で設定
+        salesFloorTypeButton.layer.borderWidth = 1
+        // 枠線のカラーを黒に設定
+        salesFloorTypeButton.layer.borderColor = UIColor.black.cgColor
+        // バックグラウンドを角丸１０に設定
+        salesFloorTypeButton.layer.cornerRadius = 10.0
+        // ラベルのテキストをボタンの幅に合わせて自動的に調整
+        salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        // ラベルの自動調整の際に縮小率を0.５に設定
+        salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
+        // ラベルの自動調整の際に必ず１行になるように設定
+        salesFloorTypeButton.titleLabel?.numberOfLines = 1
+    }
     /// 買い物リストのデータをセルの各パーツにセットする
-     func setShoppingList(isCheckBox: Bool,
-                          nameOfItem: String,
-                          numberOfItem: String,
-                          unit: String,
-                          salesFloorRawValue:Int,
-                          supplement: String?,
-                          image: UIImage?) {
+    func setShoppingList(isCheckBox: Bool,
+                         nameOfItem: String,
+                         numberOfItem: String,
+                         unit: String,
+                         salesFloorRawValue:Int,
+                         supplement: String?,
+                         image: UIImage?) {
         changeBackgroundColor(isCheckBox: isCheckBox)
         nameOfItemLabel.text = nameOfItem
         numberOfItemLabel.text = numberOfItem
@@ -118,23 +155,25 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
-     func setCustomSalesFloorButton(salesFloorRawValue: Int) {
+    func setCustomSalesFloorButton(salesFloorRawValue: Int) {
         // 指定されたrawValueにマッチするCustomSalesFloorModelを取得する
         let customSalesFloorModelList = getCustomSalesFloorModelList(for: salesFloorRawValue)
         let customSalesFloorModel = customSalesFloorModelList.first
         // ボタンのタイトルと背景色を設定する
         salesFloorTypeButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
-        salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customColorOfSalesFloor
+        salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
     }
 
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
     /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
     /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
     func getCustomSalesFloorModelList(for salesFloorRawValue: Int) -> [CustomSalesFloorModel] {
-        // 指定されたrawValueにマッチするCustomSalesFloorModelのみを保持する配列を作成する
-        let filteredList = customSalesFloorList.filter { $0.customSalesFloorRawValue == salesFloorRawValue }
-        // 絞り込まれた配列を返す
-        return filteredList
+        let realm = try! Realm()
+        // カスタム売り場モデルのオブジェクトからフィルターメソッドを使って条件に合うモデルを抽出
+        let results = realm.objects(CustomSalesFloorModel.self)
+            .filter("customSalesFloorRawValue == %@", salesFloorRawValue)
+        // 抽出した結果を戻り値に返却
+        return Array(results)
     }
 
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
@@ -150,12 +189,15 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// cellのsetPhotoPathImageViewに内容を反映させる
     /// - 写真がなければそのままnilを入れる
     /// - 写真がある場合はサイズを縦横幅50にリサイズして表示する
+
     func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
             photoPathImageView.image = image
         } else {
             let resizedImage = image?.resize(to: CGSize(width: 50, height: 50))
-            photoPathImageView.image = resizedImage
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
         }
     }
 
@@ -169,13 +211,9 @@ class ShoppingListTableViewCellController: UITableViewCell  {
             supplementLabel.textColor = UIColor.gray
             supplementLabel.text = "補足：" + (supplement ?? "")
         }
-        // realm導入時にはこちらに差し替え
-        //        if let photoPath = photoPath {
-        //             let errandDataModel = ErrandDataModel(photoPath: photoPath)
-        //            photoPathImageView.image = errandDataModel.getImage()
-        //        }
     }
 }
+
 /// チェックボックスがタップされた場合の挙動を指定するデリゲート
 protocol ShoppingListTableViewCellDelegate: AnyObject {
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController)

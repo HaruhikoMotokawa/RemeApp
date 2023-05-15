@@ -21,4 +21,12 @@ extension UILabel {
         self.layer.cornerRadius = 10
         self.sizeToFit()
     }
+
+    func setAppearance() {
+        self.adjustsFontSizeToFitWidth = true
+        self.minimumScaleFactor = 0.5
+        self.font = UIFont.systemFont(ofSize: 30)
+    }
 }
+
+
