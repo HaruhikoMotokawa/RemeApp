@@ -51,6 +51,8 @@
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
 		78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */; };
 		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
+		78CF70E82A18BCC100099A2D /* TutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF70E72A18BCC000099A2D /* TutorialView.storyboard */; };
+		78CF70EA2A18BCDF00099A2D /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialViewController.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
 /* End PBXBuildFile section */
@@ -118,6 +120,8 @@
 		78CAAF7B29DFCFE70084A8AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78CAAF7C29DFD0EA0084A8AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		78CF70E72A18BCC000099A2D /* TutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialView.storyboard; sourceTree = "<group>"; };
+		78CF70E92A18BCDF00099A2D /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		9BB669364721E9D4EB5C2E6F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 			children = (
 				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
 				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				78CF70E72A18BCC000099A2D /* TutorialView.storyboard */,
+				78CF70E92A18BCDF00099A2D /* TutorialViewController.swift */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
 				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
 				78EDF40E29DD131600A6407D /* EditShoppingListView */,
@@ -420,6 +426,7 @@
 				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
+				78CF70E82A18BCC100099A2D /* TutorialView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
 				7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */,
 			);
@@ -501,6 +508,7 @@
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
+				78CF70EA2A18BCDF00099A2D /* TutorialViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,

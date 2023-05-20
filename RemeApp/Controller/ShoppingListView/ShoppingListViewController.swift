@@ -11,6 +11,16 @@ import RealmSwift
 class ShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
+
+    @IBOutlet weak var helpButton: UIButton!
+
+    @IBAction func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
+        let TutorialVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialView") as! TutorialViewController
+        self.present(TutorialVC, animated: true)
+    }
+
     /// 買い物リストを表示する
     @IBOutlet private weak var shoppingListTableView: UITableView!
 
