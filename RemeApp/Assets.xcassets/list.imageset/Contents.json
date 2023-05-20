@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "editList25.png",
+      "filename" : "list25.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "editList50.png",
+      "filename" : "list50.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

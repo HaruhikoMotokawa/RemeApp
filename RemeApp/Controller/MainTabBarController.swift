@@ -11,7 +11,6 @@ class MainTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         // 画像と文字の選択時の色を指定（未選択字の色はデフォルトのまま）
         UITabBar.appearance().tintColor = UIColor.white
 
