@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,6 +21,7 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial" translatesAutoresizingMaskIntoConstraints="NO" id="PKZ-Yn-uiJ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="6670"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="6670" id="yN0-Jw-OJo"/>
                                         </constraints>
@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="trailing" secondItem="PKZ-Yn-uiJ" secondAttribute="trailing" id="a4p-6b-WgG"/>
                                     <constraint firstItem="PKZ-Yn-uiJ" firstAttribute="top" secondItem="M6N-2l-drd" secondAttribute="top" id="ah7-1E-NuT"/>
                                     <constraint firstItem="PKZ-Yn-uiJ" firstAttribute="leading" secondItem="M6N-2l-drd" secondAttribute="leading" id="jkf-OL-Lh3"/>
-                                    <constraint firstAttribute="bottom" secondItem="PKZ-Yn-uiJ" secondAttribute="bottom" constant="-20" id="wN9-ZD-Wrt"/>
+                                    <constraint firstAttribute="bottom" secondItem="PKZ-Yn-uiJ" secondAttribute="bottom" id="wN9-ZD-Wrt"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="hfq-b6-rDX"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="UMi-CE-qVd"/>
@@ -42,7 +42,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="閉じる">
-                                    <color key="titleColor" systemColor="labelColor"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="closeView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BJR-z8-ied"/>
@@ -50,7 +50,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M6N-2l-drd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GXg-WA-NB3"/>
                             <constraint firstItem="wY2-hP-HHF" firstAttribute="top" secondItem="M6N-2l-drd" secondAttribute="bottom" constant="20" id="HTC-Us-Dfv"/>
@@ -72,12 +72,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tutorial" width="1242" height="22080"/>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="tutorial" width="621" height="14414"/>
     </resources>
 </document>

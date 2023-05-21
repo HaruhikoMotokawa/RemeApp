@@ -12,9 +12,11 @@ class ShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
 
-    @IBOutlet weak var helpButton: UIButton!
+    /// チュートリアルを表示するボタン
+    @IBOutlet private weak var helpButton: UIButton!
 
-    @IBAction func goTutorialView(_ sender: Any) {
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
         let TutorialVC = storyboard.instantiateViewController(
             withIdentifier: "TutorialView") as! TutorialViewController
@@ -41,6 +43,22 @@ class ShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         setErrandData()
         sortErrandDataList()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //アプリ初回起動時のチュートリアル画面表示処理
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
+            let TutorialVC = storyboard.instantiateViewController(
+                withIdentifier: "TutorialView") as! TutorialViewController
+            self.present(TutorialVC, animated: true)
+        }
     }
     // MARK: - func
 
