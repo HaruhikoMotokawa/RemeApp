@@ -12,6 +12,15 @@ import RealmSwift
 class SalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
+        let TutorialVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialView") as! TutorialViewController
+        self.present(TutorialVC, animated: true)
+    }
+
     /// 売り場のボタン：StoryboardのA-1
     @IBOutlet private weak var greenThreeButton: UIButton!
     /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移

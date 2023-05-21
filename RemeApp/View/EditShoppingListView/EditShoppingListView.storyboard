@@ -24,6 +24,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tma-dn-fku">
+                                <rect key="frame" x="10" y="25" width="78" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="ヘルプ"/>
+                                <connections>
+                                    <action selector="goTutorialView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ISJ-MU-bge"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3S-mX-kxR">
                                 <rect key="frame" x="272" y="25" width="98" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -74,7 +84,9 @@
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="zwj-Md-Zw5" secondAttribute="bottom" constant="10" id="J77-Th-4wj"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="H3S-mX-kxR" secondAttribute="bottom" constant="10" id="MF3-8f-U8x"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="top" secondItem="ZdX-Bs-mTo" secondAttribute="bottom" constant="10" id="Ny4-uC-gg3"/>
+                            <constraint firstItem="tma-dn-fku" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="RQa-2T-alb"/>
                             <constraint firstItem="zwj-Md-Zw5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="RWO-rK-mfh"/>
+                            <constraint firstItem="tma-dn-fku" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="T07-PD-DKW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="H3S-mX-kxR" secondAttribute="trailing" constant="5" id="TAX-fN-3Q6"/>
                             <constraint firstItem="Dg6-dk-nnA" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="YZm-cb-OLJ"/>
                             <constraint firstItem="zwj-Md-Zw5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Yvl-5B-lnH"/>
@@ -85,6 +97,7 @@
                             <constraint firstItem="ZdX-Bs-mTo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="nu8-br-m23"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Wy-wG-LSR" secondAttribute="bottom" constant="30" id="ojL-Fo-yYx"/>
                             <constraint firstItem="H3S-mX-kxR" firstAttribute="leading" secondItem="zwj-Md-Zw5" secondAttribute="trailing" constant="15" id="wZS-uf-rNK"/>
+                            <constraint firstItem="zwj-Md-Zw5" firstAttribute="leading" secondItem="tma-dn-fku" secondAttribute="trailing" constant="30" id="zkM-5u-az9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="買い物リスト編集" image="rectangle.and.pencil.and.ellipsis" catalog="system" selectedImage="rectangle.and.pencil.and.ellipsis" id="RWg-p1-Lm8"/>
@@ -93,6 +106,7 @@
                         <outlet property="cancelEditButton" destination="ZdX-Bs-mTo" id="Pwm-S4-y9q"/>
                         <outlet property="createNewItemButton" destination="6Wy-wG-LSR" id="iT2-SK-iYY"/>
                         <outlet property="editShoppingListTableView" destination="Dg6-dk-nnA" id="AEE-yz-b6L"/>
+                        <outlet property="helpButton" destination="tma-dn-fku" id="DEq-fw-lzh"/>
                         <outlet property="multipleDeletionsButton" destination="H3S-mX-kxR" id="E6B-Ph-uSs"/>
                         <outlet property="viewTitleLabel" destination="zwj-Md-Zw5" id="6Ko-uu-3Vk"/>
                     </connections>
