@@ -18,15 +18,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pmw-hl-DVM">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="518.5"/>
+                                <rect key="frame" x="0.0" y="111" width="375" height="507"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8x9-sd-6aX">
-                                <rect key="frame" x="135.5" y="69" width="104" height="20.5"/>
+                                <rect key="frame" x="135.5" y="74" width="104" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbK-Ie-Nay">
+                                <rect key="frame" x="10" y="69" width="80.5" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="ヘルプ"/>
+                                <connections>
+                                    <action selector="goTutorialView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gTw-DV-Oc4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,9 +44,12 @@
                             <constraint firstItem="pmw-hl-DVM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2Ed-oh-Yy9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pmw-hl-DVM" secondAttribute="bottom" id="6Vm-6I-TDo"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pmw-hl-DVM" secondAttribute="trailing" id="DnS-Mt-ajB"/>
-                            <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="F6y-cf-4FD"/>
+                            <constraint firstItem="8x9-sd-6aX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="F6y-cf-4FD"/>
+                            <constraint firstItem="HbK-Ie-Nay" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="RI5-6K-USh"/>
+                            <constraint firstItem="8x9-sd-6aX" firstAttribute="leading" secondItem="HbK-Ie-Nay" secondAttribute="trailing" constant="45" id="c78-vl-Iqu"/>
+                            <constraint firstItem="HbK-Ie-Nay" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="ibQ-jw-3zM"/>
                             <constraint firstItem="8x9-sd-6aX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nQO-5a-r5g"/>
-                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="10" id="t2n-XC-blq"/>
+                            <constraint firstItem="pmw-hl-DVM" firstAttribute="top" secondItem="8x9-sd-6aX" secondAttribute="bottom" constant="16.5" id="t2n-XC-blq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="買い物リスト" image="list" selectedImage="list" id="i2Y-eK-2Nx">
@@ -45,12 +58,13 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="helpButton" destination="HbK-Ie-Nay" id="EmL-D5-qc1"/>
                         <outlet property="shoppingListTableView" destination="pmw-hl-DVM" id="fUq-Cv-VgP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="-3.1484257871064472"/>
+            <point key="canvasLocation" x="-12" y="-101"/>
         </scene>
     </scenes>
     <resources>
