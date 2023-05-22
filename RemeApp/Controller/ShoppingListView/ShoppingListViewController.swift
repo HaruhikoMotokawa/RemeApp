@@ -11,6 +11,19 @@ import RealmSwift
 class ShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
+
+    /// チュートリアルを表示するボタン
+    @IBOutlet private weak var helpButton: UIButton!
+
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
+    }
+
     /// 買い物リストを表示する
     @IBOutlet private weak var shoppingListTableView: UITableView!
 
@@ -31,6 +44,23 @@ class ShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         setErrandData()
         sortErrandDataList()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //アプリ初回起動時のチュートリアル画面表示処理
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+            let tutorialPageVC = storyboard.instantiateViewController(
+                withIdentifier: "TutorialPageView") as! TutorialPageViewController
+            tutorialPageVC.modalPresentationStyle = .fullScreen
+            self.present(tutorialPageVC, animated: true)
+        }
     }
     // MARK: - func
 
