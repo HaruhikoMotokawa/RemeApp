@@ -15,10 +15,11 @@ class EditSalesFloorMapViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
-        let TutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "TutorialView") as! TutorialViewController
-        self.present(TutorialVC, animated: true)
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
     }
     
     /// 使用する売り場マップのセレクター

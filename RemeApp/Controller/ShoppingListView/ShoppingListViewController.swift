@@ -17,10 +17,11 @@ class ShoppingListViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
-        let TutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "TutorialView") as! TutorialViewController
-        self.present(TutorialVC, animated: true)
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
     }
 
     /// 買い物リストを表示する
@@ -54,10 +55,11 @@ class ShoppingListViewController: UIViewController {
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            let storyboard = UIStoryboard(name: "TutorialView", bundle: nil)
-            let TutorialVC = storyboard.instantiateViewController(
-                withIdentifier: "TutorialView") as! TutorialViewController
-            self.present(TutorialVC, animated: true)
+            let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+            let tutorialPageVC = storyboard.instantiateViewController(
+                withIdentifier: "TutorialPageView") as! TutorialPageViewController
+            tutorialPageVC.modalPresentationStyle = .fullScreen
+            self.present(tutorialPageVC, animated: true)
         }
     }
     // MARK: - func
