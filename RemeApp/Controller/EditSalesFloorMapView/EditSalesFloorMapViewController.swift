@@ -12,6 +12,16 @@ import RealmSwift
 class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
+    }
+    
     /// 使用する売り場マップのセレクター
     @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl!
     /// 使用する売り場マップを変更するメソッド

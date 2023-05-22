@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tutorial Shopping View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="TutorialShoppingView" id="Y6W-OH-hqX" customClass="TutorialShoppingViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LVU-3q-MFW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="4000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ior-cv-GhN">
+                                <rect key="frame" x="20" y="30" width="46" height="34"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jhP-Bc-HDH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作説明" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2m-Au-2T3">
+                                <rect key="frame" x="153" y="37" width="69.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3O0-KG-leC">
+                                <rect key="frame" x="0.0" y="74" width="375" height="3871.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorialShpping" translatesAutoresizingMaskIntoConstraints="NO" id="rlt-8X-JYP">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="3605"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="rlt-8X-JYP" secondAttribute="bottom" id="0sQ-M5-eEw"/>
+                                    <constraint firstItem="rlt-8X-JYP" firstAttribute="width" secondItem="3O0-KG-leC" secondAttribute="width" id="106-Qp-Ysa"/>
+                                    <constraint firstItem="rlt-8X-JYP" firstAttribute="leading" secondItem="3O0-KG-leC" secondAttribute="leading" id="QBT-hA-1bI"/>
+                                    <constraint firstItem="rlt-8X-JYP" firstAttribute="top" secondItem="3O0-KG-leC" secondAttribute="top" id="Qqv-HR-iJe"/>
+                                    <constraint firstAttribute="trailing" secondItem="rlt-8X-JYP" secondAttribute="trailing" id="rDf-No-gO3"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="qm4-Js-6BM"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="GSa-jj-c6I"/>
+                            </scrollView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qPQ-WL-tL1">
+                                <rect key="frame" x="5" y="3955.5" width="365" height="34.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5c0-eF-Q1U">
+                                        <rect key="frame" x="0.0" y="0.0" width="182.5" height="34.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="買い物リスト編集について">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" title="売り場マップ編集">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="goBackView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aXi-pR-IFc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfn-Pu-QVf">
+                                        <rect key="frame" x="182.5" y="0.0" width="182.5" height="34.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="買い物リスト編集について">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" title="買い物リスト編集">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="goNextView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KsA-O9-COX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mVH-yu-aY7"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c2m-Au-2T3" firstAttribute="centerX" secondItem="LVU-3q-MFW" secondAttribute="centerX" id="0fY-lm-Twf"/>
+                            <constraint firstItem="qPQ-WL-tL1" firstAttribute="top" secondItem="3O0-KG-leC" secondAttribute="bottom" constant="10" id="Bus-gm-y86"/>
+                            <constraint firstItem="ior-cv-GhN" firstAttribute="leading" secondItem="mVH-yu-aY7" secondAttribute="leading" constant="20" id="OSy-73-0jk"/>
+                            <constraint firstItem="mVH-yu-aY7" firstAttribute="trailing" secondItem="3O0-KG-leC" secondAttribute="trailing" id="XQ4-eI-YqE"/>
+                            <constraint firstItem="c2m-Au-2T3" firstAttribute="centerY" secondItem="ior-cv-GhN" secondAttribute="centerY" id="a2Y-Yk-ui4"/>
+                            <constraint firstItem="qPQ-WL-tL1" firstAttribute="leading" secondItem="mVH-yu-aY7" secondAttribute="leading" constant="5" id="doc-S4-c6L"/>
+                            <constraint firstItem="ior-cv-GhN" firstAttribute="top" secondItem="mVH-yu-aY7" secondAttribute="top" constant="10" id="fZM-bP-chZ"/>
+                            <constraint firstItem="3O0-KG-leC" firstAttribute="top" secondItem="ior-cv-GhN" secondAttribute="bottom" constant="10" id="iRX-Ot-85f"/>
+                            <constraint firstItem="mVH-yu-aY7" firstAttribute="trailing" secondItem="qPQ-WL-tL1" secondAttribute="trailing" constant="5" id="oxI-le-KuI"/>
+                            <constraint firstItem="3O0-KG-leC" firstAttribute="leading" secondItem="mVH-yu-aY7" secondAttribute="leading" id="wgC-KM-wBP"/>
+                            <constraint firstAttribute="bottom" secondItem="qPQ-WL-tL1" secondAttribute="bottom" constant="10" id="xCz-CE-xLa"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="375" height="4000"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tutorialShpping" width="375" height="3605"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

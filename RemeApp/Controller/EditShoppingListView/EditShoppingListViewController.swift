@@ -12,6 +12,18 @@ import RealmSwift
 class EditShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
+
+    /// チュートリアルを表示するボタン
+    @IBOutlet private weak var helpButton: UIButton!
+
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
+    }
     /// 複数削除モードの解除ボタン
     @IBOutlet private weak var cancelEditButton: UIButton!
     /// 複数削除モードを中断して終了する
@@ -222,6 +234,7 @@ class EditShoppingListViewController: UIViewController {
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("削除実行", for: .normal)
             viewTitleLabel.text = "複数削除モード"
+            helpButton.isHidden = true
             cancelEditButton.isHidden = false
             // 編集終了
         } else {
@@ -231,6 +244,7 @@ class EditShoppingListViewController: UIViewController {
             multipleDeletionsButton.setTitle("複数削除", for: .normal)
             viewTitleLabel.text = "買い物リスト編集"
             cancelEditButton.isHidden = true
+            helpButton.isHidden = false
         }
         // 編集モード時のみ複数選択可能とする
         editShoppingListTableView.isEditing = editing

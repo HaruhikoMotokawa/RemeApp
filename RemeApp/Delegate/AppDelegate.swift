@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
 
+        //初期起動のチュートリアル表示
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch"
+        let firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
 
         // アプリインストール後の初回起動時に使用マップ設定をデフォルトにする処理
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
