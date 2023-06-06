@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -14,27 +14,174 @@
             <objects>
                 <viewController storyboardIdentifier="ShareSettingsView" id="Y6W-OH-hqX" customClass="ShareSettingsViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShareSettingsView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfQ-8p-0qp">
-                                <rect key="frame" x="125" y="415.66666666666669" width="143" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfQ-8p-0qp">
+                                <rect key="frame" x="153" y="30" width="69.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-8T-K7J" userLabel="全体">
+                                <rect key="frame" x="10" y="70.5" width="355" height="408"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="6MU-zF-bxc" userLabel="共有インフォ">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="219"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="119" translatesAutoresizingMaskIntoConstraints="NO" id="1oQ-qe-VqP" userLabel="共有①">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="65"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="8Jc-b9-BXE" userLabel="共有①ラベル">
+                                                        <rect key="frame" x="0.0" y="0.0" width="142.5" height="65"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント①" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-e1-ffB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cn-Ee-U00">
+                                                                <rect key="frame" x="0.0" y="44.5" width="69.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-kX-tCG">
+                                                        <rect key="frame" x="261.5" y="30.5" width="93.5" height="34.5"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <connections>
+                                                            <action selector="deleteFirstSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Mk4-eK-eko"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="zb9-Xg-CbT" userLabel="共有②">
+                                                <rect key="frame" x="0.0" y="89" width="355" height="49"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FBk-ki-BEm" userLabel="共有②ラベル">
+                                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="49"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント②" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAt-Bo-i9N">
+                                                                <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-jW-Rx1">
+                                                                <rect key="frame" x="0.0" y="28.5" width="69.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0o-DP-6FX">
+                                                        <rect key="frame" x="261.5" y="14.5" width="93.5" height="34.5"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <connections>
+                                                            <action selector="deleteSecondSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Um9-lC-Rqi"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="LOR-cU-COn" userLabel="共有③">
+                                                <rect key="frame" x="0.0" y="162" width="355" height="57"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LFx-tr-zco" userLabel="共有③ラベル">
+                                                        <rect key="frame" x="0.0" y="0.0" width="146.5" height="57"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント③" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vaa-lX-2SE">
+                                                                <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pq-jI-UzX">
+                                                                <rect key="frame" x="0.0" y="36.5" width="69.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fv-WI-T6T">
+                                                        <rect key="frame" x="261.5" y="22.5" width="93.5" height="34.5"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <connections>
+                                                            <action selector="deleteThirdSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eVc-d6-I0g"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lFr-0T-Lo6" userLabel="共有追加">
+                                        <rect key="frame" x="0.0" y="259" width="355" height="74.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウントの追加" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiq-SS-Xd6">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3OL-qI-y7C" userLabel="UID入力">
+                                                <rect key="frame" x="0.0" y="40.5" width="355" height="34"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザーID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwa-0Q-iSf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="85.5" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iah-HW-wkd">
+                                                        <rect key="frame" x="95.5" y="0.0" width="259.5" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1a-Nu-pKj">
+                                        <rect key="frame" x="0.0" y="373.5" width="355" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="追加"/>
+                                        <connections>
+                                            <action selector="addSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hnh-zP-yM2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dfQ-8p-0qp" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="5df-Pa-Ret"/>
+                            <constraint firstItem="XUu-8T-K7J" firstAttribute="top" secondItem="dfQ-8p-0qp" secondAttribute="bottom" constant="20" id="9j7-yN-B6Y"/>
+                            <constraint firstItem="dfQ-8p-0qp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="D5z-zC-dZk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XUu-8T-K7J" secondAttribute="trailing" constant="10" id="e41-CI-2ZA"/>
+                            <constraint firstItem="XUu-8T-K7J" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="qbw-iB-cVB"/>
                             <constraint firstItem="dfQ-8p-0qp" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="rCy-lt-nmP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstDeleteButton" destination="Bk2-kX-tCG" id="Jg7-tK-6Br"/>
+                        <outlet property="firstSharedUsersNameLabel" destination="7cn-Ee-U00" id="FR5-8n-72f"/>
+                        <outlet property="inputUIDTextField" destination="iah-HW-wkd" id="5hM-PQ-oNe"/>
+                        <outlet property="secondDeleteButton" destination="l0o-DP-6FX" id="lcB-Jv-fU7"/>
+                        <outlet property="secondSharedUsersNameLabel" destination="Gom-jW-Rx1" id="Ngy-IK-hso"/>
+                        <outlet property="thirdDeleteButton" destination="7Fv-WI-T6T" id="XWw-P7-wBb"/>
+                        <outlet property="thirdSharedUsersNameLabel" destination="8Pq-jI-UzX" id="8Ko-JL-wZ6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="-2"/>
+            <point key="canvasLocation" x="740" y="52"/>
         </scene>
     </scenes>
     <resources>

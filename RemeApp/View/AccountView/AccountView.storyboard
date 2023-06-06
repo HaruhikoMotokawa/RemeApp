@@ -178,6 +178,9 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="KRg-d1-K5U" secondAttribute="height" multiplier="355:254" id="nhl-fC-4eB"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -191,8 +194,8 @@
                         <constraints>
                             <constraint firstItem="8mA-bq-qQp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="Llm-1s-dwB"/>
                             <constraint firstItem="8mA-bq-qQp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="aj0-xJ-QqY"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8mA-bq-qQp" secondAttribute="bottom" constant="10" id="drV-Cx-7BL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8mA-bq-qQp" secondAttribute="trailing" constant="10" id="rll-nr-gCg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8mA-bq-qQp" secondAttribute="bottom" constant="10" id="tCn-GH-Ba1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="アカウント" id="RIB-8P-fDl"/>
@@ -206,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029.5999999999999" y="-23.838080959520241"/>
+            <point key="canvasLocation" x="1089" y="-24"/>
         </scene>
         <!--アカウント-->
         <scene sceneID="VG0-0U-1rH">
