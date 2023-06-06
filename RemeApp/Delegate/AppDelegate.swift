@@ -8,6 +8,9 @@
 import UIKit
 import IQKeyboardManagerSwift
 import RealmSwift
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
 
+        // Firebaseの初期設定
+        FirebaseApp.configure()
         //初期起動のチュートリアル表示
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch"
