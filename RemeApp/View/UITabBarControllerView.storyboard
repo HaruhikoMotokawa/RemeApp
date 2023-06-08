@@ -31,7 +31,6 @@
                     <connections>
                         <segue destination="xwk-Pv-IN2" kind="relationship" relationship="viewControllers" id="Nlv-3b-zZa"/>
                         <segue destination="YxG-86-6Nd" kind="relationship" relationship="viewControllers" id="rl4-3m-ZkV"/>
-                        <segue destination="JuY-s3-Z3C" kind="relationship" relationship="viewControllers" id="qCT-Jc-UzX"/>
                         <segue destination="eFN-74-s9M" kind="relationship" relationship="viewControllers" id="LSL-Dn-p53"/>
                         <segue destination="Vyc-dg-Upp" kind="relationship" relationship="viewControllers" id="krB-k8-Hxg"/>
                     </connections>
