@@ -8,6 +8,9 @@
 import UIKit
 import IQKeyboardManagerSwift
 import RealmSwift
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,14 +19,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let defaults = UserDefaults.standard
+
+        /// 現在起動しているアプリバージョンを取得
+        let currentVersion = VersionManager.shared.getCurrentVersion()
+        print(currentVersion ?? "取得できません")
+        let savedVersion = defaults.string(forKey: "appVersion")
+        print(savedVersion ?? "記録されていません")
+
+        // バージョンが異なる場合の処理
+        if let savedVersionArray = savedVersion?.components(separatedBy: ".").compactMap({ Int($0) }),
+           savedVersionArray.first == 1 {
+            // 保存されたバージョンが1.x.xの場合の処理
+            print("前バージョンが１なのでFirestore移行処理するで")
+        }
+        // 現在のバージョンをUserDefaultsに保存
+        VersionManager.shared.saveCurrentVersion()
+
+        // IQKeyboardManagerを設定
         IQKeyboardManager.shared.enable = true
 
+        // Firebaseの初期設定
+        FirebaseApp.configure()
+
         //初期起動のチュートリアル表示
-        let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch"
         let firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        defaults.register(defaults: firstLunch)
 
         // アプリインストール後の初回起動時に使用マップ設定をデフォルトにする処理
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"

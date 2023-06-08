@@ -59,6 +59,8 @@
 		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
 		78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */; };
 		78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */; };
+		78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E80B302A3021E50068C71C /* GoogleService-Info.plist */; };
+		78E80B332A31D3680068C71C /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E80B322A31D3680068C71C /* VersionManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
 		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
@@ -142,6 +144,8 @@
 		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialEditShoppingListView.storyboard; sourceTree = "<group>"; };
 		78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditShoppingListViewController.swift; sourceTree = "<group>"; };
+		78E80B302A3021E50068C71C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		78E80B322A31D3680068C71C /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -206,6 +210,7 @@
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 				78AB3B4529C835D8004685F1 /* Info.plist */,
 				78AB3B4029C835D8004685F1 /* Assets.xcassets */,
+				78E80B302A3021E50068C71C /* GoogleService-Info.plist */,
 			);
 			path = RemeApp;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
+				78E80B322A31D3680068C71C /* VersionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				78FBBF692A2EFF6C00EDCE9D /* ShareSettingsView.storyboard in Resources */,
 				7828936D2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard in Resources */,
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
+				78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */,
 				78C1607A2A1B3C8800C66E92 /* TutorialShoppingView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */,
@@ -596,6 +603,7 @@
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
+				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */,
 				7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
@@ -756,7 +764,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -790,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

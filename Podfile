@@ -7,7 +7,9 @@ target 'RemeApp' do
 
 pod 'IQKeyboardManagerSwift'
 pod 'RealmSwift', '~>10'
-
+pod 'FirebaseAuth'
+pod 'FirebaseFirestore'
+pod 'FirebaseFirestoreSwift'
 
   # Pods for RemeApp
 
