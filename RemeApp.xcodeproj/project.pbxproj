@@ -59,8 +59,18 @@
 		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
 		78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */; };
 		78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */; };
+		78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E80B302A3021E50068C71C /* GoogleService-Info.plist */; };
+		78E80B332A31D3680068C71C /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E80B322A31D3680068C71C /* VersionManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
+		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
+		78FBBF5F2A2EECB900EDCE9D /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */; };
+		78FBBF612A2EFEDF00EDCE9D /* CreateAccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */; };
+		78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF622A2EFEF500EDCE9D /* CreateAccountViewController.swift */; };
+		78FBBF652A2EFF3100EDCE9D /* SignInView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF642A2EFF3100EDCE9D /* SignInView.storyboard */; };
+		78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF662A2EFF4400EDCE9D /* SignInViewController.swift */; };
+		78FBBF692A2EFF6C00EDCE9D /* ShareSettingsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF682A2EFF6C00EDCE9D /* ShareSettingsView.storyboard */; };
+		78FBBF6B2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF6A2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -134,8 +144,18 @@
 		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialEditShoppingListView.storyboard; sourceTree = "<group>"; };
 		78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditShoppingListViewController.swift; sourceTree = "<group>"; };
+		78E80B302A3021E50068C71C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		78E80B322A31D3680068C71C /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
+		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
+		78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountView.storyboard; sourceTree = "<group>"; };
+		78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateAccountView.storyboard; sourceTree = "<group>"; };
+		78FBBF622A2EFEF500EDCE9D /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		78FBBF642A2EFF3100EDCE9D /* SignInView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInView.storyboard; sourceTree = "<group>"; };
+		78FBBF662A2EFF4400EDCE9D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		78FBBF682A2EFF6C00EDCE9D /* ShareSettingsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShareSettingsView.storyboard; sourceTree = "<group>"; };
+		78FBBF6A2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSettingsViewController.swift; sourceTree = "<group>"; };
 		9BB669364721E9D4EB5C2E6F /* Pods-RemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.release.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.release.xcconfig"; sourceTree = "<group>"; };
 		FBFE1022C1CF2ECD457387F9 /* Pods-RemeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RemeApp.debug.xcconfig"; path = "Target Support Files/Pods-RemeApp/Pods-RemeApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +210,7 @@
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 				78AB3B4529C835D8004685F1 /* Info.plist */,
 				78AB3B4029C835D8004685F1 /* Assets.xcassets */,
+				78E80B302A3021E50068C71C /* GoogleService-Info.plist */,
 			);
 			path = RemeApp;
 			sourceTree = "<group>";
@@ -321,6 +342,7 @@
 				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
+				78E80B322A31D3680068C71C /* VersionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,6 +355,7 @@
 				78C1607D2A1B64C500C66E92 /* Tutorial */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
 				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
+				78FBBF5C2A2EEC6600EDCE9D /* AccountView */,
 				78EDF40E29DD131600A6407D /* EditShoppingListView */,
 				78EDF40F29DD132900A6407D /* EditSalesFloorMapView */,
 				78EDF41029DD134800A6407D /* CustumCell */,
@@ -344,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
+				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
@@ -374,6 +398,28 @@
 				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
 			);
 			path = Delegate;
+			sourceTree = "<group>";
+		};
+		78FBBF5C2A2EEC6600EDCE9D /* AccountView */ = {
+			isa = PBXGroup;
+			children = (
+				78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */,
+				78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */,
+				78FBBF642A2EFF3100EDCE9D /* SignInView.storyboard */,
+				78FBBF682A2EFF6C00EDCE9D /* ShareSettingsView.storyboard */,
+			);
+			path = AccountView;
+			sourceTree = "<group>";
+		};
+		78FBBF5D2A2EEC9300EDCE9D /* AccountView */ = {
+			isa = PBXGroup;
+			children = (
+				78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */,
+				78FBBF622A2EFEF500EDCE9D /* CreateAccountViewController.swift */,
+				78FBBF662A2EFF4400EDCE9D /* SignInViewController.swift */,
+				78FBBF6A2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift */,
+			);
+			path = AccountView;
 			sourceTree = "<group>";
 		};
 		8507120358070AA0C6EFDBBF /* Pods */ = {
@@ -448,8 +494,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
+				78FBBF5F2A2EECB900EDCE9D /* AccountView.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
+				78FBBF612A2EFEDF00EDCE9D /* CreateAccountView.storyboard in Resources */,
+				78FBBF652A2EFF3100EDCE9D /* SignInView.storyboard in Resources */,
 				78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
@@ -458,8 +507,10 @@
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
+				78FBBF692A2EFF6C00EDCE9D /* ShareSettingsView.storyboard in Resources */,
 				7828936D2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard in Resources */,
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
+				78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */,
 				78C1607A2A1B3C8800C66E92 /* TutorialShoppingView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
 				78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */,
@@ -534,20 +585,25 @@
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
 				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
 				781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */,
+				78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
 				78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */,
 				78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
+				78FBBF6B2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
+				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
 				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
+				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
 				78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
+				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */,
 				7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
@@ -708,7 +764,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -742,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
