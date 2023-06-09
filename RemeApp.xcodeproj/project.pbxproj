@@ -15,6 +15,7 @@
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
+		7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */; };
 		781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */; };
 		7828936D2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7828936C2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard */; };
 		7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */; };
@@ -95,6 +96,7 @@
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
+		7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorModel.swift; sourceTree = "<group>"; };
 		7828936C2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialEditSalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
+				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
 				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
+				7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */,
 				781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */,
 				78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,

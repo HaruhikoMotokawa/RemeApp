@@ -15,17 +15,19 @@ import FirebaseFirestore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Firebaseの初期設定
+        FirebaseApp.configure()
+        // IQKeyboardManagerを設定
+        IQKeyboardManager.shared.enable = true
 
         let defaults = UserDefaults.standard
 
         /// 現在起動しているアプリバージョンを取得
         let currentVersion = VersionManager.shared.getCurrentVersion()
         print(currentVersion ?? "取得できません")
-        let savedVersion = defaults.string(forKey: "appVersion")
+        let savedVersion = VersionManager.shared.getSavedVersion()
         print(savedVersion ?? "記録されていません")
 
         // バージョンが異なる場合の処理
@@ -36,12 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // 現在のバージョンをUserDefaultsに保存
         VersionManager.shared.saveCurrentVersion()
-
-        // IQKeyboardManagerを設定
-        IQKeyboardManager.shared.enable = true
-
-        // Firebaseの初期設定
-        FirebaseApp.configure()
 
         //初期起動のチュートリアル表示
         let firstLunchKey = "firstLunch"
@@ -57,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "isInitialLaunch")
             UserDefaults.standard.setValue(SalesFloorMapType.default.rawValue, forKey: useSalesFloorTypeKey)
             UserDefaults.standard.setValue(ShoppingStartPositionType.right.rawValue, forKey: shoppingStartPositionKey)
+            AccountManager.shared.signInAnonymity()
 
                     let realm = try! Realm()
                     // 17個のカスタム売り場データを作成

@@ -63,6 +63,7 @@ class AccountViewController: UIViewController {
 
     /// ログイン中であればサインアウト
     @IBAction func signOut(_ sender: Any) {
+        AccountManager.shared.signInAnonymity()
     }
 
     /// 共有設定画面にプッシュ遷移
