@@ -20,29 +20,41 @@ class AccountViewController: UIViewController {
     /// 登録したパスワードを表示
     @IBOutlet weak var passwordLabel: UILabel!
 
+    private var isLabelBlack: Bool = false
+
+
     /// 登録したユーザーIDを表示
-    @IBOutlet weak var userIDLabel: UILabel!
+    @IBOutlet weak var uidLabel: UILabel!
+
+
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setPasswordLabel()
+        passwordLabel.textColor = .clear
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Task {
+            await setUserStatus()
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        setPasswordLabel()
+        passwordLabel.textColor = .clear
     }
     // MARK: - func
     /// 非表示になっているパスワードを表示する
     @IBAction func showPassword(_ sender: Any) {
-        passwordLabel.text = "ログインしていません"
         passwordLabel.textColor = .black
     }
 
     /// ユーザーIDをクリップボードにコピー
     @IBAction func copyUserID(_ sender: Any) {
         let pasteboard = UIPasteboard.general
-        pasteboard.string = userIDLabel.text
+        pasteboard.string = uidLabel.text
     }
 
     /// アカウント作成画面にプッシュ遷移
@@ -63,6 +75,7 @@ class AccountViewController: UIViewController {
 
     /// ログイン中であればサインアウト
     @IBAction func signOut(_ sender: Any) {
+        AccountManager.shared.signOut()
         AccountManager.shared.signInAnonymity()
     }
 
@@ -78,8 +91,20 @@ class AccountViewController: UIViewController {
     @IBAction func deleteAccount(_ sender: Any) {
     }
 
-    func setPasswordLabel() {
-        passwordLabel.text = "非表示中"
-        passwordLabel.textColor = .lightGray
+    /// ユーザー情報を表示する非同期処理を内包するメソッド
+    func setUserStatus() async {
+        // ログイン中のuidを取得
+        let uid = AccountManager.shared.getAuthStatus()
+        do {
+            // uidを使ってFirestoreからユーザー情報を取得しラベルに表示
+            try await FirestoreManager.shared.getUserInfo(uid: uid, nameLabel: nameLabel, mailLabel: mailLabel,
+                                                            passwordLabel: passwordLabel, uidLabel: uidLabel)
+        } catch {
+            print("取得失敗")
+            nameLabel.text = "現在読み込めません"
+            mailLabel.text = "現在読み込めません"
+            passwordLabel.text = "現在読み込めません"
+            uidLabel.text = "現在読み込めません"
+        }
     }
 }

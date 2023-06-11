@@ -5,7 +5,7 @@
 //  Created by 本川晴彦 on 2023/06/09.
 //
 
-import UIKit
+//import UIKit
 import FirebaseAuth
 /// Firebaseの認証に関する処理を管理するシングルトンクラス
 final class AccountManager {
@@ -13,6 +13,17 @@ final class AccountManager {
     static let shared = AccountManager()
     /// 外部アクセスを禁止
     private init() {}
+
+    /// 現在の認証状況を取得する
+    func getAuthStatus() -> String {
+        print("アカウントチェック開始")
+        guard let user = Auth.auth().currentUser else {
+            return "ログイン情報なし"
+        }
+        let uid = user.uid
+        print ("uid取得成功")
+        return uid
+    }
 
     /// 匿名認証でログイン
     func signInAnonymity() {
@@ -25,63 +36,101 @@ final class AccountManager {
         }
     }
 
-    /// メールとパスワードでログイン
-    /// - エラーが出たらアラートを出す
-    /// - 成功したら画面を閉じる
-    func signUp(name: String, email: String, password: String, viewController: UIViewController){
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            guard let self else { return }
-            if error == nil {
-                //サインアップ成功
-                print("アカウントの作成に成功")
-                viewController.navigationController?.popViewController(animated: true)
-            } else {
-                if let errorCode = AuthErrorCode.Code(rawValue: error!._code) {
-                    switch errorCode {
-                        case .invalidEmail:
-                            //メールアドレスの形式によるエラー
-                            print("メールアドレスの形式によるエラー")
-                            self.showAlert(errorCode: .invalidEmail, viewController: viewController)
-                        case .weakPassword:
-                            //パスワードが脆弱(５文字以下)
-                            print("パスワードが脆弱(５文字以下)")
-                            self.showAlert(errorCode: .weakPassword, viewController: viewController)
-                        case .emailAlreadyInUse:
-                            //メールアドレスが既に登録されている
-                            print("メールアドレスが既に登録されている")
-                            self.showAlert(errorCode: .emailAlreadyInUse, viewController: viewController)
-                        case .networkError:
-                            //通信エラー
-                            print("通信エラー")
-                            self.showAlert(errorCode: .networkError, viewController: viewController)
-                        default:
-                            //その他エラー
-                            print("その他エラー")
-                    }
-                }
-            }
+    /// メールとパスワードでアカウント作成
+    /// - 匿名アカウントから永続アカウントへ引き継ぐ
+    /// - 成功したらFirestoreへ情報登録をするためにuidを発行して戻り値に返す
+    func signUp(email: String, password: String) async throws -> String {
+        // Firebase認証のために、メールアドレスとパスワードから認証資格情報を生成
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        // 現在ログインしているユーザーを取得
+        let user = Auth.auth().currentUser
+        // 現在ログインしているかチェック
+        guard let anonymousUser = user else {
+            throw AuthError.userNotFound
+        }
+        // アカウントを引き継ぐ、この処理は非同期処理なのでawaitをつけ、失敗の可能性があるからtry
+        let result =  try await anonymousUser.link(with: credential)
+        // 成功したらuidにユーザーIDを格納
+        let uid = result.user.uid
+        print("アカウントの作成に成功")
+        // 返却
+        return uid
+    }
+
+    /// ログアウトメソッド
+    func signOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch _ as NSError {
+            print("ログアウトできへんよ")
         }
     }
 
-    /// エラーメッセージごとにアラートを出す
-    func showAlert(errorCode: AuthErrorCode.Code, viewController: UIViewController) {
-        var errorMessage: String
-        switch errorCode {
-            case .invalidEmail:
-                errorMessage = "メールアドレスの形式が正しくありません。"
-            case .weakPassword:
-                errorMessage = "パスワードは6文字以上である必要があります。"
-            case .emailAlreadyInUse:
-                errorMessage = "このメールアドレスは既に使用されています。"
-            case .networkError:
-                errorMessage = "ネットワークエラーが発生しました。通信環境を確認してください。"
-            default:
-                errorMessage = "エラーが発生しました。"
+    func setErrorMessage(_ error:Error?) -> String {
+        guard let error = error as? AuthError else {
+            return "エラーが発生しました"
         }
-        let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        viewController.present(alert, animated: true, completion: nil)
+
+        switch error {
+                // ネットワークエラー
+            case .networkError:
+                return AuthError.networkError.title
+                // パスワードが条件より脆弱であることを示します。
+            case .weakPassword:
+                return AuthError.weakPassword.title
+                // ユーザーが間違ったパスワードでログインしようとしたことを示します。
+            case .wrongPassword:
+                return AuthError.wrongPassword.title
+                // ユーザーのアカウントが無効になっていることを示します。
+            case .userNotFound:
+                return AuthError.userNotFound.title
+                // メールアドレスの形式が正しくないことを示します。
+            case .invalidEmail:
+                return AuthError.invalidEmail.title
+                // 既に登録されているメールアドレス
+            case .emailAlreadyInUse:
+                return AuthError.emailAlreadyInUse.title
+                // 不明なエラー
+            case .unknown:
+                return AuthError.unknown.title
+        }
     }
 }
 
+public enum AuthError: Error {
+    // ネットワークエラー
+    case networkError
+    // パスワードが条件より脆弱であることを示します。
+    case weakPassword
+    // ユーザーが間違ったパスワードでログインしようとしたことを示します。
+    case wrongPassword
+    // ユーザーのアカウントが無効になっていることを示します。
+    case userNotFound
+    // メールアドレスの形式が正しくないことを示します。
+    case invalidEmail
+    // 既に登録されているメールアドレス
+    case emailAlreadyInUse
+    // 不明なエラー
+    case unknown
 
+    //エラーによって表示する文字を定義
+    var title: String {
+        switch self {
+            case .networkError:
+                return "通信エラーです。"
+            case .weakPassword:
+                return "パスワードが脆弱です。"
+            case .wrongPassword:
+                return "メールアドレス、もしくはパスワードが違います。"
+            case .userNotFound:
+                return "アカウントがありません。"
+            case .invalidEmail:
+                return "正しくないメールアドレスの形式です。"
+            case .emailAlreadyInUse:
+                return "既に登録されているメールアドレスです。"
+            case .unknown:
+                return "エラーが起きました。"
+        }
+    }
+}
