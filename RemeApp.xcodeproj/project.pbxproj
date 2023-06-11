@@ -64,6 +64,7 @@
 		78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */; };
 		78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E80B302A3021E50068C71C /* GoogleService-Info.plist */; };
 		78E80B332A31D3680068C71C /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E80B322A31D3680068C71C /* VersionManager.swift */; };
+		78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
 		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
@@ -152,6 +153,7 @@
 		78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditShoppingListViewController.swift; sourceTree = "<group>"; };
 		78E80B302A3021E50068C71C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78E80B322A31D3680068C71C /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
+		78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseErrorManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -338,6 +340,17 @@
 			path = CustumCell;
 			sourceTree = "<group>";
 		};
+		78F2AA5B2A35A40200E2C5FF /* FirebaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */,
+				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
+				7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */,
+				78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */,
+			);
+			path = FirebaseModel;
+			sourceTree = "<group>";
+		};
 		78F6F6FD29D9552F00AF4DC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,9 +362,7 @@
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
-				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
-				7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */,
-				7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */,
+				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -604,6 +615,7 @@
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
+				78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */,
 				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
 				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,

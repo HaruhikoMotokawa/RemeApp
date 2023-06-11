@@ -55,19 +55,25 @@ class CreateAccountViewController: UIViewController {
                 try await FirestoreManager.shared.createUsers(name: name, email: email, password: password, uid: uid)
                 // 全てが問題なく完了した場合は前の画面に戻る
                 navigationController?.popViewController(animated: true)
-            } catch {
-                // 何かしらのエラー処理
+            } catch let error {
+                // エラーメッセージを生成
+                let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+                // アラート表示
+                showAlert(errorMessage: errorMessage)
                 print(error.localizedDescription)
             }
         }
     }
 
+    /// 作成ボタンの有効化を切り替えるメソッド
     private func setCreatButton() {
+        // アカウント名、メール、パスワードの全てが入力されている場合、作成ボタンを有効化
         if inputAccountTextField.text?.isEmpty == false &&
             inputMailTextField.text?.isEmpty == false &&
             inputPasswordTextField.text?.isEmpty == false {
             createButton.isEnabled = true
         } else {
+            // 全て入力されていなれば無効化
             createButton.isEnabled = false
         }
     }

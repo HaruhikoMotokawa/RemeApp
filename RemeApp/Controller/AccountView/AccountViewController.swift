@@ -12,21 +12,22 @@ class AccountViewController: UIViewController {
 
     // MARK: -property
     /// 登録したアカウント名を表示
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
 
     /// 登録したメールアドレスを表示
-    @IBOutlet weak var mailLabel: UILabel!
+    @IBOutlet private weak var mailLabel: UILabel!
 
     /// 登録したパスワードを表示
-    @IBOutlet weak var passwordLabel: UILabel!
-
-    private var isLabelBlack: Bool = false
-
+    @IBOutlet private weak var passwordLabel: UILabel!
 
     /// 登録したユーザーIDを表示
-    @IBOutlet weak var uidLabel: UILabel!
+    @IBOutlet private weak var uidLabel: UILabel!
 
+    /// ラベルの表示を切り替えるボタン
+    @IBOutlet weak var displaySwitchButton: UIButton!
 
+    /// passwordLabelの表示を切り替えるフラグ
+    private var isLabelDisplay: Bool = false
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -47,18 +48,20 @@ class AccountViewController: UIViewController {
     }
     // MARK: - func
     /// 非表示になっているパスワードを表示する
-    @IBAction func showPassword(_ sender: Any) {
-        passwordLabel.textColor = .black
+    @IBAction private func showPassword(_ sender: Any) {
+        passwordLabel.textColor = isLabelDisplay ? .clear : .black
+
+        isLabelDisplay.toggle()
     }
 
     /// ユーザーIDをクリップボードにコピー
-    @IBAction func copyUserID(_ sender: Any) {
+    @IBAction private func copyUserID(_ sender: Any) {
         let pasteboard = UIPasteboard.general
         pasteboard.string = uidLabel.text
     }
 
     /// アカウント作成画面にプッシュ遷移
-    @IBAction func goCreateAccountView(_ sender: Any) {
+    @IBAction private func goCreateAccountView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "CreateAccountView", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(
             withIdentifier: "CreateAccountView") as! CreateAccountViewController
@@ -66,21 +69,21 @@ class AccountViewController: UIViewController {
     }
 
     /// ログイン画面にプッシュ遷移
-    @IBAction func goSignInView(_ sender: Any) {
+    @IBAction private func goSignInView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "SignInView", bundle: nil)
         let signInVC = storyboard.instantiateViewController(
             withIdentifier: "SignInView") as! SignInViewController
         self.navigationController?.pushViewController(signInVC, animated: true)
     }
 
-    /// ログイン中であればサインアウト
-    @IBAction func signOut(_ sender: Any) {
+    /// ログイン中であればサインアウトし、匿名認証でログイン
+    @IBAction private func signOut(_ sender: Any) {
         AccountManager.shared.signOut()
         AccountManager.shared.signInAnonymity()
     }
 
     /// 共有設定画面にプッシュ遷移
-    @IBAction func goShareSettingsView(_ sender: Any) {
+    @IBAction private func goShareSettingsView(_ sender: Any) {
         let storyboard = UIStoryboard(name: "ShareSettingsView", bundle: nil)
         let shareSettingsVC = storyboard.instantiateViewController(
             withIdentifier: "ShareSettingsView") as! ShareSettingsViewController
@@ -88,11 +91,11 @@ class AccountViewController: UIViewController {
     }
 
     /// アカウントを削除
-    @IBAction func deleteAccount(_ sender: Any) {
+    @IBAction private func deleteAccount(_ sender: Any) {
     }
 
     /// ユーザー情報を表示する非同期処理を内包するメソッド
-    func setUserStatus() async {
+    private func setUserStatus() async {
         // ログイン中のuidを取得
         let uid = AccountManager.shared.getAuthStatus()
         do {
