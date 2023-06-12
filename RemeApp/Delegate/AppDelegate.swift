@@ -50,10 +50,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isInitialLaunch = UserDefaults.standard.bool(forKey: "isInitialLaunch")
 
         if !isInitialLaunch {
+            Task { @MainActor in
+                do {
+                    try await AccountManager.shared.signInAnonymity()
+                } catch {
+                        print("失敗")
+                    }
+                }
+
             UserDefaults.standard.set(true, forKey: "isInitialLaunch")
             UserDefaults.standard.setValue(SalesFloorMapType.default.rawValue, forKey: useSalesFloorTypeKey)
             UserDefaults.standard.setValue(ShoppingStartPositionType.right.rawValue, forKey: shoppingStartPositionKey)
-            AccountManager.shared.signInAnonymity()
+
 
                     let realm = try! Realm()
                     // 17個のカスタム売り場データを作成

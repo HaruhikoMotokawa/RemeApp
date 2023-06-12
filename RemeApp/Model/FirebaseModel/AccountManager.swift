@@ -13,6 +13,7 @@ final class AccountManager {
     /// 外部アクセスを禁止
     private init() {}
 
+
     /// 現在の認証状況を取得する
     func getAuthStatus() -> String {
         print("アカウントチェック開始")
@@ -20,19 +21,14 @@ final class AccountManager {
             return "ログイン情報なし"
         }
         let uid = user.uid
-        print ("uid取得成功")
+        print ("uid取得成功:\(uid)")
         return uid
     }
 
     /// 匿名認証でログイン
-    func signInAnonymity() {
-        Auth.auth().signInAnonymously() { authResult, error in
-            guard (authResult?.user) != nil else {
-                print("失敗です。")
-                return
-            }
-            print ("ログイン成功")
-        }
+    func signInAnonymity() async throws{
+        try await Auth.auth().signInAnonymously()
+            print ("匿名認証ログイン成功")
     }
 
     /// メールとパスワードでアカウント作成
@@ -56,19 +52,19 @@ final class AccountManager {
         return uid
     }
 
-    // メールとパスワードでログインするメソッド
+    /// メールとパスワードでログインするメソッド
     func signIn(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
     }
 
     /// ログアウトメソッド
-    func signOut() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch _ as NSError {
-            print("ログアウトできへんよ")
-        }
+    func signOut() throws {
+        try Auth.auth().signOut()
+    }
+
+    // アカウントの削除
+    func deleteAccount() async throws {
+        try await Auth.auth().currentUser?.delete()
     }
 }
 

@@ -38,7 +38,7 @@ class AccountViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
-            await setUserStatus()
+            await setUserInfo()
         }
     }
 
@@ -50,7 +50,7 @@ class AccountViewController: UIViewController {
     /// 非表示になっているパスワードを表示する
     @IBAction private func showPassword(_ sender: Any) {
         passwordLabel.textColor = isLabelDisplay ? .clear : .black
-
+        displaySwitchButton.setTitle(isLabelDisplay ? "表示" : "非表示", for: .normal)
         isLabelDisplay.toggle()
     }
 
@@ -78,8 +78,35 @@ class AccountViewController: UIViewController {
 
     /// ログイン中であればサインアウトし、匿名認証でログイン
     @IBAction private func signOut(_ sender: Any) {
-        AccountManager.shared.signOut()
-        AccountManager.shared.signInAnonymity()
+        let alert = UIAlertController(title: "ログアウト",
+                                      message: "アカウントに紐づく情報は全て表示されなくなりますがよろしいですか？",
+                                      preferredStyle: .actionSheet)
+        // キャンセル
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
+        // 削除の実行
+        let deleteAction = UIAlertAction(title: "ログアウト", style: .destructive, handler: { [weak self] (action) in
+            Task { @MainActor in
+                do {
+                    guard let self else { return }
+                    // ログアウト
+                    try AccountManager.shared.signOut()
+                    // 匿名認証でログイン
+                    try await AccountManager.shared.signInAnonymity()
+                    // 各ラベルのユーザー情報を更新
+                    await self.setUserInfo()
+                } catch let error {
+                    guard let self else { return }
+                    // エラーメッセージを生成
+                    let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
+                    // アラート表示
+                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
     }
 
     /// 共有設定画面にプッシュ遷移
@@ -92,22 +119,76 @@ class AccountViewController: UIViewController {
 
     /// アカウントを削除
     @IBAction private func deleteAccount(_ sender: Any) {
+        let alert = UIAlertController(title: "アカウント削除", message: "アカウントに関わる全てのデータが削除されます", preferredStyle: .actionSheet)
+        // キャンセル
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
+        // 削除の実行
+        let deleteAction = UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] (action) in
+            Task { @MainActor in
+                do {
+                    guard let self else { return }
+                    // ユーザーのUidを取得
+                    let deleteUid = AccountManager.shared.getAuthStatus()
+                    // ユーザー情報の削除
+                    try await FirestoreManager.shared.deleteUsersDocument(uid: deleteUid)
+                    // ユーザーが作成したhoppingItemのデータ削除
+
+                    // ユーザーが作成したmapSettingsの削除
+
+                    // ユーザーが作成したCustomSalesFloorの削除
+
+                    // アカウントの削除
+                    try await AccountManager.shared.deleteAccount()
+                    // 匿名認証でログイン
+                    try await AccountManager.shared.signInAnonymity()
+                    // 各ラベルのユーザー情報を更新
+                    await self.setUserInfo()
+                    // アラート
+                    self.showAlert(tittle: "完了", errorMessage: "アカウントを削除しました")
+
+                } catch let error {
+                    guard let self else { return }
+                    // エラーメッセージを生成
+                    let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+                    // アラート表示
+                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
     }
 
     /// ユーザー情報を表示する非同期処理を内包するメソッド
-    private func setUserStatus() async {
-        // ログイン中のuidを取得
-        let uid = AccountManager.shared.getAuthStatus()
-        do {
-            // uidを使ってFirestoreからユーザー情報を取得しラベルに表示
-            try await FirestoreManager.shared.getUserInfo(uid: uid, nameLabel: nameLabel, mailLabel: mailLabel,
-                                                            passwordLabel: passwordLabel, uidLabel: uidLabel)
-        } catch {
-            print("取得失敗")
-            nameLabel.text = "現在読み込めません"
-            mailLabel.text = "現在読み込めません"
-            passwordLabel.text = "現在読み込めません"
-            uidLabel.text = "現在読み込めません"
+    private func setUserInfo() async {
+        Task { @MainActor in
+            // ログイン中のuidを取得
+            let uid = AccountManager.shared.getAuthStatus()
+            do {
+                // uidを使ってFirestoreからユーザー情報を取得しラベルに表示
+                let userInfo = try await FirestoreManager.shared.getUserInfo(uid: uid)
+                nameLabel.text = userInfo?.name
+                mailLabel.text = userInfo?.email
+                passwordLabel.text = userInfo?.password
+                uidLabel.text = userInfo?.id
+            } catch {
+                print("取得失敗")
+                nameLabel.text = "匿名認証でログイン中"
+                mailLabel.text = "登録情報なし"
+                passwordLabel.text = "登録情報なし"
+                uidLabel.text = "登録なし"
+            }
         }
+    }
+
+    /// アラートを出す
+    func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

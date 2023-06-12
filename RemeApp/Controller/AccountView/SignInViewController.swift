@@ -41,12 +41,15 @@ class SignInViewController: UIViewController {
                 // ログイン実施
                 try await AccountManager.shared.signIn(email: email, password: password)
                 // 終了したら画面を閉じる
-                navigationController?.popViewController(animated: true)
+                showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
+                    guard let self else { return }
+                    self.navigationController?.popViewController(animated: true)
+                })
             } catch let error {
                 // エラーメッセージを生成
                 let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
                 // アラート表示
-                showAlert(errorMessage: errorMessage)
+                showAlert(tittle: "エラー", errorMessage: errorMessage)
                 print(error.localizedDescription)
             }
         }
@@ -65,9 +68,11 @@ class SignInViewController: UIViewController {
     }
 
     /// エラーメッセージごとにアラートを出す
-    func showAlert(errorMessage: String) {
-        let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
         present(alert, animated: true, completion: nil)
     }
 }
