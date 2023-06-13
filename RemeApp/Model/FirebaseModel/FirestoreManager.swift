@@ -17,6 +17,10 @@ final class FirestoreManager {
 
     let db = Firestore.firestore()
 
+    // FireStoreのsharedUsersの配列を保持するための変数
+//    var sharedUsers: [String] = []
+
+
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
@@ -45,4 +49,39 @@ final class FirestoreManager {
         try await db.collection("users").document(uid).delete()
     }
 
+    // 共有者に登録しているユーざーのuidを取得するメソッド
+    func getSharedUsers(uid: String) async throws -> [String] {
+        return try await withCheckedThrowingContinuation { continuation in
+            db.collection("users").document(uid).addSnapshotListener { (documentSnapshot ,err) in
+                print("Firestoreにアクセス開始")
+                guard let documentSnapshot else {
+                    continuation.resume(throwing: err ?? FirestoreError.unknown)
+                    return
+                }
+                let data = documentSnapshot.data()!
+                let sharedUsers = data["sharedUsers"] as? [String] ?? []
+                print("取得共有者：　\(sharedUsers)")
+                continuation.resume(returning: sharedUsers)
+            }
+        }
+    }
+
+    // 共有者のuidからアカウント名を取得するメソッド
+    func getUserName(uid: String?) async throws -> String {
+        guard let uid else {
+            return "登録者なし"
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let userDocRer = db.collection("users").document(uid)
+            userDocRer.getDocument { (documentSnapshot, error) in
+                guard let documentSnapshot else {
+                    continuation.resume(throwing: error ?? FirestoreError.unknown)
+                    return
+                }
+                let name = documentSnapshot.get("name") as! String
+                continuation.resume(returning: name)
+            }
+        }
+    }
 }

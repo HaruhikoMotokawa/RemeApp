@@ -24,7 +24,7 @@ class AccountViewController: UIViewController {
     @IBOutlet private weak var uidLabel: UILabel!
 
     /// ラベルの表示を切り替えるボタン
-    @IBOutlet weak var displaySwitchButton: UIButton!
+    @IBOutlet private weak var displaySwitchButton: UIButton!
 
     /// passwordLabelの表示を切り替えるフラグ
     private var isLabelDisplay: Bool = false
@@ -184,7 +184,7 @@ class AccountViewController: UIViewController {
     }
 
     /// アラートを出す
-    func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
+    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             completion?()

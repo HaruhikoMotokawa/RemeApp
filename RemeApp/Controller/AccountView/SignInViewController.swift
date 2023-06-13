@@ -24,6 +24,7 @@ class SignInViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setKeyboardCloseButton()
         inputMailTextField.delegate = self
         inputPasswordTextField.delegate = self
         setSignInButton()
@@ -68,12 +69,25 @@ class SignInViewController: UIViewController {
     }
 
     /// エラーメッセージごとにアラートを出す
-    func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
+    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
             completion?()
         }))
         present(alert, animated: true, completion: nil)
+    }
+
+    /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
+    private func setKeyboardCloseButton() {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        toolbar.items = [doneButton]
+        inputMailTextField.inputAccessoryView = toolbar
+        inputPasswordTextField.inputAccessoryView = toolbar
+    }
+    /// 閉じるボタンを押した時にキーボードを閉じるメソッド
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
     }
 }
 
