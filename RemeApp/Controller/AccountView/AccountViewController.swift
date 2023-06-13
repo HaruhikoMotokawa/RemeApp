@@ -83,8 +83,8 @@ class AccountViewController: UIViewController {
                                       preferredStyle: .actionSheet)
         // キャンセル
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
-        // 削除の実行
-        let deleteAction = UIAlertAction(title: "ログアウト", style: .destructive, handler: { [weak self] (action) in
+        // サインアウトの実行
+        let signOutAction = UIAlertAction(title: "ログアウト", style: .destructive, handler: { [weak self] (action) in
             Task { @MainActor in
                 do {
                     guard let self else { return }
@@ -105,7 +105,7 @@ class AccountViewController: UIViewController {
             }
         })
         alert.addAction(cancelAction)
-        alert.addAction(deleteAction)
+        alert.addAction(signOutAction)
         present(alert, animated: true)
     }
 
@@ -131,7 +131,7 @@ class AccountViewController: UIViewController {
                     let deleteUid = AccountManager.shared.getAuthStatus()
                     // ユーザー情報の削除
                     try await FirestoreManager.shared.deleteUsersDocument(uid: deleteUid)
-                    // ユーザーが作成したhoppingItemのデータ削除
+                    // ユーザーが作成したshoppingItemのデータ削除
 
                     // ユーザーが作成したmapSettingsの削除
 

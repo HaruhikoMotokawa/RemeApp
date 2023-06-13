@@ -17,9 +17,7 @@ final class FirestoreManager {
 
     let db = Firestore.firestore()
 
-    // FireStoreのsharedUsersの配列を保持するための変数
-//    var sharedUsers: [String] = []
-
+    var sharedUsersListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
@@ -44,44 +42,61 @@ final class FirestoreManager {
 
     // ユーザー情報を上書きするメソッド
 
-    // ユーザー情報を削除するメソッド
+    /// ユーザー情報を削除するメソッド
     func deleteUsersDocument(uid: String) async throws {
         try await db.collection("users").document(uid).delete()
     }
 
-    // 共有者に登録しているユーざーのuidを取得するメソッド
+    /// 共有者に登録しているユーザーのuidを取得するメソッド
     func getSharedUsers(uid: String) async throws -> [String] {
-        return try await withCheckedThrowingContinuation { continuation in
-            db.collection("users").document(uid).addSnapshotListener { (documentSnapshot ,err) in
-                print("Firestoreにアクセス開始")
-                guard let documentSnapshot else {
-                    continuation.resume(throwing: err ?? FirestoreError.unknown)
-                    return
-                }
-                let data = documentSnapshot.data()!
-                let sharedUsers = data["sharedUsers"] as? [String] ?? []
-                print("取得共有者：　\(sharedUsers)")
-                continuation.resume(returning: sharedUsers)
-            }
-        }
+        let document = try await db.collection("users").document(uid).getDocument()
+        let data = document.data()!
+        let sharedUsers = data["sharedUsers"] as? [String] ?? []
+        return sharedUsers
     }
 
-    // 共有者のuidからアカウント名を取得するメソッド
+    /// 共有者のuidからアカウント名を取得するメソッド
     func getUserName(uid: String?) async throws -> String {
+        // uidがnilだったらテキストを返却して終了
         guard let uid else {
             return "登録者なし"
         }
-
+        // 非同期処理の実行結果を返却する
         return try await withCheckedThrowingContinuation { continuation in
+            // usersコレクションのuidと同じドキュメントidのドキュメントにアクセス
             let userDocRer = db.collection("users").document(uid)
+            // 該当するドキュメントからデータの取得を開始
             userDocRer.getDocument { (documentSnapshot, error) in
+                // 該当のドキュメントがnilだったらエラーをスローして終了
                 guard let documentSnapshot else {
                     continuation.resume(throwing: error ?? FirestoreError.unknown)
                     return
                 }
+                // ドキュメントに登録されたnameを取得
                 let name = documentSnapshot.get("name") as! String
+                // 取得した値を返却
                 continuation.resume(returning: name)
             }
         }
     }
+
+    /// 共有者を更新するメソッド
+    /// - 主に削除に使用
+    /// - 削除する登録者を抜いた配列を引数のshardUsersに代入
+    func upData(uid: String, shardUsers: [String]) async throws {
+        try await db.collection("users").document(uid).updateData(["sharedUsers":shardUsers])
+    }
+
+    // 共有者を追加するメソッド
+    func addSharedUsers(inputUid: String, uid: String) async throws {
+        let userRef = db.collection("users")
+        let inputUserQuery = userRef.whereField(FieldPath.documentID(), isEqualTo: inputUid)
+        let querySnapshot = try await inputUserQuery.getDocuments()
+        if querySnapshot.isEmpty {
+            throw FirestoreError.notFound
+        }
+        let document = userRef.document(uid)
+        try await document.updateData(["sharedUsers": FieldValue.arrayUnion([inputUid])])
+    }
+
 }

@@ -36,39 +36,72 @@ class ShareSettingsViewController: UIViewController {
     /// 追加ボタン
     @IBOutlet private weak var addButton: UIButton!
 
-    // FireStoreのsharedUsersの配列を保持するための変数
-//    private var sharedUsers: [String] = []
-
-
     
     // MARK: - viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputUIDTextField.delegate = self
         setKeyboardCloseButton()
         setAddButton()
         Task {
-           await setSharedUsers()
+            await setSharedUsers()
         }
     }
+
     
     // MARK: - func
 
     /// １番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteFirstSharedUsers(_ sender: Any) {
+        Task { @MainActor in
+            await deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
+            await setSharedUsers()
+        }
     }
 
     /// ２番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteSecondSharedUsers(_ sender: Any) {
+        Task { @MainActor in
+            await deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
+            await setSharedUsers()
+        }
     }
 
     /// ３番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteThirdSharedUsers(_ sender: Any) {
+        Task { @MainActor in
+            await deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
+            await setSharedUsers()
+        }
     }
 
     /// inputUIDTextFieldの入力内容を使って共有者に追加するメソッド
     @IBAction private func addSharedUsers(_ sender: Any) {
+        Task { @MainActor in
+            do {
+                // 入力された値がないかnilチェック
+                guard let inputUid = inputUIDTextField.text else { return }
+                // ユーザーのuidを取得
+                let uid = AccountManager.shared.getAuthStatus()
+                // 入力したuidのチェックと追加処理
+                try await FirestoreManager.shared.addSharedUsers(inputUid: inputUid, uid: uid)
+                // 共有者のラベルを更新
+                await setSharedUsers()
+                // uidの入力欄を空白に戻す
+                self.inputUIDTextField.text = nil
 
+                // 完了のアラート
+                self.showAlert(tittle: "完了", errorMessage: "登録しました")
+            } catch FirestoreError.notFound {
+                showAlert(tittle: "エラー", errorMessage: FirestoreError.notFound.title)
+            } catch let error {
+                // 失敗のアラート
+                print("追加失敗だよー")
+                let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+                showAlert(tittle: "エラー", errorMessage: errorMessage)
+            }
+        }
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
@@ -85,7 +118,7 @@ class ShareSettingsViewController: UIViewController {
 
     /// 作成ボタンの有効化を切り替えるメソッド
     private func setAddButton() {
-        // アカウント名、メール、パスワードの全てが入力されている場合、作成ボタンを有効化
+        // uidが入力されている場合、追加ボタンを有効化
         if inputUIDTextField.text?.isEmpty == false {
             addButton.isEnabled = true
         } else {
@@ -95,44 +128,127 @@ class ShareSettingsViewController: UIViewController {
     }
 
     /// 共有アカウントを表示するメソッド
-    func setSharedUsers() async {
+    private func setSharedUsers() async {
+        do {
+            // ログイン中のユーザーのuidを取得
+            let uid = AccountManager.shared.getAuthStatus()
+            // 共有者のuidを[String]型で取得
+            let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+            // 共有者のuidから登録されたアカウント名を取得して表示する。共有者の登録数によって処理を切り替える
+            switch sharedUsers.count {
+                case SharedUsers.one.numberOfRegistrations:
+                    firstSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.one.arrayNumber])
+                    secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
+                    thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
 
-            do {
-                let uid = AccountManager.shared.getAuthStatus()
-                let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
-                switch sharedUsers.count {
-                    case 1:
-                        firstSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[0])
-                        secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                        thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                    case 2:
-                        firstSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[0])
-                        secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[1])
-                        thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                    case 3:
-                        firstSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[0])
-                        secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[1])
-                        thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: sharedUsers[2])
-                    default:
-                        firstSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                        secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                        thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
-                }
-                firstDeleteButton.isEnabled = sharedUsers.count >= 1
-                secondDeleteButton.isEnabled = sharedUsers.count >= 2
-                thirdDeleteButton.isEnabled = sharedUsers.count >= 3
-                print(sharedUsers)
+                case SharedUsers.two.numberOfRegistrations:
+                    firstSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.one.arrayNumber])
+                    secondSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.two.arrayNumber])
+                    thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
 
-
-            } catch let error {
-                print("\(error)")
+                case SharedUsers.three.numberOfRegistrations:
+                    firstSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.one.arrayNumber])
+                    secondSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.two.arrayNumber])
+                    thirdSharedUsersNameLabel.text = try await FirestoreManager.shared
+                        .getUserName(uid: sharedUsers[SharedUsers.three.arrayNumber])
+                default:
+                    firstSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
+                    secondSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
+                    thirdSharedUsersNameLabel.text = try await FirestoreManager.shared.getUserName(uid: nil)
             }
+            // 共有者の登録があるボタンだけ有効化
+            firstDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.one.numberOfRegistrations
+            secondDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.two.numberOfRegistrations
+            thirdDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.three.numberOfRegistrations
+            print(sharedUsers)
+        } catch let error {
+            print("\(error)")
         }
+    }
 
+    /// 共有者の登録を解除する
+    private func deleteSharedUsers(deleteNumber: Int) async {
+        let alert = UIAlertController(title: "共有登録の解除",
+                                      message: "共有を解除すると相手に買い物リストが表示されなくなります。",
+                                      preferredStyle: .actionSheet)
+        // キャンセル
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
+        // 削除の実行
+        let deleteAction = UIAlertAction(title: "登録解除", style: .destructive, handler: { [weak self] (action) in
+            Task { @MainActor in
+                do {
+                    guard let self else { return }
+                    // 現在のログインしているユーザーのuidを取得
+                    let uid = AccountManager.shared.getAuthStatus()
+                    // usersコレクションのsharedUsersフィールドの値を取得
+                    var sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+                    // sharedUsersから対象の値を削除
+                    sharedUsers.remove(at: deleteNumber)
+                    // sharedUsersを上書き
+                    try await FirestoreManager.shared.upData(uid: uid, shardUsers: sharedUsers)
+                    // ラベルの更新
+                    await self.setSharedUsers()
+                    self.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
+                } catch let error {
+                    guard let self else { return }
+                    print("エラー")
+                    let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                }
+            }
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
+    }
+    /// アラートを出す
+    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            completion?()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ShareSettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         setAddButton()
+    }
+}
+
+/// 共有者の番号管理
+enum SharedUsers {
+    case one
+    case two
+    case three
+
+    /// 共有者の配列番号
+    var arrayNumber: Int {
+        switch self {
+            case .one:
+                return 0
+            case .two:
+                return 1
+            case .three:
+                return 2
+        }
+    }
+
+    /// 共有者の登録人数
+    var numberOfRegistrations:Int {
+        switch self {
+            case .one:
+                return 1
+            case .two:
+                return 2
+            case .three:
+                return 3
+        }
     }
 }
