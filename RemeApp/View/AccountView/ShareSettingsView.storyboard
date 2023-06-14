@@ -170,6 +170,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="p1a-Nu-pKj" id="5r1-8t-wYr"/>
                         <outlet property="firstDeleteButton" destination="Bk2-kX-tCG" id="Jg7-tK-6Br"/>
                         <outlet property="firstSharedUsersNameLabel" destination="7cn-Ee-U00" id="FR5-8n-72f"/>
                         <outlet property="inputUIDTextField" destination="iah-HW-wkd" id="5hM-PQ-oNe"/>
@@ -181,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="52"/>
+            <point key="canvasLocation" x="-407" y="-28"/>
         </scene>
     </scenes>
     <resources>

@@ -118,6 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createButton" destination="sJl-AY-0WS" id="2bU-Iv-gJr"/>
                         <outlet property="inputAccountTextField" destination="8vz-dY-Ptw" id="NUW-4p-1BQ"/>
                         <outlet property="inputMailTextField" destination="FNi-Md-Sfi" id="HCP-Q6-O14"/>
                         <outlet property="inputPasswordTextField" destination="ZsA-sz-iud" id="oiF-lZ-NbD"/>
