@@ -201,10 +201,11 @@
                     <navigationItem key="navigationItem" title="アカウント" id="RIB-8P-fDl"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="displaySwitchButton" destination="vHU-dO-dko" id="Wl1-eY-WsR"/>
                         <outlet property="mailLabel" destination="KND-U5-x0M" id="QAb-XC-bDV"/>
                         <outlet property="nameLabel" destination="ARn-09-jCs" id="olq-ys-iKZ"/>
                         <outlet property="passwordLabel" destination="Mxh-Vv-QYL" id="Knt-nL-jXj"/>
-                        <outlet property="userIDLabel" destination="Fp4-D3-dOX" id="5x6-6k-U4W"/>
+                        <outlet property="uidLabel" destination="Fp4-D3-dOX" id="5x6-6k-U4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
