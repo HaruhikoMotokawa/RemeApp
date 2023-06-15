@@ -15,9 +15,11 @@ final class FirestoreManager {
     /// 外部アクセスを禁止
     private init() {}
 
-    let db = Firestore.firestore()
+    /// Firestoreのインスタン化
+    private let db = Firestore.firestore()
 
-    var sharedUsersListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのリスナー
+    private var myItemListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
@@ -39,8 +41,6 @@ final class FirestoreManager {
         // userを元にFirestoreに保存実行
         try db.collection("users").document(uid).setData(from: user)
     }
-
-    // ユーザー情報を上書きするメソッド
 
     /// ユーザー情報を削除するメソッド
     func deleteUsersDocument(uid: String) async throws {
@@ -97,6 +97,41 @@ final class FirestoreManager {
         }
         let document = userRef.document(uid)
         try await document.updateData(["sharedUsers": FieldValue.arrayUnion([inputUid])])
+    }
+}
+// MARK: - shoppingItem関連
+extension FirestoreManager {
+
+    /// 自分が作成した買い物リストへの変更を監視する
+    func getShoppingItemObserver(completion: @escaping ([ShoppingItemModel]) -> Void) {
+        // 現在ログインしているユーザーのuidを取得
+        let uid = AccountManager.shared.getAuthStatus()
+        let db = Firestore.firestore()
+        // 自分が作成した買い物商品のリスナーをセット
+        myItemListener = db.collection("shoppingItem").whereField("owner", isEqualTo: uid)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard  let querySnapshot else { return }
+                // データをShoppingItemModelにマッピング
+                let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
+                    let data = item.data()
+                    return ShoppingItemModel(id: item.documentID,
+                                             isCheckBox: data["isCheckBox"] as? Bool ?? false,
+                                             nameOfItem: data["nameOfItem"] as? String ?? "",
+                                             numberOfItem: data["numberOfItem"] as? String ?? "",
+                                             unit: data["unit"] as? String ?? "",
+                                             salesFloorRawValue: data["salesFloorRawValue"] as? Int ?? 1,
+                                             supplement: data["supplement"] as? String ?? "",
+                                             photoURL: data["photoURL"] as? String ?? "",
+                                             owner: data["owner"] as? String ?? "",
+                                             sharedUsers: data["sharedUsers"] as? [String] ?? [])
+                }
+                completion(myShoppingItemList)
+            }
+    }
+
+    /// 自分の買い物リストの監視を解除
+    func removeShoppingItemObserver() {
+        myItemListener?.remove()
     }
 
 }

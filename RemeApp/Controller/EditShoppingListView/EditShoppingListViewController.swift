@@ -294,7 +294,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  numberOfItem: errandDataModel.numberOfItem,
                                  unit: errandDataModel.unit,
                                  salesFloorRawValue: errandDataModel.salesFloorRawValue,
-                                 supplement: errandDataModel.supplement,
+                                 supplement: errandDataModel.supplement ?? "",
                                  image: errandDataModel.getImage())
             return cell
         }

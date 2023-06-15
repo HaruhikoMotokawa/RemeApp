@@ -6,7 +6,8 @@
 //
 import UIKit
 import RealmSwift
-
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
 
@@ -31,6 +32,9 @@ class ShoppingListViewController: UIViewController {
     /// 買い物リストに表示するお使いデータのダミーデータ
     private var errandDataList: [ErrandDataModel] = []
 
+    private var myShoppingItemList: [ShoppingItemModel] = []
+
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +42,21 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                        forCellReuseIdentifier: "ShoppingListTableViewCell")
+        print(myShoppingItemList)
+        setShoppingItemObserver()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setErrandData()
-        sortErrandDataList()
+//        setErrandData()
+//        sortErrandDataList()
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        FirestoreManager.shared.removeShoppingItemObserver()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +84,49 @@ class ShoppingListViewController: UIViewController {
         errandDataList = Array(result)
     }
 
+    func setShoppingItemObserver() {
+        FirestoreManager.shared.getShoppingItemObserver(completion: { [weak self] itemList in
+            guard let self else { return }
+            self.myShoppingItemList = itemList
+            print(itemList)
+            self.sortMyShoppingItemList()
+
+        })
+    }
+
+
+    private func sortMyShoppingItemList() {
+        print("並び替え実行")
+        let shoppingStartPositionKey = "shoppingStartPositionKey"
+        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+        if shoppingStartPositionInt == 0 {
+            sortLeftMyShoppingItemList()
+        } else {
+            sortRightMyShoppingItemList()
+        }
+    }
+
+    func sortLeftMyShoppingItemList() {
+        myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
+            if a.isCheckBox != b.isCheckBox {
+                return !a.isCheckBox
+            } else {
+                return a.salesFloorRawValue > b.salesFloorRawValue
+            }
+        }
+        shoppingListTableView.reloadData()
+    }
+
+    func sortRightMyShoppingItemList() {
+        myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
+            if a.isCheckBox != b.isCheckBox {
+                return !a.isCheckBox
+            } else {
+                return a.salesFloorRawValue < b.salesFloorRawValue
+            }
+        }
+        shoppingListTableView.reloadData()
+    }
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     /// - UserDefaultsに使用するキーを指定
     /// - UserDefaultsから設定を取得
@@ -130,7 +186,8 @@ class ShoppingListViewController: UIViewController {
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return errandDataList.count
+//        return errandDataList.count
+        return myShoppingItemList.count
     }
     
     /// shoppingListTableViewに使用するcellの内容を指定
@@ -138,14 +195,23 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         if let cell = shoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
-            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
-            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
-                                 nameOfItem: errandDataModel.nameOfItem,
-                                 numberOfItem: errandDataModel.numberOfItem,
-                                 unit: errandDataModel.unit,
-                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
-                                 supplement: errandDataModel.supplement,
-                                 image: errandDataModel.getImage())
+//            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
+//            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
+//                                 nameOfItem: errandDataModel.nameOfItem,
+//                                 numberOfItem: errandDataModel.numberOfItem,
+//                                 unit: errandDataModel.unit,
+//                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
+//                                 supplement: errandDataModel.supplement,
+//                                 image: errandDataModel.getImage())
+            let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
+            cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                 nameOfItem: myData.nameOfItem,
+                                 numberOfItem: myData.numberOfItem,
+                                 unit: myData.unit,
+                                 salesFloorRawValue: myData.salesFloorRawValue,
+                                 supplement: myData.supplement,
+                                 image: nil)
+
             return cell
         }
         return UITableViewCell()

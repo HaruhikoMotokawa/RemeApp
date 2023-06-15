@@ -47,6 +47,9 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// お使いデータモデル
     var errandDataList: Array<ErrandDataModel> = []
 
+    /// 買い物リスト
+    var myShoppingItemList: [ShoppingItemModel] = []
+
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
@@ -106,13 +109,15 @@ class ShoppingListTableViewCellController: UITableViewCell  {
         // ラベルの自動調整の際に必ず１行になるように設定
         salesFloorTypeButton.titleLabel?.numberOfLines = 1
     }
+
+    
     /// 買い物リストのデータをセルの各パーツにセットする
     func setShoppingList(isCheckBox: Bool,
                          nameOfItem: String,
                          numberOfItem: String,
                          unit: String,
                          salesFloorRawValue:Int,
-                         supplement: String?,
+                         supplement: String,
                          image: UIImage?) {
         changeBackgroundColor(isCheckBox: isCheckBox)
         nameOfItemLabel.text = nameOfItem
@@ -204,12 +209,12 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// cellのsetSupplementLabelに内容を反映させる
     /// - 補足がnilならそのままnilで入れる
     /// - 補足があるなら文字色を灰色にし、「 補足： 」を先頭につけて表示する
-    func setSupplementLabel(supplement: String?) {
-        if supplement == nil {
+    func setSupplementLabel(supplement: String) {
+        if supplement == "" {
             supplementLabel.text = ""
         } else {
             supplementLabel.textColor = UIColor.gray
-            supplementLabel.text = "補足：" + (supplement ?? "")
+            supplementLabel.text = "補足：" + (supplement)
         }
     }
 }

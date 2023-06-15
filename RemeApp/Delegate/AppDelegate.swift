@@ -11,6 +11,7 @@ import RealmSwift
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Firebaseの初期設定
         FirebaseApp.configure()
+   
         // IQKeyboardManagerを設定
         IQKeyboardManager.shared.enable = true
 

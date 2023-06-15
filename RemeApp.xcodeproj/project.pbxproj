@@ -53,6 +53,7 @@
 		78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC529EA98CD00721592 /* PageViewController.swift */; };
 		78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */; };
 		78B18CCA29EA991B00721592 /* CustomSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */; };
+		78BAAB1E2A39460A000C9627 /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */; };
 		78C160762A1B1AF500C66E92 /* TutorialPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C160752A1B1AF500C66E92 /* TutorialPageView.storyboard */; };
 		78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C160772A1B1C5200C66E92 /* TutorialPageViewController.swift */; };
 		78C1607A2A1B3C8800C66E92 /* TutorialShoppingView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C160792A1B3C8800C66E92 /* TutorialShoppingView.storyboard */; };
@@ -139,6 +140,7 @@
 		78B18CC529EA98CD00721592 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorMapViewController.swift; sourceTree = "<group>"; };
+		78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
 		78C160752A1B1AF500C66E92 /* TutorialPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialPageView.storyboard; sourceTree = "<group>"; };
 		78C160772A1B1C5200C66E92 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		78C160792A1B3C8800C66E92 /* TutorialShoppingView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialShoppingView.storyboard; sourceTree = "<group>"; };
@@ -221,6 +223,24 @@
 				78E80B302A3021E50068C71C /* GoogleService-Info.plist */,
 			);
 			path = RemeApp;
+			sourceTree = "<group>";
+		};
+		78BAAB1B2A394562000C9627 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */,
+				78BAAB1C2A394594000C9627 /* Request */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		78BAAB1C2A394594000C9627 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */,
+				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		78C1607D2A1B64C500C66E92 /* Tutorial */ = {
@@ -344,9 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */,
-				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
-				7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */,
-				78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */,
+				78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */,
 			);
 			path = FirebaseModel;
 			sourceTree = "<group>";
@@ -362,6 +380,7 @@
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
+				78BAAB1B2A394562000C9627 /* API */,
 				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
 			path = Model;
@@ -611,6 +630,7 @@
 				78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */,
 				78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
+				78BAAB1E2A39460A000C9627 /* ShoppingItemModel.swift in Sources */,
 				78FBBF6B2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
