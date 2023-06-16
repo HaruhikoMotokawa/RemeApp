@@ -10,7 +10,7 @@ import RealmSwift
 /// G-品目新規作成
 class EditItemViewController: UIViewController {
 
-    // MARK: - @IBOutlet & @IBAction
+    // MARK: - property
 
     /// タイトル
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,6 +22,61 @@ class EditItemViewController: UIViewController {
     @IBOutlet private weak var unitPickerView: UIPickerView!
     /// 売り場選択
     @IBOutlet private weak var selectTypeOfSalesFloorButton: UIButton!
+    /// 補足文のプレースホルダー
+    @IBOutlet weak var placeholderLabel: UILabel!
+    /// 補足入力
+    @IBOutlet private weak var supplementTextView: UITextView!
+    /// 写真選択ボタン
+    @IBOutlet private weak var selectPhotoButton: UIButton!
+    /// 写真削除ボタン
+    @IBOutlet private weak var deletePhotoButton: UIButton!
+    /// 写真の背景
+    @IBOutlet private weak var photoBackgroundImage: UIImageView!
+    /// 選択した写真を添付する
+    @IBOutlet private weak var photoPathImageView: UIImageView!
+    /// キャンセルボタン
+    @IBOutlet private weak var cancelButton: UIButton!
+    /// 追加ボタン
+    @IBOutlet private weak var addButton: UIButton!
+
+    /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
+    private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
+                                                    "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
+    /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
+    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
+    /// 写真のURLパス
+    private var imageFilePath: URL?
+    /// カスタム売り場マップのリスト
+    private var customSalesFloorData = CustomSalesFloorModel()
+    /// お使いデータ
+    var errandData = ErrandDataModel()
+    /// nameOfItemTextFieldに表示するテキスト
+    private var nameOfItemTextFieldText:String? = nil
+    /// numberOfItemPickerViewに表示する文字列
+    private var numberOfItemPickerViewString:String = "１"
+    /// unitPickerViewに表示する文字列
+    private var unitPickerViewString:String = "個"
+    ///  売り場を保存するための一時置き場
+    private var selectedSalesFloorRawValue:Int? = nil
+    /// supplementTextViewに表示するテキスト
+    private var supplementTextViewText:String? = nil
+    /// photoImageViewに表示する画像
+    private var photoPathImage:UIImage? = nil
+
+    // MARK: - viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setDataSourceAndDelegate()
+        setKeyboardCloseButton()
+        setAppearanceAllButton()
+        displayData()
+        setTitleLabel()
+        setDisableOrEnable()
+        supplementTextView.setAppearance()
+    }
+
+    // MARK: - func
+
     /// 売り場選択画面に遷移するメソッド
     ///  -　遷移処理
     ///  - 遷移後に自身のボタンの見た目を変更するためにデリゲートをセット
@@ -33,12 +88,6 @@ class EditItemViewController: UIViewController {
         self.present(selectTypeOfSalesFloorVC, animated: true)
     }
 
-    /// 補足文のプレースホルダー
-    @IBOutlet weak var placeholderLabel: UILabel!
-    /// 補足入力
-    @IBOutlet private weak var supplementTextView: UITextView!
-    /// 写真選択ボタン
-    @IBOutlet private weak var selectPhotoButton: UIButton!
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
     /// - アクションシートで選択
     /// - カメラ撮影アクション
@@ -74,79 +123,25 @@ class EditItemViewController: UIViewController {
         alertController.popoverPresentationController?.sourceView = view
         present(alertController, animated: true)
     }
-    /// 写真削除ボタン
-    @IBOutlet private weak var deletePhotoButton: UIButton!
+
     /// 添付した写真データを削除する
     @IBAction private func deletePhoto(_ sender: Any) {
         // 添付した写真を削除するメソッド
         setDeletePhotoAction()
     }
 
-    /// 写真の背景
-    @IBOutlet private weak var photoBackgroundImage: UIImageView!
-    /// 選択した写真を添付する
-    @IBOutlet private weak var photoPathImageView: UIImageView!
-    /// キャンセルボタン
-    @IBOutlet private weak var cancelButton: UIButton!
     /// 編集を終了してEditShoppingListViewに戻る遷移
     @IBAction private func cancelAndReturn(_ sender: Any) {
         showCancelAlert()
     }
-    /// 追加ボタン
-    @IBOutlet private weak var addButton: UIButton!
+
     /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
     @IBAction private func addAndReturn(_ sender: Any) {
-        addOrReEnter()
+        Task { @MainActor in
+            await addOrReEnter()
+        }
     }
 
-    // MARK: - property
-    /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
-    private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
-                                                    "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
-
-    /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
-    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
-
-    /// 写真のURLパス
-    private var imageFilePath: URL?
-
-    /// カスタム売り場マップのリスト
-    private var customSalesFloorData = CustomSalesFloorModel()
-
-    /// お使いデータ
-    var errandData = ErrandDataModel()
-
-    /// nameOfItemTextFieldに表示するテキスト
-    private var nameOfItemTextFieldText:String? = nil
-
-    /// numberOfItemPickerViewに表示する文字列
-    private var numberOfItemPickerViewString:String = "１"
-
-    /// unitPickerViewに表示する文字列
-    private var unitPickerViewString:String = "個"
-
-    ///  売り場を保存するための一時置き場
-    private var selectedSalesFloorRawValue:Int? = nil
-
-    /// supplementTextViewに表示するテキスト
-    private var supplementTextViewText:String? = nil
-
-    /// photoImageViewに表示する画像
-    private var photoPathImage:UIImage? = nil
-
-    // MARK: - viewDidLoad
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setDataSourceAndDelegate()
-        setKeyboardCloseButton()
-        setAppearanceAllButton()
-        displayData()
-        setTitleLabel()
-        setDisableOrEnable()
-        supplementTextView.setAppearance()
-    }
-
-    // MARK: - func
     /// データソースとデリゲートをセット
     private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
@@ -344,7 +339,7 @@ extension EditItemViewController {
     /// 追加ボタンをタップした時の処理
     /// - 商品名が未入力の場合はアラートを出す
     /// - 商品名が入力されていればデータを書き込み、画面を閉じる
-    private func addOrReEnter() {
+    private func addOrReEnter() async {
         if nameOfItemTextField.text == "" {
             // 警告アラート
             let alertController = UIAlertController(title: nil, message:
@@ -354,33 +349,67 @@ extension EditItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            // ここに追加の処理
-            saveData()
+            await saveData()
             self.dismiss(animated: true)
         }
     }
 
-    private func saveData() {
-        // numberOfItemPickerViewで選択された値を取得
-        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-        // numberOfItemPickerViewで選択された値を取得
-        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-        // データベースに保存
-        let realm = try! Realm()
-        try! realm.write {
-            errandData.nameOfItem = nameOfItemTextField.text!
-            errandData.numberOfItem = selectedNumberOfItem
-            errandData.unit = selectedUnit
-            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
-            if supplementTextView.text == "" {
-                errandData.supplement = nil
-            } else {
-                errandData.supplement = supplementTextView.text
-            }
-            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
-            realm.add(errandData)
+    /// 保存の処理
+    private func saveData() async {
+        do {
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+            // データベースに保存
+            let uid = AccountManager.shared.getAuthStatus()
+            // ユーザー共有者のuidを取得
+            let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+            // 写真をアップロードして、ダウンロードURLを取得
+            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid, image: photoPathImageView.image,
+                                                          completion: { [weak self] photoURL in
+                guard let photoURL else { return }
+                guard let self else { return }
+                // 保存するリストを作成
+                let addItem = ShoppingItemModel(isCheckBox: false,
+                                                nameOfItem: self.nameOfItemTextField.text!,
+                                                numberOfItem: selectedNumberOfItem,
+                                                unit: selectedUnit,
+                                                salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                                                supplement: self.supplementTextView.text,
+                                                photoURL: photoURL,
+                                                owner: uid,
+                                                sharedUsers: sharedUsers)
+                FirestoreManager.shared.addItem(uid: uid, addItem: addItem)
+            })
+
+        } catch let error {
+            print(error)
         }
     }
+
+    /// 保存の処理(Realm)
+//    private func saveData() {
+//        // numberOfItemPickerViewで選択された値を取得
+//        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+//        // numberOfItemPickerViewで選択された値を取得
+//        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+//        // データベースに保存
+//        let realm = try! Realm()
+//        try! realm.write {
+//            errandData.nameOfItem = nameOfItemTextField.text!
+//            errandData.numberOfItem = selectedNumberOfItem
+//            errandData.unit = selectedUnit
+//            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
+//            if supplementTextView.text == "" {
+//                errandData.supplement = nil
+//            } else {
+//                errandData.supplement = supplementTextView.text
+//            }
+//            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
+//            realm.add(errandData)
+//        }
+//    }
 }
 
 // MARK: - UIPickerViewDataSource&Delegate

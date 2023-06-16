@@ -26,7 +26,7 @@ struct ShoppingItemModel: Codable {
     /// 補足
     var supplement = String()
     /// 写真が保存されているCloudStorageのダウンロードURL
-    var photoURL = String()
+    var photoURL:String
     /// このリストの作成者のuid
     var owner: String
     /// このリストの共有者

@@ -26,7 +26,7 @@ final class FirestoreManager {
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
     func getUserInfo(uid: String) async throws -> UserDataModel? {
         // 非同期処理であるFirestoreへのアクセスにより、ユーザー情報をUserDataModelに変換して定数に入れる
-        let document = try await db.collection("users").document(uid).getDocument(as: UserDataModel.self)
+        let document = try await db.collection(Collection.users.path).document(uid).getDocument(as: UserDataModel.self)
         print("Firestoreからデータ取得成功")
         // UserDataModelで格納した値を返却
         return document
@@ -39,19 +39,19 @@ final class FirestoreManager {
         // UserDataModelをuserとして定義
         let user = UserDataModel(name: name, email: email, password: password)
         // userを元にFirestoreに保存実行
-        try db.collection("users").document(uid).setData(from: user)
+        try db.collection(Collection.users.path).document(uid).setData(from: user)
     }
 
     /// ユーザー情報を削除するメソッド
     func deleteUsersDocument(uid: String) async throws {
-        try await db.collection("users").document(uid).delete()
+        try await db.collection(Collection.users.path).document(uid).delete()
     }
 
     /// 共有者に登録しているユーザーのuidを取得するメソッド
     func getSharedUsers(uid: String) async throws -> [String] {
-        let document = try await db.collection("users").document(uid).getDocument()
+        let document = try await db.collection(Collection.users.path).document(uid).getDocument()
         let data = document.data()!
-        let sharedUsers = data["sharedUsers"] as? [String] ?? []
+        let sharedUsers = data[Field.sharedUsers.path] as? [String] ?? []
         return sharedUsers
     }
 
@@ -64,7 +64,7 @@ final class FirestoreManager {
         // 非同期処理の実行結果を返却する
         return try await withCheckedThrowingContinuation { continuation in
             // usersコレクションのuidと同じドキュメントidのドキュメントにアクセス
-            let userDocRer = db.collection("users").document(uid)
+            let userDocRer = db.collection(Collection.users.path).document(uid)
             // 該当するドキュメントからデータの取得を開始
             userDocRer.getDocument { (documentSnapshot, error) in
                 // 該当のドキュメントがnilだったらエラーをスローして終了
@@ -73,7 +73,7 @@ final class FirestoreManager {
                     return
                 }
                 // ドキュメントに登録されたnameを取得
-                let name = documentSnapshot.get("name") as! String
+                let name = documentSnapshot.get(Field.name.path) as! String
                 // 取得した値を返却
                 continuation.resume(returning: name)
             }
@@ -84,46 +84,43 @@ final class FirestoreManager {
     /// - 主に削除に使用
     /// - 削除する登録者を抜いた配列を引数のshardUsersに代入
     func upData(uid: String, shardUsers: [String]) async throws {
-        try await db.collection("users").document(uid).updateData(["sharedUsers":shardUsers])
+        try await db.collection(Collection.users.path).document(uid).updateData([Field.sharedUsers.path:shardUsers])
     }
 
     // 共有者を追加するメソッド
     func addSharedUsers(inputUid: String, uid: String) async throws {
-        let userRef = db.collection("users")
+        let userRef = db.collection(Collection.users.path)
         let inputUserQuery = userRef.whereField(FieldPath.documentID(), isEqualTo: inputUid)
         let querySnapshot = try await inputUserQuery.getDocuments()
         if querySnapshot.isEmpty {
             throw FirestoreError.notFound
         }
         let document = userRef.document(uid)
-        try await document.updateData(["sharedUsers": FieldValue.arrayUnion([inputUid])])
+        try await document.updateData([Field.sharedUsers.path: FieldValue.arrayUnion([inputUid])])
     }
 }
 // MARK: - shoppingItem関連
 extension FirestoreManager {
 
     /// 自分が作成した買い物リストへの変更を監視する
-    func getShoppingItemObserver(completion: @escaping ([ShoppingItemModel]) -> Void) {
-        // 現在ログインしているユーザーのuidを取得
-        let uid = AccountManager.shared.getAuthStatus()
-        let db = Firestore.firestore()
+    func getShoppingItemObserver(uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        myItemListener = db.collection("shoppingItem").whereField("owner", isEqualTo: uid)
+        myItemListener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
                 let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
-                                             isCheckBox: data["isCheckBox"] as? Bool ?? false,
-                                             nameOfItem: data["nameOfItem"] as? String ?? "",
-                                             numberOfItem: data["numberOfItem"] as? String ?? "",
-                                             unit: data["unit"] as? String ?? "",
-                                             salesFloorRawValue: data["salesFloorRawValue"] as? Int ?? 1,
-                                             supplement: data["supplement"] as? String ?? "",
-                                             photoURL: data["photoURL"] as? String ?? "",
-                                             owner: data["owner"] as? String ?? "",
-                                             sharedUsers: data["sharedUsers"] as? [String] ?? [])
+                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
+                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
+                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
+                                             unit: data[Field.unit.path] as? String ?? "",
+                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
+                                             supplement: data[Field.supplement.path] as? String ?? "",
+                                             photoURL: data[Field.photoURL.path] as? String ?? "",
+                                             owner: data[Field.owner.path] as? String ?? "",
+                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
                 }
                 completion(myShoppingItemList)
             }
@@ -134,4 +131,87 @@ extension FirestoreManager {
         myItemListener?.remove()
     }
 
+    /// 買い物の商品を新規作成
+    func addItem(uid: String, addItem: ShoppingItemModel) {
+        db.collection(Collection.shoppingItem.path).document(uid).parent.addDocument(data: [
+            "isCheckBox": addItem.isCheckBox ,
+            "nameOfItem": addItem.nameOfItem ,
+            "numberOfItem": addItem.numberOfItem ,
+            "unit":addItem.unit ,
+            "salesFloorRawValue": addItem.salesFloorRawValue ,
+            "supplement": addItem.supplement ,
+            "photoURL": addItem.photoURL ,
+            "owner": addItem.owner,
+            "sharedUsers": addItem.sharedUsers])
+        { err in
+            if err != nil {
+                print("Firestoreへの保存に失敗")
+            } else {
+                print("Firestoreへの保存に成功")
+            }
+        }
+    }
+
+}
+
+/// コレクションのパスを管理
+enum Collection {
+    case users
+    case shoppingItem
+    case mapSettings
+    case customSalesFloor
+
+    // パスを返却
+    var path: String {
+        switch self {
+            case .users:
+                return "users"
+            case .shoppingItem:
+                return "shoppingItem"
+            case .mapSettings:
+                return "mapSettings"
+            case .customSalesFloor:
+                return "customSalesFloor"
+        }
+    }
+}
+
+/// フィールドのパスを管理
+enum Field {
+    case name
+    case isCheckBox
+    case nameOfItem
+    case numberOfItem
+    case unit
+    case salesFloorRawValue
+    case supplement
+    case photoURL
+    case owner
+    case sharedUsers
+
+    ///パスを返却
+    var path: String {
+        switch self {
+            case .name:
+                return "name"
+            case .isCheckBox:
+                return "isCheckBox"
+            case .nameOfItem:
+                return "nameOfItem"
+            case .numberOfItem:
+                return "numberOfItem"
+            case .unit:
+                return "unit"
+            case .salesFloorRawValue:
+                return "salesFloorRawValue"
+            case .supplement:
+                return "supplement"
+            case .photoURL:
+                return "photoURL"
+            case .owner:
+                return "owner"
+            case .sharedUsers:
+                return "sharedUsers"
+        }
+    }
 }

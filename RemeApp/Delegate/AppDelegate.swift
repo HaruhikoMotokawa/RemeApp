@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Task { @MainActor in
                 do {
                     try await AccountManager.shared.signInAnonymity()
+   
                 } catch {
                         print("失敗")
                     }

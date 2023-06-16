@@ -6,45 +6,29 @@
 //
 import UIKit
 import RealmSwift
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
 
-    // MARK: - @IBOutlet
+    // MARK: - property
 
     /// チュートリアルを表示するボタン
     @IBOutlet private weak var helpButton: UIButton!
 
-    /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
-        let tutorialPageVC = storyboard.instantiateViewController(
-            withIdentifier: "TutorialPageView") as! TutorialPageViewController
-        tutorialPageVC.modalPresentationStyle = .fullScreen
-        self.present(tutorialPageVC, animated: true)
-    }
-
     /// 買い物リストを表示する
     @IBOutlet private weak var shoppingListTableView: UITableView!
 
-    // MARK: - property
     /// 買い物リストに表示するお使いデータのダミーデータ
     private var errandDataList: [ErrandDataModel] = []
 
+    /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
 
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                       forCellReuseIdentifier: "ShoppingListTableViewCell")
-        print(myShoppingItemList)
+        setTableView()
         setShoppingItemObserver()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +40,34 @@ class ShoppingListViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        FirestoreManager.shared.removeShoppingItemObserver()
+        FirestoreManager.shared.removeShoppingItemObserver() // オブザーバを廃棄
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        showTutorialPageOnFirstLaunch() // 初回起動時のチュートリアル表示
+    }
+    // MARK: - func
 
-        //アプリ初回起動時のチュートリアル画面表示処理
+    /// チュートリアル画面にモーダル遷移
+    @IBAction private func goTutorialView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+        let tutorialPageVC = storyboard.instantiateViewController(
+            withIdentifier: "TutorialPageView") as! TutorialPageViewController
+        tutorialPageVC.modalPresentationStyle = .fullScreen
+        self.present(tutorialPageVC, animated: true)
+    }
+
+    /// shoppingListTableView関連の設定
+    private func setTableView() {
+        shoppingListTableView.dataSource = self
+        shoppingListTableView.delegate = self
+        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+                                       forCellReuseIdentifier: "ShoppingListTableViewCell")
+    }
+
+    /// アプリ初回起動時のチュートリアル画面表示処理
+    private func showTutorialPageOnFirstLaunch() {
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch"
         if ud.bool(forKey: firstLunchKey) {
@@ -75,7 +80,6 @@ class ShoppingListViewController: UIViewController {
             self.present(tutorialPageVC, animated: true)
         }
     }
-    // MARK: - func
 
     /// 保存されたお使いデータをセットする
     func setErrandData() {
@@ -84,17 +88,23 @@ class ShoppingListViewController: UIViewController {
         errandDataList = Array(result)
     }
 
+    /// 買い物リストの変更を監視、データを受け取り表示を更新する
     func setShoppingItemObserver() {
-        FirestoreManager.shared.getShoppingItemObserver(completion: { [weak self] itemList in
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getShoppingItemObserver(uid: uid, completion: { [weak self] itemList in
             guard let self else { return }
             self.myShoppingItemList = itemList
             print(itemList)
             self.sortMyShoppingItemList()
-
         })
     }
 
-
+    /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
+    /// - UserDefaultsに使用するキーを指定
+    /// - UserDefaultsから設定を取得
+    /// -  画面ローディング時の表示をif文で切り替え
+    /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortMyShoppingItemList() {
         print("並び替え実行")
         let shoppingStartPositionKey = "shoppingStartPositionKey"
@@ -106,6 +116,9 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
+    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
+    /// - shoppingListTableViewを再読み込み
     func sortLeftMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
@@ -117,6 +130,9 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.reloadData()
     }
 
+    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
+    /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
+    /// - shoppingListTableViewを再読み込み
     func sortRightMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
@@ -133,43 +149,43 @@ class ShoppingListViewController: UIViewController {
     /// -  画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-    private func sortErrandDataList() {
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
-            sortLeftErrandDataList()
-        } else {
-            sortRightErrandDataList()
-        }
-    }
+//    private func sortErrandDataList() {
+//        let shoppingStartPositionKey = "shoppingStartPositionKey"
+//        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+//        if shoppingStartPositionInt == 0 {
+//            sortLeftErrandDataList()
+//        } else {
+//            sortRightErrandDataList()
+//        }
+//    }
 
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortLeftErrandDataList() {
-        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-            if a.isCheckBox != b.isCheckBox {
-                return !a.isCheckBox
-            } else {
-                return a.salesFloorRawValue > b.salesFloorRawValue
-            }
-        }
-        shoppingListTableView.reloadData()
-    }
+//    func sortLeftErrandDataList() {
+//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+//            if a.isCheckBox != b.isCheckBox {
+//                return !a.isCheckBox
+//            } else {
+//                return a.salesFloorRawValue > b.salesFloorRawValue
+//            }
+//        }
+//        shoppingListTableView.reloadData()
+//    }
 
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortRightErrandDataList() {
-        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-            if a.isCheckBox != b.isCheckBox {
-                return !a.isCheckBox
-            } else {
-                return a.salesFloorRawValue < b.salesFloorRawValue
-            }
-        }
-        shoppingListTableView.reloadData()
-    }
+//    func sortRightErrandDataList() {
+//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+//            if a.isCheckBox != b.isCheckBox {
+//                return !a.isCheckBox
+//            } else {
+//                return a.salesFloorRawValue < b.salesFloorRawValue
+//            }
+//        }
+//        shoppingListTableView.reloadData()
+//    }
 
     /// 全てのセルがチェックされている場合にアラートを表示する
    private func completionAlert() {
@@ -277,7 +293,7 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
                 }
             }
         }, completion: nil)
-        sortErrandDataList()
+//        sortErrandDataList()
         completionAlert()
     }
 }

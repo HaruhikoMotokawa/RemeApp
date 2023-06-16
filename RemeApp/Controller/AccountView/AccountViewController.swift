@@ -92,6 +92,7 @@ class AccountViewController: UIViewController {
                     try AccountManager.shared.signOut()
                     // 匿名認証でログイン
                     try await AccountManager.shared.signInAnonymity()
+
                     // 各ラベルのユーザー情報を更新
                     await self.setUserInfo()
                 } catch let error {
