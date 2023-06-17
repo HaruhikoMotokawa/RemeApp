@@ -63,6 +63,9 @@ class EditItemViewController: UIViewController {
     /// photoImageViewに表示する画像
     private var photoPathImage:UIImage? = nil
 
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -363,27 +366,42 @@ extension EditItemViewController {
             let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
             // データベースに保存
             let uid = AccountManager.shared.getAuthStatus()
+            //
+            let nameOfItemString = nameOfItemTextField.text
+            //
+            let selectedSalesFloorRawValueInt = selectedSalesFloorRawValue
+            //
+            let supplementTextViewString = supplementTextView.text
             // ユーザー共有者のuidを取得
             let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+
+            print("写真のアップロードとFirestoreの保存処理を開始")
             // 写真をアップロードして、ダウンロードURLを取得
             StorageManager.shared.upLoadShoppingItemPhoto(uid: uid, image: photoPathImageView.image,
-                                                          completion: { [weak self] photoURL in
-                guard let photoURL else { return }
-                guard let self else { return }
+                                                          completion: { photoURL in
+                guard let photoURL else {
+                    print("URLの取得に失敗")
+                    AlertController.shared.showAlert(viewController: self, tittle: "エラー",
+                                                     errorMessage: "写真の保存に失敗したため、中断しました")
+                    return
+                }
+                print(photoURL)
                 // 保存するリストを作成
-                let addItem = ShoppingItemModel(isCheckBox: false,
-                                                nameOfItem: self.nameOfItemTextField.text!,
+                let addItem:ShoppingItemModel = ShoppingItemModel(isCheckBox: false,
+                                                nameOfItem: nameOfItemString!,
                                                 numberOfItem: selectedNumberOfItem,
                                                 unit: selectedUnit,
-                                                salesFloorRawValue: self.selectedSalesFloorRawValue!,
-                                                supplement: self.supplementTextView.text,
+                                                salesFloorRawValue: selectedSalesFloorRawValueInt!,
+                                                supplement: supplementTextViewString ?? "",
                                                 photoURL: photoURL,
                                                 owner: uid,
                                                 sharedUsers: sharedUsers)
+                print(addItem)
                 FirestoreManager.shared.addItem(uid: uid, addItem: addItem)
             })
-
         } catch let error {
+            let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+            AlertController.shared.showAlert(viewController: self, tittle: "エラー", errorMessage: errorMessage)
             print(error)
         }
     }

@@ -220,13 +220,18 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
 //                                 supplement: errandDataModel.supplement,
 //                                 image: errandDataModel.getImage())
             let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
+            var setImage:UIImage? = nil
+            if let imageUrl:URL = URL(string: myData.photoURL) {
+                let imageData:Data = try! Data(contentsOf: imageUrl)
+                setImage = UIImage(data: imageData)
+            }
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
                                  numberOfItem: myData.numberOfItem,
                                  unit: myData.unit,
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
-                                 image: nil)
+                                 image: setImage )//setImage )
 
             return cell
         }

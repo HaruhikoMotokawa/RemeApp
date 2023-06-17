@@ -49,7 +49,6 @@ class EditShoppingListViewController: UIViewController {
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
 //        setErrandData()
-        setShoppingItemObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {

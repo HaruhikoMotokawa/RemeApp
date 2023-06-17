@@ -23,6 +23,7 @@
 		7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
+		784669742A3DDB7D00C175EB /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784669732A3DDB7D00C175EB /* AlertController.swift */; };
 		784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F1F29C8451200C9360A /* MainTabBarController.swift */; };
 		784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */; };
 		784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */; };
@@ -109,6 +110,7 @@
 		7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
+		784669732A3DDB7D00C175EB /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		784E1F1F29C8451200C9360A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
+				784669732A3DDB7D00C175EB /* AlertController.swift */,
 				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
@@ -645,6 +648,7 @@
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */,
+				784669742A3DDB7D00C175EB /* AlertController.swift in Sources */,
 				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
 				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,

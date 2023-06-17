@@ -41,11 +41,13 @@ final class StorageManager {
                 print("アップロード失敗: \(error!.localizedDescription)")
                 completion(nil)
             } else {
+                print("アップロード成功")
                 imageRef.downloadURL(completion: { (url, error) in
                     if error != nil {
                         print("ダウンロードURL取得失敗")
                         completion(nil)
                     }
+                    print("ダウンロードURLの取得成功")
                         completion(url?.absoluteString)
                     })
                 }
