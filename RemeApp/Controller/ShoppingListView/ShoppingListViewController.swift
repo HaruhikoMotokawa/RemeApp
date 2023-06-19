@@ -223,7 +223,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
             var setImage:UIImage? = nil
             if let imageUrl:URL = URL(string: myData.photoURL) {
                 let imageData:Data = try! Data(contentsOf: imageUrl)
-                setImage = UIImage(data: imageData)
+                setImage = UIImage(data: imageData)   
             }
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
@@ -231,7 +231,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                                  unit: myData.unit,
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
-                                 image: setImage )//setImage )
+                                 image: setImage )
 
             return cell
         }

@@ -55,7 +55,7 @@ class CreateAccountViewController: UIViewController {
                 // 非同期処理で完了まで待機させるのでawait、かつthrows付きメソッドなのでtry
                 try await FirestoreManager.shared.createUsers(name: name, email: email, password: password, uid: uid)
                 // 全てが問題なく完了した場合は前の画面に戻る
-                showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
+                    AlertController.showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
                     guard let self else { return }
                     self.navigationController?.popViewController(animated: true)
                 })
@@ -63,7 +63,7 @@ class CreateAccountViewController: UIViewController {
                 // エラーメッセージを生成
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                 // アラート表示
-                showAlert(tittle: "エラー", errorMessage: errorMessage)
+                AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                 print(error.localizedDescription)
             }
         }
@@ -80,15 +80,6 @@ class CreateAccountViewController: UIViewController {
             // 全て入力されていなれば無効化
             createButton.isEnabled = false
         }
-    }
-
-    /// エラーメッセージごとにアラートを出す
-    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true, completion: nil)
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド

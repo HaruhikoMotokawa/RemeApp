@@ -353,7 +353,8 @@ extension EditItemViewController {
             present(alertController, animated: true)
         } else {
             await saveData()
-            self.dismiss(animated: true)
+            // これが良くなかった
+            //            self.dismiss(animated: true)
         }
     }
 
@@ -364,70 +365,72 @@ extension EditItemViewController {
             let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
             // numberOfItemPickerViewで選択された値を取得
             let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-            // データベースに保存
+            // ログイン中のユーザーのuidを取得
             let uid = AccountManager.shared.getAuthStatus()
-            //
-            let nameOfItemString = nameOfItemTextField.text
-            //
-            let selectedSalesFloorRawValueInt = selectedSalesFloorRawValue
-            //
-            let supplementTextViewString = supplementTextView.text
             // ユーザー共有者のuidを取得
             let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
-
             print("写真のアップロードとFirestoreの保存処理を開始")
             // 写真をアップロードして、ダウンロードURLを取得
-            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid, image: photoPathImageView.image,
-                                                          completion: { photoURL in
+            // 非同期処理でawaitついてないからコールバック関数で対応
+            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
+                                                          image: photoPathImageView.image,
+                                                          completion: { [weak self] photoURL in
+                guard let self else { return }
                 guard let photoURL else {
                     print("URLの取得に失敗")
-                    AlertController.shared.showAlert(viewController: self, tittle: "エラー",
-                                                     errorMessage: "写真の保存に失敗したため、中断しました")
+                    AlertController.showAlert(tittle: "エラー",
+                                              errorMessage: "写真の保存に失敗したため、中断しました")
                     return
                 }
-                print(photoURL)
                 // 保存するリストを作成
-                let addItem:ShoppingItemModel = ShoppingItemModel(isCheckBox: false,
-                                                nameOfItem: nameOfItemString!,
-                                                numberOfItem: selectedNumberOfItem,
-                                                unit: selectedUnit,
-                                                salesFloorRawValue: selectedSalesFloorRawValueInt!,
-                                                supplement: supplementTextViewString ?? "",
-                                                photoURL: photoURL,
-                                                owner: uid,
-                                                sharedUsers: sharedUsers)
-                print(addItem)
+                let addItem:ShoppingItemModel = ShoppingItemModel(
+                    isCheckBox: false,
+                    nameOfItem: self.nameOfItemTextField.text!,
+                    numberOfItem: selectedNumberOfItem,
+                    unit: selectedUnit,
+                    salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                    supplement: self.supplementTextView.text ?? "",
+                    photoURL: photoURL,
+                    owner: uid,
+                    sharedUsers: sharedUsers)
+                // データベースに保存
                 FirestoreManager.shared.addItem(uid: uid, addItem: addItem)
+                // メインスレッドで実行を宣言
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    // 全ての処理が終わったら画面を閉じる
+                    self.dismiss(animated: true)
+                }
             })
         } catch let error {
             let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-            AlertController.shared.showAlert(viewController: self, tittle: "エラー", errorMessage: errorMessage)
+            AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
             print(error)
         }
     }
 
     /// 保存の処理(Realm)
-//    private func saveData() {
-//        // numberOfItemPickerViewで選択された値を取得
-//        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-//        // numberOfItemPickerViewで選択された値を取得
-//        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-//        // データベースに保存
-//        let realm = try! Realm()
-//        try! realm.write {
-//            errandData.nameOfItem = nameOfItemTextField.text!
-//            errandData.numberOfItem = selectedNumberOfItem
-//            errandData.unit = selectedUnit
-//            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
-//            if supplementTextView.text == "" {
-//                errandData.supplement = nil
-//            } else {
-//                errandData.supplement = supplementTextView.text
-//            }
-//            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
-//            realm.add(errandData)
-//        }
-//    }
+    //    private func saveData() {
+    //        // numberOfItemPickerViewで選択された値を取得
+    //        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+    //        // numberOfItemPickerViewで選択された値を取得
+    //        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+    //        // データベースに保存
+    //        let realm = try! Realm()
+    //        try! realm.write {
+    //            errandData.nameOfItem = nameOfItemTextField.text!
+    //            errandData.numberOfItem = selectedNumberOfItem
+    //            errandData.unit = selectedUnit
+    //            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
+    //            if supplementTextView.text == "" {
+    //                errandData.supplement = nil
+    //            } else {
+    //                errandData.supplement = supplementTextView.text
+    //            }
+    //            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
+    //            realm.add(errandData)
+    //        }
+    //    }
 }
 
 // MARK: - UIPickerViewDataSource&Delegate
@@ -506,7 +509,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
 extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダーのラベルを非表示
     func textViewDidBeginEditing(_ textView: UITextView) {
-            placeholderLabel.isHidden = true
+        placeholderLabel.isHidden = true
     }
     /// 編集終了後、何も入力されていなかったらプレースホルダーをセット
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -550,8 +553,9 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     private func setDeletePhotoAction() {
         let alertController = UIAlertController(title: "写真の削除", message: "削除してもよろしいですか？",
                                                 preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "削除する", style: .default) { (action) in
+        let okAction = UIAlertAction(title: "削除する", style: .default) { [weak self] (action) in
             // OKが押された時の処理
+            guard let self else { return }
             self.photoPathImageView.image = nil
             self.deletePhotoButton.setDisable()
             self.photoBackgroundImage.isHidden = false

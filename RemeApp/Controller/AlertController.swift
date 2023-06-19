@@ -9,17 +9,24 @@ import UIKit
 
 class AlertController {
 
-    /// 他のクラスで使用できるようにstaticで定義
-    static let shared = AlertController()
-    /// 外部アクセスを禁止
-    private init() {}
-
     /// エラーメッセージごとにアラートを出す
-    func showAlert(viewController:UIViewController,tittle: String, errorMessage: String,completion: (() -> Void)? = nil) {
+    static func showAlert(tittle: String, errorMessage: String,completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {  _ in
             completion?()
         }))
-        viewController.present(alert, animated: true, completion: nil)
+
+        // 現在アクティブな最初のシーンを取得
+        if let scene =  UIApplication.shared.connectedScenes.first,
+           // シーンのデリゲートをSceneDelegateにキャストして取得
+           let delegate = scene.delegate as? SceneDelegate,
+           // 表示されている最前面の画面に関連付けられたビューコントローラを取得
+           let rootViewController = delegate.window?.rootViewController {
+            // rootViewControllerにアラートを表示
+            rootViewController.present(alert, animated: true)
+        }
     }
+
+
 }
+

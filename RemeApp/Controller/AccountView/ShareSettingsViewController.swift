@@ -92,14 +92,14 @@ class ShareSettingsViewController: UIViewController {
                 self.inputUIDTextField.text = nil
 
                 // 完了のアラート
-                self.showAlert(tittle: "完了", errorMessage: "登録しました")
+                AlertController.showAlert(tittle: "完了", errorMessage: "登録しました")
             } catch FirestoreError.notFound {
-                showAlert(tittle: "エラー", errorMessage: FirestoreError.notFound.title)
+                AlertController.showAlert(tittle: "エラー", errorMessage: FirestoreError.notFound.title)
             } catch let error {
                 // 失敗のアラート
                 print("追加失敗だよー")
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-                showAlert(tittle: "エラー", errorMessage: errorMessage)
+                AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
             }
         }
     }
@@ -193,12 +193,12 @@ class ShareSettingsViewController: UIViewController {
                     try await FirestoreManager.shared.upData(uid: uid, shardUsers: sharedUsers)
                     // ラベルの更新
                     await self.setSharedUsers()
-                    self.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
+                    AlertController.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
                 } catch let error {
                     guard let self else { return }
                     print("エラー")
                     let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                 }
             }
         })
@@ -206,14 +206,7 @@ class ShareSettingsViewController: UIViewController {
         alert.addAction(deleteAction)
         present(alert, animated: true)
     }
-    /// アラートを出す
-    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true, completion: nil)
-    }
+
 }
 
 extension ShareSettingsViewController: UITextFieldDelegate {

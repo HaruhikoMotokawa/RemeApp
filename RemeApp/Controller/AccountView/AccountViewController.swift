@@ -96,11 +96,11 @@ class AccountViewController: UIViewController {
                     // 各ラベルのユーザー情報を更新
                     await self.setUserInfo()
                 } catch let error {
-                    guard let self else { return }
+                    guard self != nil else { return }
                     // エラーメッセージを生成
                     let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
                     // アラート表示
-                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                     print(error.localizedDescription)
                 }
             }
@@ -145,14 +145,14 @@ class AccountViewController: UIViewController {
                     // 各ラベルのユーザー情報を更新
                     await self.setUserInfo()
                     // アラート
-                    self.showAlert(tittle: "完了", errorMessage: "アカウントを削除しました")
+                    AlertController.showAlert(tittle: "完了", errorMessage: "アカウントを削除しました")
 
                 } catch let error {
                     guard let self else { return }
                     // エラーメッセージを生成
                     let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                     // アラート表示
-                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                     print(error.localizedDescription)
                 }
             }
@@ -184,12 +184,4 @@ class AccountViewController: UIViewController {
         }
     }
 
-    /// アラートを出す
-    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true, completion: nil)
-    }
 }
