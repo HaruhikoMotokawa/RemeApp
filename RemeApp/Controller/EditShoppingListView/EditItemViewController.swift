@@ -194,17 +194,27 @@ class EditItemViewController: UIViewController {
             photoBackgroundImage.isHidden = true
         }
     }
-
     /// データ受け渡し用のメソッド
-    func configurer(detail: ErrandDataModel) {
-        errandData = detail
+    func configurer(detail: ShoppingItemModel) {
+        myShoppingItemList = [detail]
         nameOfItemTextFieldText = detail.nameOfItem
         numberOfItemPickerViewString = detail.numberOfItem
         unitPickerViewString = detail.unit
         selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
-        photoPathImage = detail.getImage()
+        photoPathImage = StorageManager.shared.setImageWithUrl(photoURL: detail.photoURL)
     }
+
+    /// データ受け渡し用のメソッド
+//    func configurer(detail: ErrandDataModel) {
+//        errandData = detail
+//        nameOfItemTextFieldText = detail.nameOfItem
+//        numberOfItemPickerViewString = detail.numberOfItem
+//        unitPickerViewString = detail.unit
+//        selectedSalesFloorRawValue = detail.salesFloorRawValue
+//        supplementTextViewText = detail.supplement
+//        photoPathImage = detail.getImage()
+//    }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
     private func displayData() {

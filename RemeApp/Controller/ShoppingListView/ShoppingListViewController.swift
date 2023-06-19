@@ -40,7 +40,8 @@ class ShoppingListViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        FirestoreManager.shared.removeShoppingItemObserver() // オブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.shoppingListMyItemListener) // オブザーバを廃棄
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -91,7 +92,10 @@ class ShoppingListViewController: UIViewController {
     /// 買い物リストの変更を監視、データを受け取り表示を更新する
     func setShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getShoppingItemObserver(uid: uid, completion: { [weak self] itemList in
+        FirestoreManager.shared.getShoppingItemObserver(
+            listener: &FirestoreManager.shared.shoppingListMyItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
             guard let self else { return }
             self.myShoppingItemList = itemList
             print(itemList)
@@ -223,7 +227,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
             var setImage:UIImage? = nil
             if let imageUrl:URL = URL(string: myData.photoURL) {
                 let imageData:Data = try! Data(contentsOf: imageUrl)
-                setImage = UIImage(data: imageData)   
+                setImage = UIImage(data: imageData)
             }
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,

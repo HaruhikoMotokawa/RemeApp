@@ -19,7 +19,11 @@ final class FirestoreManager {
     private let db = Firestore.firestore()
 
     /// 自分のshoppingItemコレクションのリスナー
-    private var myItemListener: ListenerRegistration?
+     var shoppingListMyItemListener: ListenerRegistration?
+
+     var salesFloorMapMyItemListener: ListenerRegistration?
+
+     var editShoppingListMyItemListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
@@ -103,9 +107,9 @@ final class FirestoreManager {
 extension FirestoreManager {
 
     /// 自分が作成した買い物リストへの変更を監視する
-    func getShoppingItemObserver(uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
+    func getShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        myItemListener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
+        listener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
@@ -127,8 +131,8 @@ extension FirestoreManager {
     }
 
     /// 自分の買い物リストの監視を解除
-    func removeShoppingItemObserver() {
-        myItemListener?.remove()
+    func removeShoppingItemObserver(listener: inout ListenerRegistration?) {
+        listener?.remove()
     }
 
     /// 買い物の商品を新規作成

@@ -49,19 +49,21 @@ class EditShoppingListViewController: UIViewController {
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
 //        setErrandData()
+        setShoppingItemObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setupNotification() // realmのNotificationをセット
-        setShoppingItemObserver()
+//        setShoppingItemObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("離れるで")
 //        notificationToken?.invalidate() // realmのNotificationの解除
-        FirestoreManager.shared.removeShoppingItemObserver() // オブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListMyItemListener) // オブザーバを廃棄
     }
 
     // MARK: - func
@@ -128,7 +130,10 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物リストの変更を監視、データを受け取り表示を更新する
     func setShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getShoppingItemObserver(uid: uid, completion: { [weak self] itemList in
+        FirestoreManager.shared.getShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListMyItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
             guard let self else { return }
             print("買い物リストの取得を開始")
             self.myShoppingItemList = itemList
@@ -339,13 +344,14 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
             let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
+            let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
                                  numberOfItem: myData.numberOfItem,
                                  unit: myData.unit,
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
-                                 image: nil)
+                                 image: setImage)
 //            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
 //            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
 //                                 nameOfItem: errandDataModel.nameOfItem,
@@ -372,10 +378,12 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
-        let errandData = errandDataList[indexPath.row]
-        editItemVC.configurer(detail: errandData)
+        let shoppingItemData = myShoppingItemList[indexPath.row]
+        editItemVC.configurer(detail: shoppingItemData)
+//        let errandData = errandDataList[indexPath.row]
+//        editItemVC.configurer(detail: errandData)
         editShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        self.present(editItemVC, animated: true)
+        present(editItemVC, animated: true)
     }
 
     /// スワイプして削除する処理
