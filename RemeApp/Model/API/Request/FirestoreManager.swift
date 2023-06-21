@@ -19,16 +19,16 @@ final class FirestoreManager {
     private let db = Firestore.firestore()
 
     /// 自分のshoppingItemコレクションのリスナー
-     var shoppingListMyItemListener: ListenerRegistration?
+     internal var shoppingListMyItemListener: ListenerRegistration?
 
-     var salesFloorMapMyItemListener: ListenerRegistration?
+     internal var salesFloorMapMyItemListener: ListenerRegistration?
 
-     var editShoppingListMyItemListener: ListenerRegistration?
+     internal var editShoppingListMyItemListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
-    func getUserInfo(uid: String) async throws -> UserDataModel? {
+    internal func getUserInfo(uid: String) async throws -> UserDataModel? {
         // 非同期処理であるFirestoreへのアクセスにより、ユーザー情報をUserDataModelに変換して定数に入れる
         let document = try await db.collection(Collection.users.path).document(uid).getDocument(as: UserDataModel.self)
         print("Firestoreからデータ取得成功")
@@ -39,7 +39,7 @@ final class FirestoreManager {
     /// ユーザー情報を新規作成するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
-    func createUsers(name: String, email: String, password: String, uid: String) async throws {
+    internal func createUsers(name: String, email: String, password: String, uid: String) async throws {
         // UserDataModelをuserとして定義
         let user = UserDataModel(name: name, email: email, password: password)
         // userを元にFirestoreに保存実行
@@ -47,12 +47,12 @@ final class FirestoreManager {
     }
 
     /// ユーザー情報を削除するメソッド
-    func deleteUsersDocument(uid: String) async throws {
+    internal func deleteUsersDocument(uid: String) async throws {
         try await db.collection(Collection.users.path).document(uid).delete()
     }
 
     /// 共有者に登録しているユーザーのuidを取得するメソッド
-    func getSharedUsers(uid: String) async throws -> [String] {
+    internal func getSharedUsers(uid: String) async throws -> [String] {
         let document = try await db.collection(Collection.users.path).document(uid).getDocument()
         let data = document.data()!
         let sharedUsers = data[Field.sharedUsers.path] as? [String] ?? []
@@ -60,7 +60,7 @@ final class FirestoreManager {
     }
 
     /// 共有者のuidからアカウント名を取得するメソッド
-    func getUserName(uid: String?) async throws -> String {
+    internal func getUserName(uid: String?) async throws -> String {
         // uidがnilだったらテキストを返却して終了
         guard let uid else {
             return "登録者なし"
@@ -107,7 +107,7 @@ final class FirestoreManager {
 extension FirestoreManager {
 
     /// 自分が作成した買い物リストへの変更を監視する
-    func getShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
+    internal func getShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
         listener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
             .addSnapshotListener { (querySnapshot, error) in
@@ -131,13 +131,13 @@ extension FirestoreManager {
     }
 
     /// 自分の買い物リストの監視を解除
-    func removeShoppingItemObserver(listener: inout ListenerRegistration?) {
+    internal func removeShoppingItemObserver(listener: inout ListenerRegistration?) {
         listener?.remove()
     }
 
-    /// 買い物の商品を新規作成
-    func addItem(uid: String, addItem: ShoppingItemModel) {
-        db.collection(Collection.shoppingItem.path).document(uid).parent.addDocument(data: [
+    /// 新規作成した買い物の商品を保存
+    internal func addItem(uid: String, addItem: ShoppingItemModel) {
+        db.collection(Collection.shoppingItem.path).addDocument(data: [
             "isCheckBox": addItem.isCheckBox ,
             "nameOfItem": addItem.nameOfItem ,
             "numberOfItem": addItem.numberOfItem ,
@@ -156,6 +156,42 @@ extension FirestoreManager {
         }
     }
 
+    /// 編集した買い物商品を保存
+    internal func upDateItem(uid: String, addItem: ShoppingItemModel) {
+        guard let id = addItem.id else { return }
+        db.collection(Collection.shoppingItem.path).document(id).updateData([
+            "isCheckBox": addItem.isCheckBox ,
+            "nameOfItem": addItem.nameOfItem ,
+            "numberOfItem": addItem.numberOfItem ,
+            "unit":addItem.unit ,
+            "salesFloorRawValue": addItem.salesFloorRawValue ,
+            "supplement": addItem.supplement ,
+            "photoURL": addItem.photoURL ,
+            "owner": addItem.owner,
+            "sharedUsers": addItem.sharedUsers])
+        { err in
+            if err != nil {
+                print("Firestoreへの保存に失敗")
+            } else {
+                print("Firestoreへの保存に成功")
+            }
+        }
+    }
+
+    // ドキュメントを削除する
+    internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
+        db.collection(Collection.shoppingItem.path).document(id).delete() { error in
+            if let error {
+                print("削除に失敗: \(error)")
+                completion(error)
+            } else {
+                print("削除成功")
+                completion(nil)
+            }
+        }
+    }
+
+    
 }
 
 /// コレクションのパスを管理

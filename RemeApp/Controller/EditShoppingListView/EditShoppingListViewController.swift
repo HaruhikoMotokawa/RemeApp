@@ -48,25 +48,25 @@ class EditShoppingListViewController: UIViewController {
         setEditButtonAppearance(cancelEditButton, title: "キャンセル")
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
-//        setErrandData()
+        //        setErrandData()
         setShoppingItemObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setupNotification() // realmのNotificationをセット
-//        setShoppingItemObserver()
+        //        setupNotification() // realmのNotificationをセット
+//                setShoppingItemObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("離れるで")
-//        notificationToken?.invalidate() // realmのNotificationの解除
+        //        notificationToken?.invalidate() // realmのNotificationの解除
         FirestoreManager.shared.removeShoppingItemObserver(
             listener: &FirestoreManager.shared.editShoppingListMyItemListener) // オブザーバを廃棄
     }
 
-    // MARK: - func
+    // MARK: - @IBAction func
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
@@ -92,8 +92,11 @@ class EditShoppingListViewController: UIViewController {
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
-        self.present(editItemVC, animated: true)
+        editItemVC.isNewItem = true // 新規編集フラグをオンにする
+        present(editItemVC, animated: true)
     }
+
+    // MARK: - func
 
     /// 編集モード用のUIButtonの装飾基本設定
     private func setEditButtonAppearance(_ button: UIButton ,title: String) {
@@ -128,18 +131,17 @@ class EditShoppingListViewController: UIViewController {
     }
 
     /// 買い物リストの変更を監視、データを受け取り表示を更新する
-    func setShoppingItemObserver() {
+    private func setShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getShoppingItemObserver(
             listener: &FirestoreManager.shared.editShoppingListMyItemListener,
             uid: uid,
             completion: { [weak self] itemList in
-            guard let self else { return }
-            print("買い物リストの取得を開始")
-            self.myShoppingItemList = itemList
-            print(itemList)
-            self.sortMyShoppingItemList()
-        })
+                guard let self else { return }
+                print("買い物リストの取得を開始")
+                self.myShoppingItemList = itemList
+                self.sortMyShoppingItemList()
+            })
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
@@ -162,7 +164,7 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortLeftMyShoppingItemList() {
+    private func sortLeftMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -176,7 +178,7 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortRightMyShoppingItemList() {
+    private func sortRightMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -188,37 +190,37 @@ class EditShoppingListViewController: UIViewController {
     }
 
     /// 保存されたお使いデータをセットする
-//    private func setErrandData() {
-//        let realm = try! Realm()
-//        let result = realm.objects(ErrandDataModel.self)
-//        errandDataModel = realm.objects(ErrandDataModel.self)
-//        errandDataList = Array(result)
-//    }
+    //    private func setErrandData() {
+    //        let realm = try! Realm()
+    //        let result = realm.objects(ErrandDataModel.self)
+    //        errandDataModel = realm.objects(ErrandDataModel.self)
+    //        errandDataList = Array(result)
+    //    }
 
     /// CustomSalesFloorModelの監視用メソッド
-//    private func setupNotification() {
-//        // Realmの通知機能で変更を監視する
-//        // 変更通知を受け取る
-//        notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
-//            switch changes {
-//                    //　画面遷移時の初回実行処理（画面移動後に毎回実施）
-//                case .initial:
-//                    self?.setErrandData()
-//                    self?.sortErrandDataList()
-//                    // 新規と追加処理の際の処理
-//                case .update(let errandDataModel,let deletions,let insertions,let modifications):
-//                    print(errandDataModel)
-//                    print(deletions)
-//                    print(insertions)
-//                    print(modifications)
-//                    self?.setErrandData()
-//                    self?.sortErrandDataList()
-//                    // エラー時の処理
-//                case .error:
-//                    print("困ったことが起きました😱")
-//            }
-//        }
-//    }
+    //    private func setupNotification() {
+    //        // Realmの通知機能で変更を監視する
+    //        // 変更通知を受け取る
+    //        notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
+    //            switch changes {
+    //                    //　画面遷移時の初回実行処理（画面移動後に毎回実施）
+    //                case .initial:
+    //                    self?.setErrandData()
+    //                    self?.sortErrandDataList()
+    //                    // 新規と追加処理の際の処理
+    //                case .update(let errandDataModel,let deletions,let insertions,let modifications):
+    //                    print(errandDataModel)
+    //                    print(deletions)
+    //                    print(insertions)
+    //                    print(modifications)
+    //                    self?.setErrandData()
+    //                    self?.sortErrandDataList()
+    //                    // エラー時の処理
+    //                case .error:
+    //                    print("困ったことが起きました😱")
+    //            }
+    //        }
+    //    }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     /// - NotificationCenterの受診をセット
@@ -227,43 +229,43 @@ class EditShoppingListViewController: UIViewController {
     /// -  画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-//    private func sortErrandDataList() {
-//        let shoppingStartPositionKey = "shoppingStartPositionKey"
-//        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-//        if shoppingStartPositionInt == 0 {
-//            sortLeftErrandDataList()
-//        } else {
-//            sortRightErrandDataList()
-//        }
-//    }
+    //    private func sortErrandDataList() {
+    //        let shoppingStartPositionKey = "shoppingStartPositionKey"
+    //        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
+    //        if shoppingStartPositionInt == 0 {
+    //            sortLeftErrandDataList()
+    //        } else {
+    //            sortRightErrandDataList()
+    //        }
+    //    }
 
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-//    private func sortLeftErrandDataList() {
-//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-//            if a.isCheckBox != b.isCheckBox {
-//                return !a.isCheckBox
-//            } else {
-//                return a.salesFloorRawValue > b.salesFloorRawValue
-//            }
-//        }
-//        editShoppingListTableView.reloadData()
-//    }
+    //    private func sortLeftErrandDataList() {
+    //        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+    //            if a.isCheckBox != b.isCheckBox {
+    //                return !a.isCheckBox
+    //            } else {
+    //                return a.salesFloorRawValue > b.salesFloorRawValue
+    //            }
+    //        }
+    //        editShoppingListTableView.reloadData()
+    //    }
 
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-//    private func sortRightErrandDataList() {
-//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-//            if a.isCheckBox != b.isCheckBox {
-//                return !a.isCheckBox
-//            } else {
-//                return a.salesFloorRawValue < b.salesFloorRawValue
-//            }
-//        }
-//        editShoppingListTableView.reloadData()
-//    }
+    //    private func sortRightErrandDataList() {
+    //        errandDataList = errandDataList.sorted { (a, b) -> Bool in
+    //            if a.isCheckBox != b.isCheckBox {
+    //                return !a.isCheckBox
+    //            } else {
+    //                return a.salesFloorRawValue < b.salesFloorRawValue
+    //            }
+    //        }
+    //        editShoppingListTableView.reloadData()
+    //    }
 
     // MARK: - 編集モードに関する処理
     /// 編集モードの設定==multipleDeletionsButtonをタップした時の動作
@@ -272,7 +274,7 @@ class EditShoppingListViewController: UIViewController {
         setEditing(isEditingMode, animated: true)
     }
 
-    override func setEditing(_ editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool)  {
         super.setEditing(editing, animated: animated)
         let section = 0
         // 0からTableViewの指定されたセクションの行数未満までの整数rowに対して以下の処理を実行する。
@@ -308,25 +310,54 @@ class EditShoppingListViewController: UIViewController {
     private func deleteRows() {
         // ユーザーが何も選択していない場合には抜ける
         guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else { return }
+        // オブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListMyItemListener)
         // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
         let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
-        let realm = try! Realm()
-        try! realm.write {
-            // 降順に繰り返す
-            for indexPathList in sortedIndexPaths {
-                // indexPathListに該当するidのErrandDataModelを取得
-                let errandData = realm.objects(ErrandDataModel.self).filter("id = %@",
-                                                                            errandDataList[indexPathList.row].id).first
-                // 削除
-                realm.delete(errandData!)
-                // indexPathListに該当するerrandDataListの配列の要素を削除
-                errandDataList.remove(at: indexPathList.row)
-            }
+        // for-in文で一つずつ削除
+        for indexPathList in sortedIndexPaths {
+            // 選択したセルのインデックス番号を取得
+            let target = myShoppingItemList[indexPathList.row]
+            guard let id = target.id else { return }
+            // FirebaseStorageから写真データを削除
+            StorageManager.shared.deletePhoto(photoURL: target.photoURL, completion: { error in
+                // firestoreからドキュメント削除
+                FirestoreManager.shared.deleteItem(id: id, completion: { [weak self] error in
+                    guard let self else { return }
+                    if error != nil {
+                        print("削除に失敗")
+                        return
+                    }
+                    // ローカルデータmyShoppingItemList配列からデータを削除
+                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
+                        self.myShoppingItemList.remove(at: index)
+                        // tableViewの行を削除
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self else { return }
+                            self.editShoppingListTableView.deleteRows(at: [indexPathList], with: UITableView.RowAnimation.left)
+                        }
+                    }
+                })
+            })
         }
-        // tableViewの行を削除
-        editShoppingListTableView.deleteRows(at: sortedIndexPaths, with: UITableView.RowAnimation.automatic)
+        setShoppingItemObserver()
     }
 }
+//                    let realm = try! Realm()
+//                    try! realm.write {
+//                        // 降順に繰り返す
+//                        for indexPathList in sortedIndexPaths {
+//                            // indexPathListに該当するidのErrandDataModelを取得
+//                            let errandData = realm.objects(ErrandDataModel.self).filter("id = %@",
+//                                                                                        errandDataList[indexPathList.row].id).first
+//                            // 削除
+//                            realm.delete(errandData!)
+//                            // indexPathListに該当するerrandDataListの配列の要素を削除
+//                            errandDataList.remove(at: indexPathList.row)
+//                        }
+//                    }
+
 
 // MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -380,6 +411,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             withIdentifier: "EditItemView") as! EditItemViewController
         let shoppingItemData = myShoppingItemList[indexPath.row]
         editItemVC.configurer(detail: shoppingItemData)
+        editItemVC.isNewItem = false // 新規編集フラグをオフにする
 //        let errandData = errandDataList[indexPath.row]
 //        editItemVC.configurer(detail: errandData)
         editShoppingListTableView.deselectRow(at: indexPath, animated: true)
@@ -390,17 +422,37 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
     UISwipeActionsConfiguration? {
         /// スワイプした時の処理を定義
-        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [self]
+        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [weak self]
             (action, view, completionHandler) in
-            let realm = try! Realm()
-            let target = self.errandDataList[indexPath.row]
-            try! realm.write(withoutNotifying: [self.notificationToken!]) {
-                realm.delete(target)
+            // オブザーバーを廃棄
+            FirestoreManager.shared.removeShoppingItemObserver(
+                listener: &FirestoreManager.shared.editShoppingListMyItemListener)
+            guard let self else { return }
+            // 選択したセルのインデックス番号を取得
+            let target = self.myShoppingItemList[indexPath.row]
+            guard let id = target.id else { return }
+            // FirebaseStorageの写真データを削除
+            StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
+                guard let self else { return }
+                // firestoreからドキュメント削除
+                FirestoreManager.shared.deleteItem(id: id, completion: { error in
+                    // ローカルデータmyShoppingItemList配列からデータを削除
+                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
+                        self.myShoppingItemList.remove(at: index)
+                    }
+                    // tableViewから視覚的に行を削除
+                    self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+                    // オブザーバーを再度セット
+                    self.setShoppingItemObserver()
+                })
             }
-            // お使いデータの対象のインデックス番号を削除
-            self.errandDataList.remove(at: indexPath.row)
-            // テーブルビューから視覚的に削除
-            self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+            //            let realm = try! Realm()
+            //            let target = self.errandDataList[indexPath.row]
+            //            try! realm.write(withoutNotifying: [self.notificationToken!]) {
+            //                realm.delete(target)
+            //            }
+            //            // お使いデータの対象のインデックス番号を削除
+            //            self.errandDataList.remove(at: indexPath.row)
             // アクション完了を報告
             completionHandler(true)
         }

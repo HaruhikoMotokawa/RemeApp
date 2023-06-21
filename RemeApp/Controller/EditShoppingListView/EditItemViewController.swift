@@ -50,6 +50,8 @@ class EditItemViewController: UIViewController {
     private var customSalesFloorData = CustomSalesFloorModel()
     /// お使いデータ
     var errandData = ErrandDataModel()
+    /// ドキュメントID
+    private var id:String? = nil
     /// nameOfItemTextFieldに表示するテキスト
     private var nameOfItemTextFieldText:String? = nil
     /// numberOfItemPickerViewに表示する文字列
@@ -61,7 +63,9 @@ class EditItemViewController: UIViewController {
     /// supplementTextViewに表示するテキスト
     private var supplementTextViewText:String? = nil
     /// photoImageViewに表示する画像
-    private var photoPathImage:UIImage? = nil
+    private var photoURL:String = ""
+    /// 画面遷移時に新規作成か、編集かを切り替えるフラグ
+    internal var isNewItem:Bool = true
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
@@ -76,6 +80,7 @@ class EditItemViewController: UIViewController {
         setTitleLabel()
         setDisableOrEnable()
         supplementTextView.setAppearance()
+        print("これがphotoURL： \(photoURL)")
     }
 
     // MARK: - func
@@ -88,7 +93,7 @@ class EditItemViewController: UIViewController {
         let selectTypeOfSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "SelectTypeOfSalesFloorView") as! SelectTypeOfSalesFloorViewController
         selectTypeOfSalesFloorVC.delegate = self
-        self.present(selectTypeOfSalesFloorVC, animated: true)
+        present(selectTypeOfSalesFloorVC, animated: true)
     }
 
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
@@ -195,14 +200,15 @@ class EditItemViewController: UIViewController {
         }
     }
     /// データ受け渡し用のメソッド
-    func configurer(detail: ShoppingItemModel) {
+    internal func configurer(detail: ShoppingItemModel) {
         myShoppingItemList = [detail]
+        id = detail.id
         nameOfItemTextFieldText = detail.nameOfItem
         numberOfItemPickerViewString = detail.numberOfItem
         unitPickerViewString = detail.unit
         selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
-        photoPathImage = StorageManager.shared.setImageWithUrl(photoURL: detail.photoURL)
+        photoURL = detail.photoURL
     }
 
     /// データ受け渡し用のメソッド
@@ -223,7 +229,7 @@ class EditItemViewController: UIViewController {
         selectUnitRow(selectedUnit: unitPickerViewString)
         setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
-        setPhotoPathImageView(image: photoPathImage)
+        setPhotoPathImageView(photoURL: photoURL)
     }
 
     /// numberOfItemPickerViewに表示できるように変換する
@@ -304,6 +310,21 @@ class EditItemViewController: UIViewController {
     /// 受け取った写真データを変換して表示するためのメソッド
     ///  - イメージがnilだったらそのままからを表示
     ///  - イメージがある場合はサイズを調整し、角丸にして表示する
+    private func setPhotoPathImageView(photoURL: String) {
+        if photoURL == "" {
+            photoPathImageView.image = nil
+        } else {
+            let setImage = StorageManager.shared.setImageWithUrl(photoURL: photoURL)
+            let resizedImage = setImage?.resize(to: CGSize(width: 355, height: 500))
+            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+            photoPathImageView.image = roundedAndBorderedImage
+        }
+    }
+
+    /// 受け取った写真データを変換して表示するためのメソッド
+    ///  - イメージがnilだったらそのままからを表示
+    ///  - イメージがある場合はサイズを調整し、角丸にして表示する
     private func setPhotoPathImageView(image: UIImage?) {
         if image == nil {
             photoPathImageView.image = image
@@ -362,9 +383,13 @@ extension EditItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            await saveData()
-            // これが良くなかった
-            //            self.dismiss(animated: true)
+            if isNewItem {
+                print("🔵新規作成した内容を保存開始")
+                await saveData()
+            } else {
+                print("🔴編集した内容を保存開始")
+                await upDateData()
+            }
         }
     }
 
@@ -403,8 +428,61 @@ extension EditItemViewController {
                     photoURL: photoURL,
                     owner: uid,
                     sharedUsers: sharedUsers)
+
                 // データベースに保存
                 FirestoreManager.shared.addItem(uid: uid, addItem: addItem)
+                // メインスレッドで実行を宣言
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    // 全ての処理が終わったら画面を閉じる
+                    self.dismiss(animated: true)
+                }
+            })
+        } catch let error {
+            let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+            AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
+            print(error)
+        }
+    }
+
+    /// 編集したデータの保存処理
+    private func upDateData() async {
+        do {
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+            // ログイン中のユーザーのuidを取得
+            let uid = AccountManager.shared.getAuthStatus()
+            // ユーザー共有者のuidを取得
+            let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+            print("写真のアップロードとFirestoreの保存処理を開始")
+            // 写真をアップロードして、ダウンロードURLを取得
+            // 非同期処理でawaitついてないからコールバック関数で対応
+            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
+                                                          image: photoPathImageView.image,
+                                                          completion: { [weak self] photoURL in
+                guard let self else { return }
+                guard let photoURL else {
+                    print("URLの取得に失敗")
+                    AlertController.showAlert(tittle: "エラー",
+                                              errorMessage: "写真の保存に失敗したため、中断しました")
+                    return
+                }
+                // 保存するリストを作成
+                let addItem:ShoppingItemModel = ShoppingItemModel(
+                    id: self.id,
+                    isCheckBox: false,
+                    nameOfItem: self.nameOfItemTextField.text!,
+                    numberOfItem: selectedNumberOfItem,
+                    unit: selectedUnit,
+                    salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                    supplement: self.supplementTextView.text ?? "",
+                    photoURL: photoURL,
+                    owner: uid,
+                    sharedUsers: sharedUsers)
+                // データベースに編集内容を保存
+                FirestoreManager.shared.upDateItem(uid: uid, addItem: addItem)
                 // メインスレッドで実行を宣言
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
@@ -498,7 +576,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
     /// - addButtonを活性化
-    func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
+    internal func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         // 0 -> カスタム、1(else) -> デフォルト
@@ -564,16 +642,37 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         let alertController = UIAlertController(title: "写真の削除", message: "削除してもよろしいですか？",
                                                 preferredStyle: .alert)
         let okAction = UIAlertAction(title: "削除する", style: .default) { [weak self] (action) in
-            // OKが押された時の処理
-            guard let self else { return }
-            self.photoPathImageView.image = nil
-            self.deletePhotoButton.setDisable()
-            self.photoBackgroundImage.isHidden = false
-            if let filePath = self.imageFilePath {
-                do {
-                    try FileManager.default.removeItem(at: filePath)
-                } catch {
-                    print("Error deleting image: \\(error.localizedDescription)")
+                // OKが押された時の処理
+                guard let self else { return }
+            if self.isNewItem {
+                print("🔵新規作成中の写真を削除開始")
+                if let filePath = self.imageFilePath {
+                    do {
+                        try FileManager.default.removeItem(at: filePath)
+                    } catch {
+                        print("Error deleting image: \\(error.localizedDescription)")
+                    }
+                    self.photoPathImageView.image = nil
+                    self.deletePhotoButton.setDisable()
+                    self.photoBackgroundImage.isHidden = false
+                }
+            } else {
+                print("🔴編集中の写真を削除開始")
+//                // uidを取得
+//                let uid = AccountManager.shared.getAuthStatus()
+                // 写真を削除
+                StorageManager.shared.deletePhoto(photoURL: photoURL) { [weak self] error in
+                    guard let self else { return }
+                    if let error {
+                        print("🟥削除に失敗：　\(error.localizedDescription)")
+                    } else {
+                        print("🟥削除に成功")
+                        DispatchQueue.main.async {
+                            self.photoPathImageView.image = nil
+                            self.deletePhotoButton.setDisable()
+                            self.photoBackgroundImage.isHidden = false
+                        }
+                    }
                 }
             }
         }

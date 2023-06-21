@@ -20,7 +20,7 @@ final class StorageManager {
     private let folderPath: String = "shoppingItem"
 
     /// 写真を保存し、ダウンロードURLを取得して返却する
-    func upLoadShoppingItemPhoto(uid: String, image: UIImage?, completion: @escaping (_ url: String?) -> Void)  {
+    internal func upLoadShoppingItemPhoto(uid: String, image: UIImage?, completion: @escaping (_ url: String?) -> Void)  {
         guard let image else {
             print("写真のデータがないよん")
             completion("")
@@ -53,14 +53,32 @@ final class StorageManager {
         }
     }
 
-
-    func setImageWithUrl(photoURL: String) -> UIImage? {
+    /// ダウンロードURLからUIImageに変換
+    internal func setImageWithUrl(photoURL: String) -> UIImage? {
         if let imageUrl:URL = URL(string: photoURL) {
-            let imageData:Data = try! Data(contentsOf: imageUrl)
-            let setImage = UIImage(data: imageData)
-            return setImage
+            do {
+                let imageData:Data = try Data(contentsOf: imageUrl)
+                let setImage = UIImage(data: imageData)
+                return setImage
+            } catch {
+                 print(error)
+                return nil
+            }
         } else {
             return nil
+        }
+    }
+
+    /// 写真をStorageから削除
+    internal func deletePhoto(photoURL: String, completion: ((Error?) -> Void)? = nil) {
+        print("ダウンロードURL：　\(photoURL)")
+        if photoURL.isEmpty {
+            completion?(nil)
+            return
+        }
+        let targetRef = storage.reference(forURL: photoURL)
+        targetRef.delete { error in
+            completion?(error)
         }
     }
 }

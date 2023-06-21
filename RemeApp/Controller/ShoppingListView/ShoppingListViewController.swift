@@ -90,7 +90,7 @@ class ShoppingListViewController: UIViewController {
     }
 
     /// 買い物リストの変更を監視、データを受け取り表示を更新する
-    func setShoppingItemObserver() {
+    private func setShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getShoppingItemObserver(
             listener: &FirestoreManager.shared.shoppingListMyItemListener,
@@ -98,7 +98,6 @@ class ShoppingListViewController: UIViewController {
             completion: { [weak self] itemList in
             guard let self else { return }
             self.myShoppingItemList = itemList
-            print(itemList)
             self.sortMyShoppingItemList()
         })
     }
@@ -123,7 +122,7 @@ class ShoppingListViewController: UIViewController {
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortLeftMyShoppingItemList() {
+    private func sortLeftMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -137,7 +136,7 @@ class ShoppingListViewController: UIViewController {
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    func sortRightMyShoppingItemList() {
+    private func sortRightMyShoppingItemList() {
         myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
@@ -224,11 +223,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
 //                                 supplement: errandDataModel.supplement,
 //                                 image: errandDataModel.getImage())
             let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
-            var setImage:UIImage? = nil
-            if let imageUrl:URL = URL(string: myData.photoURL) {
-                let imageData:Data = try! Data(contentsOf: imageUrl)
-                setImage = UIImage(data: imageData)
-            }
+            let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
                                  numberOfItem: myData.numberOfItem,
