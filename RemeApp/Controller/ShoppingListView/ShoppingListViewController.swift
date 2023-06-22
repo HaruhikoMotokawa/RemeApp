@@ -28,18 +28,18 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        setShoppingItemObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setErrandData()
 //        sortErrandDataList()
-
+        setShoppingItemObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("離れるで")
         FirestoreManager.shared.removeShoppingItemObserver(
             listener: &FirestoreManager.shared.shoppingListMyItemListener) // オブザーバを廃棄
     }
@@ -97,6 +97,7 @@ class ShoppingListViewController: UIViewController {
             uid: uid,
             completion: { [weak self] itemList in
             guard let self else { return }
+                print("買い物リストの取得を開始")
             self.myShoppingItemList = itemList
             self.sortMyShoppingItemList()
         })
@@ -192,7 +193,7 @@ class ShoppingListViewController: UIViewController {
 
     /// 全てのセルがチェックされている場合にアラートを表示する
    private func completionAlert() {
-        if errandDataList.allSatisfy({ $0.isCheckBox }) {
+        if myShoppingItemList.allSatisfy({ $0.isCheckBox }) {
             let alertController = UIAlertController(title: "買い物が完了しました！", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
@@ -242,13 +243,15 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
     /// - detailShoppingListViewControllerにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListViewController = storyboard.instantiateViewController(
+        let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
-        let errandData = errandDataList[indexPath.row]
-        detailShoppingListViewController.configurer(detail: errandData)
+//        let errandData = errandDataList[indexPath.row]
+//        detailShoppingListViewController.configurer(detail: errandData)
+        let shoppingItemData = myShoppingItemList[indexPath.row]
+        detailShoppingListVC.configurer(detail: shoppingItemData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListViewController, animated: true)
+        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
+        self.present(detailShoppingListVC, animated: true)
     }
 }
 
@@ -261,43 +264,86 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// - テーブルビューを再読み込みして表示する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
-        let isChecked = !errandDataList[indexPath.row].isCheckBox
-        // Realmのトランザクションを開始
-        let realm = try! Realm()
-        realm.beginWrite()
-        errandDataList[indexPath.row].isCheckBox = isChecked
-        realm.add(errandDataList[indexPath.row], update: .modified)
-        try! realm.commitWrite()
+        let isChecked = !myShoppingItemList[indexPath.row].isCheckBox
+        let id = myShoppingItemList[indexPath.row].id
 
-        // タップされたcellだけにアニメーションを実行する
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
-            // cellをリロードする
-            self.shoppingListTableView.reloadRows(at: [indexPath], with: .fade)
-            if isChecked {
-                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
-                var lastUncheckedRowIndex: Int?
-                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
-                for (index, errandData) in self.errandDataList.enumerated() {
-                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
-                    if !errandData.isCheckBox && index < indexPath.row {
-                        lastUncheckedRowIndex = index
-                    }
-                }
-                // 移動するcellの範囲が決定したら、移動する
-                guard let lastRow = lastUncheckedRowIndex else { return }
+        FirestoreManager.shared.upDateItemForIsChecked(id: id, isChecked: isChecked, completion: { [weak self] isSuccess in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    guard let self else { return }
+                    // タップされたcellだけにアニメーションを実行する
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+                        // cellをリロードする
+                        self.shoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+                        if isChecked {
+                            // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+                            var lastUncheckedRowIndex: Int?
+                            // self.myShoppingItemDataという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+                            for (index, myShoppingItemData) in self.myShoppingItemList.enumerated() {
+                                // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+                                if !myShoppingItemData.isCheckBox && index < indexPath.row {
+                                    lastUncheckedRowIndex = index
+                                }
+                            }
+                            // 移動するcellの範囲が決定したら、移動する
+                            guard let lastRow = lastUncheckedRowIndex else { return }
 
-                if lastRow < indexPath.row {
-                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
-                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
-                        // iとi-1の要素を入れ替える
-                        self.errandDataList.swapAt(i, i - 1)
-                    }
-                    // 指定されたindexPathの行を、別のindexPathの行に移動する
-                    self.shoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                            if lastRow < indexPath.row {
+                                // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+                                for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+                                    // iとi-1の要素を入れ替える
+                                    self.myShoppingItemList.swapAt(i, i - 1)
+                                }
+                                // 指定されたindexPathの行を、別のindexPathの行に移動する
+                                self.shoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                            }
+                        }
+                    }, completion: nil)
+                    self.sortMyShoppingItemList()
+                    self.completionAlert()
                 }
+            } else {
+                print("書き込み失敗")
             }
-        }, completion: nil)
-//        sortErrandDataList()
-        completionAlert()
+        })
     }
 }
+        // Realmのトランザクションを開始
+//        let realm = try! Realm()
+//        realm.beginWrite()
+//        errandDataList[indexPath.row].isCheckBox = isChecked
+//        realm.add(errandDataList[indexPath.row], update: .modified)
+//        try! realm.commitWrite()
+
+        // タップされたcellだけにアニメーションを実行する
+//        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+//            // cellをリロードする
+//            self.shoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+//            if isChecked {
+//                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+//                var lastUncheckedRowIndex: Int?
+//                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+//                for (index, errandData) in self.errandDataList.enumerated() {
+//                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+//                    if !errandData.isCheckBox && index < indexPath.row {
+//                        lastUncheckedRowIndex = index
+//                    }
+//                }
+//                // 移動するcellの範囲が決定したら、移動する
+//                guard let lastRow = lastUncheckedRowIndex else { return }
+//
+//                if lastRow < indexPath.row {
+//                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+//                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+//                        // iとi-1の要素を入れ替える
+//                        self.errandDataList.swapAt(i, i - 1)
+//                    }
+//                    // 指定されたindexPathの行を、別のindexPathの行に移動する
+//                    self.shoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+//                }
+//            }
+//        }, completion: nil)
+//        sortErrandDataList()
+//        completionAlert()
+//    }
+//}

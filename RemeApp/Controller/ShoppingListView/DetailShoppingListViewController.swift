@@ -12,25 +12,9 @@ import RealmSwift
 class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
-    /// 画面閉じて戻る
-    @IBAction private func closeView(_ sender: Any) {
-        dismiss(animated: true)
-    }
 
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
-
-    /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
-    @IBAction private func goSalesFloorMapView(_ sender: Any) {
-        self.dismiss(animated: true) {
-            if let windowScene = UIApplication.shared.connectedScenes
-                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
-               let tabBarController = windowScene.windows.first?.rootViewController as? UITabBarController {
-                tabBarController.selectedIndex = 1
-            }
-        }
-    }
-
     /// 詳細のView
     @IBOutlet weak var detailView: UIView!
     /// 写真を表示
@@ -41,11 +25,12 @@ class DetailShoppingListViewController: UIViewController {
     @IBOutlet private weak var numberOfItemLabel: UILabel!
     /// 必要数の単位を表示
     @IBOutlet private weak var unitLabel: UILabel!
-
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
 
     // MARK: - property
+    /// ドキュメントID
+    private var id:String? = nil
     /// nameOfItemLabelに表示するテキスト
     private var nameOfItemLabelText:String = ""
     /// numberOfItemLabelに表示するテキスト
@@ -56,12 +41,16 @@ class DetailShoppingListViewController: UIViewController {
     private var salesFloorButtonRawValue:Int = 0
     /// supplementLabelに表示するテキスト
     private var supplementLabelText:String? = nil
+    /// photoImageViewに表示する画像
+    private var photoURL:String = ""
     /// photoPathImageViewに表示する画像
-    private var photoPathImage:UIImage? = nil
+//    private var photoPathImage:UIImage? = nil
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +64,42 @@ class DetailShoppingListViewController: UIViewController {
     }
 
     // MARK: - func
+
+    /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
+    @IBAction private func goSalesFloorMapView(_ sender: Any) {
+        self.dismiss(animated: true) {
+            if let windowScene = UIApplication.shared.connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+               let tabBarController = windowScene.windows.first?.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 1
+            }
+        }
+    }
+
+    /// 画面閉じて戻る
+    @IBAction private func closeView(_ sender: Any) {
+        dismiss(animated: true)
+    }
+//    /// データ受け渡し用のメソッド
+//    func configurer(detail: ErrandDataModel) {
+//        nameOfItemLabelText = detail.nameOfItem
+//        numberOfItemLabelText = detail.numberOfItem
+//        unitLabelText = detail.unit
+//        salesFloorButtonRawValue = detail.salesFloorRawValue
+//        supplementLabelText = detail.supplement
+//        photoPathImage = detail.getImage()
+//    }
+
     /// データ受け渡し用のメソッド
-    func configurer(detail: ErrandDataModel) {
+    internal func configurer(detail: ShoppingItemModel) {
+        myShoppingItemList = [detail]
+        id = detail.id
         nameOfItemLabelText = detail.nameOfItem
         numberOfItemLabelText = detail.numberOfItem
         unitLabelText = detail.unit
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
-        photoPathImage = detail.getImage()
+        photoURL = detail.photoURL
     }
 
     /// detailViewに枠線をつけるメソッド
@@ -106,7 +123,7 @@ class DetailShoppingListViewController: UIViewController {
         unitLabel.text = unitLabelText
         setSalesFloorTypeButton(salesFloorRawValue: salesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementLabelText)
-        setPhotoPathImageView(image: photoPathImage)
+        setPhotoPathImageView(photoURL: photoURL)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
@@ -172,11 +189,12 @@ class DetailShoppingListViewController: UIViewController {
     /// 受け渡されたデータをphotoPathImageViewに表示
     /// - 画像がなければ抜ける
     /// - 画像があればリサイズと角丸処理をして表示する
-    private func setPhotoPathImageView(image: UIImage?) {
-        if image == nil {
-            return
+    private func setPhotoPathImageView(photoURL: String) {
+        if photoURL == "" {
+            photoPathImageView.image = nil
         } else {
-            let resizedImage = image?.resize(to: CGSize(width: 410, height: 410))
+            let setImage = StorageManager.shared.setImageWithUrl(photoURL: photoURL)
+            let resizedImage = setImage?.resize(to: CGSize(width: 410, height: 410))
             let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage

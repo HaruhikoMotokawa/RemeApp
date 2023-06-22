@@ -21,6 +21,9 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     var salesFloorRawValue: Int = 0
 
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,13 +104,15 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     /// - detailShoppingListViewControllerにモーダル遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListViewController = storyboard.instantiateViewController(
+        let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
-        let errandData = errandDataList[indexPath.row]
-        detailShoppingListViewController.configurer(detail: errandData)
+//        let errandData = errandDataList[indexPath.row]
+//        detailShoppingListViewController.configurer(detail: errandData)
+        let shoppingItemData = myShoppingItemList[indexPath.row]
+        detailShoppingListVC.configurer(detail: shoppingItemData)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListViewController.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListViewController, animated: true)
+        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
+        self.present(detailShoppingListVC, animated: true)
     }
 }
 

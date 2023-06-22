@@ -38,6 +38,9 @@ class EditShoppingListViewController: UIViewController {
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
+    /// デリートするショッピングアイテムをセットする.
+    private var deleteShoppingItem: [ShoppingItemModel] = []
+
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -49,13 +52,12 @@ class EditShoppingListViewController: UIViewController {
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
         //        setErrandData()
-        setShoppingItemObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        setupNotification() // realmのNotificationをセット
-//                setShoppingItemObserver()
+        setShoppingItemObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -296,6 +298,8 @@ class EditShoppingListViewController: UIViewController {
         } else {
             // 選択した行を削除する
             deleteRows()
+            // デリートアイテムがある場合は削除処理をする
+            deleteFirebase()
             // multipleDeletionsButtonのタイトルを変更
             multipleDeletionsButton.setTitle("複数削除", for: .normal)
             viewTitleLabel.text = "買い物リスト編集"
@@ -306,7 +310,7 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.isEditing = editing
     }
 
-    /// 選択した行を削除する
+    /// 選択したセルの行を削除する
     private func deleteRows() {
         // ユーザーが何も選択していない場合には抜ける
         guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else { return }
@@ -319,31 +323,51 @@ class EditShoppingListViewController: UIViewController {
         for indexPathList in sortedIndexPaths {
             // 選択したセルのインデックス番号を取得
             let target = myShoppingItemList[indexPathList.row]
+            // 削除対象のidが見つからなければ抜ける
             guard let id = target.id else { return }
-            // FirebaseStorageから写真データを削除
-            StorageManager.shared.deletePhoto(photoURL: target.photoURL, completion: { error in
-                // firestoreからドキュメント削除
-                FirestoreManager.shared.deleteItem(id: id, completion: { [weak self] error in
-                    guard let self else { return }
-                    if error != nil {
-                        print("削除に失敗")
-                        return
-                    }
-                    // ローカルデータmyShoppingItemList配列からデータを削除
-                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
-                        self.myShoppingItemList.remove(at: index)
-                        // tableViewの行を削除
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self else { return }
-                            self.editShoppingListTableView.deleteRows(at: [indexPathList], with: UITableView.RowAnimation.left)
-                        }
-                    }
-                })
+            // 対象の削除アイテムをデリートアイテム配列に追加
+            deleteShoppingItem.append(target)
+            // ローカルデータmyShoppingItemList配列から同じidに該当するデータを取得
+            if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
+                // ローカルデータmyShoppingItemList配列から対象を削除
+                myShoppingItemList.remove(at: index)
+                // tableViewの行を視覚的に削除
+                editShoppingListTableView.deleteRows(at: [indexPathList], with: .left)
+            }
+        }
+    }
+
+    /// 複数削除の時のFirebase関連削除処理
+    func deleteFirebase() {
+        // 削除対象の配列全てにアクセス
+        deleteShoppingItem.forEach { target in
+            guard let id = target.id else { return }
+            // FirebaseStorageから写真を削除
+            StorageManager.shared.deletePhoto(photoURL: target.photoURL, completion: { error in })
+            // firestoreからドキュメント削除
+            FirestoreManager.shared.deleteItem(id: id, completion: { [weak self] error in
+                guard let self else { return }
+                if error != nil {
+                    // エラーの場合
+                    print("削除に失敗")
+                    let errorMassage = FirebaseErrorManager.shared.setFirestoreErrorMessage(error)
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMassage)
+                    // 削除対象の配列を空に戻す
+                    self.deleteShoppingItem = []
+                    // オブザーバーを再度セット
+                    setShoppingItemObserver()
+                    return
+                }
+                // 成功の場合
+                // 削除が成功したら削除対象の配列を空に戻す
+                self.deleteShoppingItem = []
             })
         }
+        // オブザーバーを再度セット
         setShoppingItemObserver()
     }
 }
+
 //                    let realm = try! Realm()
 //                    try! realm.write {
 //                        // 降順に繰り返す
@@ -364,7 +388,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myShoppingItemList.count
-//        return errandDataList.count
+        //        return errandDataList.count
     }
 
     /// editShoppingListTableViewに使用するcellの内容を指定
@@ -383,14 +407,14 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
                                  image: setImage)
-//            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
-//            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
-//                                 nameOfItem: errandDataModel.nameOfItem,
-//                                 numberOfItem: errandDataModel.numberOfItem,
-//                                 unit: errandDataModel.unit,
-//                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
-//                                 supplement: errandDataModel.supplement ?? "",
-//                                 image: errandDataModel.getImage())
+            //            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
+            //            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
+            //                                 nameOfItem: errandDataModel.nameOfItem,
+            //                                 numberOfItem: errandDataModel.numberOfItem,
+            //                                 unit: errandDataModel.unit,
+            //                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
+            //                                 supplement: errandDataModel.supplement ?? "",
+            //                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()
@@ -412,58 +436,96 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let shoppingItemData = myShoppingItemList[indexPath.row]
         editItemVC.configurer(detail: shoppingItemData)
         editItemVC.isNewItem = false // 新規編集フラグをオフにする
-//        let errandData = errandDataList[indexPath.row]
-//        editItemVC.configurer(detail: errandData)
+        //        let errandData = errandDataList[indexPath.row]
+        //        editItemVC.configurer(detail: errandData)
         editShoppingListTableView.deselectRow(at: indexPath, animated: true)
         present(editItemVC, animated: true)
     }
 
-    /// スワイプして削除する処理
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
-    UISwipeActionsConfiguration? {
-        /// スワイプした時の処理を定義
-        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [weak self]
-            (action, view, completionHandler) in
-            // オブザーバーを廃棄
-            FirestoreManager.shared.removeShoppingItemObserver(
-                listener: &FirestoreManager.shared.editShoppingListMyItemListener)
-            guard let self else { return }
-            // 選択したセルのインデックス番号を取得
-            let target = self.myShoppingItemList[indexPath.row]
-            guard let id = target.id else { return }
-            // FirebaseStorageの写真データを削除
-            StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
-                guard let self else { return }
-                // firestoreからドキュメント削除
-                FirestoreManager.shared.deleteItem(id: id, completion: { error in
-                    // ローカルデータmyShoppingItemList配列からデータを削除
-                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
-                        self.myShoppingItemList.remove(at: index)
-                    }
-                    // tableViewから視覚的に行を削除
-                    self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
-                    // オブザーバーを再度セット
-                    self.setShoppingItemObserver()
-                })
-            }
-            //            let realm = try! Realm()
-            //            let target = self.errandDataList[indexPath.row]
-            //            try! realm.write(withoutNotifying: [self.notificationToken!]) {
-            //                realm.delete(target)
-            //            }
-            //            // お使いデータの対象のインデックス番号を削除
-            //            self.errandDataList.remove(at: indexPath.row)
-            // アクション完了を報告
-            completionHandler(true)
+    // MARK: 単品で削除する場合の処理
+
+    /// 削除対象のセルを一時的に保存し、もしも実行された場合の処理を定義
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // デリートするアイテムを一時的にプロパティに保存
+        deleteShoppingItem.append(myShoppingItemList[indexPath.row])
+        // myShoppingItemListは削除する
+        myShoppingItemList.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+
+    /// セルの削除が行われた後に呼び出される、ここでFirebase関連の削除を行う
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        // デリートアイテムがない場合はリターン
+        guard !deleteShoppingItem.isEmpty else {
+            return
         }
-        // スワイプアクション時の画像を設定
-        destructiveAction.image = UIImage(systemName: "trash.fill")
-        // 定義した削除処理を設定
-        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
-        // 実行するように返却
-        return configuration
+        // オブザーバーを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListMyItemListener)
+        // 選択したセルのインデックス番号を取得
+        guard let target = deleteShoppingItem.first, let id = target.id else {
+            return
+        }
+        // FirebaseStorageの写真データを削除
+        StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
+            guard let self else { return }
+            // firestoreからドキュメント削除
+            FirestoreManager.shared.deleteItem(id: id, completion: { error in
+                // オブザーバーを再度セット
+                self.setShoppingItemObserver()
+                // 通信が終了したらデリートアイテムを[]にする
+                self.deleteShoppingItem = []
+            })
+        }
     }
 }
+    /// スワイプして削除する処理
+    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
+    //    UISwipeActionsConfiguration? {
+    //        /// スワイプした時の処理を定義
+    //        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [weak self]
+    //            (action, view, completionHandler) in
+    //            // オブザーバーを廃棄
+    //            FirestoreManager.shared.removeShoppingItemObserver(
+    //                listener: &FirestoreManager.shared.editShoppingListMyItemListener)
+    //            guard let self else { return }
+    //            // 選択したセルのインデックス番号を取得
+    //            let target = self.myShoppingItemList[indexPath.row]
+    //            guard let id = target.id else { return }
+    //            // FirebaseStorageの写真データを削除
+    //            StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
+    //                guard let self else { return }
+    //                // firestoreからドキュメント削除
+    //                FirestoreManager.shared.deleteItem(id: id, completion: { error in
+    //                    // ローカルデータmyShoppingItemList配列からデータを削除
+    //                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
+    //                        self.myShoppingItemList.remove(at: index)
+    //                    }
+    //                    // tableViewから視覚的に行を削除
+    //                    self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
+    //                    // オブザーバーを再度セット
+    //                    self.setShoppingItemObserver()
+    //                })
+    //            }
+    //            //            let realm = try! Realm()
+    //            //            let target = self.errandDataList[indexPath.row]
+    //            //            try! realm.write(withoutNotifying: [self.notificationToken!]) {
+    //            //                realm.delete(target)
+    //            //            }
+    //            //            // お使いデータの対象のインデックス番号を削除
+    //            //            self.errandDataList.remove(at: indexPath.row)
+    //            // アクション完了を報告
+    //            completionHandler(true)
+    //        }
+    //        // スワイプアクション時の画像を設定
+    //        destructiveAction.image = UIImage(systemName: "trash.fill")
+    //        // 定義した削除処理を設定
+    //        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
+    //        // 実行するように返却
+    //        return configuration
+    //    }
+
 
 // MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
@@ -472,42 +534,84 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// - チェックしたものは下に移動する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
         guard let indexPath = editShoppingListTableView.indexPath(for: cell) else { return }
-        let isChecked = !errandDataList[indexPath.row].isCheckBox
-        // Realmのトランザクションを開始
-        let realm = try! Realm()
-        realm.beginWrite()
-        errandDataList[indexPath.row].isCheckBox = isChecked
-        realm.add(errandDataList[indexPath.row], update: .modified)
-        try! realm.commitWrite()
+        let isChecked = !myShoppingItemList[indexPath.row].isCheckBox
+        let id = myShoppingItemList[indexPath.row].id
 
-        // タップされたcellだけにアニメーションを実行する
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
-            // cellをリロードする
-            self.editShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
-            if isChecked {
-                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
-                var lastUncheckedRowIndex: Int?
-                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
-                for (index, errandData) in self.errandDataList.enumerated() {
-                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
-                    if !errandData.isCheckBox && index < indexPath.row {
-                        lastUncheckedRowIndex = index
-                    }
-                }
-                // 移動するcellの範囲が決定したら、移動する
-                guard let lastRow = lastUncheckedRowIndex else { return }
+        FirestoreManager.shared.upDateItemForIsChecked(id: id, isChecked: isChecked, completion: { [weak self] isSuccess in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    guard let self else { return }
+                    // タップされたcellだけにアニメーションを実行する
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+                        // cellをリロードする
+                        self.editShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+                        if isChecked {
+                            // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+                            var lastUncheckedRowIndex: Int?
+                            // self.myShoppingItemDataという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+                            for (index, myShoppingItemData) in self.myShoppingItemList.enumerated() {
+                                // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+                                if !myShoppingItemData.isCheckBox && index < indexPath.row {
+                                    lastUncheckedRowIndex = index
+                                }
+                            }
+                            // 移動するcellの範囲が決定したら、移動する
+                            guard let lastRow = lastUncheckedRowIndex else { return }
 
-                if lastRow < indexPath.row {
-                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
-                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
-                        // iとi-1の要素を入れ替える
-                        self.errandDataList.swapAt(i, i - 1)
-                    }
-                    // 指定されたindexPathの行を、別のindexPathの行に移動する
-                    self.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                            if lastRow < indexPath.row {
+                                // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+                                for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+                                    // iとi-1の要素を入れ替える
+                                    self.myShoppingItemList.swapAt(i, i - 1)
+                                }
+                                // 指定されたindexPathの行を、別のindexPathの行に移動する
+                                self.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+                            }
+                        }
+                    }, completion: nil)
+                    self.sortMyShoppingItemList()
                 }
+            } else {
+                print("書き込み失敗")
             }
-        }, completion: nil)
+        })
     }
 }
+//        // Realmのトランザクションを開始
+//        let realm = try! Realm()
+//        realm.beginWrite()
+//        errandDataList[indexPath.row].isCheckBox = isChecked
+//        realm.add(errandDataList[indexPath.row], update: .modified)
+//        try! realm.commitWrite()
+//
+//        // タップされたcellだけにアニメーションを実行する
+//        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
+//            // cellをリロードする
+//            self.editShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
+//            if isChecked {
+//                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
+//                var lastUncheckedRowIndex: Int?
+//                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
+//                for (index, errandData) in self.errandDataList.enumerated() {
+//                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
+//                    if !errandData.isCheckBox && index < indexPath.row {
+//                        lastUncheckedRowIndex = index
+//                    }
+//                }
+//                // 移動するcellの範囲が決定したら、移動する
+//                guard let lastRow = lastUncheckedRowIndex else { return }
+//
+//                if lastRow < indexPath.row {
+//                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
+//                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
+//                        // iとi-1の要素を入れ替える
+//                        self.errandDataList.swapAt(i, i - 1)
+//                    }
+//                    // 指定されたindexPathの行を、別のindexPathの行に移動する
+//                    self.editShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
+//                }
+//            }
+//        }, completion: nil)
+//    }
+//}
 

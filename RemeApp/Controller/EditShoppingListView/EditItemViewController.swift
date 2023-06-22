@@ -80,7 +80,6 @@ class EditItemViewController: UIViewController {
         setTitleLabel()
         setDisableOrEnable()
         supplementTextView.setAppearance()
-        print("これがphotoURL： \(photoURL)")
     }
 
     // MARK: - func
@@ -295,7 +294,7 @@ class EditItemViewController: UIViewController {
     }
 
     /// 受け渡されたデータをsetSupplementLabelTextに表示
-    /// - 補足がなければ「""」を表示 == textViewDidBeginEditingによってプレースホルダーがセットされる
+    /// - 補足がなければplaceholderLabelを表示
     /// - 補足がある場合はフォントを黒にしてそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementTextViewText == nil {

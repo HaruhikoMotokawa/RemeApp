@@ -178,6 +178,19 @@ extension FirestoreManager {
         }
     }
 
+    /// 買い物商品のisCheckBoxにチェックを入れた時に書き込む処理
+    internal func upDateItemForIsChecked(id: String?, isChecked: Bool, completion: @escaping (Bool) -> Void) {
+        guard let id else { return }
+        db.collection(Collection.shoppingItem.path).document(id).updateData([
+            "isCheckBox": isChecked])
+        { err in
+            if err != nil {
+                print("Firestoreへの保存に失敗")
+            } else {
+                print("Firestoreへの保存に成功")
+            }
+        }
+    }
     // ドキュメントを削除する
     internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
         db.collection(Collection.shoppingItem.path).document(id).delete() { error in

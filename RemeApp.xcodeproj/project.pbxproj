@@ -412,10 +412,10 @@
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
 				784669732A3DDB7D00C175EB /* AlertController.swift */,
-				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
+				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
 				78EDF40929DD117900A6407D /* EditShoppingListView */,
 				78EDF40A29DD11EE00A6407D /* EditSalesFloorMapView */,
 				78EDF40B29DD121900A6407D /* CustumCell */,
