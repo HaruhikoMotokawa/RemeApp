@@ -42,9 +42,9 @@ class DetailShoppingListViewController: UIViewController {
     /// supplementLabelに表示するテキスト
     private var supplementLabelText:String? = nil
     /// photoImageViewに表示する画像
-    private var photoURL:String = ""
+//    private var photoURL:String = ""
     /// photoPathImageViewに表示する画像
-//    private var photoPathImage:UIImage? = nil
+    private var photoPathImage:UIImage? = nil
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
@@ -91,7 +91,7 @@ class DetailShoppingListViewController: UIViewController {
 //    }
 
     /// データ受け渡し用のメソッド
-    internal func configurer(detail: ShoppingItemModel) {
+    internal func configurer(detail: ShoppingItemModel, image: UIImage?) {
         myShoppingItemList = [detail]
         id = detail.id
         nameOfItemLabelText = detail.nameOfItem
@@ -99,7 +99,7 @@ class DetailShoppingListViewController: UIViewController {
         unitLabelText = detail.unit
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
-        photoURL = detail.photoURL
+        photoPathImage = image
     }
 
     /// detailViewに枠線をつけるメソッド
@@ -123,7 +123,7 @@ class DetailShoppingListViewController: UIViewController {
         unitLabel.text = unitLabelText
         setSalesFloorTypeButton(salesFloorRawValue: salesFloorButtonRawValue)
         setSupplementLabelText(supplement: supplementLabelText)
-        setPhotoPathImageView(photoURL: photoURL)
+        setPhotoPathImageView(image: photoPathImage)
     }
 
     /// salesFloorTypeButtonに売り場の内容を反映させる
@@ -189,12 +189,11 @@ class DetailShoppingListViewController: UIViewController {
     /// 受け渡されたデータをphotoPathImageViewに表示
     /// - 画像がなければ抜ける
     /// - 画像があればリサイズと角丸処理をして表示する
-    private func setPhotoPathImageView(photoURL: String) {
-        if photoURL == "" {
-            photoPathImageView.image = nil
+    private func setPhotoPathImageView(image: UIImage?) {
+        if image == nil {
+            photoPathImageView.image = image
         } else {
-            let setImage = StorageManager.shared.setImageWithUrl(photoURL: photoURL)
-            let resizedImage = setImage?.resize(to: CGSize(width: 410, height: 410))
+            let resizedImage = image?.resize(to: CGSize(width: 355, height: 355))
             let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage

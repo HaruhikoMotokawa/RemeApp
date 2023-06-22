@@ -434,7 +434,9 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
         let shoppingItemData = myShoppingItemList[indexPath.row]
-        editItemVC.configurer(detail: shoppingItemData)
+        let targetPhotoURL = shoppingItemData.photoURL
+        let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
+        editItemVC.configurer(detail: shoppingItemData, image: image)
         editItemVC.isNewItem = false // 新規編集フラグをオフにする
         //        let errandData = errandDataList[indexPath.row]
         //        editItemVC.configurer(detail: errandData)

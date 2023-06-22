@@ -247,8 +247,10 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
 //        let errandData = errandDataList[indexPath.row]
 //        detailShoppingListViewController.configurer(detail: errandData)
+
         let shoppingItemData = myShoppingItemList[indexPath.row]
-        detailShoppingListVC.configurer(detail: shoppingItemData)
+        let image = StorageManager.shared.setImageWithUrl(photoURL: shoppingItemData.photoURL)
+        detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
         self.present(detailShoppingListVC, animated: true)

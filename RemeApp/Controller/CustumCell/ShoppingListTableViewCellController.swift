@@ -40,16 +40,12 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     /// tableViewのcellがタップされた際のデリーゲート
     weak var delegate: ShoppingListTableViewCellDelegate?
-
     /// チェックボックスのフラグ
     private var isChecked:Bool = false
-
     /// お使いデータモデル
     var errandDataList: Array<ErrandDataModel> = []
-
     /// 買い物リスト
     var myShoppingItemList: [ShoppingItemModel] = []
-
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 

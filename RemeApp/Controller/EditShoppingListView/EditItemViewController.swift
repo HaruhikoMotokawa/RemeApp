@@ -64,6 +64,8 @@ class EditItemViewController: UIViewController {
     private var supplementTextViewText:String? = nil
     /// photoImageViewに表示する画像
     private var photoURL:String = ""
+
+    private var photoPathImage:UIImage? = nil
     /// 画面遷移時に新規作成か、編集かを切り替えるフラグ
     internal var isNewItem:Bool = true
 
@@ -199,7 +201,7 @@ class EditItemViewController: UIViewController {
         }
     }
     /// データ受け渡し用のメソッド
-    internal func configurer(detail: ShoppingItemModel) {
+    internal func configurer(detail: ShoppingItemModel, image:UIImage?) {
         myShoppingItemList = [detail]
         id = detail.id
         nameOfItemTextFieldText = detail.nameOfItem
@@ -208,6 +210,7 @@ class EditItemViewController: UIViewController {
         selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
         photoURL = detail.photoURL
+        photoPathImage = image
     }
 
     /// データ受け渡し用のメソッド
@@ -228,7 +231,7 @@ class EditItemViewController: UIViewController {
         selectUnitRow(selectedUnit: unitPickerViewString)
         setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
         setSupplementLabelText(supplement: supplementTextViewText)
-        setPhotoPathImageView(photoURL: photoURL)
+        setPhotoPathImageView(image: photoPathImage)
     }
 
     /// numberOfItemPickerViewに表示できるように変換する
@@ -309,17 +312,17 @@ class EditItemViewController: UIViewController {
     /// 受け取った写真データを変換して表示するためのメソッド
     ///  - イメージがnilだったらそのままからを表示
     ///  - イメージがある場合はサイズを調整し、角丸にして表示する
-    private func setPhotoPathImageView(photoURL: String) {
-        if photoURL == "" {
-            photoPathImageView.image = nil
-        } else {
-            let setImage = StorageManager.shared.setImageWithUrl(photoURL: photoURL)
-            let resizedImage = setImage?.resize(to: CGSize(width: 355, height: 500))
-            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
-                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
-            photoPathImageView.image = roundedAndBorderedImage
-        }
-    }
+//    private func setPhotoPathImageView(photoURL: String) {
+//        if photoURL == "" {
+//            photoPathImageView.image = nil
+//        } else {
+//            let setImage = StorageManager.shared.setImageWithUrl(photoURL: photoURL)
+//            let resizedImage = setImage?.resize(to: CGSize(width: 355, height: 500))
+//            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
+//                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+//            photoPathImageView.image = roundedAndBorderedImage
+//        }
+//    }
 
     /// 受け取った写真データを変換して表示するためのメソッド
     ///  - イメージがnilだったらそのままからを表示
@@ -328,7 +331,7 @@ class EditItemViewController: UIViewController {
         if image == nil {
             photoPathImageView.image = image
         } else {
-            let resizedImage = image?.resize(to: CGSize(width: 355, height: 500))
+            let resizedImage = image?.resize(to: CGSize(width: 355, height: 355))
             let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage

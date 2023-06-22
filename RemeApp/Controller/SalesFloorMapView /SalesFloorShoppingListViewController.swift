@@ -109,7 +109,9 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
 //        let errandData = errandDataList[indexPath.row]
 //        detailShoppingListViewController.configurer(detail: errandData)
         let shoppingItemData = myShoppingItemList[indexPath.row]
-        detailShoppingListVC.configurer(detail: shoppingItemData)
+        let targetPhotoURL = shoppingItemData.photoURL
+        let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
+        detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
         salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
         detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
         self.present(detailShoppingListVC, animated: true)
