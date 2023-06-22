@@ -179,7 +179,7 @@ extension FirestoreManager {
     }
 
     /// 買い物商品のisCheckBoxにチェックを入れた時に書き込む処理
-    internal func upDateItemForIsChecked(id: String?, isChecked: Bool, completion: @escaping (Bool) -> Void) {
+    internal func upDateItemForIsChecked(id: String?, isChecked: Bool, completion: @escaping () -> Void) {
         guard let id else { return }
         db.collection(Collection.shoppingItem.path).document(id).updateData([
             "isCheckBox": isChecked])
