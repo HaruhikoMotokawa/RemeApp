@@ -23,6 +23,8 @@ final class FirestoreManager {
 
      internal var salesFloorMapMyItemListener: ListenerRegistration?
 
+    internal var salesFloorShoppingListMyItemListener: ListenerRegistration?
+
      internal var editShoppingListMyItemListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
@@ -130,6 +132,31 @@ extension FirestoreManager {
             }
     }
 
+    /// 自分が作成した買い物リストへの変更を監視する
+    internal func getShoppingItemObserverSearchSalesFloor(uid: String, salesFloorRawValue: Int,completion: @escaping ([ShoppingItemModel]) -> Void) {
+        // 自分が作成した買い物商品のリスナーをセット
+        salesFloorShoppingListMyItemListener = db.collection(Collection.shoppingItem.path)
+            .whereField(Field.owner.path, isEqualTo: uid)
+            .whereField(Field.salesFloorRawValue.path, isEqualTo: salesFloorRawValue)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard  let querySnapshot else { return }
+                // データをShoppingItemModelにマッピング
+                let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
+                    let data = item.data()
+                    return ShoppingItemModel(id: item.documentID,
+                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
+                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
+                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
+                                             unit: data[Field.unit.path] as? String ?? "",
+                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
+                                             supplement: data[Field.supplement.path] as? String ?? "",
+                                             photoURL: data[Field.photoURL.path] as? String ?? "",
+                                             owner: data[Field.owner.path] as? String ?? "",
+                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                }
+                completion(myShoppingItemList)
+            }
+    }
     /// 自分の買い物リストの監視を解除
     internal func removeShoppingItemObserver(listener: inout ListenerRegistration?) {
         listener?.remove()

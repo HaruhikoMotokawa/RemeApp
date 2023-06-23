@@ -39,7 +39,6 @@ class ShoppingListViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("離れるで")
         FirestoreManager.shared.removeShoppingItemObserver(
             listener: &FirestoreManager.shared.shoppingListMyItemListener) // オブザーバを廃棄
     }

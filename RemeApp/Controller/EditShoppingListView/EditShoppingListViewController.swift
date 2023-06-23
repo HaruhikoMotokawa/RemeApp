@@ -545,9 +545,9 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
         // 変更対象のデータのドキュメントIDを取得
         let targetID = myShoppingItemList[indexPath.row].id
         // targetIDと同じmyShoppingItemListのidが収納されているセルのインデックス番号を取得
-        if let targetItemIndex = self.myShoppingItemList.firstIndex(where: { $0.id == targetID }) {
+        if let targetItemIndex = myShoppingItemList.firstIndex(where: { $0.id == targetID }) {
             // 対象のアイテムが見つかった場合、そのアイテムのisCheckBoxを更新する
-            self.myShoppingItemList[targetItemIndex].isCheckBox = isChecked
+            myShoppingItemList[targetItemIndex].isCheckBox = isChecked
         }
         // セルを並び替える
         sortMyShoppingItemList()
