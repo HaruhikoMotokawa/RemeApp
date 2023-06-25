@@ -38,6 +38,10 @@ class EditShoppingListViewController: UIViewController {
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
+    /// 共有相手が作成した買い物データを格納する配列
+    private var otherShoppingItemList: [ShoppingItemModel] = []
+    /// 自分と相手のshoppingコレクションのドキュメント配列を合わせた配列
+    private var allShoppingItemList: [ShoppingItemModel] = []
     /// デリートするショッピングアイテムをセットする.
     private var deleteShoppingItem: [ShoppingItemModel] = []
 
@@ -57,15 +61,15 @@ class EditShoppingListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //        setupNotification() // realmのNotificationをセット
-        setShoppingItemObserver()
+        setMyShoppingItemObserver()
+        setOtherShoppingItemObserver()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("離れるで")
         //        notificationToken?.invalidate() // realmのNotificationの解除
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.editShoppingListMyItemListener) // オブザーバを廃棄
+      removeShoppingItemObserver()
     }
 
     // MARK: - @IBAction func
@@ -132,18 +136,45 @@ class EditShoppingListViewController: UIViewController {
         createNewItemButton.addShadow() // 影
     }
 
-    /// 買い物リストの変更を監視、データを受け取り表示を更新する
-    private func setShoppingItemObserver() {
+    /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
+    private func combineShoppingItems() {
+        allShoppingItemList = myShoppingItemList + otherShoppingItemList
+        sortShoppingItemList()
+    }
+    /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setMyShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getShoppingItemObserver(
+        FirestoreManager.shared.getMyShoppingItemObserver(
             listener: &FirestoreManager.shared.editShoppingListMyItemListener,
             uid: uid,
             completion: { [weak self] itemList in
                 guard let self else { return }
-                print("買い物リストの取得を開始")
+                print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
-                self.sortMyShoppingItemList()
+                self.combineShoppingItems()
             })
+    }
+
+    /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setOtherShoppingItemObserver()  {
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getOtherShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListOtherItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
+                guard let self else { return }
+                print("他人の買い物リストの取得を開始")
+                self.otherShoppingItemList = itemList
+                self.combineShoppingItems()
+            })
+    }
+
+    /// 買い物リストに関するオブザーバーを廃棄する
+    private func removeShoppingItemObserver() {
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListMyItemListener) // 自分のオブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.editShoppingListOtherItemListener) // 他人のオブザーバーを廃棄
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
@@ -152,22 +183,22 @@ class EditShoppingListViewController: UIViewController {
     /// -  画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-    private func sortMyShoppingItemList() {
+    private func sortShoppingItemList() {
         print("並び替え実行")
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
         if shoppingStartPositionInt == 0 {
-            sortLeftMyShoppingItemList()
+            sortLeftShoppingItemList()
         } else {
-            sortRightMyShoppingItemList()
+            sortRightShoppingItemList()
         }
     }
 
     /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - shoppingListTableViewを再読み込み
-    private func sortLeftMyShoppingItemList() {
-        myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
+    private func sortLeftShoppingItemList() {
+        allShoppingItemList = allShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
             } else {
@@ -180,8 +211,8 @@ class EditShoppingListViewController: UIViewController {
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
     /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     /// - shoppingListTableViewを再読み込み
-    private func sortRightMyShoppingItemList() {
-        myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
+    private func sortRightShoppingItemList() {
+        allShoppingItemList = allShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
             } else {
@@ -314,23 +345,20 @@ class EditShoppingListViewController: UIViewController {
     private func deleteRows() {
         // ユーザーが何も選択していない場合には抜ける
         guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else { return }
-        // オブザーバを廃棄
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.editShoppingListMyItemListener)
         // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
         let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
         // for-in文で一つずつ削除
         for indexPathList in sortedIndexPaths {
             // 選択したセルのインデックス番号を取得
-            let target = myShoppingItemList[indexPathList.row]
+            let target = allShoppingItemList[indexPathList.row]
             // 削除対象のidが見つからなければ抜ける
             guard let id = target.id else { return }
             // 対象の削除アイテムをデリートアイテム配列に追加
             deleteShoppingItem.append(target)
             // ローカルデータmyShoppingItemList配列から同じidに該当するデータを取得
-            if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
+            if let index = self.allShoppingItemList.firstIndex(where: { $0.id == id }) {
                 // ローカルデータmyShoppingItemList配列から対象を削除
-                myShoppingItemList.remove(at: index)
+                allShoppingItemList.remove(at: index)
                 // tableViewの行を視覚的に削除
                 editShoppingListTableView.deleteRows(at: [indexPathList], with: .left)
             }
@@ -354,8 +382,7 @@ class EditShoppingListViewController: UIViewController {
                     AlertController.showAlert(tittle: "エラー", errorMessage: errorMassage)
                     // 削除対象の配列を空に戻す
                     self.deleteShoppingItem = []
-                    // オブザーバーを再度セット
-                    setShoppingItemObserver()
+
                     return
                 }
                 // 成功の場合
@@ -363,8 +390,6 @@ class EditShoppingListViewController: UIViewController {
                 self.deleteShoppingItem = []
             })
         }
-        // オブザーバーを再度セット
-        setShoppingItemObserver()
     }
 }
 
@@ -387,7 +412,7 @@ class EditShoppingListViewController: UIViewController {
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myShoppingItemList.count
+        return allShoppingItemList.count
         //        return errandDataList.count
     }
 
@@ -398,7 +423,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             // 編集モードの状態によってチェックボックスの表示を切り替える
             cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
-            let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
+            let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
@@ -433,7 +458,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
-        let shoppingItemData = myShoppingItemList[indexPath.row]
+        let shoppingItemData = allShoppingItemList[indexPath.row]
         let targetPhotoURL = shoppingItemData.photoURL
         let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
         editItemVC.configurer(detail: shoppingItemData, image: image)
@@ -450,9 +475,9 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // デリートするアイテムを一時的にプロパティに保存
-        deleteShoppingItem.append(myShoppingItemList[indexPath.row])
+        deleteShoppingItem.append(allShoppingItemList[indexPath.row])
         // myShoppingItemListは削除する
-        myShoppingItemList.remove(at: indexPath.row)
+        allShoppingItemList.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 
@@ -462,9 +487,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         guard !deleteShoppingItem.isEmpty else {
             return
         }
-        // オブザーバーを廃棄
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.editShoppingListMyItemListener)
         // 選択したセルのインデックス番号を取得
         guard let target = deleteShoppingItem.first, let id = target.id else {
             return
@@ -474,88 +496,37 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             guard let self else { return }
             // firestoreからドキュメント削除
             FirestoreManager.shared.deleteItem(id: id, completion: { error in
-                // オブザーバーを再度セット
-                self.setShoppingItemObserver()
                 // 通信が終了したらデリートアイテムを[]にする
                 self.deleteShoppingItem = []
             })
         }
     }
 }
-    /// スワイプして削除する処理
-    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) ->
-    //    UISwipeActionsConfiguration? {
-    //        /// スワイプした時の処理を定義
-    //        let destructiveAction = UIContextualAction(style: .destructive, title: "削除") { [weak self]
-    //            (action, view, completionHandler) in
-    //            // オブザーバーを廃棄
-    //            FirestoreManager.shared.removeShoppingItemObserver(
-    //                listener: &FirestoreManager.shared.editShoppingListMyItemListener)
-    //            guard let self else { return }
-    //            // 選択したセルのインデックス番号を取得
-    //            let target = self.myShoppingItemList[indexPath.row]
-    //            guard let id = target.id else { return }
-    //            // FirebaseStorageの写真データを削除
-    //            StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
-    //                guard let self else { return }
-    //                // firestoreからドキュメント削除
-    //                FirestoreManager.shared.deleteItem(id: id, completion: { error in
-    //                    // ローカルデータmyShoppingItemList配列からデータを削除
-    //                    if let index = self.myShoppingItemList.firstIndex(where: { $0.id == id }) {
-    //                        self.myShoppingItemList.remove(at: index)
-    //                    }
-    //                    // tableViewから視覚的に行を削除
-    //                    self.editShoppingListTableView.deleteRows(at: [indexPath], with: .automatic)
-    //                    // オブザーバーを再度セット
-    //                    self.setShoppingItemObserver()
-    //                })
-    //            }
-    //            //            let realm = try! Realm()
-    //            //            let target = self.errandDataList[indexPath.row]
-    //            //            try! realm.write(withoutNotifying: [self.notificationToken!]) {
-    //            //                realm.delete(target)
-    //            //            }
-    //            //            // お使いデータの対象のインデックス番号を削除
-    //            //            self.errandDataList.remove(at: indexPath.row)
-    //            // アクション完了を報告
-    //            completionHandler(true)
-    //        }
-    //        // スワイプアクション時の画像を設定
-    //        destructiveAction.image = UIImage(systemName: "trash.fill")
-    //        // 定義した削除処理を設定
-    //        let configuration = UISwipeActionsConfiguration(actions: [destructiveAction])
-    //        // 実行するように返却
-    //        return configuration
-    //    }
-
 
 // MARK: - ShoppingListTableViewCellDelegate
 // cell内のチェックボックスをタップした際の処理
 extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理
     /// - チェックしたものは下に移動する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = editShoppingListTableView.indexPath(for: cell) else { return }
-        // Firestoreのオブザーバーを停止
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.editShoppingListMyItemListener)
         // 指定されたセルのisCheckBoxのBool値を反転させる
-        let isChecked = !myShoppingItemList[indexPath.row].isCheckBox
+        let isChecked = !allShoppingItemList[indexPath.row].isCheckBox
         // 変更対象のデータのドキュメントIDを取得
-        let targetID = myShoppingItemList[indexPath.row].id
+        let targetID = allShoppingItemList[indexPath.row].id
         // targetIDと同じmyShoppingItemListのidが収納されているセルのインデックス番号を取得
-        if let targetItemIndex = myShoppingItemList.firstIndex(where: { $0.id == targetID }) {
+        if let targetItemIndex = self.allShoppingItemList.firstIndex(where: { $0.id == targetID }) {
             // 対象のアイテムが見つかった場合、そのアイテムのisCheckBoxを更新する
-            myShoppingItemList[targetItemIndex].isCheckBox = isChecked
+            self.allShoppingItemList[targetItemIndex].isCheckBox = isChecked
         }
-        // セルを並び替える
-        sortMyShoppingItemList()
-        // FirestoreにisCheckedだけ書き込み
-        FirestoreManager.shared.upDateItemForIsChecked(id: targetID, isChecked: isChecked) { [weak self] in
-            guard let self else { return }
-            // オブザーバーを再度セット
-            self.setShoppingItemObserver()
+        Task { @MainActor in
+            // FirestoreにisCheckedだけ書き込み
+            do {
+                try await FirestoreManager.shared.upDateItemForIsChecked(id: targetID, isChecked: isChecked)
+            } catch {
+                print("エラー")
+            }
         }
     }
 }

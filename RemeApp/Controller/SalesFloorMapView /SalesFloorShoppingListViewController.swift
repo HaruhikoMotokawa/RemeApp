@@ -24,6 +24,10 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
+    /// 共有相手が作成した買い物データを格納する配列
+    private var otherShoppingItemList: [ShoppingItemModel] = []
+    /// 自分と相手のshoppingコレクションのドキュメント配列を合わせた配列
+    private var allShoppingItemList: [ShoppingItemModel] = []
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -33,7 +37,8 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setShoppingItemObserver()
+        setMyShoppingItemObserver()
+        setOtherShoppingItemObserver()
 //        setSelectedErrandDataList(salesFloorRawValue: salesFloorRawValue)
 //        sortErrandDataList()
 
@@ -41,20 +46,49 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.salesFloorShoppingListMyItemListener) // オブザーバを廃棄
+        removeShoppingItemObserver()
     }
     // MARK: - func
 
-    /// 買い物リストの変更を監視、データを受け取り表示を更新する
-    private func setShoppingItemObserver() {
+    /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
+    private func combineShoppingItems() {
+        allShoppingItemList = myShoppingItemList + otherShoppingItemList
+        sortShoppingItemList()
+    }
+    /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setMyShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getShoppingItemObserverSearchSalesFloor(
-            uid: uid, salesFloorRawValue: salesFloorRawValue) { [weak self] itemList in
+        FirestoreManager.shared.getMyShoppingItemObserverSearchSalesFloor(
+            uid: uid,
+            salesFloorRawValue: salesFloorRawValue,
+            completion: { [weak self] itemList in
                 guard let self else { return }
+                print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
-                self.sortMyShoppingItemList()
-            }
+                self.combineShoppingItems()
+            })
+    }
+
+    /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setOtherShoppingItemObserver()  {
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getOtherShoppingItemObserverSearchSalesFloor(
+            uid: uid,
+            salesFloorRawValue: salesFloorRawValue,
+            completion: { [weak self] itemList in
+                guard let self else { return }
+                print("他人の買い物リストの取得を開始")
+                self.otherShoppingItemList = itemList
+                self.combineShoppingItems()
+            })
+    }
+
+    /// 買い物リストに関するオブザーバーを廃棄する
+    private func removeShoppingItemObserver() {
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.salesFloorShoppingListMyItemListener) // 自分のオブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.salesFloorMapOtherItemListener) // 他人のオブザーバーを廃棄
     }
 
 //    private func setSelectedErrandDataList(salesFloorRawValue: Int) {
@@ -64,8 +98,8 @@ class SalesFloorShoppingListViewController: UIViewController {
 //    }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    private func sortMyShoppingItemList() {
-        myShoppingItemList = myShoppingItemList.sorted { (a, b) -> Bool in
+    private func sortShoppingItemList() {
+        allShoppingItemList = allShoppingItemList.sorted { (a, b) -> Bool in
             if a.isCheckBox != b.isCheckBox {
                 return !a.isCheckBox
             } else {
@@ -89,7 +123,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     /// 全てのセルがチェックされている場合にアラートを表示、OKをタップして一つ前の画面に戻る
     private func completionSalesFloorAlert() {
-        if myShoppingItemList.allSatisfy({ $0.isCheckBox }) {
+        if allShoppingItemList.allSatisfy({ $0.isCheckBox }) {
             let alertController = UIAlertController(title: "この売り場の買い物が完了しました！", message: nil,
                                                     preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -113,14 +147,14 @@ class SalesFloorShoppingListViewController: UIViewController {
 extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// salesFloorShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myShoppingItemList.count
+        return allShoppingItemList.count
     }
     /// salesFloorShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = salesFloorShoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
-            let myData: ShoppingItemModel = myShoppingItemList[indexPath.row]
+            let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                  nameOfItem: myData.nameOfItem,
@@ -152,7 +186,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
 //        let errandData = errandDataList[indexPath.row]
 //        detailShoppingListViewController.configurer(detail: errandData)
-        let shoppingItemData = myShoppingItemList[indexPath.row]
+        let shoppingItemData = allShoppingItemList[indexPath.row]
         let targetPhotoURL = shoppingItemData.photoURL
         let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
         detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
@@ -169,30 +203,27 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
     /// - チェックしたものは下に移動する
     /// - 全てのチェックがついたらアラートを出す
     /// - テーブルビューを再読み込みして表示する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = salesFloorShoppingListTableView.indexPath(for: cell) else { return }
-        // Firestoreのオブザーバーを停止
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.salesFloorShoppingListMyItemListener)
         // 指定されたセルのisCheckBoxのBool値を反転させる
-        let isChecked = !myShoppingItemList[indexPath.row].isCheckBox
+        let isChecked = !allShoppingItemList[indexPath.row].isCheckBox
         // 変更対象のデータのドキュメントIDを取得
-        let targetID = myShoppingItemList[indexPath.row].id
+        let targetID = allShoppingItemList[indexPath.row].id
         // targetIDと同じmyShoppingItemListのidが収納されているセルのインデックス番号を取得
-        if let targetItemIndex = self.myShoppingItemList.firstIndex(where: { $0.id == targetID }) {
+        if let targetItemIndex = self.allShoppingItemList.firstIndex(where: { $0.id == targetID }) {
             // 対象のアイテムが見つかった場合、そのアイテムのisCheckBoxを更新する
-            self.myShoppingItemList[targetItemIndex].isCheckBox = isChecked
+            self.allShoppingItemList[targetItemIndex].isCheckBox = isChecked
         }
-        // セルを並び替える
-        sortMyShoppingItemList()
         // 全てがチェックされたらアラートを出す
         completionSalesFloorAlert()
-        // FirestoreにisCheckedだけ書き込み
-        FirestoreManager.shared.upDateItemForIsChecked(id: targetID, isChecked: isChecked) { [weak self] in
-            guard let self else { return }
-            // オブザーバーを再度セット
-            self.setShoppingItemObserver()
+        Task { @MainActor in
+            // FirestoreにisCheckedだけ書き込み
+            do {
+                try await FirestoreManager.shared.upDateItemForIsChecked(id: targetID, isChecked: isChecked)
+            } catch {
+                print("エラー")
+            }
         }
     }
 }

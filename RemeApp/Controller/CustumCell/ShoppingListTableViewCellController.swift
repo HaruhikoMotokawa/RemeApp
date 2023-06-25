@@ -18,9 +18,11 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     /// チェックボックスがタプされた際のメソッド
     /// - cellのバックグラウンドカラーをグレイに変更
     @IBAction private func isCheckBoxButton(_ sender: Any) {
-        changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
-        isChecked = !isChecked
-        delegate?.didTapCheckBoxButton(self)
+        Task { @MainActor in
+            changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
+            isChecked = !isChecked
+            await delegate?.didTapCheckBoxButton(self)
+        }
     }
     
     /// 商品名を表示する
@@ -44,8 +46,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     private var isChecked:Bool = false
     /// お使いデータモデル
     var errandDataList: Array<ErrandDataModel> = []
-    /// 買い物リスト
-    var myShoppingItemList: [ShoppingItemModel] = []
+
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
@@ -217,7 +218,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
 /// チェックボックスがタップされた場合の挙動を指定するデリゲート
 protocol ShoppingListTableViewCellDelegate: AnyObject {
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController)
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async
 }
 
 

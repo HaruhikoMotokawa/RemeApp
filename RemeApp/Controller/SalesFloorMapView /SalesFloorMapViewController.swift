@@ -163,6 +163,10 @@ class SalesFloorMapViewController: UIViewController {
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
+    /// 共有相手が作成した買い物データを格納する配列
+    private var otherShoppingItemList: [ShoppingItemModel] = []
+    /// 自分と相手のshoppingコレクションのドキュメント配列を合わせた配列
+    private var allShoppingItemList: [ShoppingItemModel] = []
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -175,32 +179,59 @@ class SalesFloorMapViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setErrandData()
-        setShoppingItemObserver()
-//        exchangeAllSalesFloorButton()
+        setMyShoppingItemObserver()
+        setOtherShoppingItemObserver()
+        //        setErrandData()
+        //        exchangeAllSalesFloorButton()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        FirestoreManager.shared.removeShoppingItemObserver(
-            listener: &FirestoreManager.shared.salesFloorMapMyItemListener) // オブザーバを廃棄
+        removeShoppingItemObserver()
     }
 
     // MARK: - func
-    /// 買い物リストの変更を監視、データを受け取り表示を更新する
-    private func setShoppingItemObserver() {
+    /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
+    private func combineShoppingItems() {
+        allShoppingItemList = myShoppingItemList + otherShoppingItemList
+        exchangeAllSalesFloorButton()
+    }
+    /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setMyShoppingItemObserver() {
         let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getShoppingItemObserver(
+        FirestoreManager.shared.getMyShoppingItemObserver(
             listener: &FirestoreManager.shared.salesFloorMapMyItemListener,
             uid: uid,
             completion: { [weak self] itemList in
                 guard let self else { return }
-                print("買い物リストの取得を開始")
+                print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
-                print(self.myShoppingItemList)
-                self.exchangeAllSalesFloorButton()
+                self.combineShoppingItems()
             })
     }
+
+    /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
+    private func setOtherShoppingItemObserver()  {
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getOtherShoppingItemObserver(
+            listener: &FirestoreManager.shared.salesFloorMapOtherItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
+                guard let self else { return }
+                print("他人の買い物リストの取得を開始")
+                self.otherShoppingItemList = itemList
+                self.combineShoppingItems()
+            })
+    }
+
+    /// 買い物リストに関するオブザーバーを廃棄する
+    private func removeShoppingItemObserver() {
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.salesFloorMapMyItemListener) // 自分のオブザーバを廃棄
+        FirestoreManager.shared.removeShoppingItemObserver(
+            listener: &FirestoreManager.shared.salesFloorMapOtherItemListener) // 他人のオブザーバーを廃棄
+    }
+
     /// 保存されたお使いデータをセットする
     private func setErrandData() {
         let realm = try! Realm()
@@ -278,11 +309,11 @@ class SalesFloorMapViewController: UIViewController {
             // customSalesFloorのcustomColorOfSalesFloorRawValueの値から対応する色を取得
             let customSalesFloorColor = CustomSalesFloorColor(rawValue: customSalesFloor.customColorOfSalesFloorRawValue)
             // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
-            if myShoppingItemList.contains(where: { $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue }) {
+            if allShoppingItemList.contains(where: { $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue }) {
                 button?.backgroundColor = customSalesFloorColor?.color
                 button?.isEnabled = true
                 // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
-                if myShoppingItemList.filter({ $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue })
+                if allShoppingItemList.filter({ $0.salesFloorRawValue == customSalesFloor.customSalesFloorRawValue })
                     .allSatisfy({ $0.isCheckBox }) {
                     button?.backgroundColor = UIColor.white
                     button?.isEnabled = false
@@ -307,11 +338,11 @@ class SalesFloorMapViewController: UIViewController {
             button?.setTitle(salesFloor.nameOfSalesFloor, for: .normal)
 
             // errandDataListにsalesFloorRawValueに該当するものがある場合は、背景色を設定、ボタンを有効にする
-            if myShoppingItemList.contains(where: { $0.salesFloorRawValue == salesFloor.rawValue }) {
+            if allShoppingItemList.contains(where: { $0.salesFloorRawValue == salesFloor.rawValue }) {
                 button?.backgroundColor = salesFloor.colorOfSalesFloor
                 button?.isEnabled = true
                 // お使いデータに存在する売り場データを持っているものの中で、全てのisCheckBoxがtrueであった場合は無効化にする
-                if myShoppingItemList.filter({ $0.salesFloorRawValue == salesFloor.rawValue })
+                if allShoppingItemList.filter({ $0.salesFloorRawValue == salesFloor.rawValue })
                     .allSatisfy({ $0.isCheckBox }) {
                     button?.backgroundColor = UIColor.white
                     button?.isEnabled = false

@@ -18,14 +18,23 @@ final class FirestoreManager {
     /// Firestoreのインスタン化
     private let db = Firestore.firestore()
 
-    /// 自分のshoppingItemコレクションのリスナー
-     internal var shoppingListMyItemListener: ListenerRegistration?
-
-     internal var salesFloorMapMyItemListener: ListenerRegistration?
-
+    /// 自分のshoppingItemコレクションのshoppingListView専用リスナー
+    internal var shoppingListMyItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのsalesFloorMapView専用リスナー
+    internal var salesFloorMapMyItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのsalesFloorShoppingListView専用リスナー
     internal var salesFloorShoppingListMyItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのeditShoppingListView専用リスナー
+    internal var editShoppingListMyItemListener: ListenerRegistration?
 
-     internal var editShoppingListMyItemListener: ListenerRegistration?
+    /// 共有者のshoppingItemコレクションのsalesFloorMapView専用リスナー
+    internal var shoppingListOtherItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのsalesFloorMapView専用リスナー
+    internal var salesFloorMapOtherItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのsalesFloorShoppingListView専用リスナー
+    internal var salesFloorShoppingListOtherItemListener: ListenerRegistration?
+    /// 自分のshoppingItemコレクションのeditShoppingListView専用リスナー
+    internal var editShoppingListOtherItemListener: ListenerRegistration?
 
     /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
@@ -109,7 +118,8 @@ final class FirestoreManager {
 extension FirestoreManager {
 
     /// 自分が作成した買い物リストへの変更を監視する
-    internal func getShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,completion: @escaping ([ShoppingItemModel]) -> Void) {
+    internal func getMyShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,
+                                            completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
         listener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
             .addSnapshotListener { (querySnapshot, error) in
@@ -132,10 +142,66 @@ extension FirestoreManager {
             }
     }
 
-    /// 自分が作成した買い物リストへの変更を監視する
-    internal func getShoppingItemObserverSearchSalesFloor(uid: String, salesFloorRawValue: Int,completion: @escaping ([ShoppingItemModel]) -> Void) {
+    /// 共有者が作成した買い物リストへの変更を監視する
+    internal func getOtherShoppingItemObserver(listener: inout ListenerRegistration?,
+                                               uid: String,
+                                               completion: @escaping ([ShoppingItemModel]) -> Void) {
+        // 自分が作成した買い物商品のリスナーをセット
+        listener = db.collection(Collection.shoppingItem.path).whereField(Field.sharedUsers.path, arrayContains: uid)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard  let querySnapshot else { return }
+                // データをShoppingItemModelにマッピング
+                let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
+                    let data = item.data()
+                    return ShoppingItemModel(id: item.documentID,
+                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
+                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
+                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
+                                             unit: data[Field.unit.path] as? String ?? "",
+                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
+                                             supplement: data[Field.supplement.path] as? String ?? "",
+                                             photoURL: data[Field.photoURL.path] as? String ?? "",
+                                             owner: data[Field.owner.path] as? String ?? "",
+                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                }
+                completion(myShoppingItemList)
+            }
+    }
+
+    /// 自分が作成した買い物リストへの変更を監視するsalesFloorShoppingListView専用
+    internal func getMyShoppingItemObserverSearchSalesFloor(uid: String,
+                                                            salesFloorRawValue: Int,
+                                                            completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
         salesFloorShoppingListMyItemListener = db.collection(Collection.shoppingItem.path)
+            .whereField(Field.sharedUsers.path, arrayContains: uid)
+            .whereField(Field.salesFloorRawValue.path, isEqualTo: salesFloorRawValue)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard  let querySnapshot else { return }
+                // データをShoppingItemModelにマッピング
+                let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
+                    let data = item.data()
+                    return ShoppingItemModel(id: item.documentID,
+                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
+                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
+                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
+                                             unit: data[Field.unit.path] as? String ?? "",
+                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
+                                             supplement: data[Field.supplement.path] as? String ?? "",
+                                             photoURL: data[Field.photoURL.path] as? String ?? "",
+                                             owner: data[Field.owner.path] as? String ?? "",
+                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                }
+                completion(myShoppingItemList)
+            }
+    }
+
+    /// 自分が作成した買い物リストへの変更を監視するsalesFloorShoppingListView専用
+    internal func getOtherShoppingItemObserverSearchSalesFloor(uid: String,
+                                                            salesFloorRawValue: Int,
+                                                            completion: @escaping ([ShoppingItemModel]) -> Void) {
+        // 自分が作成した買い物商品のリスナーをセット
+        salesFloorShoppingListOtherItemListener = db.collection(Collection.shoppingItem.path)
             .whereField(Field.owner.path, isEqualTo: uid)
             .whereField(Field.salesFloorRawValue.path, isEqualTo: salesFloorRawValue)
             .addSnapshotListener { (querySnapshot, error) in
@@ -157,6 +223,7 @@ extension FirestoreManager {
                 completion(myShoppingItemList)
             }
     }
+
     /// 自分の買い物リストの監視を解除
     internal func removeShoppingItemObserver(listener: inout ListenerRegistration?) {
         listener?.remove()
@@ -206,17 +273,10 @@ extension FirestoreManager {
     }
 
     /// 買い物商品のisCheckBoxにチェックを入れた時に書き込む処理
-    internal func upDateItemForIsChecked(id: String?, isChecked: Bool, completion: @escaping () -> Void) {
+    internal func upDateItemForIsChecked(id: String?, isChecked: Bool) async throws {
         guard let id else { return }
-        db.collection(Collection.shoppingItem.path).document(id).updateData([
+        try await db.collection(Collection.shoppingItem.path).document(id).updateData([
             "isCheckBox": isChecked])
-        { err in
-            if err != nil {
-                print("Firestoreへの保存に失敗")
-            } else {
-                print("Firestoreへの保存に成功")
-            }
-        }
     }
     // ドキュメントを削除する
     internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
