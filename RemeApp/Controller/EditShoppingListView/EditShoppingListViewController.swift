@@ -366,7 +366,7 @@ class EditShoppingListViewController: UIViewController {
     }
 
     /// 複数削除の時のFirebase関連削除処理
-    func deleteFirebase() {
+    private func deleteFirebase() {
         // 削除対象の配列全てにアクセス
         deleteShoppingItem.forEach { target in
             guard let id = target.id else { return }

@@ -84,7 +84,7 @@ final class FirestoreManager {
             userDocRer.getDocument { (documentSnapshot, error) in
                 // 該当のドキュメントがnilだったらエラーをスローして終了
                 guard let documentSnapshot else {
-                    continuation.resume(throwing: error ?? FirestoreError.unknown)
+                    continuation.resume(returning: "アカウントが存在しません")
                     return
                 }
                 // ドキュメントに登録されたnameを取得

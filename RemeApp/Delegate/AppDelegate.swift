@@ -55,7 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Task { @MainActor in
                 do {
                     try await AccountManager.shared.signInAnonymity()
-   
+                    // 現在のuidを取得
+                    let uid = AccountManager.shared.getAuthStatus()
+                    // 匿名認証用のusersデータ作成
+                    try await FirestoreManager.shared.createUsers(
+                        name: "",
+                        email: "",
+                        password: "",
+                        uid: uid)
                 } catch {
                         print("失敗")
                     }
