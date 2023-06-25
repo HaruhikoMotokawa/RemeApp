@@ -196,7 +196,7 @@ extension FirestoreManager {
             }
     }
 
-    /// 自分が作成した買い物リストへの変更を監視するsalesFloorShoppingListView専用
+    /// 共有者が作成した買い物リストへの変更を監視するsalesFloorShoppingListView専用
     internal func getOtherShoppingItemObserverSearchSalesFloor(uid: String,
                                                             salesFloorRawValue: Int,
                                                             completion: @escaping ([ShoppingItemModel]) -> Void) {
@@ -207,7 +207,7 @@ extension FirestoreManager {
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
-                let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
+                let otherShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
                                              isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
@@ -220,7 +220,7 @@ extension FirestoreManager {
                                              owner: data[Field.owner.path] as? String ?? "",
                                              sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
                 }
-                completion(myShoppingItemList)
+                completion(otherShoppingItemList)
             }
     }
 
@@ -232,15 +232,16 @@ extension FirestoreManager {
     /// 新規作成した買い物の商品を保存
     internal func addItem(uid: String, addItem: ShoppingItemModel) {
         db.collection(Collection.shoppingItem.path).addDocument(data: [
-            "isCheckBox": addItem.isCheckBox ,
-            "nameOfItem": addItem.nameOfItem ,
-            "numberOfItem": addItem.numberOfItem ,
-            "unit":addItem.unit ,
-            "salesFloorRawValue": addItem.salesFloorRawValue ,
-            "supplement": addItem.supplement ,
-            "photoURL": addItem.photoURL ,
-            "owner": addItem.owner,
-            "sharedUsers": addItem.sharedUsers])
+            Field.isCheckBox.path: addItem.isCheckBox ,
+            Field.nameOfItem.path: addItem.nameOfItem ,
+            Field.numberOfItem.path: addItem.numberOfItem ,
+            Field.unit.path:addItem.unit ,
+            Field.salesFloorRawValue.path: addItem.salesFloorRawValue ,
+            Field.supplement.path: addItem.supplement ,
+            Field.photoURL.path: addItem.photoURL ,
+            Field.owner.path: addItem.owner,
+            Field.sharedUsers.path: addItem.sharedUsers,
+            Field.date.path: Date()])
         { err in
             if err != nil {
                 print("Firestoreへの保存に失敗")
@@ -251,18 +252,17 @@ extension FirestoreManager {
     }
 
     /// 編集した買い物商品を保存
-    internal func upDateItem(uid: String, addItem: ShoppingItemModel) {
+    internal func upDateItem(addItem: ShoppingItemModel) {
         guard let id = addItem.id else { return }
         db.collection(Collection.shoppingItem.path).document(id).updateData([
-            "isCheckBox": addItem.isCheckBox ,
-            "nameOfItem": addItem.nameOfItem ,
-            "numberOfItem": addItem.numberOfItem ,
-            "unit":addItem.unit ,
-            "salesFloorRawValue": addItem.salesFloorRawValue ,
-            "supplement": addItem.supplement ,
-            "photoURL": addItem.photoURL ,
-            "owner": addItem.owner,
-            "sharedUsers": addItem.sharedUsers])
+            Field.isCheckBox.path: addItem.isCheckBox ,
+            Field.nameOfItem.path: addItem.nameOfItem ,
+            Field.numberOfItem.path: addItem.numberOfItem ,
+            Field.unit.path:addItem.unit ,
+            Field.salesFloorRawValue.path: addItem.salesFloorRawValue ,
+            Field.supplement.path: addItem.supplement ,
+            Field.photoURL.path: addItem.photoURL ,
+            Field.date.path: Date()])
         { err in
             if err != nil {
                 print("Firestoreへの保存に失敗")
@@ -276,7 +276,14 @@ extension FirestoreManager {
     internal func upDateItemForIsChecked(id: String?, isChecked: Bool) async throws {
         guard let id else { return }
         try await db.collection(Collection.shoppingItem.path).document(id).updateData([
-            "isCheckBox": isChecked])
+            Field.isCheckBox.path: isChecked])
+    }
+
+    /// 既存の買い物商品のsharedUsersフィールドに共有者を追加で設定する
+    internal func upDateItemForSharedUsers(documentID: String?, sharedUsersUid: [String]) async throws {
+        guard let documentID else { return }
+        try await db.collection(Collection.shoppingItem.path).document(documentID).updateData([
+            Field.sharedUsers.path: sharedUsersUid])
     }
     // ドキュメントを削除する
     internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
@@ -289,6 +296,18 @@ extension FirestoreManager {
                 completion(nil)
             }
         }
+    }
+
+    // 自分の作成した買い物リストを取得して返却する
+    internal func getMyShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
+        let collectionRef = db.collection(Collection.shoppingItem.path)
+        let querySnapshot = try await collectionRef.whereField(Field.owner.path, isEqualTo: uid).getDocuments()
+        print("⭕️querySnapshot: \(querySnapshot)")
+        let itemList = querySnapshot.documents.compactMap { document in
+            try? document.data(as: ShoppingItemModel.self)
+        }
+        print("🟡itemList: \(itemList)")
+        return itemList
     }
 
     
@@ -328,6 +347,7 @@ enum Field {
     case photoURL
     case owner
     case sharedUsers
+    case date
 
     ///パスを返却
     var path: String {
@@ -352,6 +372,8 @@ enum Field {
                 return "owner"
             case .sharedUsers:
                 return "sharedUsers"
+            case .date:
+                return "date"
         }
     }
 }

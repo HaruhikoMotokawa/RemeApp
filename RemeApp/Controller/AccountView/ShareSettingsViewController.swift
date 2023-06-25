@@ -35,7 +35,8 @@ class ShareSettingsViewController: UIViewController {
 
     /// 追加ボタン
     @IBOutlet private weak var addButton: UIButton!
-
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
     
     // MARK: - viewDidLoad
 
@@ -86,11 +87,23 @@ class ShareSettingsViewController: UIViewController {
                 let uid = AccountManager.shared.getAuthStatus()
                 // 入力したuidのチェックと追加処理
                 try await FirestoreManager.shared.addSharedUsers(inputUid: inputUid, uid: uid)
+                // 現在作成済みの自分の買い物リストを取得
+                myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
+                // 取得した自分の買い物リストの全てにinputUidを追加する
+                let updateItemList = myShoppingItemList.map { item -> ShoppingItemModel in
+                    var newItem = item
+                    newItem.sharedUsers.append(inputUid)
+                    return newItem
+                }
+                // 取得した買い物リストの全てのsharedUsersにinputUidを追加
+                for item in updateItemList {
+                    try await FirestoreManager.shared.upDateItemForSharedUsers(
+                        documentID: item.id, sharedUsersUid: item.sharedUsers)
+                }
                 // 共有者のラベルを更新
                 await setSharedUsers()
                 // uidの入力欄を空白に戻す
                 self.inputUIDTextField.text = nil
-
                 // 完了のアラート
                 AlertController.showAlert(tittle: "完了", errorMessage: "登録しました")
             } catch FirestoreError.notFound {
@@ -191,6 +204,19 @@ class ShareSettingsViewController: UIViewController {
                     sharedUsers.remove(at: deleteNumber)
                     // sharedUsersを上書き
                     try await FirestoreManager.shared.upData(uid: uid, shardUsers: sharedUsers)
+                    // 現在作成済みの自分の買い物リストを取得
+                    self.myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
+                    // 買い物リストから削除対象のuidを削除
+                    let updateItemList = self.myShoppingItemList.map { item -> ShoppingItemModel in
+                        var newItem = item
+                        newItem.sharedUsers.remove(at: deleteNumber)
+                        return newItem
+                    }
+                    // 取得した買い物リストの全てのsharedUsersにinputUidを追加
+                    for item in updateItemList {
+                        try await FirestoreManager.shared.upDateItemForSharedUsers(
+                            documentID: item.id, sharedUsersUid: item.sharedUsers)
+                    }
                     // ラベルの更新
                     await self.setSharedUsers()
                     AlertController.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")

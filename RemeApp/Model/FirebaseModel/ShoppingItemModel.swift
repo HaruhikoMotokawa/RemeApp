@@ -14,21 +14,21 @@ struct ShoppingItemModel: Codable {
     /// 買い物のID
     @DocumentID var id: String?
     /// 購入判定
-    var isCheckBox: Bool
+    var isCheckBox: Bool = false
     /// 商品名
-    var nameOfItem: String
+    var nameOfItem: String = ""
     /// 購入数
-    var numberOfItem: String
+    var numberOfItem: String = ""
     /// 単位
-    var unit: String
+    var unit: String = ""
     /// 売り場の番号
-    var salesFloorRawValue: Int
+    var salesFloorRawValue: Int = 0
     /// 補足
     var supplement = String()
     /// 写真が保存されているCloudStorageのダウンロードURL
-    var photoURL:String
+    var photoURL:String = ""
     /// このリストの作成者のuid
-    var owner: String
+    var owner: String = ""
     /// このリストの共有者
     var sharedUsers = [String]()
     /// 作成日時

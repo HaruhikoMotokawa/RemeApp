@@ -390,7 +390,7 @@ extension EditItemViewController {
                 await saveData()
             } else {
                 print("🔴編集した内容を保存開始")
-                await upDateData()
+                upDateData()
             }
         }
     }
@@ -448,55 +448,48 @@ extension EditItemViewController {
     }
 
     /// 編集したデータの保存処理
-    private func upDateData() async {
-        do {
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-            // ログイン中のユーザーのuidを取得
-            let uid = AccountManager.shared.getAuthStatus()
-            // ユーザー共有者のuidを取得
-            let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
-            print("写真のアップロードとFirestoreの保存処理を開始")
-            // 写真をアップロードして、ダウンロードURLを取得
-            // 非同期処理でawaitついてないからコールバック関数で対応
-            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
-                                                          image: photoPathImageView.image,
-                                                          completion: { [weak self] photoURL in
+    private func upDateData() {
+
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+        // numberOfItemPickerViewで選択された値を取得
+        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+        // ログイン中のユーザーのuidを取得
+        let uid = AccountManager.shared.getAuthStatus()
+
+        print("写真のアップロードとFirestoreの保存処理を開始")
+        // 写真をアップロードして、ダウンロードURLを取得
+        // 非同期処理でawaitついてないからコールバック関数で対応
+        StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
+                                                      image: photoPathImageView.image,
+                                                      completion: { [weak self] photoURL in
+            guard let self else { return }
+            guard let photoURL else {
+                print("URLの取得に失敗")
+                AlertController.showAlert(tittle: "エラー",
+                                          errorMessage: "写真の保存に失敗したため、中断しました")
+                return
+            }
+            // 保存するリストを作成
+            let addItem:ShoppingItemModel = ShoppingItemModel(
+                id: self.id,
+                isCheckBox: false,
+                nameOfItem: self.nameOfItemTextField.text!,
+                numberOfItem: selectedNumberOfItem,
+                unit: selectedUnit,
+                salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                supplement: self.supplementTextView.text ?? "",
+                photoURL: photoURL)
+
+            // データベースに編集内容を保存
+            FirestoreManager.shared.upDateItem(addItem: addItem)
+            // メインスレッドで実行を宣言
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                guard let photoURL else {
-                    print("URLの取得に失敗")
-                    AlertController.showAlert(tittle: "エラー",
-                                              errorMessage: "写真の保存に失敗したため、中断しました")
-                    return
-                }
-                // 保存するリストを作成
-                let addItem:ShoppingItemModel = ShoppingItemModel(
-                    id: self.id,
-                    isCheckBox: false,
-                    nameOfItem: self.nameOfItemTextField.text!,
-                    numberOfItem: selectedNumberOfItem,
-                    unit: selectedUnit,
-                    salesFloorRawValue: self.selectedSalesFloorRawValue!,
-                    supplement: self.supplementTextView.text ?? "",
-                    photoURL: photoURL,
-                    owner: uid,
-                    sharedUsers: sharedUsers)
-                // データベースに編集内容を保存
-                FirestoreManager.shared.upDateItem(uid: uid, addItem: addItem)
-                // メインスレッドで実行を宣言
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    // 全ての処理が終わったら画面を閉じる
-                    self.dismiss(animated: true)
-                }
-            })
-        } catch let error {
-            let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-            AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
-            print(error)
-        }
+                // 全ての処理が終わったら画面を閉じる
+                self.dismiss(animated: true)
+            }
+        })
     }
 
     /// 保存の処理(Realm)
@@ -660,8 +653,6 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
                 }
             } else {
                 print("🔴編集中の写真を削除開始")
-//                // uidを取得
-//                let uid = AccountManager.shared.getAuthStatus()
                 // 写真を削除
                 StorageManager.shared.deletePhoto(photoURL: photoURL) { [weak self] error in
                     guard let self else { return }
