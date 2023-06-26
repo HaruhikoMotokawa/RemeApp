@@ -36,7 +36,7 @@ final class FirestoreManager {
     /// 自分のshoppingItemコレクションのeditShoppingListView専用リスナー
     internal var editShoppingListOtherItemListener: ListenerRegistration?
 
-    /// 自身のuidを元に登録したユーザー情報を取得してUserDataModelで返却するメソッド
+    /// 自身のuidを元に登録した自分のユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
     internal func getUserInfo(uid: String) async throws -> UserDataModel? {
@@ -47,6 +47,23 @@ final class FirestoreManager {
         return document
     }
 
+    /// 自身のuidを共有者に登録している他のユーザーの情報をUserDataModelでリストにして返却するメソッド
+    /// - 非同期処理のためasyncキーワードつける
+    /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
+    internal func getUsersList(deleteUid: String) async throws -> [UserDataModel] {
+        // コレクションの参照先を定義
+        let collectionRef = db.collection(Collection.users.path)
+        // deleteUidを登録している対象のユーザードキュメントを抽出
+        let querySnapshot = try await collectionRef.whereField(Field.sharedUsers.path, arrayContains: deleteUid).getDocuments()
+        // 非同期処理であるFirestoreへのアクセスにより、ユーザー情報をUserDataModelに変換して定数に入れる
+        let usersList = querySnapshot.documents.compactMap { document in
+            try? document.data(as: UserDataModel.self)
+        }
+        print("Firestoreからデータ取得成功")
+        // UserDataModelで格納した値を返却
+        return usersList
+    }
+
     /// ユーザー情報を新規作成するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
@@ -55,6 +72,7 @@ final class FirestoreManager {
         let user = UserDataModel(name: name, email: email, password: password)
         // userを元にFirestoreに保存実行
         try db.collection(Collection.users.path).document(uid).setData(from: user)
+        print("ユーザー情報を新規作成")
     }
 
     /// ユーザー情報を削除するメソッド
@@ -98,12 +116,13 @@ final class FirestoreManager {
     /// 共有者を更新するメソッド
     /// - 主に削除に使用
     /// - 削除する登録者を抜いた配列を引数のshardUsersに代入
-    func upData(uid: String, shardUsers: [String]) async throws {
-        try await db.collection(Collection.users.path).document(uid).updateData([Field.sharedUsers.path:shardUsers])
+    internal func upData(uid documentID: String?, shardUsers: [String]) async throws {
+        guard let documentID else { return }
+        try await db.collection(Collection.users.path).document(documentID).updateData([Field.sharedUsers.path:shardUsers])
     }
 
     // 共有者を追加するメソッド
-    func addSharedUsers(inputUid: String, uid: String) async throws {
+    internal func addSharedUsers(inputUid: String, uid: String) async throws {
         let userRef = db.collection(Collection.users.path)
         let inputUserQuery = userRef.whereField(FieldPath.documentID(), isEqualTo: inputUid)
         let querySnapshot = try await inputUserQuery.getDocuments()
@@ -273,9 +292,9 @@ extension FirestoreManager {
     }
 
     /// 買い物商品のisCheckBoxにチェックを入れた時に書き込む処理
-    internal func upDateItemForIsChecked(id: String?, isChecked: Bool) async throws {
-        guard let id else { return }
-        try await db.collection(Collection.shoppingItem.path).document(id).updateData([
+    internal func upDateItemForIsChecked(documentID: String?, isChecked: Bool) async throws {
+        guard let documentID else { return }
+        try await db.collection(Collection.shoppingItem.path).document(documentID).updateData([
             Field.isCheckBox.path: isChecked])
     }
 
@@ -285,6 +304,7 @@ extension FirestoreManager {
         try await db.collection(Collection.shoppingItem.path).document(documentID).updateData([
             Field.sharedUsers.path: sharedUsersUid])
     }
+
     // ドキュメントを削除する
     internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
         db.collection(Collection.shoppingItem.path).document(id).delete() { error in
@@ -298,10 +318,20 @@ extension FirestoreManager {
         }
     }
 
-    // 自分の作成した買い物リストを取得して返却する
+    /// 自分の作成した買い物リストを取得して返却する
     internal func getMyShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
         let collectionRef = db.collection(Collection.shoppingItem.path)
         let querySnapshot = try await collectionRef.whereField(Field.owner.path, isEqualTo: uid).getDocuments()
+        let itemList = querySnapshot.documents.compactMap { document in
+            try? document.data(as: ShoppingItemModel.self)
+        }
+        return itemList
+    }
+
+    /// 自分を共有設定して作った買い物リストを取得して返却する
+    internal func getOtherShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
+        let collectionRef = db.collection(Collection.shoppingItem.path)
+        let querySnapshot = try await collectionRef.whereField(Field.sharedUsers.path, arrayContains: uid).getDocuments()
         print("⭕️querySnapshot: \(querySnapshot)")
         let itemList = querySnapshot.documents.compactMap { document in
             try? document.data(as: ShoppingItemModel.self)
@@ -309,8 +339,6 @@ extension FirestoreManager {
         print("🟡itemList: \(itemList)")
         return itemList
     }
-
-    
 }
 
 /// コレクションのパスを管理

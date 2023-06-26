@@ -38,6 +38,37 @@ extension UIButton {
         self.titleLabel?.numberOfLines = 1
     }
 
+    /// AccountView専用UIButtonの装飾基本設定
+    /// - 文字色を黒に設定
+    /// - フォントをボールドにサイズを１７に設定
+    /// - 枠線の幅を１で設定
+    /// - 枠線のカラーを黒に設定
+    /// - バックグラウンドを角丸１０に設定
+    /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
+    /// - ラベルの自動調整の際に縮小率を0.５に設定
+    /// - ラベルの自動調整の際に必ず１行になるように設定
+    /// - 背景色を引数で変更
+    func setAppearanceForAccountView(backgroundColor: UIColor) {
+        // 文字色を黒に設定
+        self.setTitleColor(.black, for: .normal)
+        // フォントをボールド、サイズを１７に設定
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+        // 枠線の幅を１で設定
+        self.layer.borderWidth = 1
+        // 枠線のカラーを黒に設定
+        self.layer.borderColor = UIColor.black.cgColor
+        // バックグラウンドを角丸１０に設定
+        self.layer.cornerRadius = 10.0
+        // ラベルのテキストをボタンの幅に合わせて自動的に調整
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        // ラベルの自動調整の際に縮小率を0.５に設定
+        self.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
+        // ラベルの自動調整の際に必ず１行になるように設定
+        self.titleLabel?.numberOfLines = 1
+
+        self.backgroundColor = backgroundColor
+    }
+
     /// UIButtonに影をつけるメソッド
     ///- 影の色を黒に設定
     ///- 影の透明度を0.５に設定

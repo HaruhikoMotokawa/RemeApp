@@ -310,7 +310,7 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         Task { @MainActor in
             // FirestoreにisCheckedだけ書き込み
             do {
-                try await FirestoreManager.shared.upDateItemForIsChecked(id: targetID, isChecked: isChecked)
+                try await FirestoreManager.shared.upDateItemForIsChecked(documentID: targetID, isChecked: isChecked)
             } catch {
                 print("エラー")
             }

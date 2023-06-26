@@ -212,7 +212,7 @@ class ShareSettingsViewController: UIViewController {
                         newItem.sharedUsers.remove(at: deleteNumber)
                         return newItem
                     }
-                    // 取得した買い物リストの全てのsharedUsersにinputUidを追加
+                    // 買い物リストの全てのsharedUsersに削除後のデータをFirestoreに上書きする
                     for item in updateItemList {
                         try await FirestoreManager.shared.upDateItemForSharedUsers(
                             documentID: item.id, sharedUsersUid: item.sharedUsers)
