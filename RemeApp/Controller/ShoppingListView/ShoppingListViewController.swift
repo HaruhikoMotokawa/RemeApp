@@ -31,6 +31,7 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+     
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -244,14 +245,6 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         if let cell = shoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
-//            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
-//            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
-//                                 nameOfItem: errandDataModel.nameOfItem,
-//                                 numberOfItem: errandDataModel.numberOfItem,
-//                                 unit: errandDataModel.unit,
-//                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
-//                                 supplement: errandDataModel.supplement,
-//                                 image: errandDataModel.getImage())
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
             cell.setShoppingList(isCheckBox: myData.isCheckBox,
@@ -261,7 +254,17 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
                                  image: setImage )
-
+//            StorageManager.shared.setDownloadImage(photoURL: myData.photoURL) { image in
+//                DispatchQueue.main.async {
+//                    cell.setShoppingList(isCheckBox: myData.isCheckBox,
+//                                         nameOfItem: myData.nameOfItem,
+//                                         numberOfItem: myData.numberOfItem,
+//                                         unit: myData.unit,
+//                                         salesFloorRawValue: myData.salesFloorRawValue,
+//                                         supplement: myData.supplement,
+//                                         image: image )
+//                }
+//            }
             return cell
         }
         return UITableViewCell()

@@ -332,11 +332,9 @@ extension FirestoreManager {
     internal func getOtherShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
         let collectionRef = db.collection(Collection.shoppingItem.path)
         let querySnapshot = try await collectionRef.whereField(Field.sharedUsers.path, arrayContains: uid).getDocuments()
-        print("⭕️querySnapshot: \(querySnapshot)")
         let itemList = querySnapshot.documents.compactMap { document in
             try? document.data(as: ShoppingItemModel.self)
         }
-        print("🟡itemList: \(itemList)")
         return itemList
     }
 }

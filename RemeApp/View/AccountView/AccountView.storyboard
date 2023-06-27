@@ -186,21 +186,16 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accountDeleteButton" destination="Qmd-94-lUg" id="uD8-2w-3vD"/>
-                        <outlet property="accountStackView" destination="dR0-qB-9rw" id="w3u-2A-K2L"/>
                         <outlet property="createAccountButton" destination="GkQ-x1-rwg" id="uNa-AI-EfM"/>
                         <outlet property="displaySwitchButton" destination="vHU-dO-dko" id="Wl1-eY-WsR"/>
                         <outlet property="mailLabel" destination="KND-U5-x0M" id="QAb-XC-bDV"/>
-                        <outlet property="mailStackView" destination="Kbf-Qn-rje" id="BGi-gp-Bhg"/>
                         <outlet property="nameLabel" destination="ARn-09-jCs" id="olq-ys-iKZ"/>
                         <outlet property="passwordLabel" destination="Mxh-Vv-QYL" id="Knt-nL-jXj"/>
-                        <outlet property="passwordStackView" destination="Lpp-Yk-mhQ" id="ZbI-27-naC"/>
                         <outlet property="sherdUsersSettingsButton" destination="uSE-7l-AzU" id="n9Y-qY-LLe"/>
                         <outlet property="signInButton" destination="6oi-NK-81z" id="9RX-JH-Mrh"/>
                         <outlet property="signOutButton" destination="wuK-yV-sIp" id="GTS-C2-zVd"/>
                         <outlet property="uidCopyButton" destination="CJQ-sv-cBz" id="hB7-4T-fQS"/>
                         <outlet property="uidLabel" destination="Fp4-D3-dOX" id="5x6-6k-U4W"/>
-                        <outlet property="uidStackView" destination="ILq-Jn-c4X" id="v4Z-8O-gkH"/>
-                        <outlet property="useerInfoStackView" destination="SQy-mr-SL9" id="Mn1-As-2qF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

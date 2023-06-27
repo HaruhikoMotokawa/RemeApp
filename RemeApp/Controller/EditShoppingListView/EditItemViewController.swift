@@ -449,7 +449,6 @@ extension EditItemViewController {
 
     /// 編集したデータの保存処理
     private func upDateData() {
-
         // numberOfItemPickerViewで選択された値を取得
         let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
         // numberOfItemPickerViewで選択された値を取得

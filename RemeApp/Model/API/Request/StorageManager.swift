@@ -69,6 +69,25 @@ final class StorageManager {
         }
     }
 
+    /// ダウンロードURLからUIImageに変換
+    internal func setDownloadImage(photoURL: String, completion: @escaping (UIImage?) -> Void) {
+        guard let imageUrl = URL(string: photoURL) else {
+            completion(nil)
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+            guard let data, error == nil else {
+                completion(nil)
+                print(error ?? "不明なエラー")
+                return
+            }
+            let setImage = UIImage(data: data)
+            completion(setImage)
+        }
+        task.resume()
+    }
+
     /// 写真をStorageから削除
     internal func deletePhoto(photoURL: String, completion: ((Error?) -> Void)? = nil) {
         print("ダウンロードURL：　\(photoURL)")
@@ -81,4 +100,9 @@ final class StorageManager {
             completion?(error)
         }
     }
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case invalidData
 }

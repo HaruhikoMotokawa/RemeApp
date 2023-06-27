@@ -103,7 +103,8 @@ class ShareSettingsViewController: UIViewController {
                 // 共有者のラベルを更新
                 await setSharedUsers()
                 // uidの入力欄を空白に戻す
-                self.inputUIDTextField.text = nil
+                inputUIDTextField.text = ""
+                setAddButton()
                 // 完了のアラート
                 AlertController.showAlert(tittle: "完了", errorMessage: "登録しました")
             } catch FirestoreError.notFound {
@@ -134,9 +135,12 @@ class ShareSettingsViewController: UIViewController {
         // uidが入力されている場合、追加ボタンを有効化
         if inputUIDTextField.text?.isEmpty == false {
             addButton.isEnabled = true
+            addButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            addButton.addShadow()
         } else {
             // 全て入力されていなれば無効化
             addButton.isEnabled = false
+            addButton.setAppearanceForAccountView(backgroundColor: .white)
         }
     }
 
@@ -178,6 +182,8 @@ class ShareSettingsViewController: UIViewController {
             firstDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.one.numberOfRegistrations
             secondDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.two.numberOfRegistrations
             thirdDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.three.numberOfRegistrations
+            // 登録者数によって見た目を変更
+            setDeleteButton(count: sharedUsers.count)
             print(sharedUsers)
         } catch let error {
             print("\(error)")
@@ -221,7 +227,6 @@ class ShareSettingsViewController: UIViewController {
                     await self.setSharedUsers()
                     AlertController.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
                 } catch let error {
-                    guard let self else { return }
                     print("エラー")
                     let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                     AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
@@ -231,6 +236,31 @@ class ShareSettingsViewController: UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
         present(alert, animated: true)
+    }
+
+    /// 共有登録者数によってボタンの見た目を変える
+    private func setDeleteButton(count: Int) {
+        if count >= 0 {
+            firstDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+            secondDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+            thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+        }
+
+        if count >= SharedUsers.one.numberOfRegistrations {
+            firstDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            firstDeleteButton.addShadow()
+        }
+
+        if count >= SharedUsers.two.numberOfRegistrations {
+            secondDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            secondDeleteButton.addShadow()
+        }
+
+        if count >= SharedUsers.three.numberOfRegistrations {
+            thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            thirdDeleteButton.addShadow()
+        }
+
     }
 
 }

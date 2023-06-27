@@ -23,17 +23,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-8T-K7J" userLabel="全体">
-                                <rect key="frame" x="10" y="70.5" width="355" height="408"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-8T-K7J" userLabel="全体">
+                                <rect key="frame" x="10" y="70.5" width="355" height="546.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="6MU-zF-bxc" userLabel="共有インフォ">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="219"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6MU-zF-bxc" userLabel="共有インフォ">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="342"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="119" translatesAutoresizingMaskIntoConstraints="NO" id="1oQ-qe-VqP" userLabel="共有①">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="65"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1oQ-qe-VqP" userLabel="共有①">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="100.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="8Jc-b9-BXE" userLabel="共有①ラベル">
-                                                        <rect key="frame" x="0.0" y="0.0" width="142.5" height="65"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Jc-b9-BXE" userLabel="共有①ラベル">
+                                                        <rect key="frame" x="0.0" y="23.5" width="288" height="53.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント①" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-e1-ffB">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
@@ -42,28 +42,28 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cn-Ee-U00">
-                                                                <rect key="frame" x="0.0" y="44.5" width="69.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="77.5" height="23"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-kX-tCG">
-                                                        <rect key="frame" x="261.5" y="30.5" width="93.5" height="34.5"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <rect key="frame" x="293" y="35.5" width="62" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="共有解除"/>
                                                         <connections>
                                                             <action selector="deleteFirstSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Mk4-eK-eko"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="zb9-Xg-CbT" userLabel="共有②">
-                                                <rect key="frame" x="0.0" y="89" width="355" height="49"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zb9-Xg-CbT" userLabel="共有②">
+                                                <rect key="frame" x="0.0" y="120.5" width="355" height="101"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FBk-ki-BEm" userLabel="共有②ラベル">
-                                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="49"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FBk-ki-BEm" userLabel="共有②ラベル">
+                                                        <rect key="frame" x="0.0" y="24" width="288" height="53.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント②" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAt-Bo-i9N">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
@@ -72,28 +72,28 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gom-jW-Rx1">
-                                                                <rect key="frame" x="0.0" y="28.5" width="69.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="77.5" height="23"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0o-DP-6FX">
-                                                        <rect key="frame" x="261.5" y="14.5" width="93.5" height="34.5"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <rect key="frame" x="293" y="35.5" width="62" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="共有解除"/>
                                                         <connections>
                                                             <action selector="deleteSecondSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Um9-lC-Rqi"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="115" translatesAutoresizingMaskIntoConstraints="NO" id="LOR-cU-COn" userLabel="共有③">
-                                                <rect key="frame" x="0.0" y="162" width="355" height="57"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LOR-cU-COn" userLabel="共有③">
+                                                <rect key="frame" x="0.0" y="241.5" width="355" height="100.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LFx-tr-zco" userLabel="共有③ラベル">
-                                                        <rect key="frame" x="0.0" y="0.0" width="146.5" height="57"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LFx-tr-zco" userLabel="共有③ラベル">
+                                                        <rect key="frame" x="0.0" y="23.5" width="288" height="53.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウント③" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vaa-lX-2SE">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="20.5"/>
@@ -102,17 +102,17 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pq-jI-UzX">
-                                                                <rect key="frame" x="0.0" y="36.5" width="69.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="77.5" height="23"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fv-WI-T6T">
-                                                        <rect key="frame" x="261.5" y="22.5" width="93.5" height="34.5"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="gray" title="共有解除"/>
+                                                        <rect key="frame" x="293" y="35" width="62" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="共有解除"/>
                                                         <connections>
                                                             <action selector="deleteThirdSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eVc-d6-I0g"/>
                                                         </connections>
@@ -122,7 +122,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lFr-0T-Lo6" userLabel="共有追加">
-                                        <rect key="frame" x="0.0" y="259" width="355" height="74.5"/>
+                                        <rect key="frame" x="0.0" y="392" width="355" height="74.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有アカウントの追加" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiq-SS-Xd6">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
@@ -130,7 +130,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3OL-qI-y7C" userLabel="UID入力">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3OL-qI-y7C" userLabel="UID入力">
                                                 <rect key="frame" x="0.0" y="40.5" width="355" height="34"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザーID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwa-0Q-iSf">
@@ -140,7 +140,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iah-HW-wkd">
-                                                        <rect key="frame" x="95.5" y="0.0" width="259.5" height="34"/>
+                                                        <rect key="frame" x="90.5" y="0.0" width="264.5" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -149,14 +149,22 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1a-Nu-pKj">
-                                        <rect key="frame" x="0.0" y="373.5" width="355" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="追加"/>
+                                        <rect key="frame" x="10" y="516.5" width="335" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="追加"/>
                                         <connections>
                                             <action selector="addSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hnh-zP-yM2"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="p1a-Nu-pKj" secondAttribute="trailing" constant="10" id="MUW-I1-dwj"/>
+                                    <constraint firstAttribute="trailing" secondItem="lFr-0T-Lo6" secondAttribute="trailing" id="Mb1-Df-nf3"/>
+                                    <constraint firstItem="6MU-zF-bxc" firstAttribute="leading" secondItem="XUu-8T-K7J" secondAttribute="leading" id="OE2-jd-shF"/>
+                                    <constraint firstItem="p1a-Nu-pKj" firstAttribute="leading" secondItem="XUu-8T-K7J" secondAttribute="leading" constant="10" id="Plb-K6-hta"/>
+                                    <constraint firstAttribute="trailing" secondItem="6MU-zF-bxc" secondAttribute="trailing" id="ZfM-0C-4uS"/>
+                                    <constraint firstItem="lFr-0T-Lo6" firstAttribute="leading" secondItem="XUu-8T-K7J" secondAttribute="leading" id="b5l-8a-OGK"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -164,6 +172,7 @@
                         <constraints>
                             <constraint firstItem="XUu-8T-K7J" firstAttribute="top" secondItem="dfQ-8p-0qp" secondAttribute="bottom" constant="20" id="9j7-yN-B6Y"/>
                             <constraint firstItem="dfQ-8p-0qp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="D5z-zC-dZk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="XUu-8T-K7J" secondAttribute="bottom" constant="50" id="KM6-mL-73O"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XUu-8T-K7J" secondAttribute="trailing" constant="10" id="e41-CI-2ZA"/>
                             <constraint firstItem="XUu-8T-K7J" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="qbw-iB-cVB"/>
                             <constraint firstItem="dfQ-8p-0qp" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="rCy-lt-nmP"/>

@@ -14,10 +14,8 @@ class SignInViewController: UIViewController {
 
     /// メールアドレス入力
     @IBOutlet private weak var inputMailTextField: UITextField!
-
     /// パスワード入力
     @IBOutlet private weak var inputPasswordTextField: UITextField!
-
     /// ログインボタン
     @IBOutlet private weak var signInButton: UIButton!
 
@@ -62,9 +60,12 @@ class SignInViewController: UIViewController {
         if inputMailTextField.text?.isEmpty == false &&
             inputPasswordTextField.text?.isEmpty == false {
             signInButton.isEnabled = true
+            signInButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            signInButton.addShadow()
         } else {
             // 全て入力されていなれば無効化
             signInButton.isEnabled = false
+            signInButton.setAppearanceForAccountView(backgroundColor: .white)
         }
     }
 

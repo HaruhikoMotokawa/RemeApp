@@ -15,13 +15,10 @@ class CreateAccountViewController: UIViewController {
 
     /// アカウント名入力
     @IBOutlet private weak var inputAccountTextField: UITextField!
-
     /// メールアドレス入力
     @IBOutlet private weak var inputMailTextField: UITextField!
-
     /// パスワード入力
     @IBOutlet private weak var inputPasswordTextField: UITextField!
-
     /// 作成ボタン
     @IBOutlet private weak var createButton: UIButton!
 
@@ -76,9 +73,12 @@ class CreateAccountViewController: UIViewController {
             inputMailTextField.text?.isEmpty == false &&
             inputPasswordTextField.text?.isEmpty == false {
             createButton.isEnabled = true
+            createButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            createButton.addShadow()
         } else {
             // 全て入力されていなれば無効化
             createButton.isEnabled = false
+            createButton.setAppearanceForAccountView(backgroundColor: .white)
         }
     }
 

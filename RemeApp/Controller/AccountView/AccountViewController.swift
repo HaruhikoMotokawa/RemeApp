@@ -19,6 +19,7 @@ class AccountViewController: UIViewController {
     @IBOutlet private weak var passwordLabel: UILabel!
     /// 登録したユーザーIDを表示
     @IBOutlet private weak var uidLabel: UILabel!
+
     /// ラベルの表示を切り替えるボタン
     @IBOutlet private weak var displaySwitchButton: UIButton!
     /// uidをコピーするボタン
@@ -34,16 +35,6 @@ class AccountViewController: UIViewController {
     /// アカウント削除ボタン
     @IBOutlet private weak var accountDeleteButton: UIButton!
 
-    @IBOutlet weak var accountStackView: UIStackView!
-
-    @IBOutlet weak var mailStackView: UIStackView!
-
-    @IBOutlet weak var passwordStackView: UIStackView!
-
-    @IBOutlet weak var uidStackView: UIStackView!
-
-    @IBOutlet weak var useerInfoStackView: UIStackView!
-
     /// passwordLabelの表示を切り替えるフラグ
     private var isLabelDisplay: Bool = false
     /// ユーザーが作成した買い物データを格納する配列
@@ -57,22 +48,35 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordLabel.textColor = .clear
-//        setStackViewAppearance()
-//        useerInfoStackView.layer.borderColor = UIColor.black.cgColor
-//        useerInfoStackView.layer.borderWidth = 1
-//        useerInfoStackView.layer.cornerRadius = 10
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task {
             await setUserInfo()
+            NetworkMonitor.shared.startMonitoring()
+            // NotificationCenterに通知を登録する
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange), name: .networkStatusDidChange, object: nil)
+            
         }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         passwordLabel.textColor = .clear
+        // NotificationCenterから通知を削除する
+        NotificationCenter.default.removeObserver(self, name: .networkStatusDidChange, object: nil)
+    }
+
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async {
+            // `isConnected`プロパティが変化した場合に、`nameLabel`の背景色を変更する
+            if NetworkMonitor.shared.isConnected {
+                self.nameLabel.backgroundColor = .red
+            } else {
+                self.nameLabel.backgroundColor = .blue
+            }
+        }
     }
     // MARK: - func
     /// 非表示になっているパスワードを表示する
@@ -269,8 +273,7 @@ class AccountViewController: UIViewController {
         for user in updateUsersList {
             try await FirestoreManager.shared.upData(uid: user.id, shardUsers: user.sharedUsers)
         }
-        // 配列を空に戻す
-        usersList = []
+        usersList = []  // 配列を空に戻す
     }
 
     /// ユーザー情報を表示する非同期処理を内包するメソッド
@@ -371,21 +374,4 @@ class AccountViewController: UIViewController {
         accountDeleteButton.isEnabled = true
     }
 
-    func setStackViewAppearance() {
-        accountStackView.layer.borderColor = UIColor.black.cgColor
-        accountStackView.layer.borderWidth = 1
-        accountStackView.layer.cornerRadius = 10
-
-        mailStackView.layer.borderColor = UIColor.black.cgColor
-        mailStackView.layer.borderWidth = 1
-        mailStackView.layer.cornerRadius = 10
-
-        passwordStackView.layer.borderColor = UIColor.black.cgColor
-        passwordStackView.layer.borderWidth = 1
-        passwordStackView.layer.cornerRadius = 10
-
-        uidStackView.layer.borderColor = UIColor.black.cgColor
-        uidStackView.layer.borderWidth = 1
-        uidStackView.layer.cornerRadius = 10
-    }
 }
