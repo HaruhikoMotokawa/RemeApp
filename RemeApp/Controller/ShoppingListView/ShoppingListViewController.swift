@@ -38,6 +38,7 @@ class ShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         //        setErrandData()
         //        sortErrandDataList()
+
         setMyShoppingItemObserver()
         setOtherShoppingItemObserver()
     }
@@ -130,30 +131,42 @@ class ShoppingListViewController: UIViewController {
     }
     /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setMyShoppingItemObserver() {
-        let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getMyShoppingItemObserver(
-            listener: &FirestoreManager.shared.shoppingListMyItemListener,
-            uid: uid,
-            completion: { [weak self] itemList in
-            guard let self else { return }
-                print("自分の買い物リストの取得を開始")
-                self.myShoppingItemList = itemList
-                self.combineShoppingItems()
-        })
+        IndicatorController.shared.startIndicator()
+        DispatchQueue.global(qos: .default).async {
+            let uid = AccountManager.shared.getAuthStatus()
+            FirestoreManager.shared.getMyShoppingItemObserver(
+                listener: &FirestoreManager.shared.shoppingListMyItemListener,
+                uid: uid,
+                completion: { [weak self] itemList in
+                    guard let self else { return }
+                    print("自分の買い物リストの取得を開始")
+                    self.myShoppingItemList = itemList
+                    self.combineShoppingItems()
+                    DispatchQueue.main.async {
+                        IndicatorController.shared.dismissIndicator()
+                    }
+            })
+        }
     }
 
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
-        let uid = AccountManager.shared.getAuthStatus()
-        FirestoreManager.shared.getOtherShoppingItemObserver(
-            listener: &FirestoreManager.shared.shoppingListOtherItemListener,
-            uid: uid,
-            completion: { [weak self] itemList in
-                guard let self else { return }
-                print("他人の買い物リストの取得を開始")
-                self.otherShoppingItemList = itemList
-                self.combineShoppingItems()
-            })
+        IndicatorController.shared.startIndicator()
+        DispatchQueue.global(qos: .default).async {
+            let uid = AccountManager.shared.getAuthStatus()
+            FirestoreManager.shared.getOtherShoppingItemObserver(
+                listener: &FirestoreManager.shared.shoppingListOtherItemListener,
+                uid: uid,
+                completion: { [weak self] itemList in
+                    guard let self else { return }
+                    print("他人の買い物リストの取得を開始")
+                    self.otherShoppingItemList = itemList
+                    self.combineShoppingItems()
+                    DispatchQueue.main.async {
+                        IndicatorController.shared.dismissIndicator()
+                    }
+                })
+        }
     }
 
     /// 買い物リストに関するオブザーバーを廃棄する
@@ -219,6 +232,7 @@ class ShoppingListViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }
     }
+
 }
 
 // MARK: - UITableViewDataSource&Delegate

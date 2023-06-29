@@ -48,6 +48,7 @@
 		7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */; };
 		7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */; };
 		7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */; };
+		78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A045602A4DC1AF0052EC65 /* IndicatorController.swift */; };
 		78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3729C835D7004685F1 /* AppDelegate.swift */; };
 		78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3929C835D7004685F1 /* SceneDelegate.swift */; };
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
@@ -137,6 +138,7 @@
 		7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSelectedSalesFloorViewController.swift; sourceTree = "<group>"; };
 		7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditSelectedSalesFloorView.storyboard; sourceTree = "<group>"; };
 		7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorColor.swift; sourceTree = "<group>"; };
+		78A045602A4DC1AF0052EC65 /* IndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorController.swift; sourceTree = "<group>"; };
 		78AB3B3429C835D7004685F1 /* RemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
 				784669732A3DDB7D00C175EB /* AlertController.swift */,
+				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
@@ -634,6 +637,7 @@
 				782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */,
 				7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */,
 				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
+				78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */,
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
 				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
 				7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */,
