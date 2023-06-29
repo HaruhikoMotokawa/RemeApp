@@ -105,6 +105,7 @@ class CreateAccountViewController: UIViewController {
             }
         }
     }
+    
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
     private func setKeyboardCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))

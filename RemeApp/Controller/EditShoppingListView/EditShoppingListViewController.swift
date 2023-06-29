@@ -114,8 +114,7 @@ class EditShoppingListViewController: UIViewController {
             guard let self else { return }
             // ネットワーク状況が変わったらTableViewを再読み込み
             self.editShoppingListTableView.reloadData()
-//            if NetworkMonitor.shared.isConnected {
-
+//            if !NetworkMonitor.shared.isConnected {
 //            }
         }
     }
@@ -244,7 +243,7 @@ class EditShoppingListViewController: UIViewController {
     @objc func buttonTapped() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
-            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            AlertController.showAlert(tittle: "エラー", errorMessage: "オフライン時はスワイプ削除のみ有効です")
             return
         }
         isEditingMode = !isEditingMode

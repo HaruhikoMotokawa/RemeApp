@@ -91,7 +91,8 @@ class DetailShoppingListViewController: UIViewController {
 
     /// オフライン時の処理
     @objc func handleNetworkStatusDidChange() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
             // オフラインになったらアラートを出す
             if !NetworkMonitor.shared.isConnected {
                 AlertController.showOffLineAlert(tittle: "オフラインです",

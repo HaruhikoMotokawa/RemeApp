@@ -237,16 +237,13 @@ class AccountViewController: UIViewController {
     /// オフライン時の処理
     @objc func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
-            print("👨‍💻ハンドラー開始")
             guard let self else { return }
             // オンラインなら通常通りにユザー情報とボタンを設定する
             if NetworkMonitor.shared.isConnected {
                 Task {
-                    print("🔥オンラインや！")
                     await self.setUserInfo()
                 }
             } else {
-                print("😮‍💨せやかてオフライン")
                 // オフラインで全てのボタンを無効化
                 self.setAllButtonEnabled()
             }
@@ -280,7 +277,6 @@ class AccountViewController: UIViewController {
             FirestoreManager.shared.deleteItem(id: id) { [weak self] error in
                 guard let self else { return }
                 if error != nil {
-                    print("削除に失敗")
                     let errorMassage = FirebaseErrorManager.shared.setErrorMessage(error)
                     AlertController.showAlert(tittle: "エラー", errorMessage: errorMassage)
                     self.myShoppingItemList = []
@@ -336,18 +332,14 @@ class AccountViewController: UIViewController {
 
     /// ユーザー情報を表示する非同期処理を内包するメソッド
     private func setUserInfo() async {
-        print("🟥setUserInfoが呼び出されたよ")
         Task { @MainActor in
-
             // ログイン中のuidを取得
             let uid = AccountManager.shared.getAuthStatus()
             do {
                 // uidを使ってFirestoreからユーザー情報を取得しラベルに表示
                 let userInfo = try await FirestoreManager.shared.getUserInfo(uid: uid)
-                print("🟦userInfo: \(String(describing: userInfo))")
                 // サインインしているならnameはからではない
                 if userInfo?.name != "" {
-                    print("🔸ラベルを変更開始が呼び出されたよ")
                     nameLabel.text = userInfo?.name
                     mailLabel.text = userInfo?.email
                     passwordLabel.text = userInfo?.password
