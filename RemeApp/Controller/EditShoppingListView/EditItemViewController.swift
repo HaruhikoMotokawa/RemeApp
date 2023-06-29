@@ -10,7 +10,7 @@ import RealmSwift
 /// G-品目新規作成
 class EditItemViewController: UIViewController {
 
-    // MARK: - @IBOutlet & @IBAction
+    // MARK: - property
 
     /// タイトル
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,6 +22,76 @@ class EditItemViewController: UIViewController {
     @IBOutlet private weak var unitPickerView: UIPickerView!
     /// 売り場選択
     @IBOutlet private weak var selectTypeOfSalesFloorButton: UIButton!
+    /// 補足文のプレースホルダー
+    @IBOutlet weak var placeholderLabel: UILabel!
+    /// 補足入力
+    @IBOutlet private weak var supplementTextView: UITextView!
+    /// 写真選択ボタン
+    @IBOutlet private weak var selectPhotoButton: UIButton!
+    /// 写真削除ボタン
+    @IBOutlet private weak var deletePhotoButton: UIButton!
+    /// 写真の背景
+    @IBOutlet private weak var photoBackgroundImage: UIImageView!
+    /// 選択した写真を添付する
+    @IBOutlet private weak var photoPathImageView: UIImageView!
+    /// キャンセルボタン
+    @IBOutlet private weak var cancelButton: UIButton!
+    /// 追加ボタン
+    @IBOutlet private weak var addButton: UIButton!
+
+    /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
+    private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
+                                                    "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
+    /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
+    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
+    /// 写真のURLパス
+    private var imageFilePath: URL?
+    /// カスタム売り場マップのリスト
+    private var customSalesFloorData = CustomSalesFloorModel()
+    /// お使いデータ
+    var errandData = ErrandDataModel()
+    /// ドキュメントID
+    private var id:String? = nil
+    // 受け渡しようのisCheckBoxの現在の値
+    private var receiveIsCheckBox:Bool = false
+    /// nameOfItemTextFieldに表示するテキスト
+    private var receiveNameOfItem:String? = nil
+    /// numberOfItemPickerViewに表示する文字列
+    private var numberOfItemPickerViewString:String = "１"
+    /// unitPickerViewに表示する文字列
+    private var unitPickerViewString:String = "個"
+    ///  売り場を保存するための一時置き場
+    private var selectedSalesFloorRawValue:Int? = nil
+    /// supplementTextViewに表示するテキスト
+    private var supplementTextViewText:String? = nil
+    /// 受け渡し用、photoImageViewに表示する画像
+    private var photoURL:String = ""
+    /// 受け渡し用、photoImageViewに表示する画像
+    private var photoPathImage:UIImage? = nil
+    /// 画面遷移時に新規作成か、編集かを切り替えるフラグ
+    internal var isNewItem:Bool = true
+    /// 編集時に写真を変更した際のフラグ
+    private var isChangePhoto: Bool = false
+    /// 写真を保存するための一時置き場
+    private var savePhotoImage: UIImage? = nil
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
+
+    // MARK: - viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNetWorkObserver()
+        setDataSourceAndDelegate()
+        setKeyboardCloseButton()
+        setAppearanceAllButton()
+        displayData()
+        setTitleLabel()
+        setDisableOrEnable()
+        supplementTextView.setAppearance()
+    }
+
+    // MARK: - func
+
     /// 売り場選択画面に遷移するメソッド
     ///  -　遷移処理
     ///  - 遷移後に自身のボタンの見た目を変更するためにデリゲートをセット
@@ -30,21 +100,20 @@ class EditItemViewController: UIViewController {
         let selectTypeOfSalesFloorVC = storyboard.instantiateViewController(
             withIdentifier: "SelectTypeOfSalesFloorView") as! SelectTypeOfSalesFloorViewController
         selectTypeOfSalesFloorVC.delegate = self
-        self.present(selectTypeOfSalesFloorVC, animated: true)
+        present(selectTypeOfSalesFloorVC, animated: true)
     }
 
-    /// 補足文のプレースホルダー
-    @IBOutlet weak var placeholderLabel: UILabel!
-    /// 補足入力
-    @IBOutlet private weak var supplementTextView: UITextView!
-    /// 写真選択ボタン
-    @IBOutlet private weak var selectPhotoButton: UIButton!
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
     /// - アクションシートで選択
     /// - カメラ撮影アクション
     /// - フォトライブリーラリーから選択アクション
     /// - キャンセルアクション
     @IBAction private func addPhoto(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showOffLineAlert(tittle: "エラー", message: "オフライン時は写真の添付ができません", view: self)
+            return
+        }
         /// アラートコントローラーをインスタンス化
         let alertController = UIAlertController(title: "選択して下さい", message: nil, preferredStyle: .actionSheet)
         // カメラ撮影アクション定義
@@ -74,79 +143,68 @@ class EditItemViewController: UIViewController {
         alertController.popoverPresentationController?.sourceView = view
         present(alertController, animated: true)
     }
-    /// 写真削除ボタン
-    @IBOutlet private weak var deletePhotoButton: UIButton!
+
     /// 添付した写真データを削除する
     @IBAction private func deletePhoto(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showOffLineAlert(tittle: "エラー", message: "オフライン時は写真の削除ができません", view: self)
+            return
+        }
         // 添付した写真を削除するメソッド
         setDeletePhotoAction()
     }
 
-    /// 写真の背景
-    @IBOutlet private weak var photoBackgroundImage: UIImageView!
-    /// 選択した写真を添付する
-    @IBOutlet private weak var photoPathImageView: UIImageView!
-    /// キャンセルボタン
-    @IBOutlet private weak var cancelButton: UIButton!
     /// 編集を終了してEditShoppingListViewに戻る遷移
     @IBAction private func cancelAndReturn(_ sender: Any) {
         showCancelAlert()
     }
-    /// 追加ボタン
-    @IBOutlet private weak var addButton: UIButton!
+
     /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
     @IBAction private func addAndReturn(_ sender: Any) {
-        addOrReEnter()
+        Task { @MainActor in
+            await addOrReEnter()
+        }
     }
 
-    // MARK: - property
-    /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
-    private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
-                                                    "１１","１２","１３","１４","１５","１６","１７","１８","１９","２０"]
-
-    /// unitPickerViewに表示する値を「個、本、袋、グラム、パック」で設定
-    private let unitArray: Array<String> = ["個", "本", "袋", "パック"]
-
-    /// 写真のURLパス
-    private var imageFilePath: URL?
-
-    /// カスタム売り場マップのリスト
-    private var customSalesFloorData = CustomSalesFloorModel()
-
-    /// お使いデータ
-    var errandData = ErrandDataModel()
-
-    /// nameOfItemTextFieldに表示するテキスト
-    private var nameOfItemTextFieldText:String? = nil
-
-    /// numberOfItemPickerViewに表示する文字列
-    private var numberOfItemPickerViewString:String = "１"
-
-    /// unitPickerViewに表示する文字列
-    private var unitPickerViewString:String = "個"
-
-    ///  売り場を保存するための一時置き場
-    private var selectedSalesFloorRawValue:Int? = nil
-
-    /// supplementTextViewに表示するテキスト
-    private var supplementTextViewText:String? = nil
-
-    /// photoImageViewに表示する画像
-    private var photoPathImage:UIImage? = nil
-
-    // MARK: - viewDidLoad
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setDataSourceAndDelegate()
-        setKeyboardCloseButton()
-        setAppearanceAllButton()
-        displayData()
-        setTitleLabel()
-        setDisableOrEnable()
-        supplementTextView.setAppearance()
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
     }
 
-    // MARK: - func
+    // MARK: handleNetworkStatusDidChange
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // オフラインになったらアラートを出す
+            if !NetworkMonitor.shared.isConnected {
+                AlertController.showOffLineAlert(tittle: "オフラインです",
+                                                 message:
+            """
+            ① 最新の情報が反映されません
+            ② 写真データは表示できません
+            ③ アカウント関連の操作はできません
+            ④ 買い物リストの作成と編集で
+            　 写真添付と削除ができません
+            ⑤ 買い物リスト作成と編集は
+               できますが上限があります
+            """, view: self)
+            }
+            // オフラインで写真を添付していて、新規作成だった場合
+            if !NetworkMonitor.shared.isConnected &&
+                self.photoPathImageView.image != nil &&
+                self.isNewItem {
+                // 添付した写真を削除
+                self.photoPathImageView.image = nil
+                // 写真関連の設定を再設定
+                self.setDisableOrEnable()
+            }
+        }
+    }
+
     /// データソースとデリゲートをセット
     private func setDataSourceAndDelegate() {
         numberOfItemPickerView.delegate = self
@@ -188,29 +246,40 @@ class EditItemViewController: UIViewController {
             addButton.setEnable()
         }
         // 添付写真削除ボタンの切り替えと背景写真イメージの切り替え
+        // 写真データがない場合
         if photoPathImageView.image == nil {
             deletePhotoButton.setDisable()
             photoBackgroundImage.isHidden = false
         } else {
+            // 写真データがある場合
+            selectPhotoButton.setDisable()
             deletePhotoButton.setEnable()
             photoBackgroundImage.isHidden = true
+        }
+
+        if !NetworkMonitor.shared.isConnected {
+            selectPhotoButton.setDisable()
+            deletePhotoButton.setDisable()
         }
     }
 
     /// データ受け渡し用のメソッド
-    func configurer(detail: ErrandDataModel) {
-        errandData = detail
-        nameOfItemTextFieldText = detail.nameOfItem
+    internal func configurer(detail: ShoppingItemModel, image:UIImage?) {
+        myShoppingItemList = [detail]
+        id = detail.id
+        receiveIsCheckBox = detail.isCheckBox
+        receiveNameOfItem = detail.nameOfItem
         numberOfItemPickerViewString = detail.numberOfItem
         unitPickerViewString = detail.unit
         selectedSalesFloorRawValue = detail.salesFloorRawValue
         supplementTextViewText = detail.supplement
-        photoPathImage = detail.getImage()
+        photoURL = detail.photoURL
+        photoPathImage = image
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示
     private func displayData() {
-        nameOfItemTextField.text = nameOfItemTextFieldText
+        nameOfItemTextField.text = receiveNameOfItem
         selectNumberOfItemRow(selectedNumberOfItem: numberOfItemPickerViewString)
         selectUnitRow(selectedUnit: unitPickerViewString)
         setSalesFloorTypeButton(salesFloorRawValue: selectedSalesFloorRawValue)
@@ -281,7 +350,7 @@ class EditItemViewController: UIViewController {
     }
 
     /// 受け渡されたデータをsetSupplementLabelTextに表示
-    /// - 補足がなければ「""」を表示 == textViewDidBeginEditingによってプレースホルダーがセットされる
+    /// - 補足がなければplaceholderLabelを表示
     /// - 補足がある場合はフォントを黒にしてそのまま表示
     private func setSupplementLabelText(supplement: String? ) {
         if supplementTextViewText == nil {
@@ -300,7 +369,7 @@ class EditItemViewController: UIViewController {
         if image == nil {
             photoPathImageView.image = image
         } else {
-            let resizedImage = image?.resize(to: CGSize(width: 355, height: 500))
+            let resizedImage = image?.resize(to: CGSize(width: 355, height: 355))
             let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
                 cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
             photoPathImageView.image = roundedAndBorderedImage
@@ -344,7 +413,7 @@ extension EditItemViewController {
     /// 追加ボタンをタップした時の処理
     /// - 商品名が未入力の場合はアラートを出す
     /// - 商品名が入力されていればデータを書き込み、画面を閉じる
-    private func addOrReEnter() {
+    private func addOrReEnter() async {
         if nameOfItemTextField.text == "" {
             // 警告アラート
             let alertController = UIAlertController(title: nil, message:
@@ -354,33 +423,160 @@ extension EditItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            // ここに追加の処理
-            saveData()
-            self.dismiss(animated: true)
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+            // numberOfItemPickerViewで選択された値を取得
+            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+            // ログイン中のユーザーのuidを取得
+            let uid = AccountManager.shared.getAuthStatus()
+            if isNewItem {
+                await saveData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
+            } else {
+                upDateData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
+            }
         }
     }
 
-    private func saveData() {
-        // numberOfItemPickerViewで選択された値を取得
-        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-        // numberOfItemPickerViewで選択された値を取得
-        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-        // データベースに保存
-        let realm = try! Realm()
-        try! realm.write {
-            errandData.nameOfItem = nameOfItemTextField.text!
-            errandData.numberOfItem = selectedNumberOfItem
-            errandData.unit = selectedUnit
-            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
-            if supplementTextView.text == "" {
-                errandData.supplement = nil
-            } else {
-                errandData.supplement = supplementTextView.text
+    ///  新規作成、保存の処理
+    private func saveData(selectedNumberOfItem: String, selectedUnit: String, uid: String) async {
+        do {
+            if !NetworkMonitor.shared.isConnected {
+                photoPathImageView.image = nil
             }
-            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
-            realm.add(errandData)
+            // ユーザー共有者のuidを取得
+            let sharedUsers = try await FirestoreManager.shared.getSharedUsers(uid: uid)
+            print("写真のアップロードとFirestoreの保存処理を開始")
+            // 写真をアップロードして、ダウンロードURLを取得
+            // 非同期処理でawaitついてないからコールバック関数で対応
+            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
+                                                          image: savePhotoImage,
+                                                          completion: { [weak self] photoURL in
+                guard let self else { return }
+                guard let photoURL else {
+                    print("URLの取得に失敗")
+                    AlertController.showAlert(tittle: "エラー",
+                                              errorMessage: "写真の保存に失敗したため、中断しました")
+                    return
+                }
+                // 保存するリストを作成
+                let addItem:ShoppingItemModel = ShoppingItemModel(
+                    isCheckBox: false,
+                    nameOfItem: self.nameOfItemTextField.text!,
+                    numberOfItem: selectedNumberOfItem,
+                    unit: selectedUnit,
+                    salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                    supplement: self.supplementTextView.text ?? "",
+                    photoURL: photoURL,
+                    owner: uid,
+                    sharedUsers: sharedUsers)
+
+                // データベースに保存
+                FirestoreManager.shared.addItem(uid: uid, addItem: addItem)
+                // メインスレッドで実行を宣言
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    // 全ての処理が終わったら画面を閉じる
+                    self.dismiss(animated: true)
+                }
+            })
+        } catch let error {
+            let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+            AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
+            print(error)
         }
     }
+
+    /// 編集したデータの保存処理
+    private func upDateData(selectedNumberOfItem: String, selectedUnit: String, uid: String) {
+        // オフライン時に写真の変更をしていた場合は抜ける
+        if !NetworkMonitor.shared.isConnected && isChangePhoto {
+            dismiss(animated: true)
+            AlertController.showAlert(tittle: "エラー", errorMessage: "保存処理に問題が出る可能性があるため中断しました")
+            return
+        }
+        // 編集当初の画像と追加処理時の画像が同一だったら
+        if !isChangePhoto {
+            // 保存するリストを作成
+            let addItem:ShoppingItemModel = ShoppingItemModel(
+                id: id,
+                isCheckBox: receiveIsCheckBox,
+                nameOfItem: nameOfItemTextField.text!,
+                numberOfItem: selectedNumberOfItem,
+                unit: selectedUnit,
+                salesFloorRawValue: selectedSalesFloorRawValue!,
+                supplement: supplementTextView.text ?? "",
+                photoURL: photoURL)
+
+            // データベースに編集内容を保存
+            FirestoreManager.shared.upDateItem(addItem: addItem)
+            // メインスレッドで実行を宣言
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                // 全ての処理が終わったら画面を閉じる
+                self.dismiss(animated: true)
+            }
+        } else {
+            // 編集当初の画像と追加処理時の画像が違う場合は新たにアップロード処理
+            // 既存の写真データを削除
+            StorageManager.shared.deletePhoto(photoURL: photoURL)
+            // 写真をアップロードして、ダウンロードURLを取得
+            // 非同期処理でawaitついてないからコールバック関数で対応
+            StorageManager.shared.upLoadShoppingItemPhoto(uid: uid,
+                                                          image: savePhotoImage,
+                                                          completion: { [weak self] photoURL in
+                guard let self else { return }
+                guard let photoURL else {
+                    print("URLの取得に失敗")
+                    AlertController.showAlert(tittle: "エラー",
+                                              errorMessage: "写真の保存に失敗したため、中断しました")
+                    return
+                }
+                // 保存するリストを作成
+                let addItem:ShoppingItemModel = ShoppingItemModel(
+                    id: self.id,
+                    isCheckBox: receiveIsCheckBox,
+                    nameOfItem: self.nameOfItemTextField.text!,
+                    numberOfItem: selectedNumberOfItem,
+                    unit: selectedUnit,
+                    salesFloorRawValue: self.selectedSalesFloorRawValue!,
+                    supplement: self.supplementTextView.text ?? "",
+                    photoURL: photoURL)
+
+                // データベースに編集内容を保存
+                FirestoreManager.shared.upDateItem(addItem: addItem)
+
+                // メインスレッドで実行を宣言
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    // 全ての処理が終わったら画面を閉じる
+                    self.dismiss(animated: true)
+                }
+            })
+        }
+    }
+
+    /// 保存の処理(Realm)
+    //    private func saveData() {
+    //        // numberOfItemPickerViewで選択された値を取得
+    //        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+    //        // numberOfItemPickerViewで選択された値を取得
+    //        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+    //        // データベースに保存
+    //        let realm = try! Realm()
+    //        try! realm.write {
+    //            errandData.nameOfItem = nameOfItemTextField.text!
+    //            errandData.numberOfItem = selectedNumberOfItem
+    //            errandData.unit = selectedUnit
+    //            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
+    //            if supplementTextView.text == "" {
+    //                errandData.supplement = nil
+    //            } else {
+    //                errandData.supplement = supplementTextView.text
+    //            }
+    //            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
+    //            realm.add(errandData)
+    //        }
+    //    }
 }
 
 // MARK: - UIPickerViewDataSource&Delegate
@@ -438,7 +634,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// - selectTypeOfSalesFloorButtonのタイトルを該当する売り場の名称に変更
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
     /// - addButtonを活性化
-    func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
+    internal func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
         let useSalesFloorTypeKey = "useSalesFloorTypeKey"
         let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
         // 0 -> カスタム、1(else) -> デフォルト
@@ -459,7 +655,7 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
 extension EditItemViewController: UITextViewDelegate {
     /// 入力があったらプレースホルダーのラベルを非表示
     func textViewDidBeginEditing(_ textView: UITextView) {
-            placeholderLabel.isHidden = true
+        placeholderLabel.isHidden = true
     }
     /// 編集終了後、何も入力されていなかったらプレースホルダーをセット
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -490,8 +686,10 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        setPhotoPathImageView(image: image)
+        savePhotoImage = image
+        setPhotoPathImageView(image: savePhotoImage)
         deletePhotoButton.setEnable()
+        selectPhotoButton.setDisable()
         photoBackgroundImage.isHidden = true
         dismiss(animated: true)
     }
@@ -503,17 +701,31 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     private func setDeletePhotoAction() {
         let alertController = UIAlertController(title: "写真の削除", message: "削除してもよろしいですか？",
                                                 preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "削除する", style: .default) { (action) in
+        let okAction = UIAlertAction(title: "削除する", style: .default) { [weak self] (action) in
             // OKが押された時の処理
-            self.photoPathImageView.image = nil
-            self.deletePhotoButton.setDisable()
-            self.photoBackgroundImage.isHidden = false
-            if let filePath = self.imageFilePath {
-                do {
-                    try FileManager.default.removeItem(at: filePath)
-                } catch {
-                    print("Error deleting image: \\(error.localizedDescription)")
+            guard let self else { return }
+            if self.isNewItem {
+                print("🔵新規作成中の写真を削除開始")
+                if let filePath = self.imageFilePath {
+                    do {
+                        try FileManager.default.removeItem(at: filePath)
+                    } catch {
+                        print("Error deleting image: \\(error.localizedDescription)")
+                    }
+                    self.photoPathImageView.image = nil
+                    self.deletePhotoButton.setDisable()
+                    self.selectPhotoButton.setEnable()
+                    self.photoBackgroundImage.isHidden = false
                 }
+            } else {
+                print("🔴編集中の写真を削除開始")
+                // 写真を削除
+                self.photoPathImageView.image = nil
+                // 写真に変更があったフラグを立てる
+                self.isChangePhoto = true
+                self.deletePhotoButton.setDisable()
+                self.selectPhotoButton.setEnable()
+                self.photoBackgroundImage.isHidden = false
             }
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)

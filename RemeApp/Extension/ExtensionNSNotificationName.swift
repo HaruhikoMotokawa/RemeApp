@@ -32,4 +32,8 @@ extension NSNotification.Name {
     static let showRightCartView = NSNotification.Name("showRightCartView")
 }
 
+// Notification.Nameの拡張
+extension Notification.Name {
+    static let networkStatusDidChange = Notification.Name("NetworkStatusDidChangeNotification")
+}
 

@@ -11,14 +11,18 @@ import RealmSwift
 import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // ネットワークの監視を開始
+        NetworkMonitor.shared.startMonitoring()
         // Firebaseの初期設定
         FirebaseApp.configure()
+   
         // IQKeyboardManagerを設定
         IQKeyboardManager.shared.enable = true
 
@@ -53,6 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Task { @MainActor in
                 do {
                     try await AccountManager.shared.signInAnonymity()
+                    // 現在のuidを取得
+                    let uid = AccountManager.shared.getAuthStatus()
+                    // 匿名認証用のusersデータ作成
+                    try await FirestoreManager.shared.createUsers(
+                        name: "",
+                        email: "",
+                        password: "",
+                        uid: uid)
                 } catch {
                         print("失敗")
                     }
