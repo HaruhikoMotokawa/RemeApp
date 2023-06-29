@@ -31,7 +31,7 @@ class ShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-     
+        setNetWorkObserver()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +90,37 @@ class ShoppingListViewController: UIViewController {
         let realm = try! Realm()
         let result = realm.objects(ErrandDataModel.self)
         errandDataList = Array(result)
+    }
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // ネットワーク状況が変わったらTableViewを再読み込み
+            self.shoppingListTableView.reloadData()
+            // オフラインになったらアラートを出す
+            if !NetworkMonitor.shared.isConnected {
+                AlertController.showAlert(tittle: "オフラインです",
+                                          errorMessage:
+            """
+            ① 最新の情報が反映されません
+            ② 写真データは表示できません
+            ③ アカウント関連の操作はできません
+            ④ 買い物リストの作成と編集で
+            　 写真添付と削除ができません
+            ⑤ 買い物リスト作成と編集は
+               できますが上限があります
+            """)
+
+            }
+        }
     }
 
     /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
@@ -177,49 +208,7 @@ class ShoppingListViewController: UIViewController {
         }
         shoppingListTableView.reloadData()
     }
-    /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// -  画面ローディング時の表示をif文で切り替え
-    /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
-    /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-//    private func sortErrandDataList() {
-//        let shoppingStartPositionKey = "shoppingStartPositionKey"
-//        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-//        if shoppingStartPositionInt == 0 {
-//            sortLeftErrandDataList()
-//        } else {
-//            sortRightErrandDataList()
-//        }
-//    }
 
-    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
-    /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
-    /// - shoppingListTableViewを再読み込み
-//    func sortLeftErrandDataList() {
-//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-//            if a.isCheckBox != b.isCheckBox {
-//                return !a.isCheckBox
-//            } else {
-//                return a.salesFloorRawValue > b.salesFloorRawValue
-//            }
-//        }
-//        shoppingListTableView.reloadData()
-//    }
-
-    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
-    /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-    /// - shoppingListTableViewを再読み込み
-//    func sortRightErrandDataList() {
-//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-//            if a.isCheckBox != b.isCheckBox {
-//                return !a.isCheckBox
-//            } else {
-//                return a.salesFloorRawValue < b.salesFloorRawValue
-//            }
-//        }
-//        shoppingListTableView.reloadData()
-//    }
 
     /// 全てのセルがチェックされている場合にアラートを表示する
    private func completionAlert() {
@@ -236,7 +225,6 @@ class ShoppingListViewController: UIViewController {
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return errandDataList.count
         return allShoppingItemList.count
     }
     
@@ -277,9 +265,6 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
         let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
-//        let errandData = errandDataList[indexPath.row]
-//        detailShoppingListViewController.configurer(detail: errandData)
-
         let shoppingItemData = allShoppingItemList[indexPath.row]
         let image = StorageManager.shared.setImageWithUrl(photoURL: shoppingItemData.photoURL)
         detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
@@ -320,10 +305,4 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
         }
     }
 }
-    //    }
-// Realmのトランザクションを開始
-//        let realm = try! Realm()
-//        realm.beginWrite()
-//        errandDataList[indexPath.row].isCheckBox = isChecked
-//        realm.add(errandDataList[indexPath.row], update: .modified)
-//        try! realm.commitWrite()
+

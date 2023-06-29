@@ -44,40 +44,22 @@ class AccountViewController: UIViewController {
     /// ユーザー情報のリスト
     private var usersList:[UserDataModel] = []
 
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         passwordLabel.textColor = .clear
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         Task {
             await setUserInfo()
-            NetworkMonitor.shared.startMonitoring()
-            // NotificationCenterに通知を登録する
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange), name: .networkStatusDidChange, object: nil)
-            
         }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         passwordLabel.textColor = .clear
-        // NotificationCenterから通知を削除する
-        NotificationCenter.default.removeObserver(self, name: .networkStatusDidChange, object: nil)
     }
 
-    @objc func handleNetworkStatusDidChange() {
-        DispatchQueue.main.async {
-            // `isConnected`プロパティが変化した場合に、`nameLabel`の背景色を変更する
-            if NetworkMonitor.shared.isConnected {
-                self.nameLabel.backgroundColor = .red
-            } else {
-                self.nameLabel.backgroundColor = .blue
-            }
-        }
-    }
     // MARK: - func
     /// 非表示になっているパスワードを表示する
     @IBAction private func showPassword(_ sender: Any) {
@@ -94,22 +76,39 @@ class AccountViewController: UIViewController {
 
     /// アカウント作成画面にプッシュ遷移
     @IBAction private func goCreateAccountView(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
         let storyboard = UIStoryboard(name: "CreateAccountView", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(
             withIdentifier: "CreateAccountView") as! CreateAccountViewController
+        createAccountVC.delegate = self
         self.navigationController?.pushViewController(createAccountVC, animated: true)
     }
 
     /// ログイン画面にプッシュ遷移
     @IBAction private func goSignInView(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
         let storyboard = UIStoryboard(name: "SignInView", bundle: nil)
         let signInVC = storyboard.instantiateViewController(
             withIdentifier: "SignInView") as! SignInViewController
+        signInVC.delegate = self
         self.navigationController?.pushViewController(signInVC, animated: true)
     }
 
     /// ログイン中であればサインアウトし、匿名認証でログイン
     @IBAction private func signOut(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
         let alert = UIAlertController(title: "ログアウト",
                                       message: "アカウントに紐づく情報は全て表示されなくなりますがよろしいですか？",
                                       preferredStyle: .actionSheet)
@@ -120,6 +119,11 @@ class AccountViewController: UIViewController {
             Task { @MainActor in
                 do {
                     guard let self else { return }
+                    // オフラインだったらアラート出して終了
+                    guard NetworkMonitor.shared.isConnected else {
+                        AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                        return
+                    }
                     // ログアウト
                     try AccountManager.shared.signOut()
                     // 匿名認証でログイン
@@ -150,6 +154,10 @@ class AccountViewController: UIViewController {
 
     /// 共有設定画面にプッシュ遷移
     @IBAction private func goShareSettingsView(_ sender: Any) {
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
         let storyboard = UIStoryboard(name: "ShareSettingsView", bundle: nil)
         let shareSettingsVC = storyboard.instantiateViewController(
             withIdentifier: "ShareSettingsView") as! ShareSettingsViewController
@@ -158,6 +166,12 @@ class AccountViewController: UIViewController {
 
     /// アカウントを削除
     @IBAction private func deleteAccount(_ sender: Any) {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
+
         let alert = UIAlertController(
             title: "アカウント削除", message: "アカウントに関わる全てのデータが削除されます", preferredStyle: .actionSheet)
         // キャンセル
@@ -167,6 +181,11 @@ class AccountViewController: UIViewController {
             Task { @MainActor in
                 do {
                     guard let self else { return }
+                    // オフラインだったらアラート出して終了
+                    guard NetworkMonitor.shared.isConnected else {
+                        AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                        return
+                    }
                     // ユーザーのUidを取得
                     let deleteUid = AccountManager.shared.getAuthStatus()
                     // 自身が作成した買い物リストを削除
@@ -205,6 +224,45 @@ class AccountViewController: UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
         present(alert, animated: true)
+    }
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        print("👀オブザーバーセット")
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            print("👨‍💻ハンドラー開始")
+            guard let self else { return }
+            // オンラインなら通常通りにユザー情報とボタンを設定する
+            if NetworkMonitor.shared.isConnected {
+                Task {
+                    print("🔥オンラインや！")
+                    await self.setUserInfo()
+                }
+            } else {
+                print("😮‍💨せやかてオフライン")
+                // オフラインで全てのボタンを無効化
+                self.setAllButtonEnabled()
+            }
+        }
+    }
+
+    /// 全てのボタンを無効化して、背景色を白にする
+    private func setAllButtonEnabled() {
+        // この画面の全てのbuttonを収納
+        let buttons = [displaySwitchButton, uidCopyButton, createAccountButton, signInButton, signOutButton,
+                       sherdUsersSettingsButton, accountDeleteButton]
+        // 全てのボタンにアクセス、無効化して背景色を白にする
+        buttons.forEach { button in
+            button?.isEnabled = false
+            button?.setAppearanceForAccountView(backgroundColor: .white)
+        }
     }
 
     /// ユーザーが作成したshoppingItemのデータ削除
@@ -278,19 +336,23 @@ class AccountViewController: UIViewController {
 
     /// ユーザー情報を表示する非同期処理を内包するメソッド
     private func setUserInfo() async {
+        print("🟥setUserInfoが呼び出されたよ")
         Task { @MainActor in
+
             // ログイン中のuidを取得
             let uid = AccountManager.shared.getAuthStatus()
             do {
                 // uidを使ってFirestoreからユーザー情報を取得しラベルに表示
                 let userInfo = try await FirestoreManager.shared.getUserInfo(uid: uid)
+                print("🟦userInfo: \(String(describing: userInfo))")
                 // サインインしているならnameはからではない
                 if userInfo?.name != "" {
+                    print("🔸ラベルを変更開始が呼び出されたよ")
                     nameLabel.text = userInfo?.name
                     mailLabel.text = userInfo?.email
                     passwordLabel.text = userInfo?.password
                     uidLabel.text = userInfo?.id
-
+                    // アカウントでサインインの場合
                     setButtonsWithSignIn()
                 } else {
                     // 匿名認証であればnameは""で登録されている
@@ -298,7 +360,7 @@ class AccountViewController: UIViewController {
                     mailLabel.text = "登録なし"
                     passwordLabel.text = ""
                     uidLabel.text = "登録なし"
-
+                    // 匿名認証での場合
                     setButtonsWithAnonymous()
                 }
             } catch {
@@ -312,10 +374,11 @@ class AccountViewController: UIViewController {
     }
 
     /// 匿名認証でログインしている状態でのボタン設定、合計７個
+    /// - アカウント作成とログインボタンを有効化
+    /// - パスワード表示、uidコピー、ログアウト、共有設定、アカウント削除を無効化
     /// - ボタンの基本設定
     /// - バックグラウンドカラー
     /// - 影の有無
-    /// - ボタンの有効無効
     private func setButtonsWithAnonymous() {
         displaySwitchButton.setAppearanceForAccountView(backgroundColor: .white)
         displaySwitchButton.isEnabled = false
@@ -342,10 +405,11 @@ class AccountViewController: UIViewController {
     }
 
     /// 作成したアカウントでログインしている状態でのボタン設定、合計７個
+    /// - パスワード表示、uidコピー、ログアウト、共有設定、アカウント削除を有効化
+    /// - アカウント作成とログインボタンを無効化
     /// - ボタンの基本設定
     /// - バックグラウンドカラー
     /// - 影の有無
-    /// - ボタンの有効無効
     private func setButtonsWithSignIn() {
         displaySwitchButton.setAppearanceForAccountView(backgroundColor: .lightGray)
         displaySwitchButton.addShadow()
@@ -374,4 +438,17 @@ class AccountViewController: UIViewController {
         accountDeleteButton.isEnabled = true
     }
 
+}
+
+
+extension AccountViewController: CreateAccountViewControllerDelegate {
+    func updateUserInfoFromCreateAccountView() async {
+        await setUserInfo()
+    }
+}
+
+extension AccountViewController: SignInViewControllerDelegate {
+    func updateUserInfoFromSignInView() async {
+        await setUserInfo()
+    }
 }

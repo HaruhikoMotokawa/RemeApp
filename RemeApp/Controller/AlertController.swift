@@ -27,6 +27,16 @@ class AlertController {
         }
     }
 
+    /// オフライン時のアラート
+    static func showOffLineAlert(tittle: String, message: String,
+                                 view:UIViewController, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: tittle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {  _ in
+            completion?()
+        }))
+        // rootViewControllerにアラートを表示
+        view.present(alert, animated: true)
+    }
 
 }
 

@@ -42,6 +42,7 @@ class ShareSettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         inputUIDTextField.delegate = self
         setKeyboardCloseButton()
         setAddButton()
@@ -56,6 +57,11 @@ class ShareSettingsViewController: UIViewController {
     /// １番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteFirstSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
             await deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
             await setSharedUsers()
         }
@@ -64,6 +70,11 @@ class ShareSettingsViewController: UIViewController {
     /// ２番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteSecondSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
             await deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
             await setSharedUsers()
         }
@@ -72,6 +83,11 @@ class ShareSettingsViewController: UIViewController {
     /// ３番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteThirdSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
             await deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
             await setSharedUsers()
         }
@@ -81,6 +97,11 @@ class ShareSettingsViewController: UIViewController {
     @IBAction private func addSharedUsers(_ sender: Any) {
         Task { @MainActor in
             do {
+                // オフラインだったらアラート出して終了
+                guard NetworkMonitor.shared.isConnected else {
+                    AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                    return
+                }
                 // 入力された値がないかnilチェック
                 guard let inputUid = inputUIDTextField.text else { return }
                 // ユーザーのuidを取得
@@ -114,6 +135,24 @@ class ShareSettingsViewController: UIViewController {
                 print("追加失敗だよー")
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                 AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
+            }
+        }
+    }
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // オンラインなら通常通りにユザー情報とボタンを設定する
+            if NetworkMonitor.shared.isConnected {
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

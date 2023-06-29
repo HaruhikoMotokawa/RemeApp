@@ -32,6 +32,7 @@ class SalesFloorShoppingListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         setTableView()
     }
 
@@ -39,9 +40,6 @@ class SalesFloorShoppingListViewController: UIViewController {
         super.viewWillAppear(animated)
         setMyShoppingItemObserver()
         setOtherShoppingItemObserver()
-//        setSelectedErrandDataList(salesFloorRawValue: salesFloorRawValue)
-//        sortErrandDataList()
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,6 +47,22 @@ class SalesFloorShoppingListViewController: UIViewController {
         removeShoppingItemObserver()
     }
     // MARK: - func
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // ネットワーク状況が変わったらTableViewを再読み込み
+            self.salesFloorShoppingListTableView.reloadData()
+        }
+    }
 
     /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
     private func combineShoppingItems() {
@@ -68,7 +82,6 @@ class SalesFloorShoppingListViewController: UIViewController {
                 self.combineShoppingItems()
             })
     }
-
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
         let uid = AccountManager.shared.getAuthStatus()
@@ -91,12 +104,6 @@ class SalesFloorShoppingListViewController: UIViewController {
             listener: &FirestoreManager.shared.salesFloorMapOtherItemListener) // 他人のオブザーバーを廃棄
     }
 
-//    private func setSelectedErrandDataList(salesFloorRawValue: Int) {
-//        let realm = try! Realm()
-//        let result = realm.objects(ErrandDataModel.self)
-//        errandDataList = Array(result.filter { $0.salesFloorRawValue == salesFloorRawValue })
-//    }
-
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
     private func sortShoppingItemList() {
         allShoppingItemList = allShoppingItemList.sorted { (a, b) -> Bool in
@@ -108,18 +115,6 @@ class SalesFloorShoppingListViewController: UIViewController {
         }
         salesFloorShoppingListTableView.reloadData()
     }
-
-    /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-//    private func sortErrandDataList() {
-//        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-//            if a.isCheckBox != b.isCheckBox {
-//                return !a.isCheckBox
-//            } else {
-//                return a.salesFloorRawValue < b.salesFloorRawValue
-//            }
-//        }
-//        salesFloorShoppingListTableView.reloadData()
-//    }
 
     /// 全てのセルがチェックされている場合にアラートを表示、OKをタップして一つ前の画面に戻る
     private func completionSalesFloorAlert() {
@@ -163,15 +158,6 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
                                  image: setImage )
-
-//            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
-//            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
-//                                 nameOfItem: errandDataModel.nameOfItem,
-//                                 numberOfItem: errandDataModel.numberOfItem,
-//                                 unit: errandDataModel.unit,
-//                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
-//                                 supplement: errandDataModel.supplement ?? "",
-//                                 image: errandDataModel.getImage())
             return cell
         }
         return UITableViewCell()
@@ -184,8 +170,6 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
         let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
         let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
-//        let errandData = errandDataList[indexPath.row]
-//        detailShoppingListViewController.configurer(detail: errandData)
         let shoppingItemData = allShoppingItemList[indexPath.row]
         let targetPhotoURL = shoppingItemData.photoURL
         let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
@@ -227,45 +211,3 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
         }
     }
 }
-//        guard let indexPath = salesFloorShoppingListTableView.indexPath(for: cell) else { return }
-//        let isChecked = !errandDataList[indexPath.row].isCheckBox
-//        // Realmのトランザクションを開始
-//        let realm = try! Realm()
-//        realm.beginWrite()
-//        errandDataList[indexPath.row].isCheckBox = isChecked
-//        realm.add(errandDataList[indexPath.row], update: .modified)
-//        try! realm.commitWrite()
-//
-//        // タップされたcellだけにアニメーションを実行する
-//        UIView.animate(withDuration: 0.5, delay: 0, options: [.transitionCrossDissolve], animations: {
-//            // cellをリロードする
-//            self.salesFloorShoppingListTableView.reloadRows(at: [indexPath], with: .fade)
-//            if isChecked {
-//                // 一番下にあるisCheckBoxがfalseのcellのindexPathを取得する
-//                var lastUncheckedRowIndex: Int?
-//                // self.errandDataListという配列の中身を順番に取り出し、各要素に対して指定した処理を行う
-//                for (index, errandData) in self.errandDataList.enumerated() {
-//                    // !errandData.isCheckBoxかつindex < indexPath.rowの場合に、lastUncheckedRowIndexにindexが代入されます
-//                    if !errandData.isCheckBox && index < indexPath.row {
-//                        lastUncheckedRowIndex = index
-//                    }
-//                }
-//                // 移動するcellの範囲が決定したら、移動する
-//                guard let lastRow = lastUncheckedRowIndex else { return }
-//
-//                if lastRow < indexPath.row {
-//                    // indexPath.rowからlastRowまでの範囲で、-1ずつ値を減少させながらループを実行する
-//                    for i in stride(from: indexPath.row, to: lastRow, by: -1) {
-//                        // iとi-1の要素を入れ替える
-//                        self.errandDataList.swapAt(i, i - 1)
-//                    }
-//                    // 指定されたindexPathの行を、別のindexPathの行に移動する
-//                    self.salesFloorShoppingListTableView.moveRow(at: indexPath, to: IndexPath(row: lastRow, section: 0))
-//                }
-//            }
-//        }, completion: nil)
-////        sortErrandDataList()
-//        completionSalesFloorAlert()
-//    }
-//}
-

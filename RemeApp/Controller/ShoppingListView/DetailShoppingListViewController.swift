@@ -41,8 +41,7 @@ class DetailShoppingListViewController: UIViewController {
     private var salesFloorButtonRawValue:Int = 0
     /// supplementLabelに表示するテキスト
     private var supplementLabelText:String? = nil
-    /// photoImageViewに表示する画像
-//    private var photoURL:String = ""
+
     /// photoPathImageViewに表示する画像
     private var photoPathImage:UIImage? = nil
 
@@ -51,9 +50,11 @@ class DetailShoppingListViewController: UIViewController {
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         displayData()
         salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
         nameOfItemLabel.setAppearance()
@@ -80,15 +81,33 @@ class DetailShoppingListViewController: UIViewController {
     @IBAction private func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
-//    /// データ受け渡し用のメソッド
-//    func configurer(detail: ErrandDataModel) {
-//        nameOfItemLabelText = detail.nameOfItem
-//        numberOfItemLabelText = detail.numberOfItem
-//        unitLabelText = detail.unit
-//        salesFloorButtonRawValue = detail.salesFloorRawValue
-//        supplementLabelText = detail.supplement
-//        photoPathImage = detail.getImage()
-//    }
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async {
+            // オフラインになったらアラートを出す
+            if !NetworkMonitor.shared.isConnected {
+                AlertController.showOffLineAlert(tittle: "オフラインです",
+                                                 message:
+            """
+            ① 最新の情報が反映されません
+            ② 写真データは表示できません
+            ③ アカウント関連の操作はできません
+            ④ 買い物リストの作成と編集で
+            　 写真添付と削除ができません
+            ⑤ 買い物リスト作成と編集は
+               できますが上限があります
+            """, view: self)
+            }
+        }
+    }
 
     /// データ受け渡し用のメソッド
     internal func configurer(detail: ShoppingItemModel, image: UIImage?) {
@@ -200,3 +219,5 @@ class DetailShoppingListViewController: UIViewController {
         }
     }
 }
+
+

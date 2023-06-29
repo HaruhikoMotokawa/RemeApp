@@ -49,18 +49,17 @@ class EditShoppingListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         setTableVIew()
         setCreateNewItemButtonAppearance()
         setEditButtonAppearance(multipleDeletionsButton, title: "複数削除")
         setEditButtonAppearance(cancelEditButton, title: "キャンセル")
         multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cancelEditButton.isHidden = true
-        //        setErrandData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        setupNotification() // realmのNotificationをセット
         setMyShoppingItemObserver()
         setOtherShoppingItemObserver()
     }
@@ -68,8 +67,7 @@ class EditShoppingListViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("離れるで")
-        //        notificationToken?.invalidate() // realmのNotificationの解除
-      removeShoppingItemObserver()
+        removeShoppingItemObserver()
     }
 
     // MARK: - @IBAction func
@@ -103,6 +101,24 @@ class EditShoppingListViewController: UIViewController {
     }
 
     // MARK: - func
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // ネットワーク状況が変わったらTableViewを再読み込み
+            self.editShoppingListTableView.reloadData()
+//            if NetworkMonitor.shared.isConnected {
+
+//            }
+        }
+    }
 
     /// 編集モード用のUIButtonの装飾基本設定
     private func setEditButtonAppearance(_ button: UIButton ,title: String) {
@@ -222,87 +238,15 @@ class EditShoppingListViewController: UIViewController {
         editShoppingListTableView.reloadData()
     }
 
-    /// 保存されたお使いデータをセットする
-    //    private func setErrandData() {
-    //        let realm = try! Realm()
-    //        let result = realm.objects(ErrandDataModel.self)
-    //        errandDataModel = realm.objects(ErrandDataModel.self)
-    //        errandDataList = Array(result)
-    //    }
-
-    /// CustomSalesFloorModelの監視用メソッド
-    //    private func setupNotification() {
-    //        // Realmの通知機能で変更を監視する
-    //        // 変更通知を受け取る
-    //        notificationToken = errandDataModel?.observe{ [weak self] (changes: RealmCollectionChange) in
-    //            switch changes {
-    //                    //　画面遷移時の初回実行処理（画面移動後に毎回実施）
-    //                case .initial:
-    //                    self?.setErrandData()
-    //                    self?.sortErrandDataList()
-    //                    // 新規と追加処理の際の処理
-    //                case .update(let errandDataModel,let deletions,let insertions,let modifications):
-    //                    print(errandDataModel)
-    //                    print(deletions)
-    //                    print(insertions)
-    //                    print(modifications)
-    //                    self?.setErrandData()
-    //                    self?.sortErrandDataList()
-    //                    // エラー時の処理
-    //                case .error:
-    //                    print("困ったことが起きました😱")
-    //            }
-    //        }
-    //    }
-
-    /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - NotificationCenterの受診をセット
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// -  画面ローディング時の表示をif文で切り替え
-    /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
-    /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-    //    private func sortErrandDataList() {
-    //        let shoppingStartPositionKey = "shoppingStartPositionKey"
-    //        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-    //        if shoppingStartPositionInt == 0 {
-    //            sortLeftErrandDataList()
-    //        } else {
-    //            sortRightErrandDataList()
-    //        }
-    //    }
-
-    /// 買い物ルートを左回りに選択された場合の買い物リストを並び替える
-    /// - cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
-    /// - shoppingListTableViewを再読み込み
-    //    private func sortLeftErrandDataList() {
-    //        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-    //            if a.isCheckBox != b.isCheckBox {
-    //                return !a.isCheckBox
-    //            } else {
-    //                return a.salesFloorRawValue > b.salesFloorRawValue
-    //            }
-    //        }
-    //        editShoppingListTableView.reloadData()
-    //    }
-
-    /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
-    /// - cellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
-    /// - shoppingListTableViewを再読み込み
-    //    private func sortRightErrandDataList() {
-    //        errandDataList = errandDataList.sorted { (a, b) -> Bool in
-    //            if a.isCheckBox != b.isCheckBox {
-    //                return !a.isCheckBox
-    //            } else {
-    //                return a.salesFloorRawValue < b.salesFloorRawValue
-    //            }
-    //        }
-    //        editShoppingListTableView.reloadData()
-    //    }
 
     // MARK: - 編集モードに関する処理
     /// 編集モードの設定==multipleDeletionsButtonをタップした時の動作
     @objc func buttonTapped() {
+        // オフラインだったらアラート出して終了
+        guard NetworkMonitor.shared.isConnected else {
+            AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+            return
+        }
         isEditingMode = !isEditingMode
         setEditing(isEditingMode, animated: true)
     }
@@ -476,9 +420,16 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                    commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // デリートするアイテムを一時的にプロパティに保存
         deleteShoppingItem.append(allShoppingItemList[indexPath.row])
-        // myShoppingItemListは削除する
-        allShoppingItemList.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        // オフラインで尚且つダウンロードURLを持っているデータだったらアラート出して終了
+        if !NetworkMonitor.shared.isConnected && !deleteShoppingItem.contains(where: { $0.photoURL == "" }) {
+            deleteShoppingItem = []
+            AlertController.showAlert(tittle: "エラー", errorMessage: "オフライン中は画像データのあるリストを削除できません")
+        } else {
+            // 通常時の処理
+            // myShoppingItemListは削除する
+            allShoppingItemList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 
     /// セルの削除が行われた後に呼び出される、ここでFirebase関連の削除を行う

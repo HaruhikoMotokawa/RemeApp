@@ -22,9 +22,12 @@ class CreateAccountViewController: UIViewController {
     /// 作成ボタン
     @IBOutlet private weak var createButton: UIButton!
 
+    var delegate: CreateAccountViewControllerDelegate?
+
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         setKeyboardCloseButton()
         inputAccountTextField.delegate = self
         inputMailTextField.delegate = self
@@ -52,9 +55,12 @@ class CreateAccountViewController: UIViewController {
                 // 非同期処理で完了まで待機させるのでawait、かつthrows付きメソッドなのでtry
                 try await FirestoreManager.shared.createUsers(name: name, email: email, password: password, uid: uid)
                 // 全てが問題なく完了した場合は前の画面に戻る
-                    AlertController.showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
+                AlertController.showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
                     guard let self else { return }
                     self.navigationController?.popViewController(animated: true)
+                    Task {
+                        await self.delegate?.updateUserInfoFromCreateAccountView()
+                    }
                 })
             } catch let error {
                 // エラーメッセージを生成
@@ -82,6 +88,23 @@ class CreateAccountViewController: UIViewController {
         }
     }
 
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // オンラインなら通常通りにユザー情報とボタンを設定する
+            if NetworkMonitor.shared.isConnected {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
     private func setKeyboardCloseButton() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))

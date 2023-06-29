@@ -55,16 +55,22 @@ final class StorageManager {
 
     /// ダウンロードURLからUIImageに変換
     internal func setImageWithUrl(photoURL: String) -> UIImage? {
+        //　もしphotoURLが""でないのならURLとして変換
         if let imageUrl:URL = URL(string: photoURL) {
             do {
+                // オフラインだったらシステムの画像を返却
+                guard NetworkMonitor.shared.isConnected else {
+                    return UIImage(systemName: "photo.artframe")
+                }
+                // ダウンロードURLから画像を取得
                 let imageData:Data = try Data(contentsOf: imageUrl)
-                let setImage = UIImage(data: imageData)
-                return setImage
+                return UIImage(data: imageData)
             } catch {
                  print(error)
                 return nil
             }
         } else {
+            // photoURLが""だったらnilを返却
             return nil
         }
     }
