@@ -5,7 +5,7 @@
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
 import UIKit
-import RealmSwift
+
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
 
@@ -16,9 +16,6 @@ class ShoppingListViewController: UIViewController {
 
     /// 買い物リストを表示する
     @IBOutlet private weak var shoppingListTableView: UITableView!
-
-    /// 買い物リストに表示するお使いデータのダミーデータ
-    private var errandDataList: [ErrandDataModel] = []
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
@@ -36,9 +33,6 @@ class ShoppingListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        setErrandData()
-        //        sortErrandDataList()
-
         setMyShoppingItemObserver()
         setOtherShoppingItemObserver()
     }
@@ -86,13 +80,6 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
-    /// 保存されたお使いデータをセットする
-    func setErrandData() {
-        let realm = try! Realm()
-        let result = realm.objects(ErrandDataModel.self)
-        errandDataList = Array(result)
-    }
-
     /// ネットワーク関連の監視の登録
     private func setNetWorkObserver() {
         // NotificationCenterに通知を登録する
@@ -132,41 +119,33 @@ class ShoppingListViewController: UIViewController {
     /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setMyShoppingItemObserver() {
         IndicatorController.shared.startIndicator()
-        DispatchQueue.global(qos: .default).async {
-            let uid = AccountManager.shared.getAuthStatus()
-            FirestoreManager.shared.getMyShoppingItemObserver(
-                listener: &FirestoreManager.shared.shoppingListMyItemListener,
-                uid: uid,
-                completion: { [weak self] itemList in
-                    guard let self else { return }
-                    print("自分の買い物リストの取得を開始")
-                    self.myShoppingItemList = itemList
-                    self.combineShoppingItems()
-                    DispatchQueue.main.async {
-                        IndicatorController.shared.dismissIndicator()
-                    }
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getMyShoppingItemObserver(
+            listener: &FirestoreManager.shared.shoppingListMyItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
+                guard let self else { return }
+                print("自分の買い物リストの取得を開始")
+                self.myShoppingItemList = itemList
+                self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
-        }
     }
 
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
         IndicatorController.shared.startIndicator()
-        DispatchQueue.global(qos: .default).async {
-            let uid = AccountManager.shared.getAuthStatus()
-            FirestoreManager.shared.getOtherShoppingItemObserver(
-                listener: &FirestoreManager.shared.shoppingListOtherItemListener,
-                uid: uid,
-                completion: { [weak self] itemList in
-                    guard let self else { return }
-                    print("他人の買い物リストの取得を開始")
-                    self.otherShoppingItemList = itemList
-                    self.combineShoppingItems()
-                    DispatchQueue.main.async {
-                        IndicatorController.shared.dismissIndicator()
-                    }
-                })
-        }
+        let uid = AccountManager.shared.getAuthStatus()
+        FirestoreManager.shared.getOtherShoppingItemObserver(
+            listener: &FirestoreManager.shared.shoppingListOtherItemListener,
+            uid: uid,
+            completion: { [weak self] itemList in
+                guard let self else { return }
+                print("他人の買い物リストの取得を開始")
+                self.otherShoppingItemList = itemList
+                self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
+            })
     }
 
     /// 買い物リストに関するオブザーバーを廃棄する
@@ -233,6 +212,14 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
+    // tableViewのデータを更新する
+    private func updateTableView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.shoppingListTableView.reloadData()
+        }
+    }
+
 }
 
 // MARK: - UITableViewDataSource&Delegate
@@ -248,25 +235,40 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
-            let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
-            cell.setShoppingList(isCheckBox: myData.isCheckBox,
-                                 nameOfItem: myData.nameOfItem,
-                                 numberOfItem: myData.numberOfItem,
-                                 unit: myData.unit,
-                                 salesFloorRawValue: myData.salesFloorRawValue,
-                                 supplement: myData.supplement,
-                                 image: setImage )
-//            StorageManager.shared.setDownloadImage(photoURL: myData.photoURL) { image in
-//                DispatchQueue.main.async {
-//                    cell.setShoppingList(isCheckBox: myData.isCheckBox,
-//                                         nameOfItem: myData.nameOfItem,
-//                                         numberOfItem: myData.numberOfItem,
-//                                         unit: myData.unit,
-//                                         salesFloorRawValue: myData.salesFloorRawValue,
-//                                         supplement: myData.supplement,
-//                                         image: image )
-//                }
-//            }
+            if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: nil) // imageはnil
+            } else { // 画像がある場合
+                let primaryImage = UIImage(systemName: "photo.artframe") // 一旦仮表示のイメージ設置
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: primaryImage)
+                // 非同期でダウンロードを開始
+                StorageManager.shared.setDownloadImage(photoURL: myData.photoURL) { [weak self] image in
+                    guard let self else { return }
+                    DispatchQueue.main.async {
+                        if let cell = self.shoppingListTableView.cellForRow(
+                            at: indexPath) as? ShoppingListTableViewCellController {
+                            cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                                 nameOfItem: myData.nameOfItem,
+                                                 numberOfItem: myData.numberOfItem,
+                                                 unit: myData.unit,
+                                                 salesFloorRawValue: myData.salesFloorRawValue,
+                                                 supplement: myData.supplement,
+                                                 image: image )
+                        }
+                    }
+                }
+            }
             return cell
         }
         return UITableViewCell()

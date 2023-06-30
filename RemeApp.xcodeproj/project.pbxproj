@@ -392,6 +392,8 @@
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
+				784669732A3DDB7D00C175EB /* AlertController.swift */,
+				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
 				78BAAB1B2A394562000C9627 /* API */,
 				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
@@ -418,8 +420,6 @@
 			isa = PBXGroup;
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
-				784669732A3DDB7D00C175EB /* AlertController.swift */,
-				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,

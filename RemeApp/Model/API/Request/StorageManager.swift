@@ -67,7 +67,7 @@ final class StorageManager {
                 return UIImage(data: imageData)
             } catch {
                  print(error)
-                return nil
+                return UIImage(systemName: "photo.artframe")
             }
         } else {
             // photoURLが""だったらnilを返却

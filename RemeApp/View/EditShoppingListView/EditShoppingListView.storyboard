@@ -2,8 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -105,9 +104,9 @@
                     <connections>
                         <outlet property="cancelEditButton" destination="ZdX-Bs-mTo" id="Pwm-S4-y9q"/>
                         <outlet property="createNewItemButton" destination="6Wy-wG-LSR" id="iT2-SK-iYY"/>
-                        <outlet property="editShoppingListTableView" destination="Dg6-dk-nnA" id="AEE-yz-b6L"/>
                         <outlet property="helpButton" destination="tma-dn-fku" id="DEq-fw-lzh"/>
                         <outlet property="multipleDeletionsButton" destination="H3S-mX-kxR" id="E6B-Ph-uSs"/>
+                        <outlet property="shoppingListTableView" destination="Dg6-dk-nnA" id="AEE-yz-b6L"/>
                         <outlet property="viewTitleLabel" destination="zwj-Md-Zw5" id="6Ko-uu-3Vk"/>
                     </connections>
                 </viewController>

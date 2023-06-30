@@ -62,6 +62,7 @@ class ShoppingListTableViewCellController: UITableViewCell  {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        
     }
 
     // MARK: - awakeFromNib

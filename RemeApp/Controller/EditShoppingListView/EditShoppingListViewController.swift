@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 /// F-買い物リスト編集
 class EditShoppingListViewController: UIViewController {
@@ -22,19 +21,11 @@ class EditShoppingListViewController: UIViewController {
     /// 画面タイトルラベル
     @IBOutlet private weak var viewTitleLabel: UILabel!
     /// 買い物リストを表示
-    @IBOutlet private weak var editShoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView!
     /// 新規作成ボタン
     @IBOutlet private weak var createNewItemButton: UIButton!
     /// 編集モードのフラグ
     private var isEditingMode: Bool = false
-    /// お使いデータのインスタンス化
-    private let errandData = ErrandDataModel()
-    /// お使いデータ
-    private var errandDataList: [ErrandDataModel] = []
-    /// Realmから取得したErrandDataModelの結果セットを保持するプロパティ
-    private var errandDataModel: Results<ErrandDataModel>?
-    /// Realmの監視用トークン
-    private var notificationToken: NotificationToken?
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
@@ -84,9 +75,9 @@ class EditShoppingListViewController: UIViewController {
     /// 複数削除モードを中断して終了する
     @IBAction private func isCancelEdit(_ sender: Any) {
         // 選択された行のIndexPathの配列を取得し、一つ一つのIndexPathに対して以下の処理を実行する。
-        editShoppingListTableView.indexPathsForSelectedRows?.forEach {
+        shoppingListTableView.indexPathsForSelectedRows?.forEach {
             // TableViewで選択されている行の選択を解除する
-            editShoppingListTableView.deselectRow(at: $0, animated: true)
+            shoppingListTableView.deselectRow(at: $0, animated: true)
         }
         isEditingMode = false
     }
@@ -112,10 +103,7 @@ class EditShoppingListViewController: UIViewController {
     @objc func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            // ネットワーク状況が変わったらTableViewを再読み込み
-            self.editShoppingListTableView.reloadData()
-//            if !NetworkMonitor.shared.isConnected {
-//            }
+            self.shoppingListTableView.reloadData()
         }
     }
 
@@ -136,10 +124,10 @@ class EditShoppingListViewController: UIViewController {
 
     /// UITableViewの初期設定関連
     private func setTableVIew() {
-        editShoppingListTableView.allowsMultipleSelectionDuringEditing = true
-        editShoppingListTableView.dataSource = self
-        editShoppingListTableView.delegate = self
-        editShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+        shoppingListTableView.allowsMultipleSelectionDuringEditing = true
+        shoppingListTableView.dataSource = self
+        shoppingListTableView.delegate = self
+        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                            forCellReuseIdentifier: "ShoppingListTableViewCell")
     }
 
@@ -158,6 +146,7 @@ class EditShoppingListViewController: UIViewController {
     }
     /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setMyShoppingItemObserver() {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getMyShoppingItemObserver(
             listener: &FirestoreManager.shared.editShoppingListMyItemListener,
@@ -167,11 +156,13 @@ class EditShoppingListViewController: UIViewController {
                 print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
     }
 
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getOtherShoppingItemObserver(
             listener: &FirestoreManager.shared.editShoppingListOtherItemListener,
@@ -181,6 +172,8 @@ class EditShoppingListViewController: UIViewController {
                 print("他人の買い物リストの取得を開始")
                 self.otherShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
+
             })
     }
 
@@ -220,7 +213,7 @@ class EditShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue > b.salesFloorRawValue
             }
         }
-        editShoppingListTableView.reloadData()
+        shoppingListTableView.reloadData()
     }
 
     /// 買い物ルートを右回りに選択された場合の買い物リストを並び替える
@@ -234,7 +227,7 @@ class EditShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
         }
-        editShoppingListTableView.reloadData()
+        shoppingListTableView.reloadData()
     }
 
 
@@ -254,9 +247,9 @@ class EditShoppingListViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         let section = 0
         // 0からTableViewの指定されたセクションの行数未満までの整数rowに対して以下の処理を実行する。
-        for row in 0..<editShoppingListTableView.numberOfRows(inSection: section) {
+        for row in 0..<shoppingListTableView.numberOfRows(inSection: section) {
             // TableViewのIndexPathで指定された位置のセルをShoppingListTableViewCellControllerにダウンキャストし、cellに代入する。
-            if let cell = editShoppingListTableView.cellForRow(at: IndexPath(row: row, section: section))
+            if let cell = shoppingListTableView.cellForRow(at: IndexPath(row: row, section: section))
                 as? ShoppingListTableViewCellController {
                 cell.checkBoxButton.isHidden = editing
             }
@@ -281,13 +274,13 @@ class EditShoppingListViewController: UIViewController {
             helpButton.isHidden = false
         }
         // 編集モード時のみ複数選択可能とする
-        editShoppingListTableView.isEditing = editing
+        shoppingListTableView.isEditing = editing
     }
 
     /// 選択したセルの行を削除する
     private func deleteRows() {
         // ユーザーが何も選択していない場合には抜ける
-        guard let selectedIndexPaths = editShoppingListTableView.indexPathsForSelectedRows else { return }
+        guard let selectedIndexPaths = shoppingListTableView.indexPathsForSelectedRows else { return }
         // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
         let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
         // for-in文で一つずつ削除
@@ -303,7 +296,7 @@ class EditShoppingListViewController: UIViewController {
                 // ローカルデータmyShoppingItemList配列から対象を削除
                 allShoppingItemList.remove(at: index)
                 // tableViewの行を視覚的に削除
-                editShoppingListTableView.deleteRows(at: [indexPathList], with: .left)
+                shoppingListTableView.deleteRows(at: [indexPathList], with: .left)
             }
         }
     }
@@ -336,21 +329,6 @@ class EditShoppingListViewController: UIViewController {
     }
 }
 
-//                    let realm = try! Realm()
-//                    try! realm.write {
-//                        // 降順に繰り返す
-//                        for indexPathList in sortedIndexPaths {
-//                            // indexPathListに該当するidのErrandDataModelを取得
-//                            let errandData = realm.objects(ErrandDataModel.self).filter("id = %@",
-//                                                                                        errandDataList[indexPathList.row].id).first
-//                            // 削除
-//                            realm.delete(errandData!)
-//                            // indexPathListに該当するerrandDataListの配列の要素を削除
-//                            errandDataList.remove(at: indexPathList.row)
-//                        }
-//                    }
-
-
 // MARK: - UITableViewDataSource&Delegate
 extension EditShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// editShoppingListTableViewに表示するcell数を指定
@@ -361,7 +339,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
 
     /// editShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = editShoppingListTableView.dequeueReusableCell(
+        if let cell = shoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             // 編集モードの状態によってチェックボックスの表示を切り替える
             cell.checkBoxButton.isHidden = isEditingMode
@@ -375,14 +353,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                                  salesFloorRawValue: myData.salesFloorRawValue,
                                  supplement: myData.supplement,
                                  image: setImage)
-            //            let errandDataModel: ErrandDataModel = errandDataList[indexPath.row]
-            //            cell.setShoppingList(isCheckBox: errandDataModel.isCheckBox,
-            //                                 nameOfItem: errandDataModel.nameOfItem,
-            //                                 numberOfItem: errandDataModel.numberOfItem,
-            //                                 unit: errandDataModel.unit,
-            //                                 salesFloorRawValue: errandDataModel.salesFloorRawValue,
-            //                                 supplement: errandDataModel.supplement ?? "",
-            //                                 image: errandDataModel.getImage())
+
             return cell
         }
         return UITableViewCell()
@@ -396,7 +367,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     ///     - EditItemViewにプッシュ遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 編集モード時の処理を行わない
-        guard !editShoppingListTableView.isEditing else { return }
+        guard !shoppingListTableView.isEditing else { return }
         // 通常時の処理
         let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
         let editItemVC = storyboard.instantiateViewController(
@@ -406,9 +377,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
         editItemVC.configurer(detail: shoppingItemData, image: image)
         editItemVC.isNewItem = false // 新規編集フラグをオフにする
-        //        let errandData = errandDataList[indexPath.row]
-        //        editItemVC.configurer(detail: errandData)
-        editShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        shoppingListTableView.deselectRow(at: indexPath, animated: true)
         present(editItemVC, animated: true)
     }
 
@@ -425,7 +394,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             AlertController.showAlert(tittle: "エラー", errorMessage: "オフライン中は画像データのあるリストを削除できません")
         } else {
             // 通常時の処理
-            // myShoppingItemListは削除する
             allShoppingItemList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -434,13 +402,9 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     /// セルの削除が行われた後に呼び出される、ここでFirebase関連の削除を行う
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         // デリートアイテムがない場合はリターン
-        guard !deleteShoppingItem.isEmpty else {
-            return
-        }
+        guard !deleteShoppingItem.isEmpty else { return }
         // 選択したセルのインデックス番号を取得
-        guard let target = deleteShoppingItem.first, let id = target.id else {
-            return
-        }
+        guard let target = deleteShoppingItem.first, let id = target.id else { return }
         // FirebaseStorageの写真データを削除
         StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
             guard let self else { return }
@@ -460,7 +424,7 @@ extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// - チェックしたものは下に移動する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
         // 操作中のcellの行番号を取得
-        guard let indexPath = editShoppingListTableView.indexPath(for: cell) else { return }
+        guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる
         let isChecked = !allShoppingItemList[indexPath.row].isCheckBox
         // 変更対象のデータのドキュメントIDを取得
