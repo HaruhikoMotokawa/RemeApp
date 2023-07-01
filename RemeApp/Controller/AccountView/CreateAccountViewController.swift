@@ -42,6 +42,7 @@ class CreateAccountViewController: UIViewController {
     @IBAction private func createAccount(_ sender: Any) {
         // 全体をメインスレッドで行うことを明示
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             // 実行内容
             do {
                 // アカウント名、メール、パスワードの入力がnilであれば抜ける
@@ -60,15 +61,17 @@ class CreateAccountViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                     Task {
                         await self.delegate?.updateUserInfoFromCreateAccountView()
+                        IndicatorController.shared.dismissIndicator()
                     }
                 })
             } catch let error {
                 // エラーメッセージを生成
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                 // アラート表示
+                IndicatorController.shared.dismissIndicator()
                 AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                 print(error.localizedDescription)
-            }
+            }            
         }
     }
 

@@ -116,6 +116,7 @@ class AccountViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
         // サインアウトの実行
         let signOutAction = UIAlertAction(title: "ログアウト", style: .destructive, handler: { [weak self] (action) in
+            IndicatorController.shared.startIndicator()
             Task { @MainActor in
                 do {
                     guard let self else { return }
@@ -126,6 +127,8 @@ class AccountViewController: UIViewController {
                     }
                     // ログアウト
                     try AccountManager.shared.signOut()
+                    // 既存のキャッシュを全て削除
+                    Cache.shared.deleteAllCache()
                     // 匿名認証でログイン
                     try await AccountManager.shared.signInAnonymity()
                     // 現在のuidを取得
@@ -146,6 +149,7 @@ class AccountViewController: UIViewController {
                     print(error.localizedDescription)
                 }
             }
+            IndicatorController.shared.dismissIndicator()
         })
         alert.addAction(cancelAction)
         alert.addAction(signOutAction)
@@ -180,12 +184,15 @@ class AccountViewController: UIViewController {
         let deleteAction = UIAlertAction(title: "削除", style: .destructive, handler: { [weak self] (action) in
             Task { @MainActor in
                 do {
+                    IndicatorController.shared.startIndicator()
                     guard let self else { return }
                     // オフラインだったらアラート出して終了
                     guard NetworkMonitor.shared.isConnected else {
                         AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                         return
                     }
+                    // 既存のキャッシュを全て削除
+                    Cache.shared.deleteAllCache()
                     // ユーザーのUidを取得
                     let deleteUid = AccountManager.shared.getAuthStatus()
                     // 自身が作成した買い物リストを削除
@@ -210,11 +217,13 @@ class AccountViewController: UIViewController {
                         uid: uid)
                     // 各ラベルのユーザー情報を更新
                     await self.setUserInfo()
+                    IndicatorController.shared.dismissIndicator()
                     // アラート
                     AlertController.showAlert(tittle: "完了", errorMessage: "アカウントを削除しました")
                 } catch let error {
                     // エラーメッセージを生成
                     let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+                    IndicatorController.shared.dismissIndicator()
                     // アラート表示
                     AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                     print(error.localizedDescription)
@@ -333,6 +342,7 @@ class AccountViewController: UIViewController {
     /// ユーザー情報を表示する非同期処理を内包するメソッド
     private func setUserInfo() async {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             // ログイン中のuidを取得
             let uid = AccountManager.shared.getAuthStatus()
             do {
@@ -345,7 +355,8 @@ class AccountViewController: UIViewController {
                     passwordLabel.text = userInfo?.password
                     uidLabel.text = userInfo?.id
                     // アカウントでサインインの場合
-                    setButtonsWithSignIn()
+                    self.setButtonsWithSignIn()
+                    IndicatorController.shared.dismissIndicator()
                 } else {
                     // 匿名認証であればnameは""で登録されている
                     nameLabel.text = "匿名"
@@ -354,6 +365,7 @@ class AccountViewController: UIViewController {
                     uidLabel.text = "登録なし"
                     // 匿名認証での場合
                     setButtonsWithAnonymous()
+                    IndicatorController.shared.dismissIndicator()
                 }
             } catch {
                 print("取得失敗")
@@ -361,9 +373,11 @@ class AccountViewController: UIViewController {
                 mailLabel.text = "エラーにより読み込めません"
                 passwordLabel.text = "エラーにより読み込めません"
                 uidLabel.text = "エラーにより読み込めません"
+                IndicatorController.shared.dismissIndicator()
             }
         }
     }
+
 
     /// 匿名認証でログインしている状態でのボタン設定、合計７個
     /// - アカウント作成とログインボタンを有効化

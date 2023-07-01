@@ -13,7 +13,7 @@ class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場の買い物リストを表示
-    @IBOutlet private weak var salesFloorShoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView!
 
     // MARK: - property
     /// お使いデータ
@@ -60,7 +60,7 @@ class SalesFloorShoppingListViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // ネットワーク状況が変わったらTableViewを再読み込み
-            self.salesFloorShoppingListTableView.reloadData()
+            self.shoppingListTableView.reloadData()
         }
     }
 
@@ -71,6 +71,7 @@ class SalesFloorShoppingListViewController: UIViewController {
     }
     /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setMyShoppingItemObserver() {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getMyShoppingItemObserverSearchSalesFloor(
             uid: uid,
@@ -80,10 +81,12 @@ class SalesFloorShoppingListViewController: UIViewController {
                 print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
     }
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getOtherShoppingItemObserverSearchSalesFloor(
             uid: uid,
@@ -93,6 +96,7 @@ class SalesFloorShoppingListViewController: UIViewController {
                 print("他人の買い物リストの取得を開始")
                 self.otherShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
     }
 
@@ -113,7 +117,7 @@ class SalesFloorShoppingListViewController: UIViewController {
                 return a.salesFloorRawValue < b.salesFloorRawValue
             }
         }
-        salesFloorShoppingListTableView.reloadData()
+        shoppingListTableView.reloadData()
     }
 
     /// 全てのセルがチェックされている場合にアラートを表示、OKをタップして一つ前の画面に戻る
@@ -130,9 +134,9 @@ class SalesFloorShoppingListViewController: UIViewController {
     }
     /// salesFloorShoppingListTableView関連の設定
     private func setTableView() {
-        salesFloorShoppingListTableView.dataSource = self
-        salesFloorShoppingListTableView.delegate = self
-        salesFloorShoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+        shoppingListTableView.dataSource = self
+        shoppingListTableView.delegate = self
+        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
                                                  forCellReuseIdentifier: "ShoppingListTableViewCell")
     }
 
@@ -146,18 +150,44 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     }
     /// salesFloorShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = salesFloorShoppingListTableView.dequeueReusableCell(
+        if let cell = shoppingListTableView.dequeueReusableCell(
             withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
-            let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
-            cell.setShoppingList(isCheckBox: myData.isCheckBox,
-                                 nameOfItem: myData.nameOfItem,
-                                 numberOfItem: myData.numberOfItem,
-                                 unit: myData.unit,
-                                 salesFloorRawValue: myData.salesFloorRawValue,
-                                 supplement: myData.supplement,
-                                 image: setImage )
+            if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: nil) // imageはnil
+            } else { // 画像がある場合
+                let primaryImage = UIImage(systemName: "photo.artframe") // 一旦仮表示のイメージ設置
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: primaryImage)
+                // 写真データをダウンロードまたはキャッシュから取得
+                Cache.shared.getImage(photoURL: myData.photoURL) { [weak self] image in
+                    guard let self else { return }
+                    DispatchQueue.main.async {
+                        if let cell = self.shoppingListTableView.cellForRow(
+                            at: indexPath) as? ShoppingListTableViewCellController {
+                            cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                                 nameOfItem: myData.nameOfItem,
+                                                 numberOfItem: myData.numberOfItem,
+                                                 unit: myData.unit,
+                                                 salesFloorRawValue: myData.salesFloorRawValue,
+                                                 supplement: myData.supplement,
+                                                 image: image )
+                        }
+                    }
+                }
+            }
             return cell
         }
         return UITableViewCell()
@@ -171,10 +201,10 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
         let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        let targetPhotoURL = shoppingItemData.photoURL
-        let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
-        detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
-        salesFloorShoppingListTableView.deselectRow(at: indexPath, animated: true)
+        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
+            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
+        }
+        shoppingListTableView.deselectRow(at: indexPath, animated: true)
         detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
         self.present(detailShoppingListVC, animated: true)
     }
@@ -189,7 +219,7 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
     /// - テーブルビューを再読み込みして表示する
     func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
         // 操作中のcellの行番号を取得
-        guard let indexPath = salesFloorShoppingListTableView.indexPath(for: cell) else { return }
+        guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる
         let isChecked = !allShoppingItemList[indexPath.row].isCheckBox
         // 変更対象のデータのドキュメントIDを取得

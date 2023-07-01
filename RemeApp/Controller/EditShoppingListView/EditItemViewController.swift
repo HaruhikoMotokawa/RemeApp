@@ -440,6 +440,7 @@ extension EditItemViewController {
     ///  新規作成、保存の処理
     private func saveData(selectedNumberOfItem: String, selectedUnit: String, uid: String) async {
         do {
+            IndicatorController.shared.startIndicatorToModal()
             if !NetworkMonitor.shared.isConnected {
                 photoPathImageView.image = nil
             }
@@ -475,12 +476,14 @@ extension EditItemViewController {
                 // メインスレッドで実行を宣言
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
+                    IndicatorController.shared.dismissIndicator()
                     // 全ての処理が終わったら画面を閉じる
                     self.dismiss(animated: true)
                 }
             })
         } catch let error {
             let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
+            IndicatorController.shared.dismissIndicator()
             AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
             print(error)
         }
@@ -489,6 +492,7 @@ extension EditItemViewController {
     /// 編集したデータの保存処理
     private func upDateData(selectedNumberOfItem: String, selectedUnit: String, uid: String) {
         // オフライン時に写真の変更をしていた場合は抜ける
+        IndicatorController.shared.startIndicatorToModal()
         if !NetworkMonitor.shared.isConnected && isChangePhoto {
             dismiss(animated: true)
             AlertController.showAlert(tittle: "エラー", errorMessage: "保存処理に問題が出る可能性があるため中断しました")
@@ -496,6 +500,7 @@ extension EditItemViewController {
         }
         // 編集当初の画像と追加処理時の画像が同一だったら
         if !isChangePhoto {
+
             // 保存するリストを作成
             let addItem:ShoppingItemModel = ShoppingItemModel(
                 id: id,
@@ -506,17 +511,18 @@ extension EditItemViewController {
                 salesFloorRawValue: selectedSalesFloorRawValue!,
                 supplement: supplementTextView.text ?? "",
                 photoURL: photoURL)
-
             // データベースに編集内容を保存
             FirestoreManager.shared.upDateItem(addItem: addItem)
             // メインスレッドで実行を宣言
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
+                IndicatorController.shared.dismissIndicator()
                 // 全ての処理が終わったら画面を閉じる
                 self.dismiss(animated: true)
             }
-        } else {
-            // 編集当初の画像と追加処理時の画像が違う場合は新たにアップロード処理
+        } else { // 編集当初の画像と追加処理時の画像が違う場合、または新たに写真を追加した場合
+            // キャッシュを削除
+            Cache.shared.deleteCache(photoURL: photoURL)
             // 既存の写真データを削除
             StorageManager.shared.deletePhoto(photoURL: photoURL)
             // 写真をアップロードして、ダウンロードURLを取得
@@ -541,13 +547,12 @@ extension EditItemViewController {
                     salesFloorRawValue: self.selectedSalesFloorRawValue!,
                     supplement: self.supplementTextView.text ?? "",
                     photoURL: photoURL)
-
                 // データベースに編集内容を保存
                 FirestoreManager.shared.upDateItem(addItem: addItem)
-
                 // メインスレッドで実行を宣言
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
+                    IndicatorController.shared.dismissIndicator()
                     // 全ての処理が終わったら画面を閉じる
                     self.dismiss(animated: true)
                 }
@@ -691,6 +696,9 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         deletePhotoButton.setEnable()
         selectPhotoButton.setDisable()
         photoBackgroundImage.isHidden = true
+        if !isNewItem {
+            isChangePhoto = true
+        }
         dismiss(animated: true)
     }
 

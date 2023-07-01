@@ -100,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         realm.add(customSalesFloors)
                     }
                 }
+        sleep(1)
         return true
     }
 

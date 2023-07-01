@@ -57,45 +57,52 @@ class ShareSettingsViewController: UIViewController {
     /// １番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteFirstSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             // オフラインだったらアラート出して終了
             guard NetworkMonitor.shared.isConnected else {
                 AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                 return
             }
-            await deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
-            await setSharedUsers()
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// ２番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteSecondSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             // オフラインだったらアラート出して終了
             guard NetworkMonitor.shared.isConnected else {
                 AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                 return
             }
-            await deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
-            await setSharedUsers()
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// ３番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteThirdSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             // オフラインだったらアラート出して終了
             guard NetworkMonitor.shared.isConnected else {
                 AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                 return
             }
-            await deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
-            await setSharedUsers()
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// inputUIDTextFieldの入力内容を使って共有者に追加するメソッド
     @IBAction private func addSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             do {
                 // オフラインだったらアラート出して終了
                 guard NetworkMonitor.shared.isConnected else {
@@ -103,15 +110,15 @@ class ShareSettingsViewController: UIViewController {
                     return
                 }
                 // 入力された値がないかnilチェック
-                guard let inputUid = inputUIDTextField.text else { return }
+                guard let inputUid = self.inputUIDTextField.text else { return }
                 // ユーザーのuidを取得
                 let uid = AccountManager.shared.getAuthStatus()
                 // 入力したuidのチェックと追加処理
                 try await FirestoreManager.shared.addSharedUsers(inputUid: inputUid, uid: uid)
                 // 現在作成済みの自分の買い物リストを取得
-                myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
+                self.myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
                 // 取得した自分の買い物リストの全てにinputUidを追加する
-                let updateItemList = myShoppingItemList.map { item -> ShoppingItemModel in
+                let updateItemList = self.myShoppingItemList.map { item -> ShoppingItemModel in
                     var newItem = item
                     newItem.sharedUsers.append(inputUid)
                     return newItem
@@ -122,10 +129,10 @@ class ShareSettingsViewController: UIViewController {
                         documentID: item.id, sharedUsersUid: item.sharedUsers)
                 }
                 // 共有者のラベルを更新
-                await setSharedUsers()
+                await self.setSharedUsers()
                 // uidの入力欄を空白に戻す
-                inputUIDTextField.text = ""
-                setAddButton()
+                self.inputUIDTextField.text = ""
+                self.setAddButton()
                 // 完了のアラート
                 AlertController.showAlert(tittle: "完了", errorMessage: "登録しました")
             } catch FirestoreError.notFound {
@@ -136,6 +143,7 @@ class ShareSettingsViewController: UIViewController {
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
                 AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
             }
+            IndicatorController.shared.dismissIndicator()
         }
     }
 

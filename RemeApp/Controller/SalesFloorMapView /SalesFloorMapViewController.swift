@@ -198,6 +198,7 @@ class SalesFloorMapViewController: UIViewController {
     }
     /// 自分の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setMyShoppingItemObserver() {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getMyShoppingItemObserver(
             listener: &FirestoreManager.shared.salesFloorMapMyItemListener,
@@ -207,11 +208,13 @@ class SalesFloorMapViewController: UIViewController {
                 print("自分の買い物リストの取得を開始")
                 self.myShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
     }
 
     /// 共有者の買い物リストの変更を監視、データを受け取り表示を更新する
     private func setOtherShoppingItemObserver()  {
+        IndicatorController.shared.startIndicator()
         let uid = AccountManager.shared.getAuthStatus()
         FirestoreManager.shared.getOtherShoppingItemObserver(
             listener: &FirestoreManager.shared.salesFloorMapOtherItemListener,
@@ -221,6 +224,7 @@ class SalesFloorMapViewController: UIViewController {
                 print("他人の買い物リストの取得を開始")
                 self.otherShoppingItemList = itemList
                 self.combineShoppingItems()
+                IndicatorController.shared.dismissIndicator()
             })
     }
 
