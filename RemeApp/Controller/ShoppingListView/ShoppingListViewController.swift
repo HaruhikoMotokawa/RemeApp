@@ -252,8 +252,8 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                                      salesFloorRawValue: myData.salesFloorRawValue,
                                      supplement: myData.supplement,
                                      image: primaryImage)
-                // 非同期でダウンロードを開始
-                StorageManager.shared.setDownloadImage(photoURL: myData.photoURL) { [weak self] image in
+                // 写真データをダウンロードまたはキャッシュから取得
+                Cache.shared.getImage(photoURL: myData.photoURL) { [weak self] image in
                     guard let self else { return }
                     DispatchQueue.main.async {
                         if let cell = self.shoppingListTableView.cellForRow(
@@ -282,8 +282,9 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
         let detailShoppingListVC = storyboard.instantiateViewController(
             withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        let image = StorageManager.shared.setImageWithUrl(photoURL: shoppingItemData.photoURL)
-        detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
+        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
+            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
+        }
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
         self.present(detailShoppingListVC, animated: true)

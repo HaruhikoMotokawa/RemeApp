@@ -43,6 +43,7 @@
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
+		7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888B8A72A4FDAA60068A2CF /* Cache.swift */; };
 		7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
 		7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */; };
@@ -133,6 +134,7 @@
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
+		7888B8A72A4FDAA60068A2CF /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSelectedSalesFloorViewController.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
 				784669732A3DDB7D00C175EB /* AlertController.swift */,
 				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
+				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
 				78BAAB1B2A394562000C9627 /* API */,
 				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
@@ -669,6 +672,7 @@
 				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */,
 				7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */,
+				7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */,
 				7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,

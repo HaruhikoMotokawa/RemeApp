@@ -53,6 +53,7 @@ final class StorageManager {
         }
     }
 
+    // TODO: 後で削除
     /// ダウンロードURLからUIImageに変換
     internal func setImageWithUrl(photoURL: String) -> UIImage? {
         //　もしphotoURLが""でないのならURLとして変換
@@ -75,23 +76,33 @@ final class StorageManager {
         }
     }
 
+    // TODO: 後で削除
     /// ダウンロードURLからUIImageに変換
     internal func setDownloadImage(photoURL: String, completion: @escaping (UIImage?) -> Void) {
+        // もしimageUrlがURL型に変換できなかったら抜ける
         guard let imageUrl = URL(string: photoURL) else {
             completion(nil)
             return
         }
-
+        // オフラインだったらシステムの画像を返却
+        guard NetworkMonitor.shared.isConnected else {
+            let primaryImage = UIImage(systemName: "photo.artframe")
+            completion(primaryImage)
+            return
+        }
+        //URLSessionのデータタスクを開始
         let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+            // データがない、、またはエラーだった場合は抜ける
             guard let data, error == nil else {
                 completion(nil)
                 print(error ?? "不明なエラー")
                 return
             }
+            // 取得したデータをUIImageにセット
             let setImage = UIImage(data: data)
-            completion(setImage)
+            completion(setImage) // 画像を返却
         }
-        task.resume()
+        task.resume() // 全体のタスクを終了
     }
 
     /// 写真をStorageから削除
