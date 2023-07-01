@@ -500,6 +500,7 @@ extension EditItemViewController {
         }
         // 編集当初の画像と追加処理時の画像が同一だったら
         if !isChangePhoto {
+
             // 保存するリストを作成
             let addItem:ShoppingItemModel = ShoppingItemModel(
                 id: id,
@@ -519,8 +520,9 @@ extension EditItemViewController {
                 // 全ての処理が終わったら画面を閉じる
                 self.dismiss(animated: true)
             }
-        } else {
-            // 編集当初の画像と追加処理時の画像が違う場合は新たにアップロード処理
+        } else { // 編集当初の画像と追加処理時の画像が違う場合、または新たに写真を追加した場合
+            // キャッシュを削除
+            Cache.shared.deleteCache(photoURL: photoURL)
             // 既存の写真データを削除
             StorageManager.shared.deletePhoto(photoURL: photoURL)
             // 写真をアップロードして、ダウンロードURLを取得
@@ -694,6 +696,9 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         deletePhotoButton.setEnable()
         selectPhotoButton.setDisable()
         photoBackgroundImage.isHidden = true
+        if !isNewItem {
+            isChangePhoto = true
+        }
         dismiss(animated: true)
     }
 

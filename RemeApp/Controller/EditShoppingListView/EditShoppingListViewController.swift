@@ -306,6 +306,8 @@ class EditShoppingListViewController: UIViewController {
         // 削除対象の配列全てにアクセス
         deleteShoppingItem.forEach { target in
             guard let id = target.id else { return }
+            // キャッシュを削除
+            Cache.shared.deleteCache(photoURL: target.photoURL)
             // FirebaseStorageから写真を削除
             StorageManager.shared.deletePhoto(photoURL: target.photoURL, completion: { error in })
             // firestoreからドキュメント削除
@@ -345,15 +347,40 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
             cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
-            let setImage = StorageManager.shared.setImageWithUrl(photoURL: myData.photoURL)
-            cell.setShoppingList(isCheckBox: myData.isCheckBox,
-                                 nameOfItem: myData.nameOfItem,
-                                 numberOfItem: myData.numberOfItem,
-                                 unit: myData.unit,
-                                 salesFloorRawValue: myData.salesFloorRawValue,
-                                 supplement: myData.supplement,
-                                 image: setImage)
-
+            if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: nil) // imageはnil
+            } else { // 画像がある場合
+                let primaryImage = UIImage(systemName: "photo.artframe") // 一旦仮表示のイメージ設置
+                cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                     nameOfItem: myData.nameOfItem,
+                                     numberOfItem: myData.numberOfItem,
+                                     unit: myData.unit,
+                                     salesFloorRawValue: myData.salesFloorRawValue,
+                                     supplement: myData.supplement,
+                                     image: primaryImage)
+                // 写真データをダウンロードまたはキャッシュから取得
+                Cache.shared.getImage(photoURL: myData.photoURL) { [weak self] image in
+                    guard let self else { return }
+                    DispatchQueue.main.async {
+                        if let cell = self.shoppingListTableView.cellForRow(
+                            at: indexPath) as? ShoppingListTableViewCellController {
+                            cell.setShoppingList(isCheckBox: myData.isCheckBox,
+                                                 nameOfItem: myData.nameOfItem,
+                                                 numberOfItem: myData.numberOfItem,
+                                                 unit: myData.unit,
+                                                 salesFloorRawValue: myData.salesFloorRawValue,
+                                                 supplement: myData.supplement,
+                                                 image: image )
+                        }
+                    }
+                }
+            }
             return cell
         }
         return UITableViewCell()
@@ -373,9 +400,9 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         let editItemVC = storyboard.instantiateViewController(
             withIdentifier: "EditItemView") as! EditItemViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        let targetPhotoURL = shoppingItemData.photoURL
-        let image = StorageManager.shared.setImageWithUrl(photoURL: targetPhotoURL)
-        editItemVC.configurer(detail: shoppingItemData, image: image)
+        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
+            editItemVC.configurer(detail: shoppingItemData, image: image)
+        }
         editItemVC.isNewItem = false // 新規編集フラグをオフにする
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
         present(editItemVC, animated: true)
@@ -405,6 +432,8 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         guard !deleteShoppingItem.isEmpty else { return }
         // 選択したセルのインデックス番号を取得
         guard let target = deleteShoppingItem.first, let id = target.id else { return }
+        // キャッシュの削除
+        Cache.shared.deleteCache(photoURL: target.photoURL)
         // FirebaseStorageの写真データを削除
         StorageManager.shared.deletePhoto(photoURL: target.photoURL) { [weak self] error in
             guard let self else { return }

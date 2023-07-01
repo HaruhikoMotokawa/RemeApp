@@ -127,6 +127,8 @@ class AccountViewController: UIViewController {
                     }
                     // ログアウト
                     try AccountManager.shared.signOut()
+                    // 既存のキャッシュを全て削除
+                    Cache.shared.deleteAllCache()
                     // 匿名認証でログイン
                     try await AccountManager.shared.signInAnonymity()
                     // 現在のuidを取得
@@ -189,6 +191,8 @@ class AccountViewController: UIViewController {
                         AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                         return
                     }
+                    // 既存のキャッシュを全て削除
+                    Cache.shared.deleteAllCache()
                     // ユーザーのUidを取得
                     let deleteUid = AccountManager.shared.getAuthStatus()
                     // 自身が作成した買い物リストを削除

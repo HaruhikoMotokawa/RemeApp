@@ -11,12 +11,12 @@ import UIKit
 final class Cache: NSCache<AnyObject, AnyObject> {
     
     static let shared = Cache()
-
     private let cache = NSCache<NSString, UIImage>()
-
     private override init() {}
 
-    func getImage(photoURL url: String, completion: @escaping (UIImage?) -> Void) {
+    /// ダウンロードURLからUIImageを取得して返却する
+    /// キャッシュにあればそこから返却、なければダウンロードしてキャッシュに保存しつつ返却
+    internal func getImage(photoURL url: String, completion: @escaping (UIImage?) -> Void) {
         // すでにキャッシュされている画像があればcachedImageを返却
         if let cachedImage = cache.object(forKey: url as NSString) {
             print("👍🏻キャッシュ画像を表示するで")
@@ -49,31 +49,17 @@ final class Cache: NSCache<AnyObject, AnyObject> {
         }
     }
 
-    /// ダウンロードURLからUIImageに変換
-    internal func setDownloadImage(photoURL: String, completion: @escaping (UIImage?) -> Void) {
-        // もしimageUrlがURL型に変換できなかったら抜ける
-        guard let imageUrl = URL(string: photoURL) else {
-            completion(nil)
+    /// キャッシュに保存された画像データを削除
+    internal func deleteCache(photoURL url: String) {
+        if url.isEmpty {
             return
         }
-        // オフラインだったらシステムの画像を返却
-        guard NetworkMonitor.shared.isConnected else {
-            let primaryImage = UIImage(systemName: "photo.artframe")
-            completion(primaryImage)
-            return
-        }
-        //URLSessionのデータタスクを開始
-        let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-            // データがない、、またはエラーだった場合は抜ける
-            guard let data, error == nil else {
-                completion(nil)
-                print(error ?? "不明なエラー")
-                return
-            }
-            // 取得したデータをUIImageにセット
-            let setImage = UIImage(data: data)
-            completion(setImage) // 画像を返却
-        }
-        task.resume() // 全体のタスクを終了
+        cache.removeObject(forKey: url as NSString)
+        print("🗑️キャッシュ削除")
+    }
+
+    /// 全てのキャッシュを削除
+    internal func deleteAllCache() {
+        cache.removeAllObjects()
     }
 }
