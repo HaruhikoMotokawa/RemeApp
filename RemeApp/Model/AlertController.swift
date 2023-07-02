@@ -38,5 +38,23 @@ class AlertController {
         view.present(alert, animated: true)
     }
 
+    static func showExitAlert(tittle: String, message: String,
+                              completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: tittle, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            // アプリを終了する
+            exit(0)
+        }))
+        // 現在アクティブな最初のシーンを取得
+        if let scene =  UIApplication.shared.connectedScenes.first,
+           // シーンのデリゲートをSceneDelegateにキャストして取得
+           let delegate = scene.delegate as? SceneDelegate,
+           // 表示されている最前面の画面に関連付けられたビューコントローラを取得
+           let rootViewController = delegate.window?.rootViewController {
+            // rootViewControllerにアラートを表示
+            rootViewController.present(alert, animated: true)
+        }
+    }
+
 }
 

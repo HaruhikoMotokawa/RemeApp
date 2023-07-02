@@ -106,7 +106,6 @@ class ShoppingListViewController: UIViewController {
             ⑤ 買い物リスト作成と編集は
                できますが上限があります
             """)
-
             }
         }
     }

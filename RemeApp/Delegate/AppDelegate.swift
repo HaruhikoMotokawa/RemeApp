@@ -17,9 +17,10 @@ import FirebaseStorage
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
-    [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                     [UIApplication.LaunchOptionsKey: Any]?)  -> Bool {
         // ネットワークの監視を開始
         NetworkMonitor.shared.startMonitoring()
+
         // Firebaseの初期設定
         FirebaseApp.configure()
    
@@ -37,8 +38,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // バージョンが異なる場合の処理
         if let savedVersionArray = savedVersion?.components(separatedBy: ".").compactMap({ Int($0) }),
            savedVersionArray.first == 1 {
-            // 保存されたバージョンが1.x.xの場合の処理
-            print("前バージョンが１なのでFirestore移行処理するで")
+            // もしオフラインだったらアラート出してアプリを強制終了
+            if !NetworkMonitor.shared.isConnected {
+                AlertController.showExitAlert(tittle: "オフラインです", message: "初期設定にはオンライン環境が必要です。")
+            }
+            Task { @MainActor in
+                do {
+                    // 保存されたバージョンが1.x.xの場合の処理
+                    print("前バージョンが１なのでFirestore移行処理するで")
+                    try await RealmFirebaseMigrationManager.shared.migration()
+                    // 保存されたバージョンが1.x.xの場合の処理
+                    print("前バージョンが１なのでFirestore移行処理するで")
+                } catch let error {
+                    let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
+                    // アラート表示
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    print(error.localizedDescription)
+                }
+            }
         }
         // 現在のバージョンをUserDefaultsに保存
         VersionManager.shared.saveCurrentVersion()
@@ -53,9 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let shoppingStartPositionKey = "shoppingStartPositionKey"
         let isInitialLaunch = UserDefaults.standard.bool(forKey: "isInitialLaunch")
 
+        // アプリインストール後の初回起動時の処理
         if !isInitialLaunch {
             Task { @MainActor in
                 do {
+                    // もしオフラインだったらアラート出してアプリを強制終了
+                    if !NetworkMonitor.shared.isConnected {
+                        AlertController.showExitAlert(tittle: "オフラインです", message: "初期設定にはオンライン環境が必要です。")
+                    }
                     try await AccountManager.shared.signInAnonymity()
                     // 現在のuidを取得
                     let uid = AccountManager.shared.getAuthStatus()
@@ -73,7 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "isInitialLaunch")
             UserDefaults.standard.setValue(SalesFloorMapType.default.rawValue, forKey: useSalesFloorTypeKey)
             UserDefaults.standard.setValue(ShoppingStartPositionType.right.rawValue, forKey: shoppingStartPositionKey)
-
 
                     let realm = try! Realm()
                     // 17個のカスタム売り場データを作成
