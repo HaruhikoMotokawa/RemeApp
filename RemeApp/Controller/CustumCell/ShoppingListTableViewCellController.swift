@@ -44,8 +44,6 @@ class ShoppingListTableViewCellController: UITableViewCell  {
     weak var delegate: ShoppingListTableViewCellDelegate?
     /// チェックボックスのフラグ
     private var isChecked:Bool = false
-    /// お使いデータモデル
-    var errandDataList: Array<ErrandDataModel> = []
 
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 /// F-買い物リスト編集
 class EditShoppingListViewController: UIViewController {
 
@@ -35,7 +34,6 @@ class EditShoppingListViewController: UIViewController {
     private var allShoppingItemList: [ShoppingItemModel] = []
     /// デリートするショッピングアイテムをセットする.
     private var deleteShoppingItem: [ShoppingItemModel] = []
-
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -336,7 +334,6 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     /// editShoppingListTableViewに表示するcell数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allShoppingItemList.count
-        //        return errandDataList.count
     }
 
     /// editShoppingListTableViewに使用するcellの内容を指定

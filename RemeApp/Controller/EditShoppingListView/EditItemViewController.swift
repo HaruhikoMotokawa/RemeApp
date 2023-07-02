@@ -9,7 +9,6 @@ import UIKit
 import RealmSwift
 /// G-品目新規作成
 class EditItemViewController: UIViewController {
-
     // MARK: - property
 
     /// タイトル
@@ -48,8 +47,6 @@ class EditItemViewController: UIViewController {
     private var imageFilePath: URL?
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
-    /// お使いデータ
-    var errandData = ErrandDataModel()
     /// ドキュメントID
     private var id:String? = nil
     // 受け渡しようのisCheckBoxの現在の値
@@ -560,28 +557,6 @@ extension EditItemViewController {
         }
     }
 
-    /// 保存の処理(Realm)
-    //    private func saveData() {
-    //        // numberOfItemPickerViewで選択された値を取得
-    //        let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-    //        // numberOfItemPickerViewで選択された値を取得
-    //        let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-    //        // データベースに保存
-    //        let realm = try! Realm()
-    //        try! realm.write {
-    //            errandData.nameOfItem = nameOfItemTextField.text!
-    //            errandData.numberOfItem = selectedNumberOfItem
-    //            errandData.unit = selectedUnit
-    //            errandData.salesFloorRawValue = selectedSalesFloorRawValue!
-    //            if supplementTextView.text == "" {
-    //                errandData.supplement = nil
-    //            } else {
-    //                errandData.supplement = supplementTextView.text
-    //            }
-    //            errandData.photoFileName = errandData.setImage(image: photoPathImageView.image)
-    //            realm.add(errandData)
-    //        }
-    //    }
 }
 
 // MARK: - UIPickerViewDataSource&Delegate
@@ -742,4 +717,3 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
         present(alertController, animated: true, completion: nil)
     }
 }
-

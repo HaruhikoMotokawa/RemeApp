@@ -71,6 +71,7 @@
 		78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */; };
 		78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E80B302A3021E50068C71C /* GoogleService-Info.plist */; };
 		78E80B332A31D3680068C71C /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E80B322A31D3680068C71C /* VersionManager.swift */; };
+		78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E931F22A50584300FD3678 /* MigrationManager.swift */; };
 		78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
@@ -167,6 +168,7 @@
 		78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditShoppingListViewController.swift; sourceTree = "<group>"; };
 		78E80B302A3021E50068C71C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78E80B322A31D3680068C71C /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
+		78E931F22A50584300FD3678 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseErrorManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				784669732A3DDB7D00C175EB /* AlertController.swift */,
 				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
 				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
+				78E931F22A50584300FD3678 /* MigrationManager.swift */,
 				78BAAB1B2A394562000C9627 /* API */,
 				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
@@ -656,6 +659,7 @@
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */,
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
+				78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */,
 				78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */,
 				780DCCA02A4C138700ADE060 /* AccountViewProtocol.swift in Sources */,
 				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
@@ -832,7 +836,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -866,7 +870,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

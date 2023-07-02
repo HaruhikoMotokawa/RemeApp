@@ -5,10 +5,8 @@
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
 import UIKit
-
 /// A-買い物リスト
 class ShoppingListViewController: UIViewController {
-
     // MARK: - property
 
     /// チュートリアルを表示するボタン
@@ -106,7 +104,6 @@ class ShoppingListViewController: UIViewController {
             ⑤ 買い物リスト作成と編集は
                できますが上限があります
             """)
-
             }
         }
     }
