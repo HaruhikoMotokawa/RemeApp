@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 /// D-売り場の買い物リスト
 class SalesFloorShoppingListViewController: UIViewController {
@@ -16,12 +15,9 @@ class SalesFloorShoppingListViewController: UIViewController {
     @IBOutlet private weak var shoppingListTableView: UITableView!
 
     // MARK: - property
-    /// お使いデータ
-    private var errandDataList: [ErrandDataModel] = []
 
     /// 売り場のRawValue受け渡し用
     internal var salesFloorRawValue: Int = 0
-
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
     /// 共有相手が作成した買い物データを格納する配列

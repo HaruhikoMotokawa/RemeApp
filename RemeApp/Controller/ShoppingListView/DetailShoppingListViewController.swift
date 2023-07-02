@@ -41,13 +41,10 @@ class DetailShoppingListViewController: UIViewController {
     private var salesFloorButtonRawValue:Int = 0
     /// supplementLabelに表示するテキスト
     private var supplementLabelText:String? = nil
-
     /// photoPathImageViewに表示する画像
     private var photoPathImage:UIImage? = nil
-
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
-
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
 
