@@ -48,11 +48,11 @@ class ShoppingListViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
-        let tutorialPageVC = storyboard.instantiateViewController(
-            withIdentifier: "TutorialPageView") as! TutorialPageViewController
-        tutorialPageVC.modalPresentationStyle = .fullScreen
-        self.present(tutorialPageVC, animated: true)
+        let storyboard = UIStoryboard(name: "HomeTutorialView", bundle: nil)
+        let homeTutorialVC = storyboard.instantiateViewController(
+            withIdentifier: "HomeTutorialView") as! HomeTutorialViewController
+        homeTutorialVC.modalPresentationStyle = .fullScreen
+        self.present(homeTutorialVC, animated: true)
     }
 
     /// shoppingListTableView関連の設定

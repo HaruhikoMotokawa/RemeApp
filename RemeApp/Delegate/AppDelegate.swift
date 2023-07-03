@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         password: "",
                         uid: uid)
                     var myShoppingItemList: [ShoppingItemModel] = []
+
                     // ShoppingItemModelに沿う形にerrandDataModelの情報をマッピングして収納
                     myShoppingItemList = realm.objects(ErrandDataModel.self).map { (errandDataModel) -> ShoppingItemModel in
                         return ShoppingItemModel(isCheckBox: errandDataModel.isCheckBox,
@@ -80,6 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  date: Date())
                     }
 
+                    if myShoppingItemList.isEmpty {
+                        return
+                    }
                     // myShoppingItemListの要素分だけ順番に回す
                     for item in myShoppingItemList {
                         // 写真の保存処理、realmのファイルパスから画像を取得して保存

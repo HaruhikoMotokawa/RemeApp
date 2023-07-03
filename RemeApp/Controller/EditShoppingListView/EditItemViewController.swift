@@ -645,14 +645,20 @@ extension EditItemViewController: UITextViewDelegate {
             placeholderLabel.isHidden = true
         }
     }
+
     /// 入力制限を３０文字以内で設定
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool {
+        // 最大文字数を３０文字で設定
         let maxLength = 30
+        // 現在入力されいている文字数を取得（NSString型にキャスト）
         let currentString: NSString = supplementTextView.text as NSString
+        // 更新された文字数を取得、入力されるたびに判定する、判定はテキストビューのテキストの長さ
         let updatedString = currentString.replacingCharacters(in: range, with: text)
+        // 更新された文字数（最終文字数）が最大値以下であればtrueを返却
         return updatedString.count <= maxLength
     }
+    
 }
 
 // MARK: - UIImagePickerDelegate,UINavigationControllerDelegate
