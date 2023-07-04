@@ -187,7 +187,14 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8mA-bq-qQp" secondAttribute="bottom" constant="10" id="tCn-GH-Ba1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="アカウント" id="RIB-8P-fDl"/>
+                    <navigationItem key="navigationItem" title="アカウント" id="RIB-8P-fDl">
+                        <barButtonItem key="leftBarButtonItem" title="ヘルプ" style="done" id="Wu6-2v-iOV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="goTutorialView:" destination="Y6W-OH-hqX" id="xMg-49-8Pk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accountDeleteButton" destination="Qmd-94-lUg" id="uD8-2w-3vD"/>

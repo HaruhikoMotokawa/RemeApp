@@ -9,12 +9,11 @@ import UIKit
 /// チュートリアルの一覧を表示する
 class HomeTutorialViewController: UITableViewController {
     /// チュートリアルの一覧を表示するTableView
-    @IBOutlet var tutorialTableView: UITableView!
+    @IBOutlet private var tutorialTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
     /// タップしてモーダル遷移
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セクションと行番号でDetailTutorialViewに表示するチュートリアルの画像を切り替える
@@ -42,7 +41,6 @@ class HomeTutorialViewController: UITableViewController {
 
             default:
                 dismiss(animated: true)
-
         }
     }
 
@@ -53,9 +51,9 @@ class HomeTutorialViewController: UITableViewController {
             withIdentifier: "DetailTutorialView") as! DetailTutorialViewController
         detailTutorialVC.configurer(imageName: imageName)
         detailTutorialVC.modalPresentationStyle = .fullScreen
+
         self.present(detailTutorialVC, animated: true)
     }
-
 }
 
 /// チュートリアルの表示する画像名を管理

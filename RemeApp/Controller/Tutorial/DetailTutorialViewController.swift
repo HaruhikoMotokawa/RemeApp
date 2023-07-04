@@ -7,14 +7,16 @@
 
 import UIKit
 
+/// チュートリアル画像を表示を管理する
 class DetailTutorialViewController: UIViewController {
 
-    @IBOutlet weak var topCloseButton: UIButton!
-
-    @IBOutlet weak var tutorialImageView: UIImageView!
-
-    @IBOutlet weak var underCloseButton: UIButton!
-
+    /// 画面上部の閉じるボタン
+    @IBOutlet private weak var topCloseButton: UIButton!
+    /// チュートリアルの画像を表示するimgeView
+    @IBOutlet private weak var tutorialImageView: UIImageView!
+    /// 画面下部の閉じるボタン
+    @IBOutlet private weak var underCloseButton: UIButton!
+    /// 表示するイメージのAssets名
     private var imageName: String = ""
 
     override func viewDidLoad() {
@@ -22,12 +24,11 @@ class DetailTutorialViewController: UIViewController {
         displayData()
     }
 
-    
-
+    /// 上部のボタンによって前の画面に戻る
     @IBAction func returnHomeViewByTopButton(_ sender: Any) {
         dismiss(animated: true )
     }
-
+    /// 下部のボタンによって前の画面に戻る
     @IBAction func returnHomeViewByUnderButton(_ sender: Any) {
         dismiss(animated: true )
     }
