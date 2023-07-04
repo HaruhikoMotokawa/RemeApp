@@ -42,7 +42,7 @@ class ShoppingListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showTutorialPageOnFirstLaunch() // 初回起動時のチュートリアル表示
+        showIntroductionPageOnFirstLaunch() // 初回起動時のチュートリアル表示
     }
     // MARK: - func
 
@@ -64,15 +64,15 @@ class ShoppingListViewController: UIViewController {
     }
 
     /// アプリ初回起動時のチュートリアル画面表示処理
-    private func showTutorialPageOnFirstLaunch() {
+    private func showIntroductionPageOnFirstLaunch() {
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            let storyboard = UIStoryboard(name: "TutorialPageView", bundle: nil)
+            let storyboard = UIStoryboard(name: "IntroductionPageView", bundle: nil)
             let tutorialPageVC = storyboard.instantiateViewController(
-                withIdentifier: "TutorialPageView") as! TutorialPageViewController
+                withIdentifier: "IntroductionPageView") as! IntroductionPageViewController
             tutorialPageVC.modalPresentationStyle = .fullScreen
             self.present(tutorialPageVC, animated: true)
         }
