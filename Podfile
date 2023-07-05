@@ -10,6 +10,7 @@ pod 'RealmSwift', '~>10'
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 pod 'FirebaseFirestoreSwift'
+pod 'FirebaseStorage'
 
   # Pods for RemeApp
 

@@ -14,16 +14,17 @@ class SignInViewController: UIViewController {
 
     /// メールアドレス入力
     @IBOutlet private weak var inputMailTextField: UITextField!
-
     /// パスワード入力
     @IBOutlet private weak var inputPasswordTextField: UITextField!
-
     /// ログインボタン
     @IBOutlet private weak var signInButton: UIButton!
+
+    var delegate: SignInViewControllerDelegate?
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         setKeyboardCloseButton()
         inputMailTextField.delegate = self
         inputPasswordTextField.delegate = self
@@ -42,15 +43,18 @@ class SignInViewController: UIViewController {
                 // ログイン実施
                 try await AccountManager.shared.signIn(email: email, password: password)
                 // 終了したら画面を閉じる
-                showAlert(tittle: "成功", errorMessage: "ログインしました", completion: { [weak self] in
+                AlertController.showAlert(tittle: "成功", errorMessage: "ログインしました",completion: { [weak self]  in
                     guard let self else { return }
                     self.navigationController?.popViewController(animated: true)
+                    Task {
+                        await self.delegate?.updateUserInfoFromSignInView()
+                    }
                 })
             } catch let error {
                 // エラーメッセージを生成
                 let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
                 // アラート表示
-                showAlert(tittle: "エラー", errorMessage: errorMessage)
+                AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                 print(error.localizedDescription)
             }
         }
@@ -62,19 +66,31 @@ class SignInViewController: UIViewController {
         if inputMailTextField.text?.isEmpty == false &&
             inputPasswordTextField.text?.isEmpty == false {
             signInButton.isEnabled = true
+            signInButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            signInButton.addShadow()
         } else {
             // 全て入力されていなれば無効化
             signInButton.isEnabled = false
+            signInButton.setAppearanceForAccountView(backgroundColor: .white)
         }
     }
 
-    /// エラーメッセージごとにアラートを出す
-    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true, completion: nil)
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // オンラインなら通常通りにユザー情報とボタンを設定する
+            if NetworkMonitor.shared.isConnected {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 
     /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
@@ -96,3 +112,5 @@ extension SignInViewController: UITextFieldDelegate {
         setSignInButton()
     }
 }
+
+

@@ -35,12 +35,14 @@ class ShareSettingsViewController: UIViewController {
 
     /// 追加ボタン
     @IBOutlet private weak var addButton: UIButton!
-
+    /// ユーザーが作成した買い物データを格納する配列
+    private var myShoppingItemList: [ShoppingItemModel] = []
     
     // MARK: - viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNetWorkObserver()
         inputUIDTextField.delegate = self
         setKeyboardCloseButton()
         setAddButton()
@@ -55,51 +57,110 @@ class ShareSettingsViewController: UIViewController {
     /// １番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteFirstSharedUsers(_ sender: Any) {
         Task { @MainActor in
-            await deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
-            await setSharedUsers()
+            IndicatorController.shared.startIndicator()
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// ２番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteSecondSharedUsers(_ sender: Any) {
         Task { @MainActor in
-            await deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
-            await setSharedUsers()
+            IndicatorController.shared.startIndicator()
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// ３番目に登録されている共有者を解除するメソッド
     @IBAction private func deleteThirdSharedUsers(_ sender: Any) {
         Task { @MainActor in
-            await deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
-            await setSharedUsers()
+            IndicatorController.shared.startIndicator()
+            // オフラインだったらアラート出して終了
+            guard NetworkMonitor.shared.isConnected else {
+                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                return
+            }
+            await self.deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
+            await self.setSharedUsers()
+            IndicatorController.shared.dismissIndicator()
         }
     }
 
     /// inputUIDTextFieldの入力内容を使って共有者に追加するメソッド
     @IBAction private func addSharedUsers(_ sender: Any) {
         Task { @MainActor in
+            IndicatorController.shared.startIndicator()
             do {
+                // オフラインだったらアラート出して終了
+                guard NetworkMonitor.shared.isConnected else {
+                    AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                    return
+                }
                 // 入力された値がないかnilチェック
-                guard let inputUid = inputUIDTextField.text else { return }
+                guard let inputUid = self.inputUIDTextField.text else { return }
                 // ユーザーのuidを取得
                 let uid = AccountManager.shared.getAuthStatus()
                 // 入力したuidのチェックと追加処理
                 try await FirestoreManager.shared.addSharedUsers(inputUid: inputUid, uid: uid)
+                // 現在作成済みの自分の買い物リストを取得
+                self.myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
+                // 取得した自分の買い物リストの全てにinputUidを追加する
+                let updateItemList = self.myShoppingItemList.map { item -> ShoppingItemModel in
+                    var newItem = item
+                    newItem.sharedUsers.append(inputUid)
+                    return newItem
+                }
+                // 取得した買い物リストの全てのsharedUsersにinputUidを追加
+                for item in updateItemList {
+                    try await FirestoreManager.shared.upDateItemForSharedUsers(
+                        documentID: item.id, sharedUsersUid: item.sharedUsers)
+                }
                 // 共有者のラベルを更新
-                await setSharedUsers()
+                await self.setSharedUsers()
                 // uidの入力欄を空白に戻す
-                self.inputUIDTextField.text = nil
-
+                self.inputUIDTextField.text = ""
+                self.setAddButton()
                 // 完了のアラート
-                self.showAlert(tittle: "完了", errorMessage: "登録しました")
+                AlertController.showAlert(tittle: "完了", errorMessage: "登録しました")
             } catch FirestoreError.notFound {
-                showAlert(tittle: "エラー", errorMessage: FirestoreError.notFound.title)
+                AlertController.showAlert(tittle: "エラー", errorMessage: FirestoreError.notFound.title)
             } catch let error {
                 // 失敗のアラート
                 print("追加失敗だよー")
                 let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-                showAlert(tittle: "エラー", errorMessage: errorMessage)
+                AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
+            }
+            IndicatorController.shared.dismissIndicator()
+        }
+    }
+
+    /// ネットワーク関連の監視の登録
+    private func setNetWorkObserver() {
+        // NotificationCenterに通知を登録する
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNetworkStatusDidChange),
+                                               name: .networkStatusDidChange, object: nil)
+    }
+
+    /// オフライン時の処理
+    @objc func handleNetworkStatusDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            // オンラインなら通常通りにユザー情報とボタンを設定する
+            if NetworkMonitor.shared.isConnected {
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -121,9 +182,12 @@ class ShareSettingsViewController: UIViewController {
         // uidが入力されている場合、追加ボタンを有効化
         if inputUIDTextField.text?.isEmpty == false {
             addButton.isEnabled = true
+            addButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            addButton.addShadow()
         } else {
             // 全て入力されていなれば無効化
             addButton.isEnabled = false
+            addButton.setAppearanceForAccountView(backgroundColor: .white)
         }
     }
 
@@ -165,6 +229,8 @@ class ShareSettingsViewController: UIViewController {
             firstDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.one.numberOfRegistrations
             secondDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.two.numberOfRegistrations
             thirdDeleteButton.isEnabled = sharedUsers.count >= SharedUsers.three.numberOfRegistrations
+            // 登録者数によって見た目を変更
+            setDeleteButton(count: sharedUsers.count)
             print(sharedUsers)
         } catch let error {
             print("\(error)")
@@ -191,14 +257,26 @@ class ShareSettingsViewController: UIViewController {
                     sharedUsers.remove(at: deleteNumber)
                     // sharedUsersを上書き
                     try await FirestoreManager.shared.upData(uid: uid, shardUsers: sharedUsers)
+                    // 現在作成済みの自分の買い物リストを取得
+                    self.myShoppingItemList = try await FirestoreManager.shared.getMyShoppingItemList(uid: uid)
+                    // 買い物リストから削除対象のuidを削除
+                    let updateItemList = self.myShoppingItemList.map { item -> ShoppingItemModel in
+                        var newItem = item
+                        newItem.sharedUsers.remove(at: deleteNumber)
+                        return newItem
+                    }
+                    // 買い物リストの全てのsharedUsersに削除後のデータをFirestoreに上書きする
+                    for item in updateItemList {
+                        try await FirestoreManager.shared.upDateItemForSharedUsers(
+                            documentID: item.id, sharedUsersUid: item.sharedUsers)
+                    }
                     // ラベルの更新
                     await self.setSharedUsers()
-                    self.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
+                    AlertController.showAlert(tittle: "完了", errorMessage: "共有登録を解除しました")
                 } catch let error {
-                    guard let self else { return }
                     print("エラー")
                     let errorMessage = FirebaseErrorManager.shared.setErrorMessage(error)
-                    self.showAlert(tittle: "エラー", errorMessage: errorMessage)
+                    AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                 }
             }
         })
@@ -206,14 +284,32 @@ class ShareSettingsViewController: UIViewController {
         alert.addAction(deleteAction)
         present(alert, animated: true)
     }
-    /// アラートを出す
-    private func showAlert(tittle: String, errorMessage: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: tittle, message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            completion?()
-        }))
-        present(alert, animated: true, completion: nil)
+
+    /// 共有登録者数によってボタンの見た目を変える
+    private func setDeleteButton(count: Int) {
+        if count >= 0 {
+            firstDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+            secondDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+            thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
+        }
+
+        if count >= SharedUsers.one.numberOfRegistrations {
+            firstDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            firstDeleteButton.addShadow()
+        }
+
+        if count >= SharedUsers.two.numberOfRegistrations {
+            secondDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            secondDeleteButton.addShadow()
+        }
+
+        if count >= SharedUsers.three.numberOfRegistrations {
+            thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
+            thirdDeleteButton.addShadow()
+        }
+
     }
+
 }
 
 extension ShareSettingsViewController: UITextFieldDelegate {

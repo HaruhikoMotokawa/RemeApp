@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gts-oN-KQY">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Tutorial View Controller-->
+        <scene sceneID="tR6-le-7w0">
+            <objects>
+                <viewController storyboardIdentifier="DetailTutorialView" id="gts-oN-KQY" customClass="DetailTutorialViewController" customModule="RemeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g4h-Mc-ean">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="4000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsc-hj-sep">
+                                <rect key="frame" x="20.000000000000004" y="69" width="46.333333333333343" height="34.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="returnHomeViewByTopButton:" destination="gts-oN-KQY" eventType="touchUpInside" id="fMM-N2-aJX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作説明" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAp-Pf-PxK">
+                                <rect key="frame" x="153" y="76" width="69.333333333333314" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RyO-fL-4En">
+                                <rect key="frame" x="0.0" y="113.33333333333326" width="375" height="3802.3333333333339"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TutorialShppingListVer2.0.0" translatesAutoresizingMaskIntoConstraints="NO" id="1xt-BR-7WE">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2850"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1xt-BR-7WE" secondAttribute="trailing" id="HHu-2q-IoN"/>
+                                    <constraint firstItem="1xt-BR-7WE" firstAttribute="width" secondItem="RyO-fL-4En" secondAttribute="width" id="Y2c-zO-8Wk"/>
+                                    <constraint firstItem="1xt-BR-7WE" firstAttribute="leading" secondItem="RyO-fL-4En" secondAttribute="leading" id="Y9M-Vf-2CJ"/>
+                                    <constraint firstItem="1xt-BR-7WE" firstAttribute="top" secondItem="RyO-fL-4En" secondAttribute="top" id="gtI-Nl-YaA"/>
+                                    <constraint firstAttribute="bottom" secondItem="1xt-BR-7WE" secondAttribute="bottom" id="rDw-GI-Xe4"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="ZDJ-81-Xk5"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="sH8-6T-Kyo"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaO-Hh-ALH">
+                                <rect key="frame" x="5" y="3925.6666666666665" width="365" height="34.333333333333485"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="買い物リスト編集について">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" title="閉じる">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="returnHomeViewByUnderButton:" destination="gts-oN-KQY" eventType="touchUpInside" id="peX-ht-jR7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pJw-FN-8BK"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="OaO-Hh-ALH" secondAttribute="bottom" constant="40" id="2BR-Fn-41h"/>
+                            <constraint firstItem="pJw-FN-8BK" firstAttribute="trailing" secondItem="OaO-Hh-ALH" secondAttribute="trailing" constant="5" id="492-pk-AcN"/>
+                            <constraint firstItem="aAp-Pf-PxK" firstAttribute="centerX" secondItem="g4h-Mc-ean" secondAttribute="centerX" id="J70-dZ-eA7"/>
+                            <constraint firstItem="OaO-Hh-ALH" firstAttribute="top" secondItem="RyO-fL-4En" secondAttribute="bottom" constant="10" id="NDz-j6-1Py"/>
+                            <constraint firstItem="Nsc-hj-sep" firstAttribute="top" secondItem="pJw-FN-8BK" secondAttribute="top" constant="10" id="UTl-sT-ymU"/>
+                            <constraint firstItem="aAp-Pf-PxK" firstAttribute="centerY" secondItem="Nsc-hj-sep" secondAttribute="centerY" id="amK-ej-ss6"/>
+                            <constraint firstItem="RyO-fL-4En" firstAttribute="top" secondItem="Nsc-hj-sep" secondAttribute="bottom" constant="10" id="bH6-ed-Svw"/>
+                            <constraint firstItem="pJw-FN-8BK" firstAttribute="trailing" secondItem="RyO-fL-4En" secondAttribute="trailing" id="ciO-ys-Kg7"/>
+                            <constraint firstItem="Nsc-hj-sep" firstAttribute="leading" secondItem="pJw-FN-8BK" secondAttribute="leading" constant="20" id="e6l-0b-WaB"/>
+                            <constraint firstItem="RyO-fL-4En" firstAttribute="leading" secondItem="pJw-FN-8BK" secondAttribute="leading" id="yfh-GF-oDy"/>
+                            <constraint firstItem="OaO-Hh-ALH" firstAttribute="leading" secondItem="pJw-FN-8BK" secondAttribute="leading" constant="5" id="zzM-s3-HA0"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="375" height="4000"/>
+                    <connections>
+                        <outlet property="topCloseButton" destination="Nsc-hj-sep" id="dur-Nz-G6d"/>
+                        <outlet property="tutorialImageView" destination="1xt-BR-7WE" id="Mwf-hu-QSL"/>
+                        <outlet property="underCloseButton" destination="OaO-Hh-ALH" id="h3R-xn-QGu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUu-XK-1c6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="TutorialShppingListVer2.0.0" width="375" height="2850"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>
