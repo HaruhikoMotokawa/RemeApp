@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="7pw-Gk-KEG" userLabel="入力フィールド">
-                                <rect key="frame" x="10" y="80.5" width="355" height="347.5"/>
+                                <rect key="frame" x="10" y="80.5" width="355" height="343"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="faR-ub-DyN" userLabel="アカウント">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="64.5"/>
@@ -97,9 +97,9 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJl-AY-0WS">
-                                        <rect key="frame" x="0.0" y="313" width="355" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="作成"/>
+                                        <rect key="frame" x="0.0" y="313" width="355" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="作成"/>
                                         <connections>
                                             <action selector="createAccount:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zIb-Zb-g7M"/>
                                         </connections>
@@ -118,6 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createButton" destination="sJl-AY-0WS" id="2bU-Iv-gJr"/>
                         <outlet property="inputAccountTextField" destination="8vz-dY-Ptw" id="NUW-4p-1BQ"/>
                         <outlet property="inputMailTextField" destination="FNi-Md-Sfi" id="HCP-Q6-O14"/>
                         <outlet property="inputPasswordTextField" destination="ZsA-sz-iud" id="oiF-lZ-NbD"/>

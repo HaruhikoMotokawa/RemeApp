@@ -13,13 +13,21 @@
 		78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */; };
 		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
+		780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */; };
+		780DCCA02A4C138700ADE060 /* AccountViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
+		7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */; };
+		7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */; };
+		7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */; };
 		781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */; };
-		7828936D2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7828936C2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard */; };
-		7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
+		78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */; };
+		78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */; };
+		78385F132A52C63800FDD7CE /* DetailTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */; };
+		78385F152A52C7F800FDD7CE /* DetailTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
+		784669742A3DDB7D00C175EB /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784669732A3DDB7D00C175EB /* AlertController.swift */; };
 		784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F1F29C8451200C9360A /* MainTabBarController.swift */; };
 		784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */; };
 		784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */; };
@@ -28,6 +36,16 @@
 		784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */; };
 		784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */; };
 		784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */; };
+		785067232A53EBCF007E0E1A /* FirstIntroductionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785067222A53EBCF007E0E1A /* FirstIntroductionView.storyboard */; };
+		785067252A53EC01007E0E1A /* FirstIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785067242A53EC01007E0E1A /* FirstIntroductionViewController.swift */; };
+		785067272A53EE6B007E0E1A /* SecondIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785067262A53EE6B007E0E1A /* SecondIntroductionViewController.swift */; };
+		785067292A53EE8F007E0E1A /* SecondIntroductionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785067282A53EE8F007E0E1A /* SecondIntroductionView.storyboard */; };
+		7850672B2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850672A2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift */; };
+		7850672D2A53EFFD007E0E1A /* ThirdIntroductionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7850672C2A53EFFD007E0E1A /* ThirdIntroductionView.storyboard */; };
+		7850672F2A53F075007E0E1A /* ForceIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850672E2A53F075007E0E1A /* ForceIntroductionViewController.swift */; };
+		785067312A53F08B007E0E1A /* ForceIntroductionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785067302A53F08B007E0E1A /* ForceIntroductionView.storyboard */; };
+		785067332A53F148007E0E1A /* FifthIntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785067322A53F148007E0E1A /* FifthIntroductionViewController.swift */; };
+		785067352A53F163007E0E1A /* FifthIntroductionView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 785067342A53F163007E0E1A /* FifthIntroductionView.storyboard */; };
 		7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */; };
 		7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */; };
 		78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */; };
@@ -37,10 +55,13 @@
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
+		7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888B8A72A4FDAA60068A2CF /* Cache.swift */; };
+		7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
 		7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */; };
 		7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */; };
 		7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */; };
+		78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A045602A4DC1AF0052EC65 /* IndicatorController.swift */; };
 		78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3729C835D7004685F1 /* AppDelegate.swift */; };
 		78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AB3B3929C835D7004685F1 /* SceneDelegate.swift */; };
 		78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78AB3B4029C835D8004685F1 /* Assets.xcassets */; };
@@ -50,17 +71,16 @@
 		78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC529EA98CD00721592 /* PageViewController.swift */; };
 		78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */; };
 		78B18CCA29EA991B00721592 /* CustomSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */; };
-		78C160762A1B1AF500C66E92 /* TutorialPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C160752A1B1AF500C66E92 /* TutorialPageView.storyboard */; };
-		78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C160772A1B1C5200C66E92 /* TutorialPageViewController.swift */; };
-		78C1607A2A1B3C8800C66E92 /* TutorialShoppingView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C160792A1B3C8800C66E92 /* TutorialShoppingView.storyboard */; };
-		78C1607C2A1B3CAF00C66E92 /* TutorialShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C1607B2A1B3CAF00C66E92 /* TutorialShoppingViewController.swift */; };
+		78BAAB1E2A39460A000C9627 /* ShoppingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */; };
+		78C160762A1B1AF500C66E92 /* IntroductionPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C160752A1B1AF500C66E92 /* IntroductionPageView.storyboard */; };
+		78C160782A1B1C5200C66E92 /* IntroductionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C160772A1B1C5200C66E92 /* IntroductionPageViewController.swift */; };
 		78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */; };
 		78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */; };
 		78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */; };
-		78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */; };
-		78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */; };
 		78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78E80B302A3021E50068C71C /* GoogleService-Info.plist */; };
 		78E80B332A31D3680068C71C /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E80B322A31D3680068C71C /* VersionManager.swift */; };
+		78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E931F22A50584300FD3678 /* MigrationManager.swift */; };
+		78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
 		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
@@ -93,13 +113,21 @@
 		78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorType.swift; sourceTree = "<group>"; };
 		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
+		780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewProtocol.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
+		7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorModel.swift; sourceTree = "<group>"; };
-		7828936C2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialEditSalesFloorMapView.storyboard; sourceTree = "<group>"; };
-		7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
+		78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTutorialView.storyboard; sourceTree = "<group>"; };
+		78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
+		78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailTutorialView.storyboard; sourceTree = "<group>"; };
+		78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTutorialViewController.swift; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
+		784669732A3DDB7D00C175EB /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		784E1F1F29C8451200C9360A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		784E1F2329C84A2000C9360A /* SalesFloorMapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorMapView.storyboard; sourceTree = "<group>"; };
 		784E1F2529C84A4700C9360A /* EditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -108,6 +136,16 @@
 		784E1F2D29C84C7900C9360A /* SalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		784E1F2F29C84CB300C9360A /* EditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShoppingListViewController.swift; sourceTree = "<group>"; };
 		784E1F3429C88C5C00C9360A /* ShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShoppingListView.storyboard; sourceTree = "<group>"; };
+		785067222A53EBCF007E0E1A /* FirstIntroductionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirstIntroductionView.storyboard; sourceTree = "<group>"; };
+		785067242A53EC01007E0E1A /* FirstIntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroductionViewController.swift; sourceTree = "<group>"; };
+		785067262A53EE6B007E0E1A /* SecondIntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondIntroductionViewController.swift; sourceTree = "<group>"; };
+		785067282A53EE8F007E0E1A /* SecondIntroductionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondIntroductionView.storyboard; sourceTree = "<group>"; };
+		7850672A2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdIntroductionViewController.swift; sourceTree = "<group>"; };
+		7850672C2A53EFFD007E0E1A /* ThirdIntroductionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThirdIntroductionView.storyboard; sourceTree = "<group>"; };
+		7850672E2A53F075007E0E1A /* ForceIntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceIntroductionViewController.swift; sourceTree = "<group>"; };
+		785067302A53F08B007E0E1A /* ForceIntroductionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForceIntroductionView.storyboard; sourceTree = "<group>"; };
+		785067322A53F148007E0E1A /* FifthIntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthIntroductionViewController.swift; sourceTree = "<group>"; };
+		785067342A53F163007E0E1A /* FifthIntroductionView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FifthIntroductionView.storyboard; sourceTree = "<group>"; };
 		7850D38B29D9696500D27023 /* SalesFloorShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorShoppingListViewController.swift; sourceTree = "<group>"; };
 		7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SalesFloorShoppingListView.storyboard; sourceTree = "<group>"; };
 		78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
@@ -117,10 +155,13 @@
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
+		7888B8A72A4FDAA60068A2CF /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		7891125B29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSelectedSalesFloorViewController.swift; sourceTree = "<group>"; };
 		7891125D29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditSelectedSalesFloorView.storyboard; sourceTree = "<group>"; };
 		7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorColor.swift; sourceTree = "<group>"; };
+		78A045602A4DC1AF0052EC65 /* IndicatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorController.swift; sourceTree = "<group>"; };
 		78AB3B3429C835D7004685F1 /* RemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AB3B3729C835D7004685F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78AB3B3929C835D7004685F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,20 +173,19 @@
 		78B18CC529EA98CD00721592 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		78B18CC729EA990300721592 /* DefaultSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		78B18CC929EA991B00721592 /* CustomSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorMapViewController.swift; sourceTree = "<group>"; };
-		78C160752A1B1AF500C66E92 /* TutorialPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialPageView.storyboard; sourceTree = "<group>"; };
-		78C160772A1B1C5200C66E92 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
-		78C160792A1B3C8800C66E92 /* TutorialShoppingView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialShoppingView.storyboard; sourceTree = "<group>"; };
-		78C1607B2A1B3CAF00C66E92 /* TutorialShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialShoppingViewController.swift; sourceTree = "<group>"; };
+		78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemModel.swift; sourceTree = "<group>"; };
+		78C160752A1B1AF500C66E92 /* IntroductionPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IntroductionPageView.storyboard; sourceTree = "<group>"; };
+		78C160772A1B1C5200C66E92 /* IntroductionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionPageViewController.swift; sourceTree = "<group>"; };
 		78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UITabBarControllerView.storyboard; sourceTree = "<group>"; };
 		78CAAF7729DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectTypeOfSalesFloorView.storyboard; sourceTree = "<group>"; };
 		78CAAF7929DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfSalesFloorViewController.swift; sourceTree = "<group>"; };
 		78CAAF7B29DFCFE70084A8AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78CAAF7C29DFD0EA0084A8AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		78CAAF7D29DFD1090084A8AF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorialEditShoppingListView.storyboard; sourceTree = "<group>"; };
-		78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEditShoppingListViewController.swift; sourceTree = "<group>"; };
 		78E80B302A3021E50068C71C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78E80B322A31D3680068C71C /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
+		78E931F22A50584300FD3678 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
+		78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseErrorManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -179,6 +219,32 @@
 				59F5F3CB7F16E55697338026 /* Pods_RemeApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		785067202A53E9D2007E0E1A /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				78C160772A1B1C5200C66E92 /* IntroductionPageViewController.swift */,
+				785067242A53EC01007E0E1A /* FirstIntroductionViewController.swift */,
+				785067262A53EE6B007E0E1A /* SecondIntroductionViewController.swift */,
+				7850672A2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift */,
+				7850672E2A53F075007E0E1A /* ForceIntroductionViewController.swift */,
+				785067322A53F148007E0E1A /* FifthIntroductionViewController.swift */,
+			);
+			path = Introduction;
+			sourceTree = "<group>";
+		};
+		785067212A53EA14007E0E1A /* IntroductionView */ = {
+			isa = PBXGroup;
+			children = (
+				78C160752A1B1AF500C66E92 /* IntroductionPageView.storyboard */,
+				785067222A53EBCF007E0E1A /* FirstIntroductionView.storyboard */,
+				785067282A53EE8F007E0E1A /* SecondIntroductionView.storyboard */,
+				7850672C2A53EFFD007E0E1A /* ThirdIntroductionView.storyboard */,
+				785067302A53F08B007E0E1A /* ForceIntroductionView.storyboard */,
+				785067342A53F163007E0E1A /* FifthIntroductionView.storyboard */,
+			);
+			path = IntroductionView;
 			sourceTree = "<group>";
 		};
 		78AB3B2B29C835D7004685F1 = {
@@ -215,13 +281,31 @@
 			path = RemeApp;
 			sourceTree = "<group>";
 		};
+		78BAAB1B2A394562000C9627 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */,
+				780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */,
+				78BAAB1C2A394594000C9627 /* Request */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		78BAAB1C2A394594000C9627 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */,
+				7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */,
+				7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		78C1607D2A1B64C500C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78C160752A1B1AF500C66E92 /* TutorialPageView.storyboard */,
-				78CF70E72A18BCC000099A2D /* TutorialEditShoppingListView.storyboard */,
-				7828936C2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard */,
-				78C160792A1B3C8800C66E92 /* TutorialShoppingView.storyboard */,
+				78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */,
+				78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -229,10 +313,8 @@
 		78C1607E2A1B651900C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78C160772A1B1C5200C66E92 /* TutorialPageViewController.swift */,
-				78CF70E92A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift */,
-				7828936E2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift */,
-				78C1607B2A1B3CAF00C66E92 /* TutorialShoppingViewController.swift */,
+				78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */,
+				78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -332,6 +414,15 @@
 			path = CustumCell;
 			sourceTree = "<group>";
 		};
+		78F2AA5B2A35A40200E2C5FF /* FirebaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */,
+				78BAAB1D2A39460A000C9627 /* ShoppingItemModel.swift */,
+			);
+			path = FirebaseModel;
+			sourceTree = "<group>";
+		};
 		78F6F6FD29D9552F00AF4DC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +434,12 @@
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
 				78E80B322A31D3680068C71C /* VersionManager.swift */,
+				784669732A3DDB7D00C175EB /* AlertController.swift */,
+				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
+				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
+				78E931F22A50584300FD3678 /* MigrationManager.swift */,
+				78BAAB1B2A394562000C9627 /* API */,
+				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +449,7 @@
 			children = (
 				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
 				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				785067212A53EA14007E0E1A /* IntroductionView */,
 				78C1607D2A1B64C500C66E92 /* Tutorial */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
 				78EDF40D29DD12EF00A6407D /* SalesFloorMapView  */,
@@ -367,10 +465,11 @@
 			isa = PBXGroup;
 			children = (
 				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
-				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
+				785067202A53E9D2007E0E1A /* Introduction */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
 				78EDF40829DD114300A6407D /* SalesFloorMapView  */,
+				78FBBF5D2A2EEC9300EDCE9D /* AccountView */,
 				78EDF40929DD117900A6407D /* EditShoppingListView */,
 				78EDF40A29DD11EE00A6407D /* EditSalesFloorMapView */,
 				78EDF40B29DD121900A6407D /* CustumCell */,
@@ -396,6 +495,7 @@
 			children = (
 				78AB3B3729C835D7004685F1 /* AppDelegate.swift */,
 				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
+				780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -495,6 +595,9 @@
 			files = (
 				78AB3B4429C835D8004685F1 /* LaunchScreen.storyboard in Resources */,
 				78FBBF5F2A2EECB900EDCE9D /* AccountView.storyboard in Resources */,
+				78385F132A52C63800FDD7CE /* DetailTutorialView.storyboard in Resources */,
+				7850672D2A53EFFD007E0E1A /* ThirdIntroductionView.storyboard in Resources */,
+				785067312A53F08B007E0E1A /* ForceIntroductionView.storyboard in Resources */,
 				784E1F2629C84A4700C9360A /* EditShoppingListView.storyboard in Resources */,
 				78C662EC29C83CAA004FB8ED /* UITabBarControllerView.storyboard in Resources */,
 				78FBBF612A2EFEDF00EDCE9D /* CreateAccountView.storyboard in Resources */,
@@ -504,19 +607,20 @@
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */,
+				78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
 				78FBBF692A2EFF6C00EDCE9D /* ShareSettingsView.storyboard in Resources */,
-				7828936D2A1A6337002A7318 /* TutorialEditSalesFloorMapView.storyboard in Resources */,
 				78CAAF7829DEB6820084A8AF /* SelectTypeOfSalesFloorView.storyboard in Resources */,
 				78E80B312A3021E50068C71C /* GoogleService-Info.plist in Resources */,
-				78C1607A2A1B3C8800C66E92 /* TutorialShoppingView.storyboard in Resources */,
+				785067232A53EBCF007E0E1A /* FirstIntroductionView.storyboard in Resources */,
 				784E1F2829C84A6B00C9360A /* EditSalesFloorMapView.storyboard in Resources */,
-				78CF70E82A18BCC100099A2D /* TutorialEditShoppingListView.storyboard in Resources */,
+				785067292A53EE8F007E0E1A /* SecondIntroductionView.storyboard in Resources */,
 				784E1F3529C88C5C00C9360A /* ShoppingListView.storyboard in Resources */,
-				78C160762A1B1AF500C66E92 /* TutorialPageView.storyboard in Resources */,
+				78C160762A1B1AF500C66E92 /* IntroductionPageView.storyboard in Resources */,
 				7891125E29E7DBF500076C1B /* EditSelectedSalesFloorView.storyboard in Resources */,
+				785067352A53F163007E0E1A /* FifthIntroductionView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,41 +675,57 @@
 			files = (
 				7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */,
 				78581B6B29E308DE00930F65 /* ExtesionUILabel.swift in Sources */,
-				78C1607C2A1B3CAF00C66E92 /* TutorialShoppingViewController.swift in Sources */,
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
 				78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */,
 				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
+				78385F152A52C7F800FDD7CE /* DetailTutorialViewController.swift in Sources */,
 				7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,
 				78B18CCA29EA991B00721592 /* CustomSalesFloorMapViewController.swift in Sources */,
 				78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */,
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */,
+				7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */,
 				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
+				78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */,
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
 				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
+				7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */,
 				781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */,
+				7850672B2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift in Sources */,
 				78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
 				78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */,
 				78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
+				78BAAB1E2A39460A000C9627 /* ShoppingItemModel.swift in Sources */,
 				78FBBF6B2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
+				780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */,
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
+				78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */,
+				78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */,
+				780DCCA02A4C138700ADE060 /* AccountViewProtocol.swift in Sources */,
 				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
 				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
+				785067272A53EE6B007E0E1A /* SecondIntroductionViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
+				7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */,
+				784669742A3DDB7D00C175EB /* AlertController.swift in Sources */,
 				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
+				7850672F2A53F075007E0E1A /* ForceIntroductionViewController.swift in Sources */,
 				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
-				78CF70EA2A18BCDF00099A2D /* TutorialEditShoppingListViewController.swift in Sources */,
+				78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
 				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
-				78C160782A1B1C5200C66E92 /* TutorialPageViewController.swift in Sources */,
-				7828936F2A1A634F002A7318 /* TutorialEditSalesFloorMapViewController.swift in Sources */,
+				785067332A53F148007E0E1A /* FifthIntroductionViewController.swift in Sources */,
+				78C160782A1B1C5200C66E92 /* IntroductionPageViewController.swift in Sources */,
+				7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */,
+				7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */,
+				785067252A53EC01007E0E1A /* FirstIntroductionViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,
 			);
@@ -750,7 +870,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YQB9XDMF5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemeApp/Info.plist;
@@ -764,7 +884,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -784,7 +904,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YQB9XDMF5W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RemeApp/Info.plist;
@@ -798,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

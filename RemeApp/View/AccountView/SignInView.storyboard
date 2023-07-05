@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="ffE-Oq-o5V" userLabel="入力フィールド">
-                                <rect key="frame" x="10" y="109.33333333333333" width="373" height="232.66666666666669"/>
+                                <rect key="frame" x="10" y="109.33333333333333" width="373" height="228.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="aZT-DA-M18" userLabel="メール">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="34"/>
@@ -70,9 +70,9 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bd8-0I-rHd">
-                                        <rect key="frame" x="0.0" y="198.33333333333337" width="373" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="ログイン"/>
+                                        <rect key="frame" x="0.0" y="198.33333333333337" width="373" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="ログイン"/>
                                         <connections>
                                             <action selector="signIn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IYq-jN-JnC"/>
                                         </connections>
@@ -93,6 +93,7 @@
                     <connections>
                         <outlet property="inputMailTextField" destination="lV3-mL-GOl" id="3ZI-ux-3pK"/>
                         <outlet property="inputPasswordTextField" destination="S9B-7u-fCp" id="4wb-dS-zQt"/>
+                        <outlet property="signInButton" destination="bd8-0I-rHd" id="6Mh-qo-KvQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

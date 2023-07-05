@@ -8,7 +8,7 @@
 import Foundation
 
 /// バージョンの保存、変更を関するクラス
-class VersionManager {
+final class VersionManager {
 
     /// VersionManagerクラスのシングルトンインスタンスにアクセスするためのエントリーポイント
     static let shared = VersionManager()
