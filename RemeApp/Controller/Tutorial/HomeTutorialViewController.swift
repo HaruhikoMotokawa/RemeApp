@@ -33,45 +33,34 @@ final class HomeTutorialViewController: UITableViewController {
         // セクションと行番号でDetailTutorialViewに表示するチュートリアルの画像を切り替える
         switch (indexPath.section, indexPath.row) {
             case (0, 0):
-                return presentDetailTutorialView(imageName: ImageName.shoppingList.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.shoppingList.rawValue)
             case (0, 1):
-                return presentDetailTutorialView(imageName: ImageName.salesFloorMap.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.salesFloorMap.rawValue)
             case (0, 2):
-                return presentDetailTutorialView(imageName: ImageName.editShoppingList.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.editShoppingList.rawValue)
             case (0, 3):
-                return presentDetailTutorialView(imageName: ImageName.editSalesFloorMap.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.editSalesFloorMap.rawValue)
 
             case (1, 0):
-                return presentDetailTutorialView(imageName: ImageName.accountDescription.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.accountDescription.rawValue)
             case (1, 1):
-                return presentDetailTutorialView(imageName: ImageName.accountCreate.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.accountCreate.rawValue)
             case (1, 2):
-                return presentDetailTutorialView(imageName: ImageName.shareSettings.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.shareSettings.rawValue)
             case (1, 3):
-                return presentDetailTutorialView(imageName: ImageName.accountDelete.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.accountDelete.rawValue)
 
             case (2, 0):
-                return presentDetailTutorialView(imageName: ImageName.offLine.rawValue)
+                return Router.shared.showDetailTutorial(from: self, imageName: ImageName.offLine.rawValue)
 
             case (3, 0):
+                // アプリの設定画面に画面遷移し、ライセンス画面を表示
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-
                 return UIApplication.shared.open(settingsUrl)
 
             default:
                 dismiss(animated: true)
         }
-    }
-
-    /// DetailTutorialViewにモーダル遷移する、引数に表示するイメージ名を入力
-    private func presentDetailTutorialView(imageName: String) {
-        let storyboard = UIStoryboard(name: "DetailTutorialView", bundle: nil)
-        let detailTutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "DetailTutorialView") as! DetailTutorialViewController
-        detailTutorialVC.configurer(imageName: imageName)
-        detailTutorialVC.modalPresentationStyle = .fullScreen
-
-        self.present(detailTutorialVC, animated: true)
     }
 }
 

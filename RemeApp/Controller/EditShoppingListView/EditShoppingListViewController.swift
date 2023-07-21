@@ -63,11 +63,7 @@ final class EditShoppingListViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomeTutorialView", bundle: nil)
-        let homeTutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "HomeTutorialView") as! HomeTutorialViewController
-        homeTutorialVC.modalPresentationStyle = .fullScreen
-        self.present(homeTutorialVC, animated: true)
+        Router.shared.showHomeTutorial(from: self)
     }
 
     /// 複数削除モードを中断して終了する

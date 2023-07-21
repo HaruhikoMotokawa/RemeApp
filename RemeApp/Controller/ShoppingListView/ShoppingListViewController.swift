@@ -13,7 +13,14 @@ final class ShoppingListViewController: UIViewController {
     @IBOutlet private weak var helpButton: UIButton!
 
     /// 買い物リストを表示する
-    @IBOutlet private weak var shoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet {
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
+        }
+    }
 
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
@@ -25,7 +32,6 @@ final class ShoppingListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
         setNetWorkObserver()
     }
 
@@ -48,19 +54,7 @@ final class ShoppingListViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomeTutorialView", bundle: nil)
-        let homeTutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "HomeTutorialView") as! HomeTutorialViewController
-        homeTutorialVC.modalPresentationStyle = .fullScreen
-        self.present(homeTutorialVC, animated: true)
-    }
-
-    /// shoppingListTableView関連の設定
-    private func setTableView() {
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                       forCellReuseIdentifier: "ShoppingListTableViewCell")
+        Router.shared.showHomeTutorial(from: self)
     }
 
     /// アプリ初回起動時のチュートリアル画面表示処理
@@ -70,11 +64,7 @@ final class ShoppingListViewController: UIViewController {
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            let storyboard = UIStoryboard(name: "IntroductionPageView", bundle: nil)
-            let tutorialPageVC = storyboard.instantiateViewController(
-                withIdentifier: "IntroductionPageView") as! IntroductionPageViewController
-            tutorialPageVC.modalPresentationStyle = .fullScreen
-            self.present(tutorialPageVC, animated: true)
+            Router.shared.showIntroduction(from: self)
         }
     }
 
@@ -198,7 +188,6 @@ final class ShoppingListViewController: UIViewController {
         shoppingListTableView.reloadData()
     }
 
-
     /// 全てのセルがチェックされている場合にアラートを表示する
    private func completionAlert() {
         if allShoppingItemList.allSatisfy({ $0.isCheckBox }) {
@@ -206,14 +195,6 @@ final class ShoppingListViewController: UIViewController {
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
-        }
-    }
-
-    // tableViewのデータを更新する
-    private func updateTableView() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.shoppingListTableView.reloadData()
         }
     }
 
@@ -273,18 +254,11 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
 
     /// shoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
-    /// - detailShoppingListViewControllerにプッシュ遷移
+    /// - detailShoppingListViewControllerに遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListVC = storyboard.instantiateViewController(
-            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
-            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
-        }
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListVC, animated: true)
+        Router.shared.showDetailShoppingList(from: self, shoppingItemData: shoppingItemData)
     }
 }
 

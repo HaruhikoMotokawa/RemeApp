@@ -193,16 +193,9 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにモーダル遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListVC = storyboard.instantiateViewController(
-            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
-            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
-        }
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListVC, animated: true)
+        Router.shared.showDetailShoppingList(from: self, shoppingItemData: shoppingItemData)
     }
 }
 
