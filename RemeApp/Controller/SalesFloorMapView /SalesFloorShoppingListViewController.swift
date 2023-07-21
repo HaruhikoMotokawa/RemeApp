@@ -8,7 +8,7 @@
 import UIKit
 
 /// D-売り場の買い物リスト
-class SalesFloorShoppingListViewController: UIViewController {
+final class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場の買い物リストを表示

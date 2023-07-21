@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class CustomSalesFloorMapViewController: UIViewController {
+final class CustomSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// 売り場のマップでカスタムを選択した場合に表示するView

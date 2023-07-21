@@ -14,7 +14,6 @@
 		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
 		780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */; };
-		780DCCA02A4C138700ADE060 /* AccountViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
 		7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */; };
@@ -56,6 +55,7 @@
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
 		787DDF462A6A298200749480 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 787DDF452A6A298200749480 /* Settings.bundle */; };
+		787DDF4E2A6A531300749480 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787DDF4D2A6A531300749480 /* Router.swift */; };
 		7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888B8A72A4FDAA60068A2CF /* Cache.swift */; };
 		7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
@@ -115,7 +115,6 @@
 		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
 		780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
-		780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewProtocol.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
 		7815F7DC2A32BE5E00BE0B89 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
 		787DDF452A6A298200749480 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		787DDF4D2A6A531300749480 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7888B8A72A4FDAA60068A2CF /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -249,6 +249,39 @@
 			path = IntroductionView;
 			sourceTree = "<group>";
 		};
+		787DDF492A6A33C700749480 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				78BAAB1B2A394562000C9627 /* API */,
+				787DDF4D2A6A531300749480 /* Router.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		787DDF4A2A6A4B4100749480 /* LunchScren */ = {
+			isa = PBXGroup;
+			children = (
+				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
+			);
+			path = LunchScren;
+			sourceTree = "<group>";
+		};
+		787DDF4B2A6A4B5F00749480 /* UITabBar */ = {
+			isa = PBXGroup;
+			children = (
+				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+			);
+			path = UITabBar;
+			sourceTree = "<group>";
+		};
+		787DDF4C2A6A4B7E00749480 /* MainTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
+			);
+			path = MainTabBarController;
+			sourceTree = "<group>";
+		};
 		78AB3B2B29C835D7004685F1 = {
 			isa = PBXGroup;
 			children = (
@@ -270,14 +303,14 @@
 		78AB3B3629C835D7004685F1 /* RemeApp */ = {
 			isa = PBXGroup;
 			children = (
+				787DDF492A6A33C700749480 /* Utility */,
 				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				78F6F6FF29D9555500AF4DC0 /* View */,
 				78F6F70029D9556500AF4DC0 /* Controller */,
 				78F6F70229D9565A00AF4DC0 /* Delegate */,
 				78F6F70129D9562300AF4DC0 /* Extension */,
-				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
-				78AB3B4529C835D8004685F1 /* Info.plist */,
 				78AB3B4029C835D8004685F1 /* Assets.xcassets */,
+				78AB3B4529C835D8004685F1 /* Info.plist */,
 				78E80B302A3021E50068C71C /* GoogleService-Info.plist */,
 				787DDF452A6A298200749480 /* Settings.bundle */,
 			);
@@ -287,8 +320,13 @@
 		78BAAB1B2A394562000C9627 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				78E80B322A31D3680068C71C /* VersionManager.swift */,
+				78E931F22A50584300FD3678 /* MigrationManager.swift */,
 				78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */,
 				780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */,
+				784669732A3DDB7D00C175EB /* AlertController.swift */,
+				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
+				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
 				78BAAB1C2A394594000C9627 /* Request */,
 			);
 			path = API;
@@ -366,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 			);
 			path = CustumCell;
 			sourceTree = "<group>";
@@ -436,12 +475,6 @@
 				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
 				7893D38329F1673900A9E129 /* CustomSalesFloorColor.swift */,
-				78E80B322A31D3680068C71C /* VersionManager.swift */,
-				784669732A3DDB7D00C175EB /* AlertController.swift */,
-				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
-				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
-				78E931F22A50584300FD3678 /* MigrationManager.swift */,
-				78BAAB1B2A394562000C9627 /* API */,
 				78F2AA5B2A35A40200E2C5FF /* FirebaseModel */,
 			);
 			path = Model;
@@ -450,8 +483,8 @@
 		78F6F6FF29D9555500AF4DC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				78AB3B4229C835D8004685F1 /* LaunchScreen.storyboard */,
-				78C662EB29C83CAA004FB8ED /* UITabBarControllerView.storyboard */,
+				787DDF4A2A6A4B4100749480 /* LunchScren */,
+				787DDF4B2A6A4B5F00749480 /* UITabBar */,
 				785067212A53EA14007E0E1A /* IntroductionView */,
 				78C1607D2A1B64C500C66E92 /* Tutorial */,
 				78EDF40C29DD12BE00A6407D /* ShoppingListView */,
@@ -467,7 +500,7 @@
 		78F6F70029D9556500AF4DC0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				784E1F1F29C8451200C9360A /* MainTabBarController.swift */,
+				787DDF4C2A6A4B7E00749480 /* MainTabBarController */,
 				785067202A53E9D2007E0E1A /* Introduction */,
 				78C1607E2A1B651900C66E92 /* Tutorial */,
 				78EDF40729DD111300A6407D /* ShoppingListView */,
@@ -498,7 +531,6 @@
 			children = (
 				78AB3B3729C835D7004685F1 /* AppDelegate.swift */,
 				78AB3B3929C835D7004685F1 /* SceneDelegate.swift */,
-				780DCC9F2A4C138700ADE060 /* AccountViewProtocol.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -717,6 +749,7 @@
 				7850672B2A53EF8D007E0E1A /* ThirdIntroductionViewController.swift in Sources */,
 				78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */,
 				785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */,
+				787DDF4E2A6A531300749480 /* Router.swift in Sources */,
 				78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */,
 				78B18CC829EA990300721592 /* DefaultSalesFloorMapViewController.swift in Sources */,
 				7850D38C29D9696500D27023 /* SalesFloorShoppingListViewController.swift in Sources */,
@@ -728,7 +761,6 @@
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
 				78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */,
 				78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */,
-				780DCCA02A4C138700ADE060 /* AccountViewProtocol.swift in Sources */,
 				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
 				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,

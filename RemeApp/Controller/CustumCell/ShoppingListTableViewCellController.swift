@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ShoppingListTableViewCellController: UITableViewCell  {
+final class ShoppingListTableViewCellController: UITableViewCell  {
 
     // MARK: - @IBOutlet,@IBAction
 

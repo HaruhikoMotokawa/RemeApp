@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultSalesFloorMapViewController: UIViewController {
+final class DefaultSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場のマップでデフォルトを選択した場合に表示するView

@@ -7,7 +7,7 @@
 
 import UIKit
 /// F-買い物リスト編集
-class EditShoppingListViewController: UIViewController {
+final class EditShoppingListViewController: UIViewController {
 
     // MARK: - property
 

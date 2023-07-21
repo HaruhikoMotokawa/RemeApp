@@ -5,8 +5,6 @@
 //  Created by 本川晴彦 on 2023/07/01.
 //
 
-import Foundation
-import RealmSwift
 import UIKit
 
 final class MigrationManager {

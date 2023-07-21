@@ -8,7 +8,7 @@
 import UIKit
 
 /// 共有設定画面
-class ShareSettingsViewController: UIViewController {
+final class ShareSettingsViewController: UIViewController {
 
     // MARK: - property
 

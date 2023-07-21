@@ -18,13 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        //Windowをインスタンス化
-        window = UIWindow(windowScene: windowScene)
-
-        //rootViewControllerに指定したいControllerを指定
-        //StoryboardからViewControllerを生成
-        window?.rootViewController = UIStoryboard(name: "UITabBarControllerView", bundle: nil).instantiateInitialViewController()
-        window?.makeKeyAndVisible()
+        self.window = Router.shared.showRoot(windowScene: windowScene)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

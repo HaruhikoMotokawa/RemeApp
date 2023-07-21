@@ -7,8 +7,12 @@
 
 import UIKit
 
+protocol SignInViewControllerDelegate: AnyObject {
+    func updateUserInfoFromSignInView() async
+}
+
 /// ログイン画面
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
 
     // MARK: - property
 

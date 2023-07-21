@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IntroductionPageViewController: UIPageViewController {
+final class IntroductionPageViewController: UIPageViewController {
     // ① PageView上で表示するViewControllerを管理する配列
     private var controllers: [UIViewController] = []
 
@@ -25,29 +25,24 @@ class IntroductionPageViewController: UIPageViewController {
     private func initPageView(){
         // PageViewControllerで表示するViewControllerをインスタンス化
         // FirstIntroductionView
-        let firstIntroductionStoryboard = UIStoryboard(name: "FirstIntroductionView", bundle: nil)
-        let firstIntroductionVC = firstIntroductionStoryboard.instantiateViewController(
-            withIdentifier: "FirstIntroductionView") as! FirstIntroductionViewController
+        let firstIntroductionVC = UIStoryboard(name: "FirstIntroductionView", bundle: nil)
+            .instantiateInitialViewController() as! FirstIntroductionViewController
 
         // SecondIntroductionView
-        let secondIntroductionStoryboard = UIStoryboard(name: "SecondIntroductionView", bundle: nil)
-        let secondIntroductionVC = secondIntroductionStoryboard.instantiateViewController(
-            withIdentifier: "SecondIntroductionView") as! SecondIntroductionViewController
+        let secondIntroductionVC = UIStoryboard(name: "SecondIntroductionView", bundle: nil)
+            .instantiateInitialViewController() as! SecondIntroductionViewController
 
         // ThirdIntroductionView
-        let thirdIntroductionStoryboard = UIStoryboard(name: "ThirdIntroductionView", bundle: nil)
-        let thirdIntroductionVC = thirdIntroductionStoryboard.instantiateViewController(
-            withIdentifier: "ThirdIntroductionView") as! ThirdIntroductionViewController
+        let thirdIntroductionVC = UIStoryboard(name: "ThirdIntroductionView", bundle: nil)
+            .instantiateInitialViewController() as! ThirdIntroductionViewController
 
         // ForceIntroductionView
-        let forceIntroductionStoryboard = UIStoryboard(name: "ForceIntroductionView", bundle: nil)
-        let forceIntroductionVC = forceIntroductionStoryboard.instantiateViewController(
-            withIdentifier: "ForceIntroductionView") as! ForceIntroductionViewController
+        let forceIntroductionVC = UIStoryboard(name: "ForceIntroductionView", bundle: nil)
+            .instantiateInitialViewController() as! ForceIntroductionViewController
 
         // FifthIntroductionView
-        let fifthIntroductionStoryboard = UIStoryboard(name: "FifthIntroductionView", bundle: nil)
-        let fifthIntroductionVC = fifthIntroductionStoryboard.instantiateViewController(
-            withIdentifier: "FifthIntroductionView") as! FifthIntroductionViewController
+        let fifthIntroductionVC = UIStoryboard(name: "FifthIntroductionView", bundle: nil)
+            .instantiateInitialViewController() as! FifthIntroductionViewController
 
         // インスタンス化したViewControllerを配列に追加
         self.controllers = [ firstIntroductionVC, secondIntroductionVC, thirdIntroductionVC,

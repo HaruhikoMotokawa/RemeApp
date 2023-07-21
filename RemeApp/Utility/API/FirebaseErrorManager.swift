@@ -5,6 +5,7 @@
 //  Created by 本川晴彦 on 2023/06/11.
 //
 
+import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 

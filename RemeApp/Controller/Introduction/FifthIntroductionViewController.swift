@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FifthIntroductionViewController: UIViewController {
+final class FifthIntroductionViewController: UIViewController {
 
     @IBOutlet private weak var closeButton: UIButton!
 

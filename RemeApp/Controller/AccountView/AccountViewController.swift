@@ -8,7 +8,7 @@
 import UIKit
 
 /// アカウント画面
-class AccountViewController: UIViewController {
+final class AccountViewController: UIViewController {
 
     // MARK: -property
     /// 登録したアカウント名を表示

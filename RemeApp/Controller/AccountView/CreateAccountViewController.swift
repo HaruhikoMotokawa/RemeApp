@@ -7,9 +7,12 @@
 
 import UIKit
 
+protocol CreateAccountViewControllerDelegate: AnyObject {
+    func updateUserInfoFromCreateAccountView() async
+}
 
 /// アカウント新規作成画面
-class CreateAccountViewController: UIViewController {
+final class CreateAccountViewController: UIViewController {
 
     // MARK: - property
 

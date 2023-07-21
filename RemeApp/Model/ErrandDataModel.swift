@@ -5,11 +5,11 @@
 //  Created by 本川晴彦 on 2023/03/21.
 //
 
-import UIKit
+import Foundation
 import RealmSwift
 
 /// お使いデータモデル
-class ErrandDataModel: Object {
+final class ErrandDataModel: Object {
 
     /// データのID
     @objc dynamic var id:String = UUID().uuidString

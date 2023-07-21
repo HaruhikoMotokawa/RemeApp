@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 /// 選択した売り場編集
-class EditSelectedSalesFloorViewController: UIViewController {
+final class EditSelectedSalesFloorViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// 売り場の名称を入力するテキストフィールド

@@ -5,10 +5,9 @@
 //  Created by 本川晴彦 on 2023/04/14.
 //
 import RealmSwift
-import UIKit
 import Foundation
 /// 売り場の詳細データ
-class CustomSalesFloorModel: Object {
+final class CustomSalesFloorModel: Object {
     
     /// データのID
     @objc dynamic var id:String = UUID().uuidString

@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 /// K-売り場マップ編集
-class EditSalesFloorMapViewController: UIViewController {
+final class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
 

@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 /// G-品目新規作成
-class EditItemViewController: UIViewController {
+final class EditItemViewController: UIViewController {
     // MARK: - property
 
     /// タイトル

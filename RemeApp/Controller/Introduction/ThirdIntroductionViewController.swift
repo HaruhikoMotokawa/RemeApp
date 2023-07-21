@@ -6,7 +6,8 @@
 //
 
 import UIKit
-class ThirdIntroductionViewController: UIViewController {
+
+final class ThirdIntroductionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

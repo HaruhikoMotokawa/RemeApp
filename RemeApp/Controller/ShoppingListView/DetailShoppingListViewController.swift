@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 /// B-買い物リスト詳細
-class DetailShoppingListViewController: UIViewController {
+final class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
 

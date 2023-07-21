@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 /// H-売り場選択
-class SelectTypeOfSalesFloorViewController: UIViewController {
+final class SelectTypeOfSalesFloorViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
     /// 売り場のボタン：StoryboardのA-1

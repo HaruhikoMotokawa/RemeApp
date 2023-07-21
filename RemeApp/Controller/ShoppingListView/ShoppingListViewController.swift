@@ -6,7 +6,7 @@
 //
 import UIKit
 /// A-買い物リスト
-class ShoppingListViewController: UIViewController {
+final class ShoppingListViewController: UIViewController {
     // MARK: - property
 
     /// チュートリアルを表示するボタン

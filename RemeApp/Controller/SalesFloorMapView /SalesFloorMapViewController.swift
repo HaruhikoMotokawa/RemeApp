@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 /// C-売り場マップ閲覧
-class SalesFloorMapViewController: UIViewController {
+final class SalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
 
