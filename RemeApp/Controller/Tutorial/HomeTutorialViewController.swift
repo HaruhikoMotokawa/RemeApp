@@ -9,10 +9,11 @@ import UIKit
 /// チュートリアルの一覧を表示する
 class HomeTutorialViewController: UITableViewController {
     /// チュートリアルの一覧を表示するTableView
-    @IBOutlet private var tutorialTableView: UITableView!
+    @IBOutlet private weak var tutorialTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
     /// タップしてモーダル遷移
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -38,6 +39,11 @@ class HomeTutorialViewController: UITableViewController {
 
             case (2, 0):
                 return presentDetailTutorialView(imageName: Tutorial.offLine.imageName)
+
+            case (3, 0):
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+
+                return UIApplication.shared.open(settingsUrl)
 
             default:
                 dismiss(animated: true)

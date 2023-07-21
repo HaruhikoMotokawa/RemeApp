@@ -718,6 +718,7 @@ PODS:
   - Libuv-gRPC/Implementation (0.0.10):
     - Libuv-gRPC/Interface (= 0.0.10)
   - Libuv-gRPC/Interface (0.0.10)
+  - LicensePlist (3.24.10)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -736,6 +737,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - FirebaseStorage
   - IQKeyboardManagerSwift
+  - LicensePlist
   - RealmSwift (~> 10)
 
 SPEC REPOS:
@@ -759,6 +761,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - leveldb-library
     - Libuv-gRPC
+    - LicensePlist
     - nanopb
     - PromisesObjC
     - Realm
@@ -784,11 +787,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
+  LicensePlist: 2e5c975314d2d2ee35cec141d57cc482d61b93c9
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   Realm: 5902885dd1d5e71b0b020830caab937ecdf5bf07
   RealmSwift: 0fc037d6c32c7c4fc9362892380f380114ecdcf0
 
-PODFILE CHECKSUM: 966cea8f224b687e8a99af956b6cedcf5e535261
+PODFILE CHECKSUM: 9b4f478af863ea3d544eaadca53005e0631be37d
 
 COCOAPODS: 1.12.1

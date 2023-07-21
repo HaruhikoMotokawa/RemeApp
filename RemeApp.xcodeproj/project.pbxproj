@@ -55,6 +55,7 @@
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
 		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
+		787DDF462A6A298200749480 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 787DDF452A6A298200749480 /* Settings.bundle */; };
 		7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7888B8A72A4FDAA60068A2CF /* Cache.swift */; };
 		7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */; };
 		788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E1E8B29CE7E2C006777E6 /* CheckBox.swift */; };
@@ -155,6 +156,7 @@
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
 		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
+		787DDF452A6A298200749480 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		7888B8A72A4FDAA60068A2CF /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		7889D44C2A3AAF2300FC3F48 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		788E1E8B29CE7E2C006777E6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				78AB3B4529C835D8004685F1 /* Info.plist */,
 				78AB3B4029C835D8004685F1 /* Assets.xcassets */,
 				78E80B302A3021E50068C71C /* GoogleService-Info.plist */,
+				787DDF452A6A298200749480 /* Settings.bundle */,
 			);
 			path = RemeApp;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				78AB3B3229C835D7004685F1 /* Resources */,
 				78AC8B4929F4D5310015FEC4 /* Embed Frameworks */,
 				9CEF2829D2CDFE3857C07142 /* [CP] Embed Pods Frameworks */,
+				787DDF422A6A224E00749480 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -604,6 +608,7 @@
 				78FBBF652A2EFF3100EDCE9D /* SignInView.storyboard in Resources */,
 				78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */,
 				787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */,
+				787DDF462A6A298200749480 /* Settings.bundle in Resources */,
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */,
@@ -627,6 +632,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		787DDF422A6A224E00749480 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path $PRODUCT_NAME/Settings.bundle --github-token YOUR_GITHUB_TOKEN\nfi\n";
+		};
 		9CEF2829D2CDFE3857C07142 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
