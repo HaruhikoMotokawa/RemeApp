@@ -50,7 +50,7 @@ final class Router {
         from.present(toVC, animated: true)
     }
 
-    /// 買い物リストから買い物リスト詳細画面へ遷移
+    /// 買い物リスト詳細画面へ遷移
     internal func showDetailShoppingList(from: UIViewController, shoppingItemData: ShoppingItemModel) {
         guard let toVC = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
             .instantiateInitialViewController() as? DetailShoppingListViewController else { return }
@@ -59,6 +59,73 @@ final class Router {
         }
         toVC.modalTransitionStyle = .crossDissolve
         from.present(toVC, animated: true)
+    }
+
+    /// 売り場買い物リストへ遷移
+    internal func showSalesFloorShoppingList(from: UIViewController, salesFloorRawValue: Int) {
+        guard let toVC = UIStoryboard(name: "SalesFloorShoppingListView", bundle: nil)
+            .instantiateInitialViewController() as? SalesFloorShoppingListViewController else { return }
+        toVC.salesFloorRawValue = salesFloorRawValue
+        show(from: from, to: toVC)
+    }
+
+    /// CreateAccountViewに画面遷移、デリゲートセット
+    internal func showCreateAccount(from: AccountViewController) {
+        guard
+            let toVC = UIStoryboard(name: "CreateAccountView", bundle: nil)
+            .instantiateInitialViewController() as? CreateAccountViewController
+        else { return }
+        toVC.delegate = from
+        show(from: from, to: toVC)
+    }
+
+    /// SignInViewの画面遷移、デリゲートセット
+    internal func showSignIn(from: AccountViewController) {
+        guard
+            let toVC = UIStoryboard(name: "SignInView", bundle: nil)
+                .instantiateInitialViewController() as? SignInViewController
+        else { return }
+        toVC.delegate = from
+        show(from: from, to: toVC)
+    }
+
+    /// 共有設定画面に画面遷移
+    internal func showShareSettingsView(from: UIViewController) {
+        guard let toVC = UIStoryboard(name: "ShareSettingsView", bundle: nil)
+            .instantiateInitialViewController() as? ShareSettingsViewController else { return }
+        show(from: from, to: toVC)
+    }
+
+    /// 編集画面に遷移
+    /// 新規作成フラグをtrueで新規、falseで編集
+    /// 第３引数のshoppingItemDataはデフォルトでnil、編集時は代入する
+    internal func showEditItem(from: UIViewController, isNewItem: Bool , shoppingItemData: ShoppingItemModel? = nil) {
+        guard let toVC = UIStoryboard(name: "EditItemView", bundle: nil)
+            .instantiateInitialViewController() as? EditItemViewController else { return }
+        toVC.isNewItem = isNewItem
+        if !isNewItem {
+            guard let shoppingItemData else { return }
+            Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
+                toVC.configurer(detail: shoppingItemData, image: image)
+            }
+        }
+        show(from: from, to: toVC)
+    }
+
+    /// 売り場選択画面に遷移
+    /// 選択後にボタンの見た目を変更するためにデリデートをセット
+    internal func showSelectTypeOfSalesFloorView(from: EditItemViewController) {
+        guard let toVC = UIStoryboard(name: "SelectTypeOfSalesFloorView", bundle: nil)
+            .instantiateInitialViewController() as? SelectTypeOfSalesFloorViewController else { return }
+        toVC.delegate = from
+        show(from: from, to: toVC)
+    }
+
+    internal func showEditSelectedSalesFloorView(from: UIViewController, selectedFloor: CustomSalesFloorModel) {
+        guard let toVC = UIStoryboard(name: "EditSelectedSalesFloorView", bundle: nil)
+            .instantiateInitialViewController() as? EditSelectedSalesFloorViewController else { return }
+        toVC.configurer(detail: selectedFloor)
+        show(from: from, to: toVC)
     }
 }
 

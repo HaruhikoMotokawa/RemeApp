@@ -12,7 +12,14 @@ final class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場の買い物リストを表示
-    @IBOutlet private weak var shoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet {
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
+        }
+    }
 
     // MARK: - property
 
@@ -130,10 +137,7 @@ final class SalesFloorShoppingListViewController: UIViewController {
     }
     /// salesFloorShoppingListTableView関連の設定
     private func setTableView() {
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                                 forCellReuseIdentifier: "ShoppingListTableViewCell")
+
     }
 
 }

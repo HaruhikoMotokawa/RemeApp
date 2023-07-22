@@ -14,15 +14,40 @@ final class EditShoppingListViewController: UIViewController {
     /// チュートリアルを表示するボタン
     @IBOutlet private weak var helpButton: UIButton!
     /// 複数削除モードの解除ボタン
-    @IBOutlet private weak var cancelEditButton: UIButton!
+    @IBOutlet private weak var cancelEditButton: UIButton! {
+        didSet {
+            setEditButtonAppearance(cancelEditButton, title: "キャンセル")
+            cancelEditButton.isHidden = true
+        }
+    }
     /// 複数削除ボタン
-    @IBOutlet private weak var multipleDeletionsButton: UIButton!
+    @IBOutlet private weak var multipleDeletionsButton: UIButton! {
+        didSet {
+            setEditButtonAppearance(multipleDeletionsButton, title: "複数削除")
+            multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        }
+    }
     /// 画面タイトルラベル
     @IBOutlet private weak var viewTitleLabel: UILabel!
     /// 買い物リストを表示
-    @IBOutlet private weak var shoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet {
+            shoppingListTableView.allowsMultipleSelectionDuringEditing = true
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
+                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
+        }
+    }
     /// 新規作成ボタン
-    @IBOutlet private weak var createNewItemButton: UIButton!
+    @IBOutlet private weak var createNewItemButton: UIButton! {
+        didSet {
+            createNewItemButton.layer.borderWidth = 1 // 枠線の幅を１で設定
+            createNewItemButton.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
+            createNewItemButton.layer.cornerRadius = 25 // 角丸の値
+            createNewItemButton.addShadow() // 影
+        }
+    }
     /// 編集モードのフラグ
     private var isEditingMode: Bool = false
 
@@ -39,12 +64,6 @@ final class EditShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetWorkObserver()
-        setTableVIew()
-        setCreateNewItemButtonAppearance()
-        setEditButtonAppearance(multipleDeletionsButton, title: "複数削除")
-        setEditButtonAppearance(cancelEditButton, title: "キャンセル")
-        multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        cancelEditButton.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +74,6 @@ final class EditShoppingListViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("離れるで")
         removeShoppingItemObserver()
     }
 
@@ -78,11 +96,7 @@ final class EditShoppingListViewController: UIViewController {
 
     /// 「G-品目新規作成」画面にモーダル遷移
     @IBAction private func goCreateNewItemView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
-        let editItemVC = storyboard.instantiateViewController(
-            withIdentifier: "EditItemView") as! EditItemViewController
-        editItemVC.isNewItem = true // 新規編集フラグをオンにする
-        present(editItemVC, animated: true)
+        Router.shared.showEditItem(from: self, isNewItem: true)
     }
 
     // MARK: - func
@@ -114,23 +128,6 @@ final class EditShoppingListViewController: UIViewController {
         button.layer.borderColor = UIColor.white.cgColor
         // バックグラウンドを角丸１０に設定
         button.layer.cornerRadius = 10.0
-    }
-
-    /// UITableViewの初期設定関連
-    private func setTableVIew() {
-        shoppingListTableView.allowsMultipleSelectionDuringEditing = true
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
-    }
-
-    /// CreateNewItemButtonの装飾処理をするメソッド
-    private func setCreateNewItemButtonAppearance() {
-        createNewItemButton.layer.borderWidth = 1 // 枠線の幅を１で設定
-        createNewItemButton.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
-        createNewItemButton.layer.cornerRadius = 25 // 角丸の値
-        createNewItemButton.addShadow() // 影
     }
 
     /// 自分と共有者の買い物リストを結合させて並び替えるメソッド
@@ -227,7 +224,7 @@ final class EditShoppingListViewController: UIViewController {
 
     // MARK: - 編集モードに関する処理
     /// 編集モードの設定==multipleDeletionsButtonをタップした時の動作
-    @objc func buttonTapped() {
+    @objc private func buttonTapped() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: "オフライン時はスワイプ削除のみ有効です")
@@ -389,16 +386,10 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
         // 編集モード時の処理を行わない
         guard !shoppingListTableView.isEditing else { return }
         // 通常時の処理
-        let storyboard = UIStoryboard(name: "EditItemView", bundle: nil)
-        let editItemVC = storyboard.instantiateViewController(
-            withIdentifier: "EditItemView") as! EditItemViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
-            editItemVC.configurer(detail: shoppingItemData, image: image)
-        }
-        editItemVC.isNewItem = false // 新規編集フラグをオフにする
+        Router.shared.showEditItem(from: self, isNewItem: false, shoppingItemData: shoppingItemData)
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        present(editItemVC, animated: true)
+
     }
 
     // MARK: 単品で削除する場合の処理

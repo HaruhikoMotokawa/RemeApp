@@ -90,14 +90,9 @@ final class EditItemViewController: UIViewController {
     // MARK: - func
 
     /// 売り場選択画面に遷移するメソッド
-    ///  -　遷移処理
     ///  - 遷移後に自身のボタンの見た目を変更するためにデリゲートをセット
     @IBAction private func goSelectTypeOfSalesFloorView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "SelectTypeOfSalesFloorView", bundle: nil)
-        let selectTypeOfSalesFloorVC = storyboard.instantiateViewController(
-            withIdentifier: "SelectTypeOfSalesFloorView") as! SelectTypeOfSalesFloorViewController
-        selectTypeOfSalesFloorVC.delegate = self
-        present(selectTypeOfSalesFloorVC, animated: true)
+        Router.shared.showSelectTypeOfSalesFloorView(from: self)
     }
 
     /// カメラ撮影とフォトライブラリーでの写真選択を実行する処理
@@ -597,7 +592,8 @@ extension EditItemViewController: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        return newLength <= 15
+        let maxLength = 15
+        return newLength <= maxLength
     }
     /// 商品名が入力された時に売り場選択ボタンを活性化するメソッド
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {

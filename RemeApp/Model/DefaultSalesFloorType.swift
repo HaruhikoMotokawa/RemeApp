@@ -11,23 +11,23 @@ import UIKit
 enum DefaultSalesFloorType: Int, CaseIterable {
 
     /// 売り場の番地、赤１〜５と青１〜７、緑１〜５
-    case redOne
-    case redTwo
-    case redThree
-    case redFour
-    case redFive
-    case blueOne
-    case blueTwo
-    case blueThree
-    case blueFour
-    case blueFive
-    case blueSix
-    case blueSeven
-    case greenOne
-    case greenTwo
-    case greenThree
-    case greenFour
-    case greenFive
+    case redOne //0
+    case redTwo //1
+    case redThree //2
+    case redFour //3
+    case redFive //4
+    case blueOne  //5
+    case blueTwo // 6
+    case blueThree //7
+    case blueFour //8
+    case blueFive //9
+    case blueSix //10
+    case blueSeven //11
+    case greenOne //12
+    case greenTwo //13
+    case greenThree //14
+    case greenFour //15
+    case greenFive //16
 
     /// 売り場の名称
     var nameOfSalesFloor: String {

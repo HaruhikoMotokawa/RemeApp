@@ -250,12 +250,7 @@ final class EditSelectedSalesFloorViewController: UIViewController {
 
     /// 売り場選択からもらった情報を表示
     /// 受け渡されたデータをそれぞれのUI部品に表示
-    /// - 商品名の表示
-    /// - 必要数を表示
-    /// - 必要数の単位を表示
-    /// - 売り場を表示
-    /// - 補足を表示
-    /// - 写真を表示
+
     private func displayData() {
         nameOfSalesFloorTextField.text = nameOfSalesFloorTextFieldText
         selectedSalesFloorColorView.backgroundColor = selectedSalesFloorColorViewColor.color

@@ -61,7 +61,6 @@ final class AccountViewController: UIViewController {
     }
 
     // MARK: - func
-
     /// チュートリアル画面にモーダル遷移
     @IBAction func goTutorialView(_ sender: Any) {
         Router.shared.showHomeTutorial(from: self)
@@ -86,11 +85,8 @@ final class AccountViewController: UIViewController {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
             return
         }
-        let storyboard = UIStoryboard(name: "CreateAccountView", bundle: nil)
-        let createAccountVC = storyboard.instantiateViewController(
-            withIdentifier: "CreateAccountView") as! CreateAccountViewController
-        createAccountVC.delegate = self
-        self.navigationController?.pushViewController(createAccountVC, animated: true)
+        // まだダメな気がする
+        Router.shared.showCreateAccount(from: self)
     }
 
     /// ログイン画面にプッシュ遷移
@@ -100,11 +96,7 @@ final class AccountViewController: UIViewController {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
             return
         }
-        let storyboard = UIStoryboard(name: "SignInView", bundle: nil)
-        let signInVC = storyboard.instantiateViewController(
-            withIdentifier: "SignInView") as! SignInViewController
-        signInVC.delegate = self
-        self.navigationController?.pushViewController(signInVC, animated: true)
+        Router.shared.showSignIn(from: self)
     }
 
     /// ログイン中であればサインアウトし、匿名認証でログイン
@@ -167,10 +159,7 @@ final class AccountViewController: UIViewController {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
             return
         }
-        let storyboard = UIStoryboard(name: "ShareSettingsView", bundle: nil)
-        let shareSettingsVC = storyboard.instantiateViewController(
-            withIdentifier: "ShareSettingsView") as! ShareSettingsViewController
-        self.navigationController?.pushViewController(shareSettingsVC, animated: true)
+        Router.shared.showShareSettingsView(from: self)
     }
 
     /// アカウントを削除
@@ -249,7 +238,7 @@ final class AccountViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // オンラインなら通常通りにユザー情報とボタンを設定する
@@ -451,13 +440,13 @@ final class AccountViewController: UIViewController {
 
 }
 
-
+/// アカウント作成後にデリゲートでユーザーインフォを再度セット
 extension AccountViewController: CreateAccountViewControllerDelegate {
     func updateUserInfoFromCreateAccountView() async {
         await setUserInfo()
     }
 }
-
+/// ログイン後にデリゲートでユーザーインフォを再度セット
 extension AccountViewController: SignInViewControllerDelegate {
     func updateUserInfoFromSignInView() async {
         await setUserInfo()
