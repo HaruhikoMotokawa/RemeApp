@@ -144,16 +144,12 @@ final class ShoppingListViewController: UIViewController {
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// -  画面ローディング時の表示をif文で切り替え
+    /// - UserDefaultsから設定を取得して画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortShoppingItemList() {
         print("並び替え実行")
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
+        if UserDefaults.standard.shoppingStartPosition == ShoppingStartPositionType.left.rawValue {
             sortLeftShoppingItemList()
         } else {
             sortRightShoppingItemList()

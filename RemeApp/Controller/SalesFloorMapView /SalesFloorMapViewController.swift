@@ -282,17 +282,11 @@ final class SalesFloorMapViewController: UIViewController {
     ///    - バックグラウンドカラーを白に設定
     ///    - ボタンの非活性化
     private func exchangeAllSalesFloorButton() {
-        // - UserDefaultsに使用するキーを指定
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        // - UserDefaultsから設定を取得
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        // 0 -> カスタム、1(else) -> デフォルト
-        if salesFloorTypeInt == 0 {
-            // カスタムマップタイプの処理
-            setCustomSalesFloorButton()
+        // 保存されている設定によって処理を切り替え
+        if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
+            setCustomSalesFloorButton() // カスタムマップタイプの処理
         } else {
-            // デフォルトマップタイプの処理
-            setDefaultSalesFloorButton()
+            setDefaultSalesFloorButton() // デフォルトマップタイプの処理
         }
     }
 
@@ -364,22 +358,16 @@ final class SalesFloorMapViewController: UIViewController {
 
     /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド
     /// - NotificationCenterの通知受信を設定
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// - 画面ローディング時の表示をif文で切り替え
+    /// - UserDefaultsから設定を取得して画面ローディング時の表示をif文で切り替え
     private func setCartView() {
         NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView),
                                                name: .showLeftCartView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView),
                                                name: .showRightCartView, object: nil)
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
-            leftCartView.isHidden = false
-            rightCartView.isHidden = true
+        if UserDefaults.standard.shoppingStartPosition == ShoppingStartPositionType.left.rawValue {
+            showLeftCartView() // 左回り設定
         } else {
-            rightCartView.isHidden = false
-            leftCartView.isHidden = true
+            showRightCartView() // 右回り設定
         }
     }
 

@@ -355,6 +355,7 @@ extension EditSelectedSalesFloorViewController: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        return newLength <= 8
+        let maxLength = 8
+        return newLength <= maxLength
     }
 }

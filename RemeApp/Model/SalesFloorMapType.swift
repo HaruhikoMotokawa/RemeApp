@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SalesFloorMapType: Int {
-    case custom
-    case `default`
-}
+//enum SalesFloorMapType: Int {
+//    case custom
+//    case `default`
+//}

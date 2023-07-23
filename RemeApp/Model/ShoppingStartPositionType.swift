@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ShoppingStartPositionType:Int {
-    case left
-    case right
-}
+//enum ShoppingStartPositionType:Int {
+//    case left
+//    case right
+//}

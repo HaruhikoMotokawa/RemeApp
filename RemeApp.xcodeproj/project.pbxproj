@@ -20,6 +20,7 @@
 		7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */; };
 		7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */; };
 		781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */; };
+		782780E72A6CA0090080F385 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782780E62A6CA0090080F385 /* UserDefaults+.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
 		78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */; };
 		78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */; };
@@ -121,6 +122,7 @@
 		7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorModel.swift; sourceTree = "<group>"; };
+		782780E62A6CA0090080F385 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
 		78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTutorialView.storyboard; sourceTree = "<group>"; };
 		78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				78581B6A29E308DE00930F65 /* ExtesionUILabel.swift */,
 				7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */,
 				78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */,
+				782780E62A6CA0090080F385 /* UserDefaults+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
 				78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */,
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
+				782780E72A6CA0090080F385 /* UserDefaults+.swift in Sources */,
 				784E1F2029C8451200C9360A /* MainTabBarController.swift in Sources */,
 				7815F7DD2A32BE5E00BE0B89 /* AccountManager.swift in Sources */,
 				781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */,

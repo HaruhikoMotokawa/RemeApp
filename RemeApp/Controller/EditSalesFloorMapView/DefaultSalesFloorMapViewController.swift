@@ -97,20 +97,16 @@ final class DefaultSalesFloorMapViewController: UIViewController {
 
     /// 登録された使用マップ設定によってチェックマークの表示を切り替えるメソッド
     /// - NotificationCenterの通知受信を設定
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// -  画面ローディング時の表示をif文で切り替え
+    /// - UserDefaultsから設定を取得して画面ローディング時の表示をif文で切り替え
     private func setDefaultSelectCheckMark() {
         NotificationCenter.default.addObserver(self, selector: #selector(showDefaultSelectCheckMark),
                                                name: .showDefaultSelectCheckMark, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideDefaultSelectCheckMark),
                                                name: .hideDefaultSelectCheckMark, object: nil)
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        if salesFloorTypeInt == 0 {
-            defaultSelectCheckMark.isHidden = true
+        if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
+            hideDefaultSelectCheckMark()
         } else {
-            defaultSelectCheckMark.isHidden = false
+            showDefaultSelectCheckMark()
         }
     }
 
@@ -126,22 +122,16 @@ final class DefaultSalesFloorMapViewController: UIViewController {
 
     /// 登録された買い物の開始位置によってカートのイメージの表示を切り替えるメソッド
     /// - NotificationCenterの通知受信を設定
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// - 画面ローディング時の表示をif文で切り替え
+    /// - UserDefaultsから設定を取得して画面ローディング時の表示をif文で切り替え
     private func setCartView() {
         NotificationCenter.default.addObserver(self, selector: #selector(showLeftCartView),
                                                name: .showLeftCartView, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showRightCartView),
                                                name: .showRightCartView, object: nil)
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
-            leftCartView.isHidden = false
-            rightCartView.isHidden = true
+        if UserDefaults.standard.shoppingStartPosition == ShoppingStartPositionType.left.rawValue {
+            showLeftCartView() // 左回り設定
         } else {
-            rightCartView.isHidden = false
-            leftCartView.isHidden = true
+            showRightCartView() // 右回り設定
         }
     }
 

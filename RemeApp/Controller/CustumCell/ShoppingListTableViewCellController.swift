@@ -142,15 +142,11 @@ final class ShoppingListTableViewCellController: UITableViewCell  {
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
     func setSalesFloorTypeButton(salesFloorRawValue: Int) {
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        // 0 -> カスタム、1(else) -> デフォルト
-        if salesFloorTypeInt == 0 {
-            // カスタムマップタイプの処理
-            setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+        // 保存された設定によって切り替える
+        if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
+            setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // カスタムマップタイプの処理
         } else {
-            // デフォルトマップタイプの処理
-            setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+            setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // デフォルトマップタイプの処理
         }
     }
 
