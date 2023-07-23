@@ -48,7 +48,7 @@ final class ShoppingListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showIntroductionPageOnFirstLaunch() // 初回起動時のチュートリアル表示
+        showIntroduction() // 初回起動時のチュートリアル表示
     }
     // MARK: - func
 
@@ -58,12 +58,9 @@ final class ShoppingListViewController: UIViewController {
     }
 
     /// アプリ初回起動時のチュートリアル画面表示処理
-    private func showIntroductionPageOnFirstLaunch() {
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
+    private func showIntroduction() {
+        if !UserDefaults.standard.isIntroductionSeen {
+            UserDefaults.standard.isIntroductionSeen = true
             Router.shared.showIntroduction(from: self)
         }
     }

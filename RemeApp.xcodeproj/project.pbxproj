@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		74DD2BEC778B137D141F0BFD /* Pods_RemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F5F3CB7F16E55697338026 /* Pods_RemeApp.framework */; };
-		78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */; };
-		78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */; };
 		78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */; };
 		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
@@ -110,8 +108,6 @@
 
 /* Begin PBXFileReference section */
 		59F5F3CB7F16E55697338026 /* Pods_RemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesFloorMapType.swift; sourceTree = "<group>"; };
-		78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingStartPositionType.swift; sourceTree = "<group>"; };
 		78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorType.swift; sourceTree = "<group>"; };
 		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
@@ -254,6 +250,7 @@
 		787DDF492A6A33C700749480 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				78BAAB1B2A394562000C9627 /* API */,
 				787DDF4D2A6A531300749480 /* Router.swift */,
 			);
@@ -306,7 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				787DDF492A6A33C700749480 /* Utility */,
-				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				78F6F6FF29D9555500AF4DC0 /* View */,
 				78F6F70029D9556500AF4DC0 /* Controller */,
 				78F6F70229D9565A00AF4DC0 /* Delegate */,
@@ -471,8 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				785D74B029C93577006F0CBB /* ErrandDataModel.swift */,
-				78030ED329ED1D44000E40A3 /* SalesFloorMapType.swift */,
-				78030ED529ED1F49000E40A3 /* ShoppingStartPositionType.swift */,
 				78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */,
 				781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */,
 				782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */,
@@ -766,13 +760,11 @@
 				78E931F32A50584300FD3678 /* MigrationManager.swift in Sources */,
 				78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */,
 				78FBBF632A2EFEF500EDCE9D /* CreateAccountViewController.swift in Sources */,
-				78030ED629ED1F49000E40A3 /* ShoppingStartPositionType.swift in Sources */,
 				784E1F2E29C84C7900C9360A /* SalesFloorMapViewController.swift in Sources */,
 				785067272A53EE6B007E0E1A /* SecondIntroductionViewController.swift in Sources */,
 				785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */,
 				7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */,
 				784669742A3DDB7D00C175EB /* AlertController.swift in Sources */,
-				78030ED429ED1D44000E40A3 /* SalesFloorMapType.swift in Sources */,
 				7850672F2A53F075007E0E1A /* ForceIntroductionViewController.swift in Sources */,
 				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,

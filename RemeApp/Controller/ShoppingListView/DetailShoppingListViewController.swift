@@ -16,7 +16,7 @@ final class DetailShoppingListViewController: UIViewController {
     /// 売り場を表示
     @IBOutlet private weak var salesFloorTypeButton: UIButton!
     /// 詳細のView
-    @IBOutlet weak var detailView: UIView!
+    @IBOutlet private weak var detailView: UIView!
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
     /// 商品名を表示
@@ -87,7 +87,7 @@ final class DetailShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // オフラインになったらアラートを出す
@@ -146,7 +146,7 @@ final class DetailShoppingListViewController: UIViewController {
     /// salesFloorTypeButtonに売り場の内容を反映させる
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
-    func setSalesFloorTypeButton(salesFloorRawValue: Int) {
+    private func setSalesFloorTypeButton(salesFloorRawValue: Int) {
         // 保存された設定によって切り替える
         if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
             setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // カスタムマップタイプの処理

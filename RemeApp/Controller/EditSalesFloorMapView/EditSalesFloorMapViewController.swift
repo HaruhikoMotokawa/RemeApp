@@ -58,7 +58,7 @@ final class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - property
     /// カスタムマップの初期値
-    private let resetCustomSalesFloors: [CustomSalesFloorModel] = [
+    static var resetCustomSalesFloors: [CustomSalesFloorModel] {[
         CustomSalesFloorModel(salesFloorRawValue: 0, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 0),
         CustomSalesFloorModel(salesFloorRawValue: 1, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 1),
         CustomSalesFloorModel(salesFloorRawValue: 2, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 2),
@@ -76,8 +76,7 @@ final class EditSalesFloorMapViewController: UIViewController {
         CustomSalesFloorModel(salesFloorRawValue: 14, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 14),
         CustomSalesFloorModel(salesFloorRawValue: 15, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 15),
         CustomSalesFloorModel(salesFloorRawValue: 16, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 16)
-    ]
-
+    ]}
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,7 +129,7 @@ final class EditSalesFloorMapViewController: UIViewController {
             let customSalesFloors = Array(realm.objects(CustomSalesFloorModel.self)) // 編集した売り場のデータを取得
             try! realm.write {
                 realm.delete(customSalesFloors) // 変更されたデータを削除
-                realm.add(self.resetCustomSalesFloors) // 作成した初期値を書き込み
+                realm.add(EditSalesFloorMapViewController.resetCustomSalesFloors) // 作成した初期値を書き込み
             }
         }
         /// 何もしない処理
