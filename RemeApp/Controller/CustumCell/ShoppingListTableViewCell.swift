@@ -8,23 +8,20 @@
 import UIKit
 import RealmSwift
 
-final class ShoppingListTableViewCell: UITableViewCell  {
+/// チェックボックスがタップされた場合の挙動を指定するデリゲート
+protocol ShoppingListTableViewCellDelegate: AnyObject {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async
+}
 
+final class ShoppingListTableViewCell: UITableViewCell  {
     // MARK: - @IBOutlet,@IBAction
     static var className: String { String(describing: ShoppingListTableViewCell.self) }
     /// チェックボックスのUIButton
-    @IBOutlet  weak var checkBoxButton: CheckBox!
-
-    /// チェックボックスがタプされた際のメソッド
-    /// - cellのバックグラウンドカラーをグレイに変更
-    @IBAction private func isCheckBoxButton(_ sender: Any) {
-        Task { @MainActor in
-            changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
-            isChecked = !isChecked
-            await delegate?.didTapCheckBoxButton(self)
+    @IBOutlet  weak var checkBoxButton: CheckBox! {
+        didSet {
+            checkBoxButton.addTarget(self, action: #selector(isCheckBoxButton), for: .touchUpInside)
         }
     }
-    
     /// 商品名を表示する
     @IBOutlet private weak var nameOfItemLabel: UILabel!
     /// 商品の必要数を表示
@@ -32,7 +29,26 @@ final class ShoppingListTableViewCell: UITableViewCell  {
     /// 必要数の単位を表示
     @IBOutlet private weak var unitLabel: UILabel!
     /// 売り場を表示
-    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+    @IBOutlet private weak var salesFloorTypeButton: UIButton! {
+        didSet {
+            // 文字色を黒に設定
+            salesFloorTypeButton.setTitleColor(.black, for: .normal)
+            // フォントをボールド、サイズを１７に設定
+            salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            // 枠線の幅を１で設定
+            salesFloorTypeButton.layer.borderWidth = 1
+            // 枠線のカラーを黒に設定
+            salesFloorTypeButton.layer.borderColor = UIColor.black.cgColor
+            // バックグラウンドを角丸１０に設定
+            salesFloorTypeButton.layer.cornerRadius = 10.0
+            // ラベルのテキストをボタンの幅に合わせて自動的に調整
+            salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            // ラベルの自動調整の際に縮小率を0.５に設定
+            salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
+            // ラベルの自動調整の際に必ず１行になるように設定
+            salesFloorTypeButton.titleLabel?.numberOfLines = 1
+        }
+    }
     /// 補足を表示
     @IBOutlet private weak var supplementLabel: UILabel!
     /// 写真を表示
@@ -67,8 +83,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // UIButtonの基本設定
-        setSalesFloorButtonAppearance()
     }
 
     // MARK: - setSelected
@@ -77,36 +91,16 @@ final class ShoppingListTableViewCell: UITableViewCell  {
     }
 
     // MARK: - func
-
-    /// UIButtonの装飾基本設定
-    /// - 文字色を黒に設定
-    /// - フォントをボールドにサイズを２０に設定
-    /// - 枠線の幅を１で設定
-    /// - 枠線のカラーを黒に設定
-    /// - バックグラウンドを角丸１０に設定
-    /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
-    /// - ラベルの自動調整の際に縮小率を0.５に設定
-    /// - ラベルの自動調整の際に必ず１行になるように設定
-    func setSalesFloorButtonAppearance() {
-        // 文字色を黒に設定
-        salesFloorTypeButton.setTitleColor(.black, for: .normal)
-        // フォントをボールド、サイズを１７に設定
-        salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        // 枠線の幅を１で設定
-        salesFloorTypeButton.layer.borderWidth = 1
-        // 枠線のカラーを黒に設定
-        salesFloorTypeButton.layer.borderColor = UIColor.black.cgColor
-        // バックグラウンドを角丸１０に設定
-        salesFloorTypeButton.layer.cornerRadius = 10.0
-        // ラベルのテキストをボタンの幅に合わせて自動的に調整
-        salesFloorTypeButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        // ラベルの自動調整の際に縮小率を0.５に設定
-        salesFloorTypeButton.titleLabel?.minimumScaleFactor = 0.5 // 縮小率を指定する
-        // ラベルの自動調整の際に必ず１行になるように設定
-        salesFloorTypeButton.titleLabel?.numberOfLines = 1
+    /// チェックボックスがタプされた際のメソッド
+    /// - cellのバックグラウンドカラーをグレイに変更
+    @objc private func isCheckBoxButton(_ sender: Any) {
+        Task { @MainActor in
+            changeBackgroundColor(isCheckBox: checkBoxButton.isChecked)
+            isChecked = !isChecked
+            await delegate?.didTapCheckBoxButton(self)
+        }
     }
 
-    
     /// 買い物リストのデータをセルの各パーツにセットする
     func setShoppingList(isCheckBox: Bool,
                          nameOfItem: String,
@@ -210,11 +204,3 @@ final class ShoppingListTableViewCell: UITableViewCell  {
         }
     }
 }
-
-/// チェックボックスがタップされた場合の挙動を指定するデリゲート
-protocol ShoppingListTableViewCellDelegate: AnyObject {
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async
-}
-
-
-
