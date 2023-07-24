@@ -18,13 +18,11 @@ enum SalesFloorMapType: Int {
     case custom
     case `default`
 }
-
-
+// 拡張してキーと値を設定しておくと共通化できる、基本コンピューテッドプロパティ
 extension UserDefaults {
-
-    // アプリインストール後初回起動フラグの保存キー
+    /// アプリインストール後初回起動フラグの保存キー
     private var isInitialLaunchKey: String { "isInitialLaunch" }
-    // アプリインストール後初回起動フラグ
+    /// アプリインストール後初回起動フラグ、保存なければデフォルトがfalse
     var isInitialLaunch: Bool {
         get {
             self.bool(forKey: isInitialLaunchKey)
@@ -33,10 +31,9 @@ extension UserDefaults {
             self.setValue(newValue, forKey: isInitialLaunchKey)
         }
     }
-
-    // 導入スクショ閲覧フラグの保存キー
+    /// 導入スクショ閲覧フラグの保存キー
     private var isIntroductionSeenKey: String { "isIntroductionSeen" }
-    // 導入スクショ閲覧フラグ
+    /// 導入スクショ閲覧フラグ、保存なければデフォルトがfalse
     var isIntroductionSeen: Bool {
         get {
             self.bool(forKey: isIntroductionSeenKey)
@@ -45,10 +42,9 @@ extension UserDefaults {
             self.setValue(newValue, forKey: isIntroductionSeenKey)
         }
     }
-
     /// 使用マップの保存キー
     private var useSalesFloorTypeKey: String { "useSalesFloorTypeKey" }
-    /// 使用マップのセグメントナンバーを保存
+    /// 使用マップのセグメントナンバー、保存がなければデフォルトが0
     var useSalesFloorType: Int {
         get {
             self.integer(forKey: useSalesFloorTypeKey)
@@ -57,10 +53,9 @@ extension UserDefaults {
             self.setValue(newValue, forKey: useSalesFloorTypeKey)
         }
     }
-
     /// 買い物開始位置の保存キー
     private var shoppingStartPositionKey:String  { "shoppingStartPositionKey" }
-    /// 買い物開始位置のセグメントナンバー
+    /// 買い物開始位置のセグメントナンバー、保存がなければデフォルトが0
     var shoppingStartPosition: Int {
         get {
             self.integer(forKey: shoppingStartPositionKey)
@@ -69,5 +64,4 @@ extension UserDefaults {
             self.setValue(newValue, forKey: shoppingStartPositionKey)
         }
     }
-
 }

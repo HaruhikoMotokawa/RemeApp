@@ -11,29 +11,67 @@ import UIKit
 final class AccountViewController: UIViewController {
 
     // MARK: -property
+    /// チュートリアルを表示するボタン
+    @IBOutlet weak var helpButton: UIButton! {
+        didSet {
+            helpButton.addTarget(self, action: #selector(helpButtonTapped), for: .touchUpInside)
+        }
+    }
     /// 登録したアカウント名を表示
     @IBOutlet private weak var nameLabel: UILabel!
     /// 登録したメールアドレスを表示
     @IBOutlet private weak var mailLabel: UILabel!
     /// 登録したパスワードを表示
-    @IBOutlet private weak var passwordLabel: UILabel!
+    @IBOutlet private weak var passwordLabel: UILabel! {
+        didSet {
+            passwordLabel.textColor = .clear
+        }
+    }
     /// 登録したユーザーIDを表示
     @IBOutlet private weak var uidLabel: UILabel!
 
     /// ラベルの表示を切り替えるボタン
-    @IBOutlet private weak var displaySwitchButton: UIButton!
+    @IBOutlet private weak var displaySwitchButton: UIButton! {
+        didSet {
+            displaySwitchButton.addTarget(self, action: #selector(showPassword), for: .touchUpInside)
+        }
+    }
     /// uidをコピーするボタン
-    @IBOutlet private weak var uidCopyButton: UIButton!
+    @IBOutlet private weak var uidCopyButton: UIButton! {
+        didSet {
+            uidCopyButton.addTarget(self, action: #selector(copyUserID), for: .touchUpInside)
+        }
+    }
     /// アカウント作成ボタン
-    @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton! {
+        didSet {
+            createAccountButton.addTarget(self, action: #selector(goCreateAccountView), for: .touchUpInside)
+        }
+    }
     /// ログインボタン
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton! {
+        didSet {
+            signInButton.addTarget(self, action: #selector(goSignInView), for: .touchUpInside)
+        }
+    }
     /// ログアウトボタン
-    @IBOutlet private weak var signOutButton: UIButton!
+    @IBOutlet private weak var signOutButton: UIButton! {
+        didSet {
+            signOutButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        }
+    }
     /// 共有設定ボタン
-    @IBOutlet private weak var sherdUsersSettingsButton: UIButton!
+    @IBOutlet private weak var sherdUsersSettingsButton: UIButton! {
+        didSet {
+            sherdUsersSettingsButton.addTarget(self, action: #selector(goShareSettingsView), for: .touchUpInside)
+        }
+    }
     /// アカウント削除ボタン
-    @IBOutlet private weak var accountDeleteButton: UIButton!
+    @IBOutlet private weak var accountDeleteButton: UIButton! {
+        didSet {
+            accountDeleteButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+        }
+    }
 
     /// passwordLabelの表示を切り替えるフラグ
     private var isLabelDisplay: Bool = false
@@ -49,7 +87,6 @@ final class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetWorkObserver()
-        passwordLabel.textColor = .clear
         Task {
             await setUserInfo()
         }
@@ -62,24 +99,24 @@ final class AccountViewController: UIViewController {
 
     // MARK: - func
     /// チュートリアル画面にモーダル遷移
-    @IBAction func goTutorialView(_ sender: Any) {
+    @objc func helpButtonTapped() {
         Router.shared.showHomeTutorial(from: self)
     }
     /// 非表示になっているパスワードを表示する
-    @IBAction private func showPassword(_ sender: Any) {
+    @objc private func showPassword() {
         passwordLabel.textColor = isLabelDisplay ? .clear : .black
         displaySwitchButton.setTitle(isLabelDisplay ? "表示" : "非表示", for: .normal)
         isLabelDisplay.toggle()
     }
 
     /// ユーザーIDをクリップボードにコピー
-    @IBAction private func copyUserID(_ sender: Any) {
+    @objc private func copyUserID() {
         let pasteboard = UIPasteboard.general
         pasteboard.string = uidLabel.text
     }
 
     /// アカウント作成画面にプッシュ遷移
-    @IBAction private func goCreateAccountView(_ sender: Any) {
+    @objc private func goCreateAccountView(_ sender: Any) {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
@@ -90,7 +127,7 @@ final class AccountViewController: UIViewController {
     }
 
     /// ログイン画面にプッシュ遷移
-    @IBAction private func goSignInView(_ sender: Any) {
+    @objc private func goSignInView() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
@@ -100,7 +137,7 @@ final class AccountViewController: UIViewController {
     }
 
     /// ログイン中であればサインアウトし、匿名認証でログイン
-    @IBAction private func signOut(_ sender: Any) {
+    @objc private func signOut() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
@@ -154,7 +191,7 @@ final class AccountViewController: UIViewController {
     }
 
     /// 共有設定画面にプッシュ遷移
-    @IBAction private func goShareSettingsView(_ sender: Any) {
+    @objc private func goShareSettingsView() {
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
             return
@@ -163,7 +200,7 @@ final class AccountViewController: UIViewController {
     }
 
     /// アカウントを削除
-    @IBAction private func deleteAccount(_ sender: Any) {
+    @objc private func deleteAccount() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)

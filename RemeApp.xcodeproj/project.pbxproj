@@ -51,7 +51,7 @@
 		785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B029C93577006F0CBB /* ErrandDataModel.swift */; };
 		785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */; };
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
-		787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */; };
+		787AA84C29CC44790051CE2B /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84A29CC44790051CE2B /* ShoppingListTableViewCell.swift */; };
 		787AA84D29CC44790051CE2B /* ShoppingListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */; };
 		787DDF462A6A298200749480 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 787DDF452A6A298200749480 /* Settings.bundle */; };
 		787DDF4E2A6A531300749480 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787DDF4D2A6A531300749480 /* Router.swift */; };
@@ -151,7 +151,7 @@
 		785D74B029C93577006F0CBB /* ErrandDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrandDataModel.swift; sourceTree = "<group>"; };
 		785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSalesFloorMapViewController.swift; sourceTree = "<group>"; };
-		787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCellController.swift; sourceTree = "<group>"; };
+		787AA84A29CC44790051CE2B /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		787AA84B29CC44790051CE2B /* ShoppingListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingListTableViewCell.xib; sourceTree = "<group>"; };
 		787DDF452A6A298200749480 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		787DDF4D2A6A531300749480 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -401,7 +401,7 @@
 		78EDF40B29DD121900A6407D /* CustumCell */ = {
 			isa = PBXGroup;
 			children = (
-				787AA84A29CC44790051CE2B /* ShoppingListTableViewCellController.swift */,
+				787AA84A29CC44790051CE2B /* ShoppingListTableViewCell.swift */,
 				788E1E8B29CE7E2C006777E6 /* CheckBox.swift */,
 			);
 			path = CustumCell;
@@ -728,7 +728,7 @@
 				78581B6B29E308DE00930F65 /* ExtesionUILabel.swift in Sources */,
 				784E1F3029C84CB300C9360A /* EditShoppingListViewController.swift in Sources */,
 				78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */,
-				787AA84C29CC44790051CE2B /* ShoppingListTableViewCellController.swift in Sources */,
+				787AA84C29CC44790051CE2B /* ShoppingListTableViewCell.swift in Sources */,
 				78385F152A52C7F800FDD7CE /* DetailTutorialViewController.swift in Sources */,
 				7891125C29E7DB6200076C1B /* EditSelectedSalesFloorViewController.swift in Sources */,
 				784E1F2C29C84BCB00C9360A /* ShoppingListViewController.swift in Sources */,

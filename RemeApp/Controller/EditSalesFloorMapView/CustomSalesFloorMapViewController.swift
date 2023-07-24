@@ -15,122 +15,106 @@ final class CustomSalesFloorMapViewController: UIViewController {
     @IBOutlet private weak var customSelectCheckMark: UIImageView!
 
     /// 売り場のボタン：StoryboardのA-1
-    @IBOutlet private weak var greenThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenThree.rawValue)
+    @IBOutlet private weak var greenThreeButton: UIButton! {
+        didSet {
+            greenThreeButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのA-2
-    @IBOutlet private weak var blueThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueThree.rawValue)
+    @IBOutlet private weak var blueThreeButton: UIButton! {
+        didSet {
+            blueThreeButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのA-3
-    @IBOutlet private weak var redThreeButton: UIButton!
-    /// 売り場のボタン：StoryboardのA-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedThreeList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redThree.rawValue)
+    @IBOutlet private weak var redThreeButton: UIButton! {
+        didSet {
+            redThreeButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-1
-    @IBOutlet private weak var greenFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenFour.rawValue)
+    @IBOutlet private weak var greenFourButton: UIButton! {
+        didSet {
+            greenFourButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-2
-    @IBOutlet private weak var greenTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenTwo.rawValue)
+    @IBOutlet private weak var greenTwoButton: UIButton! {
+        didSet {
+            greenTwoButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-3
-    @IBOutlet private weak var blueSevenButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSevenList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueSeven.rawValue)
+    @IBOutlet private weak var blueSevenButton: UIButton! {
+        didSet {
+            blueSevenButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-4
-    @IBOutlet private weak var blueFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueFour.rawValue)
+    @IBOutlet private weak var blueFourButton: UIButton! {
+        didSet {
+            blueFourButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-5
-    @IBOutlet private weak var blueTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueTwo.rawValue)
+    @IBOutlet private weak var blueTwoButton: UIButton! {
+        didSet {
+            blueTwoButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-6
-    @IBOutlet private weak var redFourButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFourList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redFour.rawValue)
+    @IBOutlet private weak var redFourButton: UIButton! {
+        didSet {
+            redFourButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのB-7
-    @IBOutlet private weak var redTwoButton: UIButton!
-    /// 売り場のボタン：StoryboardのB-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedTwoList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redTwo.rawValue)
+    @IBOutlet private weak var redTwoButton: UIButton! {
+        didSet {
+            redTwoButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-1
-    @IBOutlet private weak var greenFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-1をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenFive.rawValue)
+    @IBOutlet private weak var greenFiveButton: UIButton! {
+        didSet {
+            greenFiveButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-2
-    @IBOutlet private weak var greenOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-2をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goGreenOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenOne.rawValue)
+    @IBOutlet private weak var greenOneButton: UIButton! {
+        didSet {
+            greenOneButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-3
-    @IBOutlet private weak var blueSixButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-3をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueSixList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueSix.rawValue)
+    @IBOutlet private weak var blueSixButton: UIButton! {
+        didSet {
+            blueSixButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-4
-    @IBOutlet private weak var blueFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-4をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueFive.rawValue)
+    @IBOutlet private weak var blueFiveButton: UIButton! {
+        didSet {
+            blueFiveButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-5
-    @IBOutlet private weak var blueOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-5をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goBlueOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueOne.rawValue)
+    @IBOutlet private weak var blueOneButton: UIButton! {
+        didSet {
+            blueOneButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-6
-    @IBOutlet private weak var redFiveButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-6をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedFiveList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redFive.rawValue)
+    @IBOutlet private weak var redFiveButton: UIButton! {
+        didSet {
+            redFiveButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
-
     /// 売り場のボタン：StoryboardのC-7
-    @IBOutlet private weak var redOneButton: UIButton!
-    /// 売り場のボタン：StoryboardのC-7をタップして売り場の買い物リストに画面遷移
-    @IBAction private func goRedOneList(_ sender: Any) {
-        goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redOne.rawValue)
+    @IBOutlet private weak var redOneButton: UIButton! {
+        didSet {
+            redOneButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        }
     }
 
     /// レジのラベル
@@ -180,6 +164,58 @@ final class CustomSalesFloorMapViewController: UIViewController {
     }
 
     // MARK: - func
+    /// 選択した売り場の情報を持って画面遷移する
+    @objc private func mapButtonTapped(_ sender: UIButton) {
+        switch sender {
+            case greenOneButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenOne.rawValue)
+            case greenTwoButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenTwo.rawValue)
+            case greenThreeButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenThree.rawValue)
+            case greenFourButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenFour.rawValue)
+            case greenFiveButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.greenFive.rawValue)
+            case blueOneButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueOne.rawValue)
+            case blueTwoButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueTwo.rawValue)
+            case blueThreeButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueThree.rawValue)
+            case blueFourButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueFour.rawValue)
+            case blueFiveButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueFive.rawValue)
+            case blueSixButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueSix.rawValue)
+            case blueSevenButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.blueSeven.rawValue)
+            case redOneButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redOne.rawValue)
+            case redTwoButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redTwo.rawValue)
+            case redThreeButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redThree.rawValue)
+            case redFourButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redFour.rawValue)
+            case redFiveButton:
+                return goEditSelectedSalesFloorView(salesFloorRawValue: DefaultSalesFloorType.redFive.rawValue)
+            default: break
+        }
+    }
+
+    /// EditSelectedSalesFloorViewに選択した売り場のリストを持って画面遷移する関数
+    /// - 引数：売り場に対応したSalesFloorTypeのrawValue
+    private func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
+        /// 引数に渡した値に該当するカスタム売り場のデータを取得
+        let realm = try! Realm()
+        guard
+            let selectedFloor = realm.objects(CustomSalesFloorModel.self)
+                .filter("customSalesFloorRawValue == %@",salesFloorRawValue).first else { return }
+        Router.shared.showEditSelectedSalesFloorView(from: self, selectedFloor: selectedFloor)
+    }
+
     /// レジ、左出入り口、右出入り口のラベルに枠線を設定するメソッド
     private func setBorderAllLabel() {
         registerLabel.setBorder()
@@ -321,14 +357,5 @@ final class CustomSalesFloorMapViewController: UIViewController {
         leftCartView.isHidden = true
     }
 
-    /// EditSelectedSalesFloorViewに選択した売り場のリストを持って画面遷移する関数
-    /// - 引数：売り場に対応したSalesFloorTypeのrawValue
-    private func goEditSelectedSalesFloorView(salesFloorRawValue: Int) {
-        /// 引数に渡した値に該当するカスタム売り場のデータを取得
-        let realm = try! Realm()
-       guard
-        let selectedFloor = realm.objects(CustomSalesFloorModel.self)
-        .filter("customSalesFloorRawValue == %@",salesFloorRawValue).first else { return }
-        Router.shared.showEditSelectedSalesFloorView(from: self, selectedFloor: selectedFloor)
-    }
+
 }

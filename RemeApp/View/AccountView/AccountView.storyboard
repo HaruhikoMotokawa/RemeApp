@@ -76,9 +76,6 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="表示"/>
-                                                                <connections>
-                                                                    <action selector="showPassword:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cEo-E8-IBd"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -109,9 +106,6 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="コピー"/>
-                                                                <connections>
-                                                                    <action selector="copyUserID:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="c4K-3I-491"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -133,45 +127,30 @@
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="アカウント作成"/>
-                                                <connections>
-                                                    <action selector="goCreateAccountView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mB9-39-ROZ"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oi-NK-81z">
                                                 <rect key="frame" x="0.0" y="54.5" width="355" height="44.5"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="ログイン"/>
-                                                <connections>
-                                                    <action selector="goSignInView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="r3R-aY-QD5"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuK-yV-sIp">
                                                 <rect key="frame" x="0.0" y="109" width="355" height="44"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="ログアウト"/>
-                                                <connections>
-                                                    <action selector="signOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="H9x-83-uO6"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSE-7l-AzU">
                                                 <rect key="frame" x="0.0" y="163" width="355" height="44.5"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="共有設定"/>
-                                                <connections>
-                                                    <action selector="goShareSettingsView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eMx-cQ-kG2"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmd-94-lUg">
                                                 <rect key="frame" x="0.0" y="217.5" width="355" height="44.5"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="アカウントの削除"/>
-                                                <connections>
-                                                    <action selector="deleteAccount:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="x5Y-lJ-0Io"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -188,11 +167,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="アカウント" id="RIB-8P-fDl">
-                        <barButtonItem key="leftBarButtonItem" title="ヘルプ" style="done" id="Wu6-2v-iOV">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="goTutorialView:" destination="Y6W-OH-hqX" id="xMg-49-8Pk"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="done" id="6TA-ek-I5e">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="vcz-tZ-mbf">
+                                <rect key="frame" x="16" y="5" width="83" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="ヘルプ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -200,6 +184,7 @@
                         <outlet property="accountDeleteButton" destination="Qmd-94-lUg" id="uD8-2w-3vD"/>
                         <outlet property="createAccountButton" destination="GkQ-x1-rwg" id="uNa-AI-EfM"/>
                         <outlet property="displaySwitchButton" destination="vHU-dO-dko" id="Wl1-eY-WsR"/>
+                        <outlet property="helpButton" destination="vcz-tZ-mbf" id="3dM-oo-yDO"/>
                         <outlet property="mailLabel" destination="KND-U5-x0M" id="QAb-XC-bDV"/>
                         <outlet property="nameLabel" destination="ARn-09-jCs" id="olq-ys-iKZ"/>
                         <outlet property="passwordLabel" destination="Mxh-Vv-QYL" id="Knt-nL-jXj"/>

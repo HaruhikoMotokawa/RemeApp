@@ -3,7 +3,7 @@
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,9 +33,6 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="ヘルプ"/>
-                                <connections>
-                                    <action selector="goTutorialView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ua5-da-em7"/>
-                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Jh-Lq4">
                                 <rect key="frame" x="0.0" y="105.33333333333331" width="375" height="1011.6666666666667"/>
@@ -58,9 +55,6 @@
                                                             <segment title="First"/>
                                                             <segment title="Second"/>
                                                         </segments>
-                                                        <connections>
-                                                            <action selector="changeSalesFloorMap:" destination="Y6W-OH-hqX" eventType="valueChanged" id="FC6-x8-lFv"/>
-                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                                 <constraints>
@@ -82,9 +76,6 @@
                                                             <segment title="First"/>
                                                             <segment title="Second"/>
                                                         </segments>
-                                                        <connections>
-                                                            <action selector="changeShoppingStartPosition:" destination="Y6W-OH-hqX" eventType="valueChanged" id="D22-ig-x47"/>
-                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                                 <constraints>
@@ -106,9 +97,6 @@
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="カスタムマップ設定リセット"/>
-                                                <connections>
-                                                    <action selector="resetCustomMap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SZ9-aP-X7u"/>
-                                                </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HnL-L9-zHw" userLabel="スワイプ説明">
                                                 <rect key="frame" x="20" y="253" width="335" height="50"/>
@@ -199,6 +187,7 @@
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
                         <outlet property="containerView" destination="1iy-u0-WOP" id="dss-sI-sT8"/>
+                        <outlet property="helpButton" destination="Mla-1H-xEP" id="VVU-5q-Dyb"/>
                         <outlet property="resetButton" destination="bFV-Ve-ARN" id="nwz-Qf-cd2"/>
                         <outlet property="shoppingStartPositionSelector" destination="PEo-G0-cOh" id="ZlY-Zy-6ZH"/>
                         <outlet property="useSalesFloorMapSelector" destination="9eg-RI-jeQ" id="GXy-fN-utL"/>

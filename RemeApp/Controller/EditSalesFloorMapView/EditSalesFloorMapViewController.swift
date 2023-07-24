@@ -12,6 +12,12 @@ import RealmSwift
 final class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet
+    /// チュートリアルを表示するボタン
+    @IBOutlet private weak var helpButton: UIButton! {
+        didSet {
+            helpButton.addTarget(self, action: #selector(goTutorialView), for: .touchUpInside)
+        }
+    }
     /// 使用する売り場マップのセレクター
     @IBOutlet private weak var useSalesFloorMapSelector: UISegmentedControl! {
         didSet {
@@ -23,6 +29,7 @@ final class EditSalesFloorMapViewController: UIViewController {
             useSalesFloorMapSelector.setTitle("デフォルト", forSegmentAt: 1)
             // セグメントの背景色
             useSalesFloorMapSelector.backgroundColor = UIColor.lightGray
+            useSalesFloorMapSelector.addTarget(self, action: #selector(changeSalesFloorMap), for: .valueChanged)
         }
     }
 
@@ -37,6 +44,8 @@ final class EditSalesFloorMapViewController: UIViewController {
             shoppingStartPositionSelector.setTitle("右回り", forSegmentAt: 1)
             // セグメントの背景色
             shoppingStartPositionSelector.backgroundColor = UIColor.lightGray
+            shoppingStartPositionSelector.addTarget(self, action: #selector(changeShoppingStartPosition), for: .valueChanged)
+
         }
     }
 
@@ -44,6 +53,7 @@ final class EditSalesFloorMapViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton! {
         didSet {
             resetButton.setAppearanceWithShadow(fontColor: .black)
+            resetButton.addTarget(self, action: #selector(resetCustomMap), for: .touchUpInside)
         }
     }
 
@@ -84,12 +94,12 @@ final class EditSalesFloorMapViewController: UIViewController {
 
     // MARK: - func
     /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
+    @objc private func goTutorialView() {
         Router.shared.showHomeTutorial(from: self)
     }
 
     /// 使用する売り場マップを変更するメソッド
-    @IBAction private func changeSalesFloorMap(_ sender: Any) {
+    @objc private func changeSalesFloorMap() {
         // ユーザーデフォルトにセグメント番号を保存
         UserDefaults.standard.useSalesFloorType = useSalesFloorMapSelector.selectedSegmentIndex
         // セグメントナンバーによってチェックマーク表示の切り替え
@@ -103,7 +113,7 @@ final class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// 買い物の開始位置を変更するメソッド
-    @IBAction private func changeShoppingStartPosition(_ sender: UISegmentedControl) {
+    @objc private func changeShoppingStartPosition() {
         // ユーザーデフォルトにセグメント番号を保存
         UserDefaults.standard.shoppingStartPosition = shoppingStartPositionSelector.selectedSegmentIndex
         // セグメントナンバーによってカート画像の表示切り替え
@@ -115,7 +125,7 @@ final class EditSalesFloorMapViewController: UIViewController {
     }
 
     /// カスタムマップの設定をリセットする
-    @IBAction private func resetCustomMap(_ sender: Any) {
+    @objc private func resetCustomMap() {
         let alertController =
         UIAlertController(title: "確認", message:
 """
@@ -124,7 +134,7 @@ final class EditSalesFloorMapViewController: UIViewController {
 """, preferredStyle: .alert)
         /// リセットする処理
         let resetAction = UIAlertAction(title: "リセット", style: .default) { [weak self] (action) in
-            guard let self else { return }
+            guard self != nil else { return }
             let realm = try! Realm()
             let customSalesFloors = Array(realm.objects(CustomSalesFloorModel.self)) // 編集した売り場のデータを取得
             try! realm.write {

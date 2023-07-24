@@ -13,20 +13,54 @@ final class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
 
+    @IBOutlet private weak var closeButton: UIButton! {
+        didSet {
+            closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        }
+    }
+
     /// 売り場を表示
-    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+    @IBOutlet private weak var salesFloorTypeButton: UIButton! {
+        didSet {
+            salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
+            salesFloorTypeButton.addTarget(self, action: #selector(goSalesFloorMapView), for: .touchUpInside)
+        }
+    }
     /// 詳細のView
-    @IBOutlet private weak var detailView: UIView!
+    @IBOutlet private weak var detailView: UIView! {
+        didSet {
+            detailView.layer.borderColor = UIColor.black.cgColor
+            detailView.layer.borderWidth = 2
+            detailView.layer.cornerRadius = 10
+            detailView.clipsToBounds = true
+        }
+    }
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
     /// 商品名を表示
-    @IBOutlet private weak var nameOfItemLabel: UILabel!
+    @IBOutlet private weak var nameOfItemLabel: UILabel! {
+        didSet {
+            nameOfItemLabel.setAppearance()
+        }
+    }
     /// 必要数を表示
-    @IBOutlet private weak var numberOfItemLabel: UILabel!
+    @IBOutlet private weak var numberOfItemLabel: UILabel! {
+        didSet {
+            numberOfItemLabel.setAppearance()
+        }
+    }
     /// 必要数の単位を表示
-    @IBOutlet private weak var unitLabel: UILabel!
+    @IBOutlet private weak var unitLabel: UILabel! {
+        didSet {
+            unitLabel.setAppearance()
+        }
+    }
     /// 補足を表示
-    @IBOutlet private weak var supplementLabel: UILabel!
+    @IBOutlet private weak var supplementLabel: UILabel! {
+        didSet {
+            supplementLabel.setAppearance()
+        }
+    }
 
     // MARK: - property
     /// ドキュメントID
@@ -53,18 +87,11 @@ final class DetailShoppingListViewController: UIViewController {
         super.viewDidLoad()
         setNetWorkObserver()
         displayData()
-        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
-        nameOfItemLabel.setAppearance()
-        setDetailView()
-        numberOfItemLabel.setAppearance()
-        unitLabel.setAppearance()
-        supplementLabel.setAppearance()
     }
 
     // MARK: - func
-
     /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
-    @IBAction private func goSalesFloorMapView(_ sender: Any) {
+    @objc private func goSalesFloorMapView(_ sender: Any) {
         self.dismiss(animated: true) {
             if let windowScene = UIApplication.shared.connectedScenes
                 .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
@@ -75,7 +102,7 @@ final class DetailShoppingListViewController: UIViewController {
     }
 
     /// 画面閉じて戻る
-    @IBAction private func closeView(_ sender: Any) {
+    @objc private func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
 
@@ -117,14 +144,6 @@ final class DetailShoppingListViewController: UIViewController {
         salesFloorButtonRawValue = detail.salesFloorRawValue
         supplementLabelText = detail.supplement
         photoPathImage = image
-    }
-
-    /// detailViewに枠線をつけるメソッド
-    private func setDetailView() {
-        detailView.layer.borderColor = UIColor.black.cgColor
-        detailView.layer.borderWidth = 2
-        detailView.layer.cornerRadius = 10
-        detailView.clipsToBounds = true
     }
 
     /// 受け渡されたデータをそれぞれのUI部品に表示

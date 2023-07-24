@@ -344,9 +344,6 @@
                                 <state key="normal" title="ヘルプ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="goTutorialView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Xpi-3j-whw"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -365,6 +362,7 @@
                         <outlet property="greenOneButton" destination="ZZO-9g-bES" id="IdO-K5-DcM"/>
                         <outlet property="greenThreeButton" destination="D5Q-xo-Zhs" id="2U7-qr-f12"/>
                         <outlet property="greenTwoButton" destination="ReT-7i-LU5" id="Daq-fN-g8C"/>
+                        <outlet property="helpButton" destination="lLF-OR-1DX" id="g25-c9-8Ee"/>
                         <outlet property="leftCartView" destination="mir-rA-7kg" id="4FS-MQ-7ew"/>
                         <outlet property="leftEntranceLabel" destination="JCc-zF-G1P" id="cyN-Fi-XdU"/>
                         <outlet property="redFiveButton" destination="fwS-kp-HOJ" id="7KP-Ff-Joq"/>

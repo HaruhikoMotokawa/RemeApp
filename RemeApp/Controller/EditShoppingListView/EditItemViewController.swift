@@ -10,33 +10,85 @@ import RealmSwift
 /// G-品目新規作成
 final class EditItemViewController: UIViewController {
     // MARK: - property
-
     /// タイトル
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            if isNewItem {
+                titleLabel.text = "新規作成"
+            } else {
+                titleLabel.text = "編集"
+            }
+        }
+    }
     /// 商品名入力
-    @IBOutlet private weak var nameOfItemTextField: UITextField!
+    @IBOutlet private weak var nameOfItemTextField: UITextField! {
+        didSet {
+            nameOfItemTextField.delegate = self
+        }
+    }
     /// 個数入力
-    @IBOutlet private weak var numberOfItemPickerView: UIPickerView!
+    @IBOutlet private weak var numberOfItemPickerView: UIPickerView! {
+        didSet {
+            numberOfItemPickerView.delegate = self
+            numberOfItemPickerView.dataSource = self
+        }
+    }
     /// 単位入力
-    @IBOutlet private weak var unitPickerView: UIPickerView!
+    @IBOutlet private weak var unitPickerView: UIPickerView! {
+        didSet {
+            unitPickerView.delegate = self
+            unitPickerView.dataSource = self
+        }
+    }
     /// 売り場選択
-    @IBOutlet private weak var selectTypeOfSalesFloorButton: UIButton!
+    @IBOutlet private weak var selectTypeOfSalesFloorButton: UIButton! {
+        didSet {
+            selectTypeOfSalesFloorButton.addTarget(self, action: #selector(goSelectTypeOfSalesFloorView), for: .touchUpInside)
+            selectTypeOfSalesFloorButton.setAppearanceWithShadow(fontColor: .black)
+        }
+    }
     /// 補足文のプレースホルダー
     @IBOutlet weak var placeholderLabel: UILabel!
     /// 補足入力
-    @IBOutlet private weak var supplementTextView: UITextView!
+    @IBOutlet private weak var supplementTextView: UITextView! {
+        didSet {
+            supplementTextView.delegate = self
+            supplementTextView.setAppearance()
+        }
+    }
     /// 写真選択ボタン
-    @IBOutlet private weak var selectPhotoButton: UIButton!
+    @IBOutlet private weak var selectPhotoButton: UIButton! {
+        didSet {
+            selectPhotoButton.addTarget(self, action: #selector(addPhoto), for: .touchUpInside)
+            selectPhotoButton.setAppearanceWithShadow(fontColor: .black)
+        }
+    }
     /// 写真削除ボタン
-    @IBOutlet private weak var deletePhotoButton: UIButton!
+    @IBOutlet private weak var deletePhotoButton: UIButton! {
+        didSet {
+            deletePhotoButton.addTarget(self, action: #selector(deletePhoto), for: .touchUpInside)
+            deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
+        }
+    }
     /// 写真の背景
     @IBOutlet private weak var photoBackgroundImage: UIImageView!
     /// 選択した写真を添付する
     @IBOutlet private weak var photoPathImageView: UIImageView!
+
     /// キャンセルボタン
-    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton! {
+        didSet {
+            cancelButton.addTarget(self, action: #selector(cancelAndReturn), for: .touchUpInside)
+            cancelButton.setAppearanceWithShadow(fontColor: .black)
+        }
+    }
     /// 追加ボタン
-    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton! {
+        didSet {
+            addButton.addTarget(self, action: #selector(addOrReEnter), for: .touchUpInside)
+            addButton.setAppearanceWithShadow(fontColor: .black)
+        }
+    }
 
     /// numberOfItemPickerViewに表示する値を「１〜２０」で設定
     private let numberOfItemArray: Array<String> = ["１","２","３","４","５","６","７","８","９","１０",
@@ -78,20 +130,16 @@ final class EditItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetWorkObserver()
-        setDataSourceAndDelegate()
         setKeyboardCloseButton()
-        setAppearanceAllButton()
         displayData()
-        setTitleLabel()
         setDisableOrEnable()
-        supplementTextView.setAppearance()
     }
 
     // MARK: - func
 
     /// 売り場選択画面に遷移するメソッド
     ///  - 遷移後に自身のボタンの見た目を変更するためにデリゲートをセット
-    @IBAction private func goSelectTypeOfSalesFloorView(_ sender: Any) {
+    @objc private func goSelectTypeOfSalesFloorView() {
         Router.shared.showSelectTypeOfSalesFloorView(from: self)
     }
 
@@ -100,7 +148,7 @@ final class EditItemViewController: UIViewController {
     /// - カメラ撮影アクション
     /// - フォトライブリーラリーから選択アクション
     /// - キャンセルアクション
-    @IBAction private func addPhoto(_ sender: Any) {
+    @objc private func addPhoto() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showOffLineAlert(tittle: "エラー", message: "オフライン時は写真の添付ができません", view: self)
@@ -137,7 +185,7 @@ final class EditItemViewController: UIViewController {
     }
 
     /// 添付した写真データを削除する
-    @IBAction private func deletePhoto(_ sender: Any) {
+    @objc private func deletePhoto() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showOffLineAlert(tittle: "エラー", message: "オフライン時は写真の削除ができません", view: self)
@@ -148,15 +196,8 @@ final class EditItemViewController: UIViewController {
     }
 
     /// 編集を終了してEditShoppingListViewに戻る遷移
-    @IBAction private func cancelAndReturn(_ sender: Any) {
+    @objc private func cancelAndReturn() {
         showCancelAlert()
-    }
-
-    /// 編集内容を保存、追加して、EditShoppingListViewに戻る遷移
-    @IBAction private func addAndReturn(_ sender: Any) {
-        Task { @MainActor in
-            await addOrReEnter()
-        }
     }
 
     /// ネットワーク関連の監視の登録
@@ -194,35 +235,6 @@ final class EditItemViewController: UIViewController {
                 // 写真関連の設定を再設定
                 self.setDisableOrEnable()
             }
-        }
-    }
-
-    /// データソースとデリゲートをセット
-    private func setDataSourceAndDelegate() {
-        numberOfItemPickerView.delegate = self
-        numberOfItemPickerView.dataSource = self
-        unitPickerView.delegate = self
-        unitPickerView.dataSource = self
-        nameOfItemTextField.delegate = self
-        supplementTextView.delegate = self
-    }
-
-    /// 画面上の全てのButtonの見た目の設定メソッド
-    private func setAppearanceAllButton() {
-        selectTypeOfSalesFloorButton.setAppearanceWithShadow(fontColor: .black)
-        selectPhotoButton.setAppearanceWithShadow(fontColor: .black)
-        cancelButton.setAppearanceWithShadow(fontColor: .black)
-        addButton.setAppearanceWithShadow(fontColor: .black)
-        deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
-    }
-
-    /// 遷移時にヘッダータイトルを変更するメソッド
-    /// - nameOfItemTextField.textの有無で変更
-    private func setTitleLabel() {
-        if nameOfItemTextField.text == "" {
-            titleLabel.text = "新規作成"
-        } else {
-            titleLabel.text = "編集"
         }
     }
 
@@ -401,7 +413,8 @@ extension EditItemViewController {
     /// 追加ボタンをタップした時の処理
     /// - 商品名が未入力の場合はアラートを出す
     /// - 商品名が入力されていればデータを書き込み、画面を閉じる
-    private func addOrReEnter() async {
+    @objc private func addOrReEnter() {
+
         if nameOfItemTextField.text == "" {
             // 警告アラート
             let alertController = UIAlertController(title: nil, message:
@@ -411,16 +424,18 @@ extension EditItemViewController {
             alertController.addAction(reEnterAction)
             present(alertController, animated: true)
         } else {
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
-            // numberOfItemPickerViewで選択された値を取得
-            let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
-            // ログイン中のユーザーのuidを取得
-            let uid = AccountManager.shared.getAuthStatus()
-            if isNewItem {
-                await saveData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
-            } else {
-                upDateData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
+            Task { @MainActor in
+                // numberOfItemPickerViewで選択された値を取得
+                let selectedNumberOfItem = numberOfItemArray[numberOfItemPickerView.selectedRow(inComponent: 0)]
+                // numberOfItemPickerViewで選択された値を取得
+                let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
+                // ログイン中のユーザーのuidを取得
+                let uid = AccountManager.shared.getAuthStatus()
+                if isNewItem {
+                    await saveData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
+                } else {
+                    upDateData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
+                }
             }
         }
     }
@@ -488,7 +503,6 @@ extension EditItemViewController {
         }
         // 編集当初の画像と追加処理時の画像が同一だったら
         if !isChangePhoto {
-
             // 保存するリストを作成
             let addItem:ShoppingItemModel = ShoppingItemModel(
                 id: id,
@@ -607,10 +621,8 @@ extension EditItemViewController:SelectTypeOfSalesFloorViewControllerDelegate {
     /// - selectTypeOfSalesFloorButtonのバックグラウンドカラーを該当する売り場の色に変更
     /// - addButtonを活性化
     internal func salesFloorButtonDidTapDone(salesFloorRawValue: DefaultSalesFloorType.RawValue) {
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        // 0 -> カスタム、1(else) -> デフォルト
-        if salesFloorTypeInt == 0 {
+        // 使用マップ設定がカスタムだった場合
+        if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
             // カスタムマップタイプの処理
             setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
             addButton.setEnable()

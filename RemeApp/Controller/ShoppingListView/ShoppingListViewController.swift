@@ -5,23 +5,28 @@
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
 import UIKit
-/// A-買い物リスト
+/// A-買い物リスト、継承を禁止するためにfinalキーワードつける
 final class ShoppingListViewController: UIViewController {
-    // MARK: - property
-
+    // MARK: - @IBOutlet
     /// チュートリアルを表示するボタン
-    @IBOutlet private weak var helpButton: UIButton!
-
-    /// 買い物リストを表示する
-    @IBOutlet private weak var shoppingListTableView: UITableView! {
+    @IBOutlet private weak var helpButton: UIButton! {
         didSet {
-            shoppingListTableView.dataSource = self
-            shoppingListTableView.delegate = self
-            shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
+            helpButton.addTarget(self, action: #selector(helpButtonTapped), for: .touchUpInside)
         }
     }
 
+    /// 買い物リストを表示する
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet { // 基本設定関連などはなるべくdidSetにすると見やすい
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            // セルの登録などは文字を直接使わずにハードコーディングを避ける
+            shoppingListTableView.register(UINib(nibName: ShoppingListTableViewCell.className, bundle: nil),
+                                           forCellReuseIdentifier: ShoppingListTableViewCell.className)
+        }
+    }
+
+    // MARK: - property
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
     /// 共有相手が作成した買い物データを格納する配列
@@ -51,9 +56,8 @@ final class ShoppingListViewController: UIViewController {
         showIntroduction() // 初回起動時のチュートリアル表示
     }
     // MARK: - func
-
-    /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
+    /// チュートリアル画面へ遷移
+    @objc private func helpButtonTapped() {
         Router.shared.showHomeTutorial(from: self)
     }
 
@@ -73,7 +77,7 @@ final class ShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // ネットワーク状況が変わったらTableViewを再読み込み
@@ -192,7 +196,6 @@ final class ShoppingListViewController: UIViewController {
     }
 
 }
-
 // MARK: - UITableViewDataSource&Delegate
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
@@ -203,7 +206,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
     /// shoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = shoppingListTableView.dequeueReusableCell(
-            withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            withIdentifier: ShoppingListTableViewCell.className, for: indexPath) as? ShoppingListTableViewCell {
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
@@ -228,7 +231,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                     guard let self else { return }
                     DispatchQueue.main.async {
                         if let cell = self.shoppingListTableView.cellForRow(
-                            at: indexPath) as? ShoppingListTableViewCellController {
+                            at: indexPath) as? ShoppingListTableViewCell {
                             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                                  nameOfItem: myData.nameOfItem,
                                                  numberOfItem: myData.numberOfItem,
@@ -262,7 +265,7 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// - チェックしたものは下に移動する
     /// - 全てのチェックがついたらアラートを出す
     /// - テーブルビューを再読み込みして表示する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる

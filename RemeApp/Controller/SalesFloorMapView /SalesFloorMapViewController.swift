@@ -12,10 +12,11 @@ import RealmSwift
 final class SalesFloorMapViewController: UIViewController {
 
     // MARK: - @IBOutlet & @IBAction
-
-    /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
-        Router.shared.showHomeTutorial(from: self)
+    /// チュートリアルを表示するボタン
+    @IBOutlet private weak var helpButton: UIButton! {
+        didSet {
+            helpButton.addTarget(self, action: #selector(helpButtonTapped), for: .touchUpInside)
+        }
     }
 
     /// 売り場のボタン：StoryboardのA-1
@@ -171,6 +172,10 @@ final class SalesFloorMapViewController: UIViewController {
     }
 
     // MARK: - func
+    /// チュートリアル画面にモーダル遷移
+    @objc private func helpButtonTapped() {
+        Router.shared.showHomeTutorial(from: self)
+    }
 
     /// 選択した売り場の情報を持って画面遷移する
     @objc private func mapButtonTapped(_ sender: UIButton) {

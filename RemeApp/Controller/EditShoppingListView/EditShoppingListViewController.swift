@@ -12,10 +12,15 @@ final class EditShoppingListViewController: UIViewController {
     // MARK: - property
 
     /// チュートリアルを表示するボタン
-    @IBOutlet private weak var helpButton: UIButton!
+    @IBOutlet private weak var helpButton: UIButton! {
+        didSet {
+            helpButton.addTarget(self, action: #selector(goTutorialView), for: .touchUpInside)
+        }
+    }
     /// 複数削除モードの解除ボタン
     @IBOutlet private weak var cancelEditButton: UIButton! {
         didSet {
+            cancelEditButton.addTarget(self, action: #selector(isCancelEdit), for: .touchUpInside)
             setEditButtonAppearance(cancelEditButton, title: "キャンセル")
             cancelEditButton.isHidden = true
         }
@@ -24,7 +29,7 @@ final class EditShoppingListViewController: UIViewController {
     @IBOutlet private weak var multipleDeletionsButton: UIButton! {
         didSet {
             setEditButtonAppearance(multipleDeletionsButton, title: "複数削除")
-            multipleDeletionsButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            multipleDeletionsButton.addTarget(self, action: #selector(deleteSelect), for: .touchUpInside)
         }
     }
     /// 画面タイトルラベル
@@ -35,20 +40,21 @@ final class EditShoppingListViewController: UIViewController {
             shoppingListTableView.allowsMultipleSelectionDuringEditing = true
             shoppingListTableView.dataSource = self
             shoppingListTableView.delegate = self
-            shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                           forCellReuseIdentifier: "ShoppingListTableViewCell")
+            shoppingListTableView.register(UINib(nibName: ShoppingListTableViewCell.className, bundle: nil),
+                                           forCellReuseIdentifier: ShoppingListTableViewCell.className)
         }
     }
     /// 新規作成ボタン
     @IBOutlet private weak var createNewItemButton: UIButton! {
         didSet {
+            createNewItemButton.addTarget(self, action: #selector(goCreateNewItemView), for: .touchUpInside)
             createNewItemButton.layer.borderWidth = 1 // 枠線の幅を１で設定
             createNewItemButton.layer.borderColor = UIColor.black.cgColor // 枠線のカラーを黒に設定
             createNewItemButton.layer.cornerRadius = 25 // 角丸の値
             createNewItemButton.addShadow() // 影
         }
     }
-    /// 編集モードのフラグ
+    /// 編集モードのフラグ(複数選択しての削除)
     private var isEditingMode: Bool = false
 
     /// ユーザーが作成した買い物データを格納する配列
@@ -77,29 +83,29 @@ final class EditShoppingListViewController: UIViewController {
         removeShoppingItemObserver()
     }
 
-    // MARK: - @IBAction func
+    // MARK: - func
 
     /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
+    @objc private func goTutorialView() {
         Router.shared.showHomeTutorial(from: self)
     }
 
     /// 複数削除モードを中断して終了する
-    @IBAction private func isCancelEdit(_ sender: Any) {
+    @objc private func isCancelEdit() {
         // 選択された行のIndexPathの配列を取得し、一つ一つのIndexPathに対して以下の処理を実行する。
         shoppingListTableView.indexPathsForSelectedRows?.forEach {
             // TableViewで選択されている行の選択を解除する
             shoppingListTableView.deselectRow(at: $0, animated: true)
         }
         isEditingMode = false
+        setEditing(isEditingMode, animated: true)
     }
 
     /// 「G-品目新規作成」画面にモーダル遷移
-    @IBAction private func goCreateNewItemView(_ sender: Any) {
+    @objc private func goCreateNewItemView() {
         Router.shared.showEditItem(from: self, isNewItem: true)
     }
 
-    // MARK: - func
     /// ネットワーク関連の監視の登録
     private func setNetWorkObserver() {
         // NotificationCenterに通知を登録する
@@ -108,7 +114,7 @@ final class EditShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.shoppingListTableView.reloadData()
@@ -219,7 +225,7 @@ final class EditShoppingListViewController: UIViewController {
 
     // MARK: - 編集モードに関する処理
     /// 編集モードの設定==multipleDeletionsButtonをタップした時の動作
-    @objc private func buttonTapped() {
+    @objc private func deleteSelect() {
         // オフラインだったらアラート出して終了
         guard NetworkMonitor.shared.isConnected else {
             AlertController.showAlert(tittle: "エラー", errorMessage: "オフライン時はスワイプ削除のみ有効です")
@@ -236,7 +242,7 @@ final class EditShoppingListViewController: UIViewController {
         for row in 0..<shoppingListTableView.numberOfRows(inSection: section) {
             // TableViewのIndexPathで指定された位置のセルをShoppingListTableViewCellControllerにダウンキャストし、cellに代入する。
             if let cell = shoppingListTableView.cellForRow(at: IndexPath(row: row, section: section))
-                as? ShoppingListTableViewCellController {
+                as? ShoppingListTableViewCell {
                 cell.checkBoxButton.isHidden = editing
             }
         }
@@ -327,7 +333,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
     /// editShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = shoppingListTableView.dequeueReusableCell(
-            withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            withIdentifier: ShoppingListTableViewCell.className, for: indexPath) as? ShoppingListTableViewCell {
             // 編集モードの状態によってチェックボックスの表示を切り替える
             cell.checkBoxButton.isHidden = isEditingMode
             cell.delegate = self
@@ -354,7 +360,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
                     guard let self else { return }
                     DispatchQueue.main.async {
                         if let cell = self.shoppingListTableView.cellForRow(
-                            at: indexPath) as? ShoppingListTableViewCellController {
+                            at: indexPath) as? ShoppingListTableViewCell {
                             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                                  nameOfItem: myData.nameOfItem,
                                                  numberOfItem: myData.numberOfItem,
@@ -430,7 +436,7 @@ extension EditShoppingListViewController: UITableViewDataSource, UITableViewDele
 extension EditShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// cell内のチェックボックスをタップした際の処理
     /// - チェックしたものは下に移動する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる

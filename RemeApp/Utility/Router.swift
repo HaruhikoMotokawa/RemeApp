@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 画面遷移に関する処理を担うクラス
 final class Router {
     static let shared = Router()
     private init() {}

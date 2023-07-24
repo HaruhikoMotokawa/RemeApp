@@ -36,15 +36,14 @@ final class FirestoreManager {
     /// 自分のshoppingItemコレクションのeditShoppingListView専用リスナー
     internal var editShoppingListOtherItemListener: ListenerRegistration?
 
-    /// コレクションのパスを管理
+    /// コレクションのパスを管理、Stringに準拠させると、指定しなければcase名を文字列で返す
     enum CollectionPathName: String {
         case users
         case shoppingItem
         case mapSettings
         case customSalesFloor
     }
-
-    /// フィールドのパスを管理
+    /// フィールドのパスを管理、Stringに準拠させると、指定しなければcase名を文字列で返す
     enum FieldPathName: String {
         case name
         case isCheckBox
@@ -58,7 +57,7 @@ final class FirestoreManager {
         case sharedUsers
         case date
     }
-    
+
     /// 自身のuidを元に登録した自分のユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける

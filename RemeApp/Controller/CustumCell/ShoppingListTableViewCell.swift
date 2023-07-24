@@ -8,10 +8,10 @@
 import UIKit
 import RealmSwift
 
-final class ShoppingListTableViewCellController: UITableViewCell  {
+final class ShoppingListTableViewCell: UITableViewCell  {
 
     // MARK: - @IBOutlet,@IBAction
-
+    static var className: String { String(describing: ShoppingListTableViewCell.self) }
     /// チェックボックスのUIButton
     @IBOutlet  weak var checkBoxButton: CheckBox!
 
@@ -213,7 +213,8 @@ final class ShoppingListTableViewCellController: UITableViewCell  {
 
 /// チェックボックスがタップされた場合の挙動を指定するデリゲート
 protocol ShoppingListTableViewCellDelegate: AnyObject {
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async
 }
+
 
 
