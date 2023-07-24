@@ -36,12 +36,34 @@ final class FirestoreManager {
     /// 自分のshoppingItemコレクションのeditShoppingListView専用リスナー
     internal var editShoppingListOtherItemListener: ListenerRegistration?
 
+    /// コレクションのパスを管理、Stringに準拠させると、指定しなければcase名を文字列で返す
+    enum CollectionPathName: String {
+        case users
+        case shoppingItem
+        case mapSettings
+        case customSalesFloor
+    }
+    /// フィールドのパスを管理、Stringに準拠させると、指定しなければcase名を文字列で返す
+    enum FieldPathName: String {
+        case name
+        case isCheckBox
+        case nameOfItem
+        case numberOfItem
+        case unit
+        case salesFloorRawValue
+        case supplement
+        case photoURL
+        case owner
+        case sharedUsers
+        case date
+    }
+
     /// 自身のuidを元に登録した自分のユーザー情報を取得してUserDataModelで返却するメソッド
     /// - 非同期処理のためasyncキーワードつける
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
     internal func getUserInfo(uid: String) async throws -> UserDataModel? {
         // 非同期処理であるFirestoreへのアクセスにより、ユーザー情報をUserDataModelに変換して定数に入れる
-        let document = try await db.collection(Collection.users.path).document(uid).getDocument(as: UserDataModel.self)
+        let document = try await db.collection(CollectionPathName.users.rawValue).document(uid).getDocument(as: UserDataModel.self)
         print("Firestoreからデータ取得成功")
         // UserDataModelで格納した値を返却
         return document
@@ -52,9 +74,9 @@ final class FirestoreManager {
     /// - エラー処理は呼び出し元で実施するためthrowsキーワードつける
     internal func getUsersList(deleteUid: String) async throws -> [UserDataModel] {
         // コレクションの参照先を定義
-        let collectionRef = db.collection(Collection.users.path)
+        let collectionRef = db.collection(CollectionPathName.users.rawValue)
         // deleteUidを登録している対象のユーザードキュメントを抽出
-        let querySnapshot = try await collectionRef.whereField(Field.sharedUsers.path, arrayContains: deleteUid).getDocuments()
+        let querySnapshot = try await collectionRef.whereField(FieldPathName.sharedUsers.rawValue, arrayContains: deleteUid).getDocuments()
         // 非同期処理であるFirestoreへのアクセスにより、ユーザー情報をUserDataModelに変換して定数に入れる
         let usersList = querySnapshot.documents.compactMap { document in
             try? document.data(as: UserDataModel.self)
@@ -71,20 +93,20 @@ final class FirestoreManager {
         // UserDataModelをuserとして定義
         let user = UserDataModel(name: name, email: email, password: password)
         // userを元にFirestoreに保存実行
-        try db.collection(Collection.users.path).document(uid).setData(from: user)
+        try db.collection(CollectionPathName.users.rawValue).document(uid).setData(from: user)
         print("ユーザー情報を新規作成")
     }
 
     /// ユーザー情報を削除するメソッド
     internal func deleteUsersDocument(uid: String) async throws {
-        try await db.collection(Collection.users.path).document(uid).delete()
+        try await db.collection(CollectionPathName.users.rawValue).document(uid).delete()
     }
 
     /// 共有者に登録しているユーザーのuidを取得するメソッド
     internal func getSharedUsers(uid: String) async throws -> [String] {
-        let document = try await db.collection(Collection.users.path).document(uid).getDocument()
+        let document = try await db.collection(CollectionPathName.users.rawValue).document(uid).getDocument()
         let data = document.data()!
-        let sharedUsers = data[Field.sharedUsers.path] as? [String] ?? []
+        let sharedUsers = data[FieldPathName.sharedUsers.rawValue] as? [String] ?? []
         return sharedUsers
     }
 
@@ -97,7 +119,7 @@ final class FirestoreManager {
         // 非同期処理の実行結果を返却する
         return try await withCheckedThrowingContinuation { continuation in
             // usersコレクションのuidと同じドキュメントidのドキュメントにアクセス
-            let userDocRer = db.collection(Collection.users.path).document(uid)
+            let userDocRer = db.collection(CollectionPathName.users.rawValue).document(uid)
             // 該当するドキュメントからデータの取得を開始
             userDocRer.getDocument { (documentSnapshot, error) in
                 // 該当のドキュメントがnilだったらエラーをスローして終了
@@ -106,7 +128,7 @@ final class FirestoreManager {
                     return
                 }
                 // ドキュメントに登録されたnameを取得
-                let name = documentSnapshot.get(Field.name.path) as! String
+                let name = documentSnapshot.get(FieldPathName.name.rawValue) as! String
                 // 取得した値を返却
                 continuation.resume(returning: name)
             }
@@ -118,19 +140,19 @@ final class FirestoreManager {
     /// - 削除する登録者を抜いた配列を引数のshardUsersに代入
     internal func upData(uid documentID: String?, shardUsers: [String]) async throws {
         guard let documentID else { return }
-        try await db.collection(Collection.users.path).document(documentID).updateData([Field.sharedUsers.path:shardUsers])
+        try await db.collection(CollectionPathName.users.rawValue).document(documentID).updateData([FieldPathName.sharedUsers.rawValue: shardUsers])
     }
 
     // 共有者を追加するメソッド
     internal func addSharedUsers(inputUid: String, uid: String) async throws {
-        let userRef = db.collection(Collection.users.path)
+        let userRef = db.collection(CollectionPathName.users.rawValue)
         let inputUserQuery = userRef.whereField(FieldPath.documentID(), isEqualTo: inputUid)
         let querySnapshot = try await inputUserQuery.getDocuments()
         if querySnapshot.isEmpty {
             throw FirestoreError.notFound
         }
         let document = userRef.document(uid)
-        try await document.updateData([Field.sharedUsers.path: FieldValue.arrayUnion([inputUid])])
+        try await document.updateData([FieldPathName.sharedUsers.rawValue: FieldValue.arrayUnion([inputUid])])
     }
 }
 // MARK: - shoppingItem関連
@@ -140,22 +162,22 @@ extension FirestoreManager {
     internal func getMyShoppingItemObserver(listener: inout ListenerRegistration?, uid: String,
                                             completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        listener = db.collection(Collection.shoppingItem.path).whereField(Field.owner.path, isEqualTo: uid)
+        listener = db.collection(CollectionPathName.shoppingItem.rawValue).whereField(FieldPathName.owner.rawValue, isEqualTo: uid)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
                 let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
-                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
-                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
-                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
-                                             unit: data[Field.unit.path] as? String ?? "",
-                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
-                                             supplement: data[Field.supplement.path] as? String ?? "",
-                                             photoURL: data[Field.photoURL.path] as? String ?? "",
-                                             owner: data[Field.owner.path] as? String ?? "",
-                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                                             isCheckBox: data[FieldPathName.isCheckBox.rawValue] as? Bool ?? false,
+                                             nameOfItem: data[FieldPathName.nameOfItem.rawValue] as? String ?? "",
+                                             numberOfItem: data[FieldPathName.numberOfItem.rawValue] as? String ?? "",
+                                             unit: data[FieldPathName.unit.rawValue] as? String ?? "",
+                                             salesFloorRawValue: data[FieldPathName.salesFloorRawValue.rawValue] as? Int ?? 1,
+                                             supplement: data[FieldPathName.supplement.rawValue] as? String ?? "",
+                                             photoURL: data[FieldPathName.photoURL.rawValue] as? String ?? "",
+                                             owner: data[FieldPathName.owner.rawValue] as? String ?? "",
+                                             sharedUsers: data[FieldPathName.sharedUsers.rawValue] as? [String] ?? [])
                 }
                 completion(myShoppingItemList)
             }
@@ -166,22 +188,22 @@ extension FirestoreManager {
                                                uid: String,
                                                completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        listener = db.collection(Collection.shoppingItem.path).whereField(Field.sharedUsers.path, arrayContains: uid)
+        listener = db.collection(CollectionPathName.shoppingItem.rawValue).whereField(FieldPathName.sharedUsers.rawValue, arrayContains: uid)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
                 let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
-                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
-                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
-                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
-                                             unit: data[Field.unit.path] as? String ?? "",
-                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
-                                             supplement: data[Field.supplement.path] as? String ?? "",
-                                             photoURL: data[Field.photoURL.path] as? String ?? "",
-                                             owner: data[Field.owner.path] as? String ?? "",
-                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                                             isCheckBox: data[FieldPathName.isCheckBox.rawValue] as? Bool ?? false,
+                                             nameOfItem: data[FieldPathName.nameOfItem.rawValue] as? String ?? "",
+                                             numberOfItem: data[FieldPathName.numberOfItem.rawValue] as? String ?? "",
+                                             unit: data[FieldPathName.unit.rawValue] as? String ?? "",
+                                             salesFloorRawValue: data[FieldPathName.salesFloorRawValue.rawValue] as? Int ?? 1,
+                                             supplement: data[FieldPathName.supplement.rawValue] as? String ?? "",
+                                             photoURL: data[FieldPathName.photoURL.rawValue] as? String ?? "",
+                                             owner: data[FieldPathName.owner.rawValue] as? String ?? "",
+                                             sharedUsers: data[FieldPathName.sharedUsers.rawValue] as? [String] ?? [])
                 }
                 completion(myShoppingItemList)
             }
@@ -192,24 +214,24 @@ extension FirestoreManager {
                                                             salesFloorRawValue: Int,
                                                             completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        salesFloorShoppingListMyItemListener = db.collection(Collection.shoppingItem.path)
-            .whereField(Field.sharedUsers.path, arrayContains: uid)
-            .whereField(Field.salesFloorRawValue.path, isEqualTo: salesFloorRawValue)
+        salesFloorShoppingListMyItemListener = db.collection(CollectionPathName.shoppingItem.rawValue)
+            .whereField(FieldPathName.sharedUsers.rawValue, arrayContains: uid)
+            .whereField(FieldPathName.salesFloorRawValue.rawValue, isEqualTo: salesFloorRawValue)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
                 let myShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
-                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
-                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
-                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
-                                             unit: data[Field.unit.path] as? String ?? "",
-                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
-                                             supplement: data[Field.supplement.path] as? String ?? "",
-                                             photoURL: data[Field.photoURL.path] as? String ?? "",
-                                             owner: data[Field.owner.path] as? String ?? "",
-                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                                             isCheckBox: data[FieldPathName.isCheckBox.rawValue] as? Bool ?? false,
+                                             nameOfItem: data[FieldPathName.nameOfItem.rawValue] as? String ?? "",
+                                             numberOfItem: data[FieldPathName.numberOfItem.rawValue] as? String ?? "",
+                                             unit: data[FieldPathName.unit.rawValue] as? String ?? "",
+                                             salesFloorRawValue: data[FieldPathName.salesFloorRawValue.rawValue] as? Int ?? 1,
+                                             supplement: data[FieldPathName.supplement.rawValue] as? String ?? "",
+                                             photoURL: data[FieldPathName.photoURL.rawValue] as? String ?? "",
+                                             owner: data[FieldPathName.owner.rawValue] as? String ?? "",
+                                             sharedUsers: data[FieldPathName.sharedUsers.rawValue] as? [String] ?? [])
                 }
                 completion(myShoppingItemList)
             }
@@ -220,24 +242,24 @@ extension FirestoreManager {
                                                             salesFloorRawValue: Int,
                                                             completion: @escaping ([ShoppingItemModel]) -> Void) {
         // 自分が作成した買い物商品のリスナーをセット
-        salesFloorShoppingListOtherItemListener = db.collection(Collection.shoppingItem.path)
-            .whereField(Field.owner.path, isEqualTo: uid)
-            .whereField(Field.salesFloorRawValue.path, isEqualTo: salesFloorRawValue)
+        salesFloorShoppingListOtherItemListener = db.collection(CollectionPathName.shoppingItem.rawValue)
+            .whereField(FieldPathName.owner.rawValue, isEqualTo: uid)
+            .whereField(FieldPathName.salesFloorRawValue.rawValue, isEqualTo: salesFloorRawValue)
             .addSnapshotListener { (querySnapshot, error) in
                 guard  let querySnapshot else { return }
                 // データをShoppingItemModelにマッピング
                 let otherShoppingItemList = querySnapshot.documents.map{ item -> ShoppingItemModel in
                     let data = item.data()
                     return ShoppingItemModel(id: item.documentID,
-                                             isCheckBox: data[Field.isCheckBox.path] as? Bool ?? false,
-                                             nameOfItem: data[Field.nameOfItem.path] as? String ?? "",
-                                             numberOfItem: data[Field.numberOfItem.path] as? String ?? "",
-                                             unit: data[Field.unit.path] as? String ?? "",
-                                             salesFloorRawValue: data[Field.salesFloorRawValue.path] as? Int ?? 1,
-                                             supplement: data[Field.supplement.path] as? String ?? "",
-                                             photoURL: data[Field.photoURL.path] as? String ?? "",
-                                             owner: data[Field.owner.path] as? String ?? "",
-                                             sharedUsers: data[Field.sharedUsers.path] as? [String] ?? [])
+                                             isCheckBox: data[FieldPathName.isCheckBox.rawValue] as? Bool ?? false,
+                                             nameOfItem: data[FieldPathName.nameOfItem.rawValue] as? String ?? "",
+                                             numberOfItem: data[FieldPathName.numberOfItem.rawValue] as? String ?? "",
+                                             unit: data[FieldPathName.unit.rawValue] as? String ?? "",
+                                             salesFloorRawValue: data[FieldPathName.salesFloorRawValue.rawValue] as? Int ?? 1,
+                                             supplement: data[FieldPathName.supplement.rawValue] as? String ?? "",
+                                             photoURL: data[FieldPathName.photoURL.rawValue] as? String ?? "",
+                                             owner: data[FieldPathName.owner.rawValue] as? String ?? "",
+                                             sharedUsers: data[FieldPathName.sharedUsers.rawValue] as? [String] ?? [])
                 }
                 completion(otherShoppingItemList)
             }
@@ -250,17 +272,17 @@ extension FirestoreManager {
 
     /// 新規作成した買い物の商品を保存
     internal func addItem(uid: String, addItem: ShoppingItemModel) {
-        db.collection(Collection.shoppingItem.path).addDocument(data: [
-            Field.isCheckBox.path: addItem.isCheckBox ,
-            Field.nameOfItem.path: addItem.nameOfItem ,
-            Field.numberOfItem.path: addItem.numberOfItem ,
-            Field.unit.path:addItem.unit ,
-            Field.salesFloorRawValue.path: addItem.salesFloorRawValue ,
-            Field.supplement.path: addItem.supplement ,
-            Field.photoURL.path: addItem.photoURL ,
-            Field.owner.path: addItem.owner,
-            Field.sharedUsers.path: addItem.sharedUsers,
-            Field.date.path: Date()])
+        db.collection(CollectionPathName.shoppingItem.rawValue).addDocument(data: [
+            FieldPathName.isCheckBox.rawValue: addItem.isCheckBox ,
+            FieldPathName.nameOfItem.rawValue: addItem.nameOfItem ,
+            FieldPathName.numberOfItem.rawValue: addItem.numberOfItem ,
+            FieldPathName.unit.rawValue:addItem.unit ,
+            FieldPathName.salesFloorRawValue.rawValue: addItem.salesFloorRawValue ,
+            FieldPathName.supplement.rawValue: addItem.supplement ,
+            FieldPathName.photoURL.rawValue: addItem.photoURL ,
+            FieldPathName.owner.rawValue: addItem.owner,
+            FieldPathName.sharedUsers.rawValue: addItem.sharedUsers,
+            FieldPathName.date.rawValue: Date()])
         { err in
             if err != nil {
                 print("Firestoreへの保存に失敗")
@@ -273,15 +295,15 @@ extension FirestoreManager {
     /// 編集した買い物商品を保存
     internal func upDateItem(addItem: ShoppingItemModel) {
         guard let id = addItem.id else { return }
-        db.collection(Collection.shoppingItem.path).document(id).updateData([
-            Field.isCheckBox.path: addItem.isCheckBox ,
-            Field.nameOfItem.path: addItem.nameOfItem ,
-            Field.numberOfItem.path: addItem.numberOfItem ,
-            Field.unit.path:addItem.unit ,
-            Field.salesFloorRawValue.path: addItem.salesFloorRawValue ,
-            Field.supplement.path: addItem.supplement ,
-            Field.photoURL.path: addItem.photoURL ,
-            Field.date.path: Date()])
+        db.collection(CollectionPathName.shoppingItem.rawValue).document(id).updateData([
+            FieldPathName.isCheckBox.rawValue: addItem.isCheckBox ,
+            FieldPathName.nameOfItem.rawValue: addItem.nameOfItem ,
+            FieldPathName.numberOfItem.rawValue: addItem.numberOfItem ,
+            FieldPathName.unit.rawValue:addItem.unit ,
+            FieldPathName.salesFloorRawValue.rawValue: addItem.salesFloorRawValue ,
+            FieldPathName.supplement.rawValue: addItem.supplement ,
+            FieldPathName.photoURL.rawValue: addItem.photoURL ,
+            FieldPathName.date.rawValue: Date()])
         { err in
             if err != nil {
                 print("Firestoreへの保存に失敗")
@@ -294,20 +316,20 @@ extension FirestoreManager {
     /// 買い物商品のisCheckBoxにチェックを入れた時に書き込む処理
     internal func upDateItemForIsChecked(documentID: String?, isChecked: Bool) async throws {
         guard let documentID else { return }
-        try await db.collection(Collection.shoppingItem.path).document(documentID).updateData([
-            Field.isCheckBox.path: isChecked])
+        try await db.collection(CollectionPathName.shoppingItem.rawValue).document(documentID).updateData([
+            FieldPathName.isCheckBox.rawValue: isChecked])
     }
 
     /// 既存の買い物商品のsharedUsersフィールドに共有者を追加で設定する
     internal func upDateItemForSharedUsers(documentID: String?, sharedUsersUid: [String]) async throws {
         guard let documentID else { return }
-        try await db.collection(Collection.shoppingItem.path).document(documentID).updateData([
-            Field.sharedUsers.path: sharedUsersUid])
+        try await db.collection(CollectionPathName.shoppingItem.rawValue).document(documentID).updateData([
+            FieldPathName.sharedUsers.rawValue: sharedUsersUid])
     }
 
     // ドキュメントを削除する
     internal func deleteItem(id: String, completion: @escaping (Error?) -> ()) {
-        db.collection(Collection.shoppingItem.path).document(id).delete() { error in
+        db.collection(CollectionPathName.shoppingItem.rawValue).document(id).delete() { error in
             if let error {
                 print("削除に失敗: \(error)")
                 completion(error)
@@ -320,8 +342,8 @@ extension FirestoreManager {
 
     /// 自分の作成した買い物リストを取得して返却する
     internal func getMyShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
-        let collectionRef = db.collection(Collection.shoppingItem.path)
-        let querySnapshot = try await collectionRef.whereField(Field.owner.path, isEqualTo: uid).getDocuments()
+        let collectionRef = db.collection(CollectionPathName.shoppingItem.rawValue)
+        let querySnapshot = try await collectionRef.whereField(FieldPathName.owner.rawValue, isEqualTo: uid).getDocuments()
         let itemList = querySnapshot.documents.compactMap { document in
             try? document.data(as: ShoppingItemModel.self)
         }
@@ -330,76 +352,11 @@ extension FirestoreManager {
 
     /// 自分を共有設定して作った買い物リストを取得して返却する
     internal func getOtherShoppingItemList(uid: String) async throws -> [ShoppingItemModel]{
-        let collectionRef = db.collection(Collection.shoppingItem.path)
-        let querySnapshot = try await collectionRef.whereField(Field.sharedUsers.path, arrayContains: uid).getDocuments()
+        let collectionRef = db.collection(CollectionPathName.shoppingItem.rawValue)
+        let querySnapshot = try await collectionRef.whereField(FieldPathName.sharedUsers.rawValue, arrayContains: uid).getDocuments()
         let itemList = querySnapshot.documents.compactMap { document in
             try? document.data(as: ShoppingItemModel.self)
         }
         return itemList
-    }
-}
-
-/// コレクションのパスを管理
-enum Collection {
-    case users
-    case shoppingItem
-    case mapSettings
-    case customSalesFloor
-
-    // パスを返却
-    var path: String {
-        switch self {
-            case .users:
-                return "users"
-            case .shoppingItem:
-                return "shoppingItem"
-            case .mapSettings:
-                return "mapSettings"
-            case .customSalesFloor:
-                return "customSalesFloor"
-        }
-    }
-}
-
-/// フィールドのパスを管理
-enum Field {
-    case name
-    case isCheckBox
-    case nameOfItem
-    case numberOfItem
-    case unit
-    case salesFloorRawValue
-    case supplement
-    case photoURL
-    case owner
-    case sharedUsers
-    case date
-
-    ///パスを返却
-    var path: String {
-        switch self {
-            case .name:
-                return "name"
-            case .isCheckBox:
-                return "isCheckBox"
-            case .nameOfItem:
-                return "nameOfItem"
-            case .numberOfItem:
-                return "numberOfItem"
-            case .unit:
-                return "unit"
-            case .salesFloorRawValue:
-                return "salesFloorRawValue"
-            case .supplement:
-                return "supplement"
-            case .photoURL:
-                return "photoURL"
-            case .owner:
-                return "owner"
-            case .sharedUsers:
-                return "sharedUsers"
-            case .date:
-                return "date"
-        }
     }
 }

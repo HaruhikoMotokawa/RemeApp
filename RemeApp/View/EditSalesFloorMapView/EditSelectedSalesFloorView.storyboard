@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -89,73 +90,46 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="greenButton"/>
-                                                        <connections>
-                                                            <action selector="selectGreen:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FzW-su-soX"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC3-OT-X0w">
                                                         <rect key="frame" x="0.0" y="43" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemTealButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemTeal:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PCB-Wx-r6p"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wps-u7-9ZD">
                                                         <rect key="frame" x="0.0" y="85.5" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="blueButton"/>
-                                                        <connections>
-                                                            <action selector="selectBlue:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qPv-5N-6JI"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDi-hO-4MN">
                                                         <rect key="frame" x="0.0" y="128.5" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemPurpleButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemPurple:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vZ4-mV-qKN"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="by4-Y5-zbZ">
                                                         <rect key="frame" x="0.0" y="171.5" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemPinkButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemPink:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="feP-zW-gOh"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-eM-03x">
                                                         <rect key="frame" x="0.0" y="214" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="purpleButton"/>
-                                                        <connections>
-                                                            <action selector="selectPurple:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RlY-LI-joo"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rup-U2-lLs">
                                                         <rect key="frame" x="0.0" y="257" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="brownButton"/>
-                                                        <connections>
-                                                            <action selector="selectBrown:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NFo-BJ-Fsf"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghF-ac-MmX">
                                                         <rect key="frame" x="0.0" y="300" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="redButton"/>
-                                                        <connections>
-                                                            <action selector="selectRed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Qal-Tz-exg"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU5-Qf-ex1">
                                                         <rect key="frame" x="0.0" y="342.5" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemRedButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemRed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="g1f-Ou-OyA"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -166,65 +140,41 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="magentaButton"/>
-                                                        <connections>
-                                                            <action selector="selectMagenta:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Xob-61-Hm9"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-7g-VW2">
                                                         <rect key="frame" x="0.0" y="43" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemGrayButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemGray:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RrK-a2-eju"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu9-Ry-nya">
                                                         <rect key="frame" x="0.0" y="85.5" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemGreenButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemGreen:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UOA-cS-Vgu"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vF-sS-8z6">
                                                         <rect key="frame" x="0.0" y="128.5" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemIndigoButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemIndigo:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7ze-Go-Bk4"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a01-OL-Njf">
                                                         <rect key="frame" x="0.0" y="171.5" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="cyanButton"/>
-                                                        <connections>
-                                                            <action selector="selectCyan:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FrL-Wc-JQm"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAa-JM-lpj">
                                                         <rect key="frame" x="0.0" y="214" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemBlueButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemBlue:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="c7a-mF-699"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDf-LC-BJj">
                                                         <rect key="frame" x="0.0" y="257" width="172.5" height="33"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="systemYellowButton"/>
-                                                        <connections>
-                                                            <action selector="selectSystemYellow:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vIC-WQ-Ovw"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-lk-OCw">
                                                         <rect key="frame" x="0.0" y="300" width="172.5" height="32.5"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="orangeButton"/>
-                                                        <connections>
-                                                            <action selector="selectOrange:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qWU-fS-QeP"/>
-                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-h9-Xiv">
                                                         <rect key="frame" x="0.0" y="342.5" width="172.5" height="33"/>
@@ -251,17 +201,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="172.5" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="キャンセル"/>
-                                        <connections>
-                                            <action selector="cancelAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gyt-rp-lbq"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u99-rP-lRV">
                                         <rect key="frame" x="182.5" y="0.0" width="172.5" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="保存"/>
-                                        <connections>
-                                            <action selector="saveAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UXC-xX-Gjn"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -304,14 +248,14 @@
                         <outlet property="saveButton" destination="u99-rP-lRV" id="hCe-Ad-QPn"/>
                         <outlet property="selectedSalesFloorColorView" destination="m8E-Yn-uHY" id="LbD-IY-jE4"/>
                         <outlet property="systemBlueButton" destination="qAa-JM-lpj" id="5XG-UH-k3k"/>
-                        <outlet property="systemGrayButton" destination="PQ2-7g-VW2" id="Cx9-RI-vwH"/>
                         <outlet property="systemGreenButton" destination="wu9-Ry-nya" id="jlD-NV-okw"/>
                         <outlet property="systemIndigoButton" destination="7vF-sS-8z6" id="eD4-4f-zHh"/>
+                        <outlet property="systemMintButton" destination="PQ2-7g-VW2" id="Cx9-RI-vwH"/>
                         <outlet property="systemPinkButton" destination="by4-Y5-zbZ" id="bDI-pP-ArP"/>
                         <outlet property="systemPurpleButton" destination="IDi-hO-4MN" id="TKT-R1-AtB"/>
-                        <outlet property="systemRedButton" destination="eU5-Qf-ex1" id="6kx-mK-eUu"/>
                         <outlet property="systemTealButton" destination="XC3-OT-X0w" id="yL1-KM-PJh"/>
                         <outlet property="systemYellowButton" destination="JDf-LC-BJj" id="a4p-Oh-lcH"/>
+                        <outlet property="yellowButton" destination="eU5-Qf-ex1" id="6kx-mK-eUu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

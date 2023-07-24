@@ -8,29 +8,34 @@
 import UIKit
 
 /// チュートリアル画像を表示を管理する
-class DetailTutorialViewController: UIViewController {
+final class DetailTutorialViewController: UIViewController {
 
     /// 画面上部の閉じるボタン
-    @IBOutlet private weak var topCloseButton: UIButton!
+    @IBOutlet private weak var topCloseButton: UIButton! {
+        didSet {
+            topCloseButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        }
+    }
+
     /// チュートリアルの画像を表示するimgeView
-    @IBOutlet private weak var tutorialImageView: UIImageView!
+    @IBOutlet private weak var tutorialImageView: UIImageView! {
+        didSet {
+            tutorialImageView.image = UIImage(named: imageName)
+        }
+    }
+
     /// 画面下部の閉じるボタン
-    @IBOutlet private weak var underCloseButton: UIButton!
+    @IBOutlet private weak var underCloseButton: UIButton! {
+        didSet {
+            underCloseButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        }
+    }
+
     /// 表示するイメージのAssets名
     private var imageName: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayData()
-    }
-
-    /// 上部のボタンによって前の画面に戻る
-    @IBAction func returnHomeViewByTopButton(_ sender: Any) {
-        dismiss(animated: true )
-    }
-    /// 下部のボタンによって前の画面に戻る
-    @IBAction func returnHomeViewByUnderButton(_ sender: Any) {
-        dismiss(animated: true )
     }
 
     /// データ受け渡し用のメソッド
@@ -38,8 +43,8 @@ class DetailTutorialViewController: UIViewController {
         self.imageName = imageName
     }
 
-    /// 受け渡されたデータを表示
-    private func displayData() {
-        tutorialImageView.image = UIImage(named: imageName)
+    /// 画面を閉じる
+    @objc private func closeView() {
+        dismiss(animated: true)
     }
 }

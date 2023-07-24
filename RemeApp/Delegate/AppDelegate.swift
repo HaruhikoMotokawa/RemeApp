@@ -18,16 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                      [UIApplication.LaunchOptionsKey: Any]?)  -> Bool {
-        // ネットワークの監視を開始
-        NetworkMonitor.shared.startMonitoring()
 
-        // Firebaseの初期設定
-        FirebaseApp.configure()
-
-        // IQKeyboardManagerを設定
-        IQKeyboardManager.shared.enable = true
-
-        let defaults = UserDefaults.standard
+        NetworkMonitor.shared.startMonitoring()  // ネットワークの監視を開始
+        FirebaseApp.configure() // Firebaseの初期設定
+        IQKeyboardManager.shared.enable = true // IQKeyboardManagerを設定
 
         /// 現在起動しているアプリバージョンを取得
         let currentVersion = VersionManager.shared.getCurrentVersion()
@@ -55,9 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     """
                     )
                     let realm = try await Realm()
-
                     try await AccountManager.shared.signInAnonymity() // 匿名認証でログイン
-
                     let uid = AccountManager.shared.getAuthStatus() // ログイン後のuid取得
                     // 匿名認証用のusersデータ作成
                     try await FirestoreManager.shared.createUsers(
@@ -66,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         password: "",
                         uid: uid)
                     var myShoppingItemList: [ShoppingItemModel] = []
-
                     // ShoppingItemModelに沿う形にerrandDataModelの情報をマッピングして収納
                     myShoppingItemList = realm.objects(ErrandDataModel.self).map { (errandDataModel) -> ShoppingItemModel in
                         return ShoppingItemModel(isCheckBox: errandDataModel.isCheckBox,
@@ -80,10 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  sharedUsers: [],
                                                  date: Date())
                     }
-
-                    if myShoppingItemList.isEmpty {
-                        return
-                    }
+                    if myShoppingItemList.isEmpty { return }
                     // myShoppingItemListの要素分だけ順番に回す
                     for item in myShoppingItemList {
                         // 写真の保存処理、realmのファイルパスから画像を取得して保存
@@ -114,7 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("✨✨✨移　行　完　了✨✨✨")
                 } catch let error {
                     let errorMessage = FirebaseErrorManager.shared.setAuthErrorMessage(error)
-                    // アラート表示
                     AlertController.showAlert(tittle: "エラー", errorMessage: errorMessage)
                     print(error.localizedDescription)
                 }
@@ -123,24 +110,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 現在のバージョンをUserDefaultsに保存
         VersionManager.shared.saveCurrentVersion()
 
-        //初期起動のチュートリアル表示
-        let firstLunchKey = "firstLunch"
-        let firstLunch = [firstLunchKey: true]
-        defaults.register(defaults: firstLunch)
-
-        // アプリインストール後の初回起動時に使用マップ設定をデフォルトにする処理
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let isInitialLaunch = UserDefaults.standard.bool(forKey: "isInitialLaunch")
-
         // アプリインストール後の初回起動時の処理
-        if !isInitialLaunch {
+        if !UserDefaults.standard.isInitialLaunch {
             Task { @MainActor in
                 do {
                     // もしオフラインだったらアラート出してアプリを強制終了
                     if !NetworkMonitor.shared.isConnected {
                         AlertController.showExitAlert(tittle: "オフラインです", message: "初期設定にはオンライン環境が必要です。")
                     }
+                    // 匿名認証でログイン
                     try await AccountManager.shared.signInAnonymity()
                     // 現在のuidを取得
                     let uid = AccountManager.shared.getAuthStatus()
@@ -154,34 +132,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("失敗")
                 }
             }
-
-            UserDefaults.standard.set(true, forKey: "isInitialLaunch")
-            UserDefaults.standard.setValue(SalesFloorMapType.default.rawValue, forKey: useSalesFloorTypeKey)
-            UserDefaults.standard.setValue(ShoppingStartPositionType.right.rawValue, forKey: shoppingStartPositionKey)
+            UserDefaults.standard.isInitialLaunch = true // アプリの初回起動済みフラグをtrue
+            UserDefaults.standard.useSalesFloorType = SalesFloorMapType.default.rawValue // 使用マップをデフォルトに設定
+            UserDefaults.standard.shoppingStartPosition = ShoppingStartPositionType.right.rawValue // 買い物開始位置を右回りに設定
 
             let realm = try! Realm()
-            // 17個のカスタム売り場データを作成
-            let customSalesFloors: [CustomSalesFloorModel] = [
-                CustomSalesFloorModel(salesFloorRawValue: 0, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 0),
-                CustomSalesFloorModel(salesFloorRawValue: 1, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 1),
-                CustomSalesFloorModel(salesFloorRawValue: 2, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 2),
-                CustomSalesFloorModel(salesFloorRawValue: 3, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 3),
-                CustomSalesFloorModel(salesFloorRawValue: 4, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 4),
-                CustomSalesFloorModel(salesFloorRawValue: 5, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 5),
-                CustomSalesFloorModel(salesFloorRawValue: 6, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 6),
-                CustomSalesFloorModel(salesFloorRawValue: 7, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 7),
-                CustomSalesFloorModel(salesFloorRawValue: 8, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 8),
-                CustomSalesFloorModel(salesFloorRawValue: 9, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 9),
-                CustomSalesFloorModel(salesFloorRawValue: 10, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 10),
-                CustomSalesFloorModel(salesFloorRawValue: 11, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 11),
-                CustomSalesFloorModel(salesFloorRawValue: 12, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 12),
-                CustomSalesFloorModel(salesFloorRawValue: 13, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 13),
-                CustomSalesFloorModel(salesFloorRawValue: 14, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 14),
-                CustomSalesFloorModel(salesFloorRawValue: 15, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 15),
-                CustomSalesFloorModel(salesFloorRawValue: 16, nameOfSalesFloor: "未設定", customColorOfSalesFloorRawValue: 16)
-            ]
-            try! realm.write {
-                realm.add(customSalesFloors)
+            try! realm.write { // カスタムマップの初期設定を書き込み
+                realm.add(EditSalesFloorMapViewController.resetCustomSalesFloors)
             }
         }
         sleep(1)

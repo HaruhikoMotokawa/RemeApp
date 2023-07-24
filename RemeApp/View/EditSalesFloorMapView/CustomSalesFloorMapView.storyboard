@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,9 +51,6 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goGreenThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="rdO-DD-uej"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIY-eE-rHT">
                                                 <rect key="frame" x="123.5" y="0.0" width="118" height="60"/>
@@ -65,9 +63,6 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goBlueThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="mO2-ny-4ZY"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzw-EQ-KiZ">
                                                 <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
@@ -80,9 +75,6 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="goRedThreeList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="pMU-T5-IQG"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -103,9 +95,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="dvR-ya-wuv"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRt-5C-I0k">
                                                         <rect key="frame" x="54" y="0.0" width="40.5" height="227"/>
@@ -118,9 +107,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="QBW-bO-mmB"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kt1-W0-Dao">
                                                         <rect key="frame" x="108.5" y="0.0" width="40" height="227"/>
@@ -133,9 +119,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueSevenList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="ltV-wn-HR6"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tA-PX-L6Z">
                                                         <rect key="frame" x="162.5" y="0.0" width="40" height="227"/>
@@ -148,9 +131,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="9mt-gN-52u"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmv-xS-lmU">
                                                         <rect key="frame" x="216.5" y="0.0" width="40" height="227"/>
@@ -163,9 +143,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="hjL-b7-FgG"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv5-6q-3Pv">
                                                         <rect key="frame" x="270.5" y="0.0" width="40.5" height="227"/>
@@ -178,9 +155,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedFourList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="3SD-uy-QGC"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vR-QM-Gmz">
                                                         <rect key="frame" x="325" y="0.0" width="40" height="227"/>
@@ -193,9 +167,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedTwoList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="jvV-LX-7ol"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -213,9 +184,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="GOe-94-BaU"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofx-ei-hrY">
                                                         <rect key="frame" x="54" y="0.0" width="40.5" height="226.5"/>
@@ -228,9 +196,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goGreenOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="Cgr-i0-Dfw"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFf-0z-Lfb">
                                                         <rect key="frame" x="108.5" y="0.0" width="40" height="226.5"/>
@@ -243,9 +208,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueSixList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="fl6-yz-fG1"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyf-FL-ImJ">
                                                         <rect key="frame" x="162.5" y="0.0" width="40" height="226.5"/>
@@ -258,9 +220,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="DXG-0S-FbT"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHA-8w-OZf">
                                                         <rect key="frame" x="216.5" y="0.0" width="40" height="226.5"/>
@@ -273,9 +232,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goBlueOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="Bhb-S0-qpK"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88l-IE-3t0">
                                                         <rect key="frame" x="270.5" y="0.0" width="40.5" height="226.5"/>
@@ -288,9 +244,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedFiveList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="31r-dB-uAo"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-zZ-KEk">
                                                         <rect key="frame" x="325" y="0.0" width="40" height="226.5"/>
@@ -303,9 +256,6 @@
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="goRedOneList:" destination="hHJ-fw-n8m" eventType="touchUpInside" id="YcO-Vv-hO2"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

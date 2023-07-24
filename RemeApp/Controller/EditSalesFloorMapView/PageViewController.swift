@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController {
+final class PageViewController: UIPageViewController {
 
     // ① PageView上で表示するViewControllerを管理する配列
     private var controllers: [UIViewController] = []

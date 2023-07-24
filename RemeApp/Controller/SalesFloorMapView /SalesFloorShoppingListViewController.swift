@@ -8,14 +8,20 @@
 import UIKit
 
 /// D-売り場の買い物リスト
-class SalesFloorShoppingListViewController: UIViewController {
+final class SalesFloorShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
     /// 売り場の買い物リストを表示
-    @IBOutlet private weak var shoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet {
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            shoppingListTableView.register(UINib(nibName: ShoppingListTableViewCell.className, bundle: nil),
+                                           forCellReuseIdentifier: ShoppingListTableViewCell.className)
+        }
+    }
 
     // MARK: - property
-
     /// 売り場のRawValue受け渡し用
     internal var salesFloorRawValue: Int = 0
     /// ユーザーが作成した買い物データを格納する配列
@@ -29,7 +35,6 @@ class SalesFloorShoppingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetWorkObserver()
-        setTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +57,7 @@ class SalesFloorShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // ネットワーク状況が変わったらTableViewを再読み込み
@@ -128,13 +133,6 @@ class SalesFloorShoppingListViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }
     }
-    /// salesFloorShoppingListTableView関連の設定
-    private func setTableView() {
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                                 forCellReuseIdentifier: "ShoppingListTableViewCell")
-    }
 
 }
 
@@ -147,7 +145,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     /// salesFloorShoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = shoppingListTableView.dequeueReusableCell(
-            withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            withIdentifier: ShoppingListTableViewCell.className, for: indexPath) as? ShoppingListTableViewCell {
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
@@ -172,7 +170,7 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
                     guard let self else { return }
                     DispatchQueue.main.async {
                         if let cell = self.shoppingListTableView.cellForRow(
-                            at: indexPath) as? ShoppingListTableViewCellController {
+                            at: indexPath) as? ShoppingListTableViewCell {
                             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                                  nameOfItem: myData.nameOfItem,
                                                  numberOfItem: myData.numberOfItem,
@@ -193,16 +191,9 @@ extension SalesFloorShoppingListViewController: UITableViewDataSource, UITableVi
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
     /// - detailShoppingListViewControllerにモーダル遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListVC = storyboard.instantiateViewController(
-            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
-            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
-        }
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListVC, animated: true)
+        Router.shared.showDetailShoppingList(from: self, shoppingItemData: shoppingItemData)
     }
 }
 
@@ -213,7 +204,7 @@ extension SalesFloorShoppingListViewController: ShoppingListTableViewCellDelegat
     /// - チェックしたものは下に移動する
     /// - 全てのチェックがついたらアラートを出す
     /// - テーブルビューを再読み込みして表示する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる

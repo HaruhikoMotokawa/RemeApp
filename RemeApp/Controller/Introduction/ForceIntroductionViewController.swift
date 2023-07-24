@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ForceIntroductionViewController: UIViewController {
+final class ForceIntroductionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

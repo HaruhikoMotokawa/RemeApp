@@ -9,24 +9,58 @@ import UIKit
 import RealmSwift
 
 /// B-買い物リスト詳細
-class DetailShoppingListViewController: UIViewController {
+final class DetailShoppingListViewController: UIViewController {
 
     // MARK: - @IBOutlet
 
+    @IBOutlet private weak var closeButton: UIButton! {
+        didSet {
+            closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        }
+    }
+
     /// 売り場を表示
-    @IBOutlet private weak var salesFloorTypeButton: UIButton!
+    @IBOutlet private weak var salesFloorTypeButton: UIButton! {
+        didSet {
+            salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
+            salesFloorTypeButton.addTarget(self, action: #selector(goSalesFloorMapView), for: .touchUpInside)
+        }
+    }
     /// 詳細のView
-    @IBOutlet weak var detailView: UIView!
+    @IBOutlet private weak var detailView: UIView! {
+        didSet {
+            detailView.layer.borderColor = UIColor.black.cgColor
+            detailView.layer.borderWidth = 2
+            detailView.layer.cornerRadius = 10
+            detailView.clipsToBounds = true
+        }
+    }
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
     /// 商品名を表示
-    @IBOutlet private weak var nameOfItemLabel: UILabel!
+    @IBOutlet private weak var nameOfItemLabel: UILabel! {
+        didSet {
+            nameOfItemLabel.setAppearance()
+        }
+    }
     /// 必要数を表示
-    @IBOutlet private weak var numberOfItemLabel: UILabel!
+    @IBOutlet private weak var numberOfItemLabel: UILabel! {
+        didSet {
+            numberOfItemLabel.setAppearance()
+        }
+    }
     /// 必要数の単位を表示
-    @IBOutlet private weak var unitLabel: UILabel!
+    @IBOutlet private weak var unitLabel: UILabel! {
+        didSet {
+            unitLabel.setAppearance()
+        }
+    }
     /// 補足を表示
-    @IBOutlet private weak var supplementLabel: UILabel!
+    @IBOutlet private weak var supplementLabel: UILabel! {
+        didSet {
+            supplementLabel.setAppearance()
+        }
+    }
 
     // MARK: - property
     /// ドキュメントID
@@ -53,18 +87,11 @@ class DetailShoppingListViewController: UIViewController {
         super.viewDidLoad()
         setNetWorkObserver()
         displayData()
-        salesFloorTypeButton.setAppearanceWithShadow(fontColor: .black)
-        nameOfItemLabel.setAppearance()
-        setDetailView()
-        numberOfItemLabel.setAppearance()
-        unitLabel.setAppearance()
-        supplementLabel.setAppearance()
     }
 
     // MARK: - func
-
     /// 買い物リストから詳細画面に遷移中の場合、画面を閉じてマップ閲覧画面に画面遷移する
-    @IBAction private func goSalesFloorMapView(_ sender: Any) {
+    @objc private func goSalesFloorMapView(_ sender: Any) {
         self.dismiss(animated: true) {
             if let windowScene = UIApplication.shared.connectedScenes
                 .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
@@ -75,7 +102,7 @@ class DetailShoppingListViewController: UIViewController {
     }
 
     /// 画面閉じて戻る
-    @IBAction private func closeView(_ sender: Any) {
+    @objc private func closeView(_ sender: Any) {
         dismiss(animated: true)
     }
 
@@ -87,7 +114,7 @@ class DetailShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // オフラインになったらアラートを出す
@@ -119,14 +146,6 @@ class DetailShoppingListViewController: UIViewController {
         photoPathImage = image
     }
 
-    /// detailViewに枠線をつけるメソッド
-    private func setDetailView() {
-        detailView.layer.borderColor = UIColor.black.cgColor
-        detailView.layer.borderWidth = 2
-        detailView.layer.cornerRadius = 10
-        detailView.clipsToBounds = true
-    }
-
     /// 受け渡されたデータをそれぞれのUI部品に表示
     /// - 商品名の表示
     /// - 必要数を表示
@@ -147,15 +166,11 @@ class DetailShoppingListViewController: UIViewController {
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
     private func setSalesFloorTypeButton(salesFloorRawValue: Int) {
-        let useSalesFloorTypeKey = "useSalesFloorTypeKey"
-        let salesFloorTypeInt = UserDefaults.standard.integer(forKey: useSalesFloorTypeKey)
-        // 0 -> カスタム、1(else) -> デフォルト
-        if salesFloorTypeInt == 0 {
-            // カスタムマップタイプの処理
-            setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+        // 保存された設定によって切り替える
+        if UserDefaults.standard.useSalesFloorType == SalesFloorMapType.custom.rawValue {
+            setCustomSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // カスタムマップタイプの処理
         } else {
-            // デフォルトマップタイプの処理
-            setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue)
+            setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // デフォルトマップタイプの処理
         }
     }
 

@@ -7,17 +7,33 @@
 
 import UIKit
 
+protocol SignInViewControllerDelegate: AnyObject {
+    func updateUserInfoFromSignInView() async
+}
+
 /// ログイン画面
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
 
     // MARK: - property
 
     /// メールアドレス入力
-    @IBOutlet private weak var inputMailTextField: UITextField!
+    @IBOutlet private weak var inputMailTextField: UITextField! {
+        didSet {
+            inputMailTextField.delegate = self
+        }
+    }
     /// パスワード入力
-    @IBOutlet private weak var inputPasswordTextField: UITextField!
+    @IBOutlet private weak var inputPasswordTextField: UITextField! {
+        didSet {
+            inputPasswordTextField.delegate = self
+        }
+    }
     /// ログインボタン
-    @IBOutlet private weak var signInButton: UIButton!
+    @IBOutlet private weak var signInButton: UIButton! {
+        didSet {
+            signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
+        }
+    }
 
     var delegate: SignInViewControllerDelegate?
 
@@ -26,14 +42,12 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         setNetWorkObserver()
         setKeyboardCloseButton()
-        inputMailTextField.delegate = self
-        inputPasswordTextField.delegate = self
         setSignInButton()
     }
     
     // MARK: - func
     /// メールとパスワードでログインするメソッド
-    @IBAction private func signIn(_ sender: Any) {
+    @objc private func signIn() {
         // ログインの処理
         Task { @MainActor in
             do {
