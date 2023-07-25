@@ -11,6 +11,7 @@ pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 pod 'FirebaseFirestoreSwift'
 pod 'FirebaseStorage'
+pod 'LicensePlist'
 
   # Pods for RemeApp
 

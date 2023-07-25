@@ -53,24 +53,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MH2-w2-fuy">
-                                        <rect key="frame" x="16" y="91" width="343" height="31.5"/>
+                                        <rect key="frame" x="16" y="91" width="343" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MH2-w2-fuy" id="fuW-cx-G5E">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jf5-5R-yVR">
-                                                    <rect key="frame" x="20" y="5.5" width="21.5" height="20"/>
+                                                    <rect key="frame" x="20" y="5.5" width="21.5" height="19.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="売り場マップ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUJ-LS-Djk">
-                                                    <rect key="frame" x="61.5" y="5" width="104" height="21.5"/>
+                                                    <rect key="frame" x="61.5" y="5" width="104" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Gjk-Vz-FB3">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -88,24 +88,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="T4B-Yb-98E">
-                                        <rect key="frame" x="16" y="122.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="122" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T4B-Yb-98E" id="UhY-2B-EJi">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.and.pencil.and.ellipsis" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Mj4-Ce-9M6">
-                                                    <rect key="frame" x="20" y="5" width="29" height="19.5"/>
+                                                    <rect key="frame" x="20" y="5" width="29" height="20"/>
                                                     <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="買い物リスト編集" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmc-x8-e2y">
-                                                    <rect key="frame" x="64" y="5" width="139" height="21"/>
+                                                    <rect key="frame" x="64" y="5" width="139" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KMz-XY-tqy">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -123,24 +123,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="H1E-UQ-8wG">
-                                        <rect key="frame" x="16" y="153.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="153.5" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H1E-UQ-8wG" id="ucV-XY-u9U">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DyU-Pe-3wn">
-                                                    <rect key="frame" x="20" y="5" width="21" height="19.5"/>
+                                                    <rect key="frame" x="20" y="5" width="21" height="20"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="売り場マップ編集" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMI-iI-8kl">
-                                                    <rect key="frame" x="61" y="5" width="139" height="21"/>
+                                                    <rect key="frame" x="61" y="5" width="139" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0JI-g0-Ovo">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -164,24 +164,24 @@
                             <tableViewSection headerTitle="アカウントとリストの共有について" id="4k2-xk-B1h">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="d0G-Mf-uNd">
-                                        <rect key="frame" x="16" y="240.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="241" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d0G-Mf-uNd" id="tno-PB-CIL">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LlJ-Ca-RVn">
-                                                    <rect key="frame" x="20" y="6.5" width="18" height="18"/>
+                                                    <rect key="frame" x="20" y="6.5" width="18" height="18.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウントの概要" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U15-az-BiK">
-                                                    <rect key="frame" x="58" y="5" width="139" height="21"/>
+                                                    <rect key="frame" x="58" y="5" width="139" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="isv-aa-gia">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -199,24 +199,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ebw-nP-MFa">
-                                        <rect key="frame" x="16" y="271.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="272.5" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ebw-nP-MFa" id="hNH-jq-8iv">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nRM-M0-rUw">
-                                                    <rect key="frame" x="20" y="6.5" width="18" height="18"/>
+                                                    <rect key="frame" x="20" y="6.5" width="18" height="18.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウント作成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZ5-KW-aFu">
-                                                    <rect key="frame" x="58" y="5" width="121.5" height="21"/>
+                                                    <rect key="frame" x="58" y="5" width="121.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="f3E-aw-adG">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -234,24 +234,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ifK-mz-nP3">
-                                        <rect key="frame" x="16" y="302.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="304" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ifK-mz-nP3" id="h6V-zX-4vu">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iuL-Ed-njO">
-                                                    <rect key="frame" x="20" y="6.5" width="18" height="18"/>
+                                                    <rect key="frame" x="20" y="6.5" width="18" height="18.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共有設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5R-uk-gWZ">
-                                                    <rect key="frame" x="58" y="5" width="69.5" height="21"/>
+                                                    <rect key="frame" x="58" y="5" width="69.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Mgn-gH-0Ne">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -269,24 +269,24 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4F1-Zy-MOE">
-                                        <rect key="frame" x="16" y="333.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="335.5" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4F1-Zy-MOE" id="HaO-uT-MK8">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-tF-Q2g">
-                                                    <rect key="frame" x="20" y="6.5" width="18" height="18"/>
+                                                    <rect key="frame" x="20" y="6.5" width="18" height="18.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="アカウントの削除" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-A8-RfP">
-                                                    <rect key="frame" x="58" y="5" width="139" height="21"/>
+                                                    <rect key="frame" x="58" y="5" width="139" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tk5-C1-Ygu">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -308,24 +308,24 @@
                             <tableViewSection headerTitle="オフライン時の注意事項" id="BSf-jh-m9v">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="urw-lG-nK0">
-                                        <rect key="frame" x="16" y="420.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="423" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="urw-lG-nK0" id="3Q6-GX-1J6">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pm1-s3-83w">
-                                                    <rect key="frame" x="20" y="5" width="22.5" height="19"/>
+                                                    <rect key="frame" x="20" y="5" width="22.5" height="19.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="オフライン時の注意事項" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEm-m2-XgE">
-                                                    <rect key="frame" x="62.5" y="5" width="191" height="21"/>
+                                                    <rect key="frame" x="62.5" y="5" width="191" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dtz-Y2-WOw">
-                                                    <rect key="frame" x="303" y="5.5" width="20" height="20"/>
+                                                    <rect key="frame" x="303" y="5.5" width="20" height="20.5"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
@@ -347,18 +347,18 @@
                             <tableViewSection id="gHK-0f-0CR">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TFN-j6-ABR">
-                                        <rect key="frame" x="16" y="487.5" width="343" height="31"/>
+                                        <rect key="frame" x="16" y="490.5" width="343" height="31.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TFN-j6-ABR" id="aAY-T1-zQg">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-DI-QzH">
-                                                    <rect key="frame" x="20" y="7" width="18" height="16.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZAT-DI-QzH">
+                                                    <rect key="frame" x="20" y="5" width="18" height="21.5"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="画面を閉じる" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGP-so-mPC">
-                                                    <rect key="frame" x="58" y="5" width="104" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="法的表示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGP-so-mPC">
+                                                    <rect key="frame" x="58" y="5" width="69.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -371,6 +371,38 @@
                                                 <constraint firstItem="ZAT-DI-QzH" firstAttribute="top" secondItem="aAY-T1-zQg" secondAttribute="top" constant="5" id="Joa-Zm-bic"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZAT-DI-QzH" secondAttribute="bottom" constant="5" id="fVB-M6-qEF"/>
                                                 <constraint firstItem="ZAT-DI-QzH" firstAttribute="leading" secondItem="aAY-T1-zQg" secondAttribute="leading" constant="20" id="lwg-o7-pqe"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="wiM-Hq-aOy">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="b4C-34-1TO">
+                                        <rect key="frame" x="16" y="558" width="343" height="31.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b4C-34-1TO" id="Byl-PW-afu">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Shz-ba-c2P">
+                                                    <rect key="frame" x="20" y="7" width="18" height="17"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="画面を閉じる" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkF-j8-hOU">
+                                                    <rect key="frame" x="58" y="5" width="104" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Shz-ba-c2P" firstAttribute="top" secondItem="Byl-PW-afu" secondAttribute="top" constant="5" id="87u-80-Job"/>
+                                                <constraint firstItem="Shz-ba-c2P" firstAttribute="leading" secondItem="Byl-PW-afu" secondAttribute="leading" constant="20" id="Cxd-RQ-0Mw"/>
+                                                <constraint firstItem="CkF-j8-hOU" firstAttribute="top" secondItem="Byl-PW-afu" secondAttribute="top" constant="5" id="ED8-dI-X6S"/>
+                                                <constraint firstAttribute="bottom" secondItem="CkF-j8-hOU" secondAttribute="bottom" constant="5" id="jgi-MZ-FzR"/>
+                                                <constraint firstItem="CkF-j8-hOU" firstAttribute="leading" secondItem="Shz-ba-c2P" secondAttribute="trailing" constant="20" id="tgU-8R-ASz"/>
+                                                <constraint firstAttribute="bottom" secondItem="Shz-ba-c2P" secondAttribute="bottom" constant="5" id="yEr-Mh-y8X"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -394,6 +426,7 @@
     </scenes>
     <resources>
         <image name="chevron.forward.circle" catalog="system" width="128" height="123"/>
+        <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="list" width="25" height="25"/>
         <image name="map" catalog="system" width="128" height="112"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>

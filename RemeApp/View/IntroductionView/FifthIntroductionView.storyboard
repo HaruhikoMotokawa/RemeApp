@@ -25,9 +25,6 @@
                                 <state key="normal" title="画面を閉じる">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <action selector="closeView:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="FJb-jl-Pop"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PZm-sP-H6N"/>

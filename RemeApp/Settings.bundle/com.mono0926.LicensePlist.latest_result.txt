@@ -1,0 +1,119 @@
+name: abseil, nameSpecified: 
+body: 
+                   …
+version: 1.20211102.0
+
+name: BoringSSL-GRPC, nameSpecified: 
+body: BoringSSL is a fork …
+version: 0.0.24
+
+name: FirebaseAppCheckInterop, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseAuth, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseAuthInterop, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseCoreExtension, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseCoreInternal, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseFirestore, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseFirestoreSwift, nameSpecified: 
+body: 
+                   …
+version: 10.10.0
+
+name: FirebaseSharedSwift, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseStorage, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 7.11.1
+
+name: gRPC-C++, nameSpecified: 
+body: 
+                   …
+version: 
+
+name: gRPC-Core, nameSpecified: 
+body: 
+                   …
+version: 1.44.0
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 3.1.1
+
+name: IQKeyboardManagerSwift, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 6.5.11
+
+name: leveldb-library, nameSpecified: 
+body: Copyright (c) 2011 T…
+version: 1.22.2
+
+name: Libuv-gRPC, nameSpecified: 
+body: libuv is licensed fo…
+version: 0.0.10
+
+name: LicensePlist, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 3.24.10
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 2.30909.0
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 2.2.0
+
+name: Realm, nameSpecified: 
+body:                     …
+version: 10.38.0
+
+name: RealmSwift, nameSpecified: 
+body:                     …
+version: 10.38.0
+
+add-version-numbers: false
+
+LicensePlist Version: 3.24.10

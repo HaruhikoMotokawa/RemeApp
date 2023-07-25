@@ -53,9 +53,6 @@
                                                         <rect key="frame" x="293" y="35.5" width="62" height="30"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="共有解除"/>
-                                                        <connections>
-                                                            <action selector="deleteFirstSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Mk4-eK-eko"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -83,9 +80,6 @@
                                                         <rect key="frame" x="293" y="35.5" width="62" height="30"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="共有解除"/>
-                                                        <connections>
-                                                            <action selector="deleteSecondSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Um9-lC-Rqi"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -113,9 +107,6 @@
                                                         <rect key="frame" x="293" y="35" width="62" height="30"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="共有解除"/>
-                                                        <connections>
-                                                            <action selector="deleteThirdSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="eVc-d6-I0g"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -152,9 +143,6 @@
                                         <rect key="frame" x="10" y="516.5" width="335" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="追加"/>
-                                        <connections>
-                                            <action selector="addSharedUsers:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hnh-zP-yM2"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

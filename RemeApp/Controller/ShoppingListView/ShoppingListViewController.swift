@@ -5,16 +5,28 @@
 //  Created by 本川晴彦 on 2023/[03/20.]
 //
 import UIKit
-/// A-買い物リスト
-class ShoppingListViewController: UIViewController {
-    // MARK: - property
-
+/// A-買い物リスト、継承を禁止するためにfinalキーワードつける
+final class ShoppingListViewController: UIViewController {
+    // MARK: - @IBOutlet
     /// チュートリアルを表示するボタン
-    @IBOutlet private weak var helpButton: UIButton!
+    @IBOutlet private weak var helpButton: UIButton! {
+        didSet {
+            helpButton.addTarget(self, action: #selector(helpButtonTapped), for: .touchUpInside)
+        }
+    }
 
     /// 買い物リストを表示する
-    @IBOutlet private weak var shoppingListTableView: UITableView!
+    @IBOutlet private weak var shoppingListTableView: UITableView! {
+        didSet { // 基本設定関連などはなるべくdidSetにすると見やすい
+            shoppingListTableView.dataSource = self
+            shoppingListTableView.delegate = self
+            // セルの登録などは文字を直接使わずにハードコーディングを避ける
+            shoppingListTableView.register(UINib(nibName: ShoppingListTableViewCell.className, bundle: nil),
+                                           forCellReuseIdentifier: ShoppingListTableViewCell.className)
+        }
+    }
 
+    // MARK: - property
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
     /// 共有相手が作成した買い物データを格納する配列
@@ -25,7 +37,6 @@ class ShoppingListViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
         setNetWorkObserver()
     }
 
@@ -42,39 +53,19 @@ class ShoppingListViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showIntroductionPageOnFirstLaunch() // 初回起動時のチュートリアル表示
+        showIntroduction() // 初回起動時のチュートリアル表示
     }
     // MARK: - func
-
-    /// チュートリアル画面にモーダル遷移
-    @IBAction private func goTutorialView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomeTutorialView", bundle: nil)
-        let homeTutorialVC = storyboard.instantiateViewController(
-            withIdentifier: "HomeTutorialView") as! HomeTutorialViewController
-        homeTutorialVC.modalPresentationStyle = .fullScreen
-        self.present(homeTutorialVC, animated: true)
-    }
-
-    /// shoppingListTableView関連の設定
-    private func setTableView() {
-        shoppingListTableView.dataSource = self
-        shoppingListTableView.delegate = self
-        shoppingListTableView.register(UINib(nibName: "ShoppingListTableViewCell", bundle: nil),
-                                       forCellReuseIdentifier: "ShoppingListTableViewCell")
+    /// チュートリアル画面へ遷移
+    @objc private func helpButtonTapped() {
+        Router.shared.showHomeTutorial(from: self)
     }
 
     /// アプリ初回起動時のチュートリアル画面表示処理
-    private func showIntroductionPageOnFirstLaunch() {
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
-            let storyboard = UIStoryboard(name: "IntroductionPageView", bundle: nil)
-            let tutorialPageVC = storyboard.instantiateViewController(
-                withIdentifier: "IntroductionPageView") as! IntroductionPageViewController
-            tutorialPageVC.modalPresentationStyle = .fullScreen
-            self.present(tutorialPageVC, animated: true)
+    private func showIntroduction() {
+        if !UserDefaults.standard.isIntroductionSeen {
+            UserDefaults.standard.isIntroductionSeen = true
+            Router.shared.showIntroduction(from: self)
         }
     }
 
@@ -86,7 +77,7 @@ class ShoppingListViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // ネットワーク状況が変わったらTableViewを再読み込み
@@ -154,16 +145,12 @@ class ShoppingListViewController: UIViewController {
     }
 
     /// cellをチェックがオフのものを一番上に、かつ売り場の順に並び替える
-    /// - UserDefaultsに使用するキーを指定
-    /// - UserDefaultsから設定を取得
-    /// -  画面ローディング時の表示をif文で切り替え
+    /// - UserDefaultsから設定を取得して画面ローディング時の表示をif文で切り替え
     /// - 買い物開始位置が左回り設定の場合 -> cellをチェックがオフのものを一番上に、かつ売り場を降順に並び替える
     /// - 買い物開始位置が右回り設定の場合 -> ellをチェックがオフのものを一番上に、かつ売り場を昇順に並び替える
     private func sortShoppingItemList() {
         print("並び替え実行")
-        let shoppingStartPositionKey = "shoppingStartPositionKey"
-        let shoppingStartPositionInt = UserDefaults.standard.integer(forKey: shoppingStartPositionKey)
-        if shoppingStartPositionInt == 0 {
+        if UserDefaults.standard.shoppingStartPosition == ShoppingStartPositionType.left.rawValue {
             sortLeftShoppingItemList()
         } else {
             sortRightShoppingItemList()
@@ -198,7 +185,6 @@ class ShoppingListViewController: UIViewController {
         shoppingListTableView.reloadData()
     }
 
-
     /// 全てのセルがチェックされている場合にアラートを表示する
    private func completionAlert() {
         if allShoppingItemList.allSatisfy({ $0.isCheckBox }) {
@@ -209,16 +195,7 @@ class ShoppingListViewController: UIViewController {
         }
     }
 
-    // tableViewのデータを更新する
-    private func updateTableView() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.shoppingListTableView.reloadData()
-        }
-    }
-
 }
-
 // MARK: - UITableViewDataSource&Delegate
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
     /// shoppingListTableViewに表示するcell数を指定
@@ -229,7 +206,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
     /// shoppingListTableViewに使用するcellの内容を指定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = shoppingListTableView.dequeueReusableCell(
-            withIdentifier: "ShoppingListTableViewCell", for: indexPath) as? ShoppingListTableViewCellController {
+            withIdentifier: ShoppingListTableViewCell.className, for: indexPath) as? ShoppingListTableViewCell {
             cell.delegate = self
             let myData: ShoppingItemModel = allShoppingItemList[indexPath.row]
             if myData.photoURL.isEmpty { // 画像データがないセルの表示内容
@@ -254,7 +231,7 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
                     guard let self else { return }
                     DispatchQueue.main.async {
                         if let cell = self.shoppingListTableView.cellForRow(
-                            at: indexPath) as? ShoppingListTableViewCellController {
+                            at: indexPath) as? ShoppingListTableViewCell {
                             cell.setShoppingList(isCheckBox: myData.isCheckBox,
                                                  nameOfItem: myData.nameOfItem,
                                                  numberOfItem: myData.numberOfItem,
@@ -273,18 +250,11 @@ extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate
 
     /// shoppingListTableViewのcellがタップされた時の挙動を定義
     /// - タップされた商品のデータをdetailShoppingListViewControllerに渡す
-    /// - detailShoppingListViewControllerにプッシュ遷移
+    /// - detailShoppingListViewControllerに遷移
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailShoppingListView", bundle: nil)
-        let detailShoppingListVC = storyboard.instantiateViewController(
-            withIdentifier: "DetailShoppingListView") as! DetailShoppingListViewController
         let shoppingItemData = allShoppingItemList[indexPath.row]
-        Cache.shared.getImage(photoURL: shoppingItemData.photoURL) { image in
-            detailShoppingListVC.configurer(detail: shoppingItemData, image: image)
-        }
         shoppingListTableView.deselectRow(at: indexPath, animated: true)
-        detailShoppingListVC.modalTransitionStyle = .crossDissolve // フェードイン・アウトのアニメーション
-        self.present(detailShoppingListVC, animated: true)
+        Router.shared.showDetailShoppingList(from: self, shoppingItemData: shoppingItemData)
     }
 }
 
@@ -295,7 +265,7 @@ extension ShoppingListViewController: ShoppingListTableViewCellDelegate {
     /// - チェックしたものは下に移動する
     /// - 全てのチェックがついたらアラートを出す
     /// - テーブルビューを再読み込みして表示する
-    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCellController) async {
+    func didTapCheckBoxButton(_ cell: ShoppingListTableViewCell) async {
         // 操作中のcellの行番号を取得
         guard let indexPath = shoppingListTableView.indexPath(for: cell) else { return }
         // 指定されたセルのisCheckBoxのBool値を反転させる

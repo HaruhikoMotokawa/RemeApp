@@ -8,7 +8,7 @@
 import UIKit
 
 /// 共有設定画面
-class ShareSettingsViewController: UIViewController {
+final class ShareSettingsViewController: UIViewController {
 
     // MARK: - property
 
@@ -22,28 +22,77 @@ class ShareSettingsViewController: UIViewController {
     @IBOutlet private weak var thirdSharedUsersNameLabel: UILabel!
 
     /// １番目に登録されている共有者を解除するボタン
-    @IBOutlet private weak var firstDeleteButton: UIButton!
+    @IBOutlet private weak var firstDeleteButton: UIButton!{
+        didSet {
+            firstDeleteButton.addTarget(self, action: #selector(deleteSharedUsers), for: .touchUpInside)
+        }
+    }
 
     /// ２番目に登録されている共有者を解除するボタン
-    @IBOutlet private weak var secondDeleteButton: UIButton!
+    @IBOutlet private weak var secondDeleteButton: UIButton! {
+        didSet {
+            secondDeleteButton.addTarget(self, action: #selector(deleteSharedUsers), for: .touchUpInside)
+        }
+    }
 
     /// ３番目に登録されている共有者を解除するボタン
-    @IBOutlet private weak var thirdDeleteButton: UIButton!
+    @IBOutlet private weak var thirdDeleteButton: UIButton! {
+        didSet {
+            thirdDeleteButton.addTarget(self, action: #selector(deleteSharedUsers), for: .touchUpInside)
+        }
+    }
 
     /// 共有するユーザーのuidを入力するtextField
-    @IBOutlet private weak var inputUIDTextField: UITextField!
+    @IBOutlet private weak var inputUIDTextField: UITextField! {
+        didSet {
+            inputUIDTextField.delegate = self
+        }
+    }
 
     /// 追加ボタン
-    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton! {
+        didSet {
+            addButton.addTarget(self, action: #selector(addSharedUsers), for: .touchUpInside)
+        }
+    }
     /// ユーザーが作成した買い物データを格納する配列
     private var myShoppingItemList: [ShoppingItemModel] = []
-    
+
+    /// 共有者の番号管理
+    enum SharedUsers {
+        case one
+        case two
+        case three
+
+        /// 共有者の配列番号
+        var arrayNumber: Int {
+            switch self {
+                case .one:
+                    return 0
+                case .two:
+                    return 1
+                case .three:
+                    return 2
+            }
+        }
+
+        /// 共有者の登録人数
+        var numberOfRegistrations:Int {
+            switch self {
+                case .one:
+                    return 1
+                case .two:
+                    return 2
+                case .three:
+                    return 3
+            }
+        }
+    }
     // MARK: - viewDidLoad
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setNetWorkObserver()
-        inputUIDTextField.delegate = self
         setKeyboardCloseButton()
         setAddButton()
         Task {
@@ -53,9 +102,8 @@ class ShareSettingsViewController: UIViewController {
 
     
     // MARK: - func
-
-    /// １番目に登録されている共有者を解除するメソッド
-    @IBAction private func deleteFirstSharedUsers(_ sender: Any) {
+    /// 共有者の登録を解除する、引数のボタンによって削除の対象を切り替える
+    @objc func deleteSharedUsers(_ sender: UIButton) {
         Task { @MainActor in
             IndicatorController.shared.startIndicator()
             // オフラインだったらアラート出して終了
@@ -63,44 +111,23 @@ class ShareSettingsViewController: UIViewController {
                 AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
                 return
             }
-            await self.deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
-            await self.setSharedUsers()
-            IndicatorController.shared.dismissIndicator()
-        }
-    }
-
-    /// ２番目に登録されている共有者を解除するメソッド
-    @IBAction private func deleteSecondSharedUsers(_ sender: Any) {
-        Task { @MainActor in
-            IndicatorController.shared.startIndicator()
-            // オフラインだったらアラート出して終了
-            guard NetworkMonitor.shared.isConnected else {
-                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
-                return
+            // ボタンによって登録削除する対象を変える
+            switch sender {
+                case firstDeleteButton:
+                    await self.deleteSharedUsers(deleteNumber:SharedUsers.one.arrayNumber)
+                case secondDeleteButton:
+                     await self.deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
+                case thirdDeleteButton:
+                     await self.deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
+                default: break
             }
-            await self.deleteSharedUsers(deleteNumber:SharedUsers.two.arrayNumber)
-            await self.setSharedUsers()
-            IndicatorController.shared.dismissIndicator()
-        }
-    }
-
-    /// ３番目に登録されている共有者を解除するメソッド
-    @IBAction private func deleteThirdSharedUsers(_ sender: Any) {
-        Task { @MainActor in
-            IndicatorController.shared.startIndicator()
-            // オフラインだったらアラート出して終了
-            guard NetworkMonitor.shared.isConnected else {
-                AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
-                return
-            }
-            await self.deleteSharedUsers(deleteNumber:SharedUsers.three.arrayNumber)
-            await self.setSharedUsers()
-            IndicatorController.shared.dismissIndicator()
+            await self.setSharedUsers() // ラベルを更新
+            IndicatorController.shared.dismissIndicator() // インジケーター終了
         }
     }
 
     /// inputUIDTextFieldの入力内容を使って共有者に追加するメソッド
-    @IBAction private func addSharedUsers(_ sender: Any) {
+    @objc private func addSharedUsers() {
         Task { @MainActor in
             IndicatorController.shared.startIndicator()
             do {
@@ -292,22 +319,18 @@ class ShareSettingsViewController: UIViewController {
             secondDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
             thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .white)
         }
-
         if count >= SharedUsers.one.numberOfRegistrations {
             firstDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
             firstDeleteButton.addShadow()
         }
-
         if count >= SharedUsers.two.numberOfRegistrations {
             secondDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
             secondDeleteButton.addShadow()
         }
-
         if count >= SharedUsers.three.numberOfRegistrations {
             thirdDeleteButton.setAppearanceForAccountView(backgroundColor: .lightGray)
             thirdDeleteButton.addShadow()
         }
-
     }
 
 }
@@ -315,36 +338,5 @@ class ShareSettingsViewController: UIViewController {
 extension ShareSettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         setAddButton()
-    }
-}
-
-/// 共有者の番号管理
-enum SharedUsers {
-    case one
-    case two
-    case three
-
-    /// 共有者の配列番号
-    var arrayNumber: Int {
-        switch self {
-            case .one:
-                return 0
-            case .two:
-                return 1
-            case .three:
-                return 2
-        }
-    }
-
-    /// 共有者の登録人数
-    var numberOfRegistrations:Int {
-        switch self {
-            case .one:
-                return 1
-            case .two:
-                return 2
-            case .three:
-                return 3
-        }
     }
 }

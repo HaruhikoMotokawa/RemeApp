@@ -7,20 +7,38 @@
 
 import UIKit
 
+protocol CreateAccountViewControllerDelegate: AnyObject {
+    func updateUserInfoFromCreateAccountView() async
+}
 
 /// アカウント新規作成画面
-class CreateAccountViewController: UIViewController {
+final class CreateAccountViewController: UIViewController {
 
     // MARK: - property
-
     /// アカウント名入力
-    @IBOutlet private weak var inputAccountTextField: UITextField!
+    @IBOutlet private weak var inputAccountTextField: UITextField! {
+        didSet {
+            inputAccountTextField.delegate = self
+        }
+    }
     /// メールアドレス入力
-    @IBOutlet private weak var inputMailTextField: UITextField!
+    @IBOutlet private weak var inputMailTextField: UITextField! {
+        didSet {
+            inputMailTextField.delegate = self
+        }
+    }
     /// パスワード入力
-    @IBOutlet private weak var inputPasswordTextField: UITextField!
+    @IBOutlet private weak var inputPasswordTextField: UITextField! {
+        didSet {
+            inputPasswordTextField.delegate = self
+        }
+    }
     /// 作成ボタン
-    @IBOutlet private weak var createButton: UIButton!
+    @IBOutlet private weak var createButton: UIButton! {
+        didSet {
+            createButton.addTarget(self, action: #selector(createAccount), for: .touchUpInside)
+        }
+    }
 
     var delegate: CreateAccountViewControllerDelegate?
 
@@ -29,9 +47,6 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         setNetWorkObserver()
         setKeyboardCloseButton()
-        inputAccountTextField.delegate = self
-        inputMailTextField.delegate = self
-        inputPasswordTextField.delegate = self
         setCreatButton()
     }
 
@@ -39,7 +54,7 @@ class CreateAccountViewController: UIViewController {
     /// アカウント作成のメソッド
     /// - 匿名アカウントからメールとパスワードを使っての永続アカウントに引き継ぐ
     /// - 引き継がれたアカウントを使ってユーザー情報をFirestoreに保存する
-    @IBAction private func createAccount(_ sender: Any) {
+    @objc private func createAccount() {
         // 全体をメインスレッドで行うことを明示
         Task { @MainActor in
             IndicatorController.shared.startIndicator()
@@ -99,7 +114,7 @@ class CreateAccountViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // オンラインなら通常通りにユザー情報とボタンを設定する
@@ -119,7 +134,7 @@ class CreateAccountViewController: UIViewController {
         inputPasswordTextField.inputAccessoryView = toolbar
     }
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
-    @objc func doneButtonTapped() {
+    @objc private func doneButtonTapped() {
         view.endEditing(true)
     }
 }
