@@ -155,10 +155,10 @@ final class EditItemViewController: UIViewController {
             return
         }
         /// アラートコントローラーをインスタンス化
-        let alertController = UIAlertController(title: "選択して下さい", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "画像の添付方法を選択してください", message: nil, preferredStyle: .actionSheet)
         // カメラ撮影アクション定義
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraAction = UIAlertAction(title: "カメラ", style: .default, handler: { (action) in
+            let cameraAction = UIAlertAction(title: "カメラで撮影", style: .default, handler: { (action) in
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.sourceType = .camera
                 imagePickerController.delegate = self
@@ -168,7 +168,7 @@ final class EditItemViewController: UIViewController {
         }
         // フォトラーブラリーから選択アクションを定義
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let photoLibraryAction = UIAlertAction(title: "フォトライブラリー", style: .default,handler: { (action) in
+            let photoLibraryAction = UIAlertAction(title: "フォトライブラリーから選択", style: .default,handler: { (action) in
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.sourceType = .photoLibrary
                 imagePickerController.delegate = self

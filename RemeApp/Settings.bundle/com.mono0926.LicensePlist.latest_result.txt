@@ -7,6 +7,11 @@ name: BoringSSL-GRPC, nameSpecified:
 body: BoringSSL is a fork …
 version: 0.0.24
 
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
 name: FirebaseAppCheckInterop, nameSpecified: 
 body: 
                    …
@@ -37,6 +42,11 @@ body:
                    …
 version: 10.9.0
 
+name: FirebaseCrashlytics, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
 name: FirebaseFirestore, nameSpecified: 
 body: 
                    …
@@ -47,6 +57,16 @@ body:
                    …
 version: 10.10.0
 
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 10.9.0
+
+name: FirebaseSessions, nameSpecified: 
+body: 
+                   …
+version: 10.13.0
+
 name: FirebaseSharedSwift, nameSpecified: 
 body: 
                    …
@@ -56,6 +76,11 @@ name: FirebaseStorage, nameSpecified:
 body: 
                    …
 version: 10.9.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 9.2.5
 
 name: GoogleUtilities, nameSpecified: 
 body: 
@@ -102,6 +127,11 @@ body: Copyright (c) 2011 P…
 version: 2.30909.0
 
 name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 2.2.0
+
+name: PromisesSwift, nameSpecified: 
 body: 
                    …
 version: 2.2.0
