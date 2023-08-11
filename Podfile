@@ -13,6 +13,7 @@ pod 'FirebaseFirestoreSwift'
 pod 'FirebaseStorage'
 pod 'LicensePlist'
 pod 'Firebase/Crashlytics'
+pod 'Firebase/Analytics'
 
   # Pods for RemeApp
 
