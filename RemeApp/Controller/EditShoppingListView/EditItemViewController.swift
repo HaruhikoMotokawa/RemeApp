@@ -431,6 +431,12 @@ extension EditItemViewController {
                 let selectedUnit = unitArray[unitPickerView.selectedRow(inComponent: 0)]
                 // ログイン中のユーザーのuidを取得
                 let uid = AccountManager.shared.getAuthStatus()
+                // 写真をつけて保存してるかどうか情報を取得する
+                if isChangePhoto {
+                    AnalyticsUtil.send(event: "写真ありで作成")
+                } else {
+                    AnalyticsUtil.send(event: "写真なしで作成")
+                }
                 if isNewItem {
                     await saveData(selectedNumberOfItem: selectedNumberOfItem, selectedUnit: selectedUnit, uid: uid)
                 } else {

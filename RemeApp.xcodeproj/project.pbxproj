@@ -18,6 +18,7 @@
 		7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */; };
 		7815F7E12A3311EE00BE0B89 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */; };
 		781D1A1B29E942C900A0EC9C /* CustomSalesFloorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */; };
+		782514932A8621310053C10E /* AnalyticsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782514922A8621310053C10E /* AnalyticsUtil.swift */; };
 		782780E72A6CA0090080F385 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782780E62A6CA0090080F385 /* UserDefaults+.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
 		78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */; };
@@ -118,6 +119,7 @@
 		7815F7DE2A33111700BE0B89 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7815F7E02A3311EE00BE0B89 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		781D1A1A29E942C900A0EC9C /* CustomSalesFloorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorModel.swift; sourceTree = "<group>"; };
+		782514922A8621310053C10E /* AnalyticsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUtil.swift; sourceTree = "<group>"; };
 		782780E62A6CA0090080F385 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
 		78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTutorialView.storyboard; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				784669732A3DDB7D00C175EB /* AlertController.swift */,
 				78A045602A4DC1AF0052EC65 /* IndicatorController.swift */,
 				7888B8A72A4FDAA60068A2CF /* Cache.swift */,
+				782514922A8621310053C10E /* AnalyticsUtil.swift */,
 				78BAAB1C2A394594000C9627 /* Request */,
 			);
 			path = API;
@@ -792,6 +795,7 @@
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
 				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				785067332A53F148007E0E1A /* FifthIntroductionViewController.swift in Sources */,
+				782514932A8621310053C10E /* AnalyticsUtil.swift in Sources */,
 				78C160782A1B1C5200C66E92 /* IntroductionPageViewController.swift in Sources */,
 				7815F7DF2A33111700BE0B89 /* FirestoreManager.swift in Sources */,
 				7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */,

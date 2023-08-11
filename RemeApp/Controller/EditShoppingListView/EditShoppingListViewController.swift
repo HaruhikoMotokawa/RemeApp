@@ -103,6 +103,7 @@ final class EditShoppingListViewController: UIViewController {
 
     /// 「G-品目新規作成」画面にモーダル遷移
     @objc private func goCreateNewItemView() {
+        AnalyticsUtil.send(event: "新規作成画面に遷移集計")
         Router.shared.showEditItem(from: self, isNewItem: true)
     }
 

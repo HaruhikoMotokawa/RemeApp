@@ -12,6 +12,10 @@ body:
                    …
 version: 10.9.0
 
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2022 Googl…
+version: 10.9.0
+
 name: FirebaseAppCheckInterop, nameSpecified: 
 body: 
                    …
@@ -75,6 +79,10 @@ version: 10.9.0
 name: FirebaseStorage, nameSpecified: 
 body: 
                    …
+version: 10.9.0
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2022 Googl…
 version: 10.9.0
 
 name: GoogleDataTransport, nameSpecified: 
