@@ -134,12 +134,21 @@ final class ShareSettingsViewController: UIViewController {
                 // オフラインだったらアラート出して終了
                 guard NetworkMonitor.shared.isConnected else {
                     AlertController.showAlert(tittle: "エラー", errorMessage: AuthError.networkError.title)
+                    IndicatorController.shared.dismissIndicator()
                     return
                 }
                 // 入力された値がないかnilチェック
                 guard let inputUid = self.inputUIDTextField.text else { return }
                 // ユーザーのuidを取得
                 let uid = AccountManager.shared.getAuthStatus()
+                // 入力したuidがユーザー自身のuidだったら抜ける
+                guard inputUid != uid else {
+                    AlertController.showAlert(tittle: "エラー", errorMessage: "自分自身を共有者には設定できません") {
+                        self.inputUIDTextField.text = ""
+                        IndicatorController.shared.dismissIndicator()
+                    }
+                    return
+                }
                 // 入力したuidのチェックと追加処理
                 try await FirestoreManager.shared.addSharedUsers(inputUid: inputUid, uid: uid)
                 // 現在作成済みの自分の買い物リストを取得
@@ -182,7 +191,7 @@ final class ShareSettingsViewController: UIViewController {
     }
 
     /// オフライン時の処理
-    @objc func handleNetworkStatusDidChange() {
+    @objc private func handleNetworkStatusDidChange() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             // オンラインなら通常通りにユザー情報とボタンを設定する
@@ -200,7 +209,7 @@ final class ShareSettingsViewController: UIViewController {
         inputUIDTextField.inputAccessoryView = toolbar
     }
     /// 閉じるボタンを押した時にキーボードを閉じるメソッド
-    @objc func doneButtonTapped() {
+    @objc private func doneButtonTapped() {
         view.endEditing(true)
     }
 
