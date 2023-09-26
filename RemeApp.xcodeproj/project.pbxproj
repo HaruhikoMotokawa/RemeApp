@@ -11,6 +11,7 @@
 		78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */; };
 		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
+		780AA5CF2AC2614C00868754 /* TutorialMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */; };
 		780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
@@ -112,6 +113,7 @@
 		78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorType.swift; sourceTree = "<group>"; };
 		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
+		780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialMenuViewController.swift; sourceTree = "<group>"; };
 		780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			children = (
 				78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */,
 				78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */,
+				780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */,
 				785067252A53EC01007E0E1A /* FirstIntroductionViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
+				780AA5CF2AC2614C00868754 /* TutorialMenuViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
