@@ -252,7 +252,6 @@
 		787DDF492A6A33C700749480 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				78BAAB1B2A394562000C9627 /* API */,
 				787DDF4D2A6A531300749480 /* Router.swift */,
 			);
@@ -304,6 +303,7 @@
 		78AB3B3629C835D7004685F1 /* RemeApp */ = {
 			isa = PBXGroup;
 			children = (
+				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				787DDF492A6A33C700749480 /* Utility */,
 				78F6F6FF29D9555500AF4DC0 /* View */,
 				78F6F70029D9556500AF4DC0 /* Controller */,
