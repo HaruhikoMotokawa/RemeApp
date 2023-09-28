@@ -7,10 +7,15 @@
 
 import UIKit
 
+// 開発時にホットリロードするならコメントアウト解除
+//import Inject
+
 /// 画面遷移に関する処理を担うクラス
 final class Router {
     static let shared = Router()
     private init() {}
+
+//  let vc = Inject.ViewControllerHost(TutorialMenuViewController())
 
     /// 起動経路メソッド
     internal func showRoot(windowScene: UIWindowScene) -> UIWindow {
@@ -20,6 +25,8 @@ final class Router {
         //StoryboardからViewControllerを生成
         window.rootViewController = UIStoryboard(name: "UITabBarControllerView", bundle: nil)
             .instantiateInitialViewController()
+//      let rootVC = vc
+//      window.rootViewController = rootVC
         window.makeKeyAndVisible()
         return window
     }
@@ -50,6 +57,16 @@ final class Router {
         toVC.modalPresentationStyle = .fullScreen
         from.present(toVC, animated: true)
     }
+
+  /// TutorialMenuへモーダル遷移
+  internal func showTutorialMenu(from: UIViewController) {
+    let toVC = TutorialMenuViewController()
+    toVC.modalPresentationStyle = .overCurrentContext
+    toVC.modalTransitionStyle = .crossDissolve
+    from.present(toVC, animated: false) {
+      toVC.showModal()
+    }
+  }
 
     /// 買い物リスト詳細画面へ遷移
     internal func showDetailShoppingList(from: UIViewController, shoppingItemData: ShoppingItemModel) {
