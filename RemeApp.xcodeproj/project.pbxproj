@@ -22,8 +22,6 @@
 		782514932A8621310053C10E /* AnalyticsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782514922A8621310053C10E /* AnalyticsUtil.swift */; };
 		782780E72A6CA0090080F385 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782780E62A6CA0090080F385 /* UserDefaults+.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
-		78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */; };
-		78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */; };
 		78385F132A52C63800FDD7CE /* DetailTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */; };
 		78385F152A52C7F800FDD7CE /* DetailTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
@@ -127,8 +125,6 @@
 		782514922A8621310053C10E /* AnalyticsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUtil.swift; sourceTree = "<group>"; };
 		782780E62A6CA0090080F385 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
-		78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTutorialView.storyboard; sourceTree = "<group>"; };
-		78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
 		78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailTutorialView.storyboard; sourceTree = "<group>"; };
 		78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTutorialViewController.swift; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -354,7 +350,6 @@
 		78C1607D2A1B64C500C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */,
 				78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */,
 			);
 			path = Tutorial;
@@ -363,7 +358,6 @@
 		78C1607E2A1B651900C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */,
 				78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */,
 				780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */,
 				78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */,
@@ -663,7 +657,6 @@
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */,
-				78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
@@ -810,7 +803,6 @@
 				7850672F2A53F075007E0E1A /* ForceIntroductionViewController.swift in Sources */,
 				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
-				78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
 				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				785067332A53F148007E0E1A /* FifthIntroductionViewController.swift in Sources */,
