@@ -11,6 +11,7 @@
 		78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */; };
 		78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */; };
 		7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */; };
+		780AA5CF2AC2614C00868754 /* TutorialMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */; };
 		780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */; };
 		78136C2D29D1348B00D90A70 /* DetailShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */; };
 		78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */; };
@@ -21,8 +22,6 @@
 		782514932A8621310053C10E /* AnalyticsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782514922A8621310053C10E /* AnalyticsUtil.swift */; };
 		782780E72A6CA0090080F385 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782780E62A6CA0090080F385 /* UserDefaults+.swift */; };
 		782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */; };
-		78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */; };
-		78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */; };
 		78385F132A52C63800FDD7CE /* DetailTutorialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */; };
 		78385F152A52C7F800FDD7CE /* DetailTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */; };
 		7846528729D42264006BF69E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846528629D42264006BF69E /* ExtensionUIImage.swift */; };
@@ -49,6 +48,8 @@
 		7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7850D38D29D9698700D27023 /* SalesFloorShoppingListView.storyboard */; };
 		78581B6929E2E5A700930F65 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78581B6829E2E5A700930F65 /* ExtensionUIButton.swift */; };
 		78581B6B29E308DE00930F65 /* ExtesionUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78581B6A29E308DE00930F65 /* ExtesionUILabel.swift */; };
+		785984012AC2853700A6F2C8 /* HotReloading in Frameworks */ = {isa = PBXBuildFile; productRef = 785984002AC2853700A6F2C8 /* HotReloading */; };
+		785984042AC289D800A6F2C8 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 785984032AC289D800A6F2C8 /* Inject */; };
 		785D74B129C93577006F0CBB /* ErrandDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B029C93577006F0CBB /* ErrandDataModel.swift */; };
 		785D74B329C938FF006F0CBB /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D74B229C938FF006F0CBB /* ExtensionUIColor.swift */; };
 		787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA84829CC42430051CE2B /* EditSalesFloorMapViewController.swift */; };
@@ -84,6 +85,7 @@
 		78F2AA5D2A35A4AB00E2C5FF /* FirebaseErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */; };
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
+		78F5090B2AC3C04B000AB440 /* TutorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */; };
 		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
 		78FBBF5F2A2EECB900EDCE9D /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */; };
 		78FBBF612A2EFEDF00EDCE9D /* CreateAccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */; };
@@ -112,6 +114,7 @@
 		78030ED729ED891E000E40A3 /* DefaultSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSalesFloorType.swift; sourceTree = "<group>"; };
 		78030ED929ED8A4C000E40A3 /* ExtensionNSNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationName.swift; sourceTree = "<group>"; };
 		7804039029E3F30B00DDF94D /* ExtensionUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
+		780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialMenuViewController.swift; sourceTree = "<group>"; };
 		780DCC9B2A4B0DB100ADE060 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		78136C2C29D1348B00D90A70 /* DetailShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailShoppingListViewController.swift; sourceTree = "<group>"; };
 		78136C2E29D136A200D90A70 /* DetailShoppingListView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailShoppingListView.storyboard; sourceTree = "<group>"; };
@@ -122,8 +125,6 @@
 		782514922A8621310053C10E /* AnalyticsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUtil.swift; sourceTree = "<group>"; };
 		782780E62A6CA0090080F385 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		782DEBDE29EE522E00141E57 /* CustomSalesFloorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSalesFloorType.swift; sourceTree = "<group>"; };
-		78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTutorialView.storyboard; sourceTree = "<group>"; };
-		78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTutorialViewController.swift; sourceTree = "<group>"; };
 		78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailTutorialView.storyboard; sourceTree = "<group>"; };
 		78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTutorialViewController.swift; sourceTree = "<group>"; };
 		7846528629D42264006BF69E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		78F2AA5C2A35A4AB00E2C5FF /* FirebaseErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseErrorManager.swift; sourceTree = "<group>"; };
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
+		78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialTableViewCell.swift; sourceTree = "<group>"; };
 		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountView.storyboard; sourceTree = "<group>"; };
 		78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateAccountView.storyboard; sourceTree = "<group>"; };
@@ -207,7 +209,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				785984012AC2853700A6F2C8 /* HotReloading in Frameworks */,
 				74DD2BEC778B137D141F0BFD /* Pods_RemeApp.framework in Frameworks */,
+				785984042AC289D800A6F2C8 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +256,6 @@
 		787DDF492A6A33C700749480 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				78BAAB1B2A394562000C9627 /* API */,
 				787DDF4D2A6A531300749480 /* Router.swift */,
 			);
@@ -304,6 +307,7 @@
 		78AB3B3629C835D7004685F1 /* RemeApp */ = {
 			isa = PBXGroup;
 			children = (
+				78F6F6FD29D9552F00AF4DC0 /* Model */,
 				787DDF492A6A33C700749480 /* Utility */,
 				78F6F6FF29D9555500AF4DC0 /* View */,
 				78F6F70029D9556500AF4DC0 /* Controller */,
@@ -346,7 +350,6 @@
 		78C1607D2A1B64C500C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78385F0E2A51A10300FDD7CE /* HomeTutorialView.storyboard */,
 				78385F122A52C63800FDD7CE /* DetailTutorialView.storyboard */,
 			);
 			path = Tutorial;
@@ -355,8 +358,9 @@
 		78C1607E2A1B651900C66E92 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				78385F102A51A25C00FDD7CE /* HomeTutorialViewController.swift */,
 				78385F142A52C7F800FDD7CE /* DetailTutorialViewController.swift */,
+				780AA5CE2AC2614C00868754 /* TutorialMenuViewController.swift */,
+				78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -587,6 +591,10 @@
 			dependencies = (
 			);
 			name = RemeApp;
+			packageProductDependencies = (
+				785984002AC2853700A6F2C8 /* HotReloading */,
+				785984032AC289D800A6F2C8 /* Inject */,
+			);
 			productName = RemeApp;
 			productReference = 78AB3B3429C835D7004685F1 /* RemeApp.app */;
 			productType = "com.apple.product-type.application";
@@ -616,6 +624,10 @@
 				ja,
 			);
 			mainGroup = 78AB3B2B29C835D7004685F1;
+			packageReferences = (
+				785983FF2AC2853700A6F2C8 /* XCRemoteSwiftPackageReference "HotReloading" */,
+				785984022AC289D800A6F2C8 /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = 78AB3B3529C835D7004685F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -645,7 +657,6 @@
 				78AB3B4129C835D8004685F1 /* Assets.xcassets in Resources */,
 				7850D38E29D9698700D27023 /* SalesFloorShoppingListView.storyboard in Resources */,
 				78B18CC429EA986000721592 /* CustomSalesFloorMapView.storyboard in Resources */,
-				78385F0F2A51A10300FDD7CE /* HomeTutorialView.storyboard in Resources */,
 				78136C2F29D136A200D90A70 /* DetailShoppingListView.storyboard in Resources */,
 				784E1F2429C84A2000C9360A /* SalesFloorMapView.storyboard in Resources */,
 				78B18CC229EA985300721592 /* DefaultSalesFloorMapView.storyboard in Resources */,
@@ -777,6 +788,7 @@
 				78BAAB1E2A39460A000C9627 /* ShoppingItemModel.swift in Sources */,
 				78FBBF6B2A2EFF7F00EDCE9D /* ShareSettingsViewController.swift in Sources */,
 				78AB3B3829C835D7004685F1 /* AppDelegate.swift in Sources */,
+				78F5090B2AC3C04B000AB440 /* TutorialTableViewCell.swift in Sources */,
 				78AB3B3A29C835D7004685F1 /* SceneDelegate.swift in Sources */,
 				780DCC9C2A4B0DB100ADE060 /* NetworkMonitor.swift in Sources */,
 				78030ED829ED891E000E40A3 /* DefaultSalesFloorType.swift in Sources */,
@@ -791,7 +803,6 @@
 				7850672F2A53F075007E0E1A /* ForceIntroductionViewController.swift in Sources */,
 				78FBBF672A2EFF4400EDCE9D /* SignInViewController.swift in Sources */,
 				78CAAF7A29DEB6A00084A8AF /* SelectTypeOfSalesFloorViewController.swift in Sources */,
-				78385F112A51A25C00FDD7CE /* HomeTutorialViewController.swift in Sources */,
 				7893D38429F1673900A9E129 /* CustomSalesFloorColor.swift in Sources */,
 				78E80B332A31D3680068C71C /* VersionManager.swift in Sources */,
 				785067332A53F148007E0E1A /* FifthIntroductionViewController.swift in Sources */,
@@ -801,6 +812,7 @@
 				7888B8A82A4FDAA60068A2CF /* Cache.swift in Sources */,
 				785067252A53EC01007E0E1A /* FirstIntroductionViewController.swift in Sources */,
 				787AA84929CC42430051CE2B /* EditSalesFloorMapViewController.swift in Sources */,
+				780AA5CF2AC2614C00868754 /* TutorialMenuViewController.swift in Sources */,
 				7804039129E3F30B00DDF94D /* ExtensionUITextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,6 +1039,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		785983FF2AC2853700A6F2C8 /* XCRemoteSwiftPackageReference "HotReloading" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnno1962/HotReloading.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.11.29;
+			};
+		};
+		785984022AC289D800A6F2C8 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		785984002AC2853700A6F2C8 /* HotReloading */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785983FF2AC2853700A6F2C8 /* XCRemoteSwiftPackageReference "HotReloading" */;
+			productName = HotReloading;
+		};
+		785984032AC289D800A6F2C8 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785984022AC289D800A6F2C8 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 78AB3B2C29C835D7004685F1 /* Project object */;
 }

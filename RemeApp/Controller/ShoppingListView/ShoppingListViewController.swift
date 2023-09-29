@@ -58,7 +58,7 @@ final class ShoppingListViewController: UIViewController {
     // MARK: - func
     /// チュートリアル画面へ遷移
     @objc private func helpButtonTapped() {
-        Router.shared.showHomeTutorial(from: self)
+      Router.shared.showTutorialMenu(from: self)
     }
 
     /// アプリ初回起動時のチュートリアル画面表示処理

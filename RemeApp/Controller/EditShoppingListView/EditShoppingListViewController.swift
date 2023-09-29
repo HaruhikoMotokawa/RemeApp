@@ -87,7 +87,7 @@ final class EditShoppingListViewController: UIViewController {
 
     /// チュートリアル画面にモーダル遷移
     @objc private func goTutorialView() {
-        Router.shared.showHomeTutorial(from: self)
+      Router.shared.showTutorialMenu(from: self)
     }
 
     /// 複数削除モードを中断して終了する
