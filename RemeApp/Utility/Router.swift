@@ -8,14 +8,14 @@
 import UIKit
 
 // 開発時にホットリロードするならコメントアウト解除
-//import Inject
+import Inject
 
 /// 画面遷移に関する処理を担うクラス
 final class Router {
     static let shared = Router()
     private init() {}
 
-//  let vc = Inject.ViewControllerHost(TutorialMenuViewController())
+//  let vc = Inject.ViewControllerHost(MainTabBarController())
 
     /// 起動経路メソッド
     internal func showRoot(windowScene: UIWindowScene) -> UIWindow {
