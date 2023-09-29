@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -269,7 +268,7 @@
                         <outlet property="nameOfItemTextField" destination="RQd-WW-qo9" id="79d-MQ-S7o"/>
                         <outlet property="numberOfItemPickerView" destination="AWi-nL-b3N" id="Kei-CE-DIb"/>
                         <outlet property="photoBackgroundImage" destination="TPK-X8-Kzb" id="hYd-v6-xYg"/>
-                        <outlet property="photoPathImageView" destination="YWi-Bj-frU" id="Yk8-jn-krr"/>
+                        <outlet property="photoImageView" destination="YWi-Bj-frU" id="Yk8-jn-krr"/>
                         <outlet property="placeholderLabel" destination="Lct-oe-kvz" id="r6C-GE-WBa"/>
                         <outlet property="selectPhotoButton" destination="sON-BO-0No" id="aH2-Y5-VxT"/>
                         <outlet property="selectTypeOfSalesFloorButton" destination="qf2-8I-85S" id="xVm-wI-U9P"/>
@@ -286,7 +285,7 @@
     <resources>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
