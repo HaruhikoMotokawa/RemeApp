@@ -9,6 +9,7 @@ import UIKit
 
 // UIImageをリサイズできるように拡張
 extension UIImage {
+
   /// 画像の縦横サイズを指定してリサイズする、アスペクト比は無視
   func resize(to size: CGSize) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
@@ -16,6 +17,7 @@ extension UIImage {
     draw(in: CGRect(origin: .zero, size: size))
     return UIGraphicsGetImageFromCurrentImageContext()
   }
+
   /// 横幅のみ指定、縦は計算して算出
   func resize(width: Double) -> UIImage? {
     // オリジナル画像のサイズからアスペクト比を計算
