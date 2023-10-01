@@ -1,5 +1,5 @@
 //
-//  CreateNewItemViewController.swift
+//  EditItemViewController.swift
 //  RemeApp
 //
 //  Created by 本川晴彦 on 2023/04/05.
@@ -14,11 +14,7 @@ final class EditItemViewController: UIViewController {
   /// タイトル
   @IBOutlet weak var titleLabel: UILabel! {
     didSet {
-      if isNewItem {
-        titleLabel.text = "新規作成"
-      } else {
-        titleLabel.text = "編集"
-      }
+      titleLabel.text = isNewItem ? "新規作成" : "編集"
     }
   }
   /// 商品名入力
@@ -49,7 +45,7 @@ final class EditItemViewController: UIViewController {
     }
   }
   /// 補足文のプレースホルダー
-  @IBOutlet weak var placeholderLabel: UILabel!
+  @IBOutlet private weak var placeholderLabel: UILabel!
   /// 補足入力
   @IBOutlet private weak var supplementTextView: UITextView! {
     didSet {
@@ -71,11 +67,10 @@ final class EditItemViewController: UIViewController {
       deletePhotoButton.setAppearanceWithShadow(fontColor: .black)
     }
   }
-  /// 写真の背景
-  @IBOutlet private weak var photoBackgroundImage: UIImageView!
   /// 選択した写真を添付する
   @IBOutlet private weak var photoImageView: UIImageView!
-
+  /// photoImageViewの高さの制約 (弱参照にするとクラッシュする？）
+  @IBOutlet private var photoImageViewHeightConstraint: NSLayoutConstraint!
   /// キャンセルボタン
   @IBOutlet private weak var cancelButton: UIButton! {
     didSet {
@@ -230,6 +225,7 @@ final class EditItemViewController: UIViewController {
       }
     }
   }
+  // MARK: 編集中
   /// 画面遷移してきた際にデータの有無によってボタンの活性化を切り替えるメソッド
   /// - 商品名のデータがある場合はaddButtonを活性化
   /// - 写真データがある場合はdeletePhotoButtonを活性化、photoBackgroundImageを非表示
@@ -242,23 +238,17 @@ final class EditItemViewController: UIViewController {
       addButton.setEnable()
     }
     // 添付写真削除ボタンの切り替えと背景写真イメージの切り替え
-    // 写真データがない場合
-    if photoImageView.image == nil {
+    if photoURL.isEmpty { // 写真データがない場合
       deletePhotoButton.setDisable()
-      photoBackgroundImage.isHidden = false
-    } else {
-      // 写真データがある場合
+    } else {  // 写真データがある場合
       selectPhotoButton.setDisable()
       deletePhotoButton.setEnable()
-      photoBackgroundImage.isHidden = true
     }
-
     if !NetworkMonitor.shared.isConnected {
       selectPhotoButton.setDisable()
       deletePhotoButton.setDisable()
     }
   }
-
   /// データ受け渡し用のメソッド
   internal func configurer(detail: ShoppingItemModel, image:UIImage?) {
     myShoppingItemList = [detail]
@@ -272,7 +262,6 @@ final class EditItemViewController: UIViewController {
     photoURL = detail.photoURL
     receivePhotoImage = image
   }
-
   /// 受け渡されたデータをそれぞれのUI部品に表示
   private func displayData() {
     nameOfItemTextField.text = receiveNameOfItem
@@ -282,19 +271,16 @@ final class EditItemViewController: UIViewController {
     setSupplementLabelText(supplement: supplementTextViewText)
     setPhotoPathImageView(image: receivePhotoImage)
   }
-
   /// numberOfItemPickerViewに表示できるように変換する
   private func selectNumberOfItemRow(selectedNumberOfItem: String) {
     let numberOfItemIndex = numberOfItemArray.firstIndex(of: selectedNumberOfItem) ?? 0
     numberOfItemPickerView.selectRow(numberOfItemIndex, inComponent: 0, animated: true)
   }
-
   /// unitPickerViewに表示できるように変換する
   private func selectUnitRow(selectedUnit: String) {
     let selectedUnitIndex = unitArray.firstIndex(of: selectedUnit) ?? 0
     unitPickerView.selectRow(selectedUnitIndex, inComponent: 0, animated: true)
   }
-
   /// salesFloorTypeButtonに売り場の内容を反映させる
   /// - 売り場の名称を設定
   /// - 売り場の色を設定
@@ -307,7 +293,6 @@ final class EditItemViewController: UIViewController {
       setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // デフォルトマップタイプの処理
     }
   }
-
   /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
   /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
   private func setCustomSalesFloorButton(salesFloorRawValue: Int) {
@@ -318,7 +303,6 @@ final class EditItemViewController: UIViewController {
     selectTypeOfSalesFloorButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
     selectTypeOfSalesFloorButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
   }
-
   /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
   /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
   /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
@@ -330,7 +314,6 @@ final class EditItemViewController: UIViewController {
     // 抽出した結果を戻り値に返却
     return Array(results)
   }
-
   /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
   /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
   private func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
@@ -340,7 +323,6 @@ final class EditItemViewController: UIViewController {
     selectTypeOfSalesFloorButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
     selectTypeOfSalesFloorButton.backgroundColor = salesFloor?.colorOfSalesFloor
   }
-
   /// 受け渡されたデータをsetSupplementLabelTextに表示
   /// - 補足がなければplaceholderLabelを表示
   /// - 補足がある場合はフォントを黒にしてそのまま表示
@@ -353,21 +335,21 @@ final class EditItemViewController: UIViewController {
       placeholderLabel.isHidden = true
     }
   }
-
   /// 受け取った写真データを変換して表示するためのメソッド
   ///  - イメージがnilだったらそのままからを表示
   ///  - イメージがある場合はサイズを調整し、角丸にして表示する
   private func setPhotoPathImageView(image: UIImage?) {
-    if image == nil {
-      photoImageView.image = image
-    } else {
-      let resizedImage = image?.resize(to: CGSize(width: 355, height: 355))
-      let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
-        cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
+    if let image,
+       let resizedImage = image.resize(width: view.bounds.width)
+    {
+      let roundedAndBorderedImage = resizedImage.roundedAndBordered()
+      photoImageViewHeightConstraint.isActive = false // 高さの制限を解除して、リサイズして算出された高さを使用する
       photoImageView.image = roundedAndBorderedImage
+    } else {
+      photoImageViewHeightConstraint.isActive = true
+      photoImageView.image = UIImage(systemName: "photo.artframe")
     }
   }
-
   /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
   private func setKeyboardCloseButton() {
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
@@ -381,7 +363,6 @@ final class EditItemViewController: UIViewController {
     view.endEditing(true)
   }
 }
-
 // MARK: - ボタンタップ時のアラート関連
 extension EditItemViewController {
   /// アラートで確認するメソッド
@@ -668,7 +649,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     setPhotoPathImageView(image: savePhotoImage)
     deletePhotoButton.setEnable()
     selectPhotoButton.setDisable()
-    photoBackgroundImage.isHidden = true
+
     if !isNewItem {
       isChangePhoto = true
     }
@@ -684,17 +665,13 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     let okAction = UIAlertAction(title: "削除する", style: .default) { [weak self] (action) in
       // OKが押された時の処理
       guard let self else { return }
-      if self.isNewItem { // 新規作成時の削除処理
-          self.photoImageView.image = nil
-          self.deletePhotoButton.setDisable()
-          self.selectPhotoButton.setEnable()
-          self.photoBackgroundImage.isHidden = false
-      } else { // 既存アイテムの編集時の削除処理
-        self.photoImageView.image = nil
+      self.photoImageView.image = UIImage(systemName: "photo.artframe")
+      self.photoImageViewHeightConstraint.isActive = true
+      self.savePhotoImage = nil
+      self.deletePhotoButton.setDisable()
+      self.selectPhotoButton.setEnable()
+      if !self.isNewItem { // 既存アイテムの編集時の削除処理
         self.isChangePhoto = true // 写真に変更があったフラグを立てる
-        self.deletePhotoButton.setDisable()
-        self.selectPhotoButton.setEnable()
-        self.photoBackgroundImage.isHidden = false
       }
     }
     let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -719,7 +696,6 @@ extension EditItemViewController: PHPickerViewControllerDelegate {
           self.setPhotoPathImageView(image: self.savePhotoImage)
           self.deletePhotoButton.setEnable()
           self.selectPhotoButton.setDisable()
-          self.photoBackgroundImage.isHidden = true
           if !self.isNewItem {
             self.isChangePhoto = true
           }

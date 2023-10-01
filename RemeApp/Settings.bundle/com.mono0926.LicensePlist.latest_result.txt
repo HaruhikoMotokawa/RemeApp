@@ -152,18 +152,6 @@ name: RealmSwift, nameSpecified:
 body:                     …
 version: 10.38.0
 
-name: HotReloading, nameSpecified: HotReloading, owner: johnno1962, version: 4.11.29, source: https://github.com/johnno1962/HotReloading
-
-name: Inject, nameSpecified: Inject, owner: krzysztofzablocki, version: 1.2.4, source: https://github.com/krzysztofzablocki/Inject
-
-name: Remote, nameSpecified: RemotePlugin, owner: johnno1962, version: 2.3.5, source: https://github.com/johnno1962/Remote
-
-name: SwiftRegex5, nameSpecified: SwiftRegex, owner: johnno1962, version: 5.2.3, source: https://github.com/johnno1962/SwiftRegex5
-
-name: SwiftTrace, nameSpecified: SwiftTrace, owner: johnno1962, version: 8.4.6, source: https://github.com/johnno1962/SwiftTrace
-
-name: XprobePlugin, nameSpecified: XprobePlugin, owner: johnno1962, version: 2.9.4, source: https://github.com/johnno1962/XprobePlugin
-
 add-version-numbers: false
 
 LicensePlist Version: 3.24.10
