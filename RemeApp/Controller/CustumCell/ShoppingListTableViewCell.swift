@@ -32,7 +32,7 @@ final class ShoppingListTableViewCell: UITableViewCell  {
     @IBOutlet private weak var salesFloorTypeButton: UIButton! {
         didSet {
             // 文字色を黒に設定
-            salesFloorTypeButton.setTitleColor(.black, for: .normal)
+          salesFloorTypeButton.setTitleColor(.black, for: .normal)
             // フォントをボールド、サイズを１７に設定
             salesFloorTypeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
             // 枠線の幅を１で設定
@@ -53,43 +53,32 @@ final class ShoppingListTableViewCell: UITableViewCell  {
     @IBOutlet private weak var supplementLabel: UILabel!
     /// 写真を表示
     @IBOutlet private weak var photoPathImageView: UIImageView!
-
     // MARK: - property
-
     /// tableViewのcellがタップされた際のデリーゲート
     weak var delegate: ShoppingListTableViewCellDelegate?
     /// チェックボックスのフラグ
     private var isChecked:Bool = false
-
     /// カスタム売り場マップのリスト
     private var customSalesFloorData = CustomSalesFloorModel()
 
     static var count = 0
-
     var id = 0
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         id = Self.count
         Self.count += 1
     }
-
     override func prepareForReuse() {
         super.prepareForReuse()
-        
     }
-
     // MARK: - awakeFromNib
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
     // MARK: - setSelected
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
     // MARK: - func
     /// チェックボックスがタプされた際のメソッド
     /// - cellのバックグラウンドカラーをグレイに変更
@@ -100,7 +89,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
             await delegate?.didTapCheckBoxButton(self)
         }
     }
-
     /// 買い物リストのデータをセルの各パーツにセットする
     func setShoppingList(isCheckBox: Bool,
                          nameOfItem: String,
@@ -117,7 +105,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
         setPhotoPathImageView(image: image)
         setSupplementLabel(supplement: supplement)
     }
-
     /// isCheckBoxのオンオフによってバックグラウンドカラーを変更する
     /// - オフで通常表示
     /// - オンでバックグラウンドカラーをライトグレイにする
@@ -131,7 +118,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
             self.contentView.backgroundColor = UIColor.lightGray
         }
     }
-
     /// salesFloorTypeButtonに売り場の内容を反映させる
     /// - 売り場の名称を設定
     /// - 売り場の色を設定
@@ -143,7 +129,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
             setDefaultSalesFloorButton(salesFloorRawValue: salesFloorRawValue) // デフォルトマップタイプの処理
         }
     }
-
     /// 引数で指定されたrawValueに対応するカスタム売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたいカスタム売り場のrawValue
     func setCustomSalesFloorButton(salesFloorRawValue: Int) {
@@ -154,7 +139,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
         salesFloorTypeButton.setTitle(customSalesFloorModel?.customNameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = customSalesFloorModel?.customSalesFloorColor.color
     }
-
     /// 引数で指定された値に対応するCustomSalesFloorModelのリストを返す関数
     /// - Parameter salesFloorRawValue: 検索したいCustomSalesFloorModelのrawValue
     /// - Returns: 検索にマッチしたCustomSalesFloorModelのリスト
@@ -166,7 +150,6 @@ final class ShoppingListTableViewCell: UITableViewCell  {
         // 抽出した結果を戻り値に返却
         return Array(results)
     }
-
     /// 引数で指定されたrawValueに対応するデフォルト売り場を反映させる
     /// - Parameter salesFloorRawValue: 反映させたい売り場のrawValue
     func setDefaultSalesFloorButton(salesFloorRawValue: Int) {
@@ -176,22 +159,19 @@ final class ShoppingListTableViewCell: UITableViewCell  {
         salesFloorTypeButton.setTitle(salesFloor?.nameOfSalesFloor, for: .normal)
         salesFloorTypeButton.backgroundColor = salesFloor?.colorOfSalesFloor
     }
-
     /// cellのsetPhotoPathImageViewに内容を反映させる
     /// - 写真がなければそのままnilを入れる
     /// - 写真がある場合はサイズを縦横幅50にリサイズして表示する
 
     func setPhotoPathImageView(image: UIImage?) {
-        if image == nil {
-            photoPathImageView.image = image
+      if let image {
+        let resizedImage = image.resize(to: CGSize(width: 50, height: 50))
+          let roundedAndBorderedImage = resizedImage?.roundedAndBordered()
+          photoPathImageView.image = roundedAndBorderedImage
         } else {
-            let resizedImage = image?.resize(to: CGSize(width: 50, height: 50))
-            let roundedAndBorderedImage = resizedImage?.roundedAndBordered(
-                cornerRadius: 10, borderWidth: 1, borderColor: UIColor.black)
-            photoPathImageView.image = roundedAndBorderedImage
+          photoPathImageView.image = image
         }
     }
-
     /// cellのsetSupplementLabelに内容を反映させる
     /// - 補足がnilならそのままnilで入れる
     /// - 補足があるなら文字色を灰色にし、「 補足： 」を先頭につけて表示する

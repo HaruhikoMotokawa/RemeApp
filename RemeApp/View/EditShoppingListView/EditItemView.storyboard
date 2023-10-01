@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -54,7 +55,7 @@
                                 <rect key="frame" x="10" y="148" width="355" height="1002"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xGz-Od-6Hz" userLabel="全体">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="990.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="690.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="HTK-pa-h90" userLabel="個数">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="100"/>
@@ -175,11 +176,11 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YWi-Bj-frU">
-                                                <rect key="frame" x="0.0" y="490.5" width="355" height="500"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.artframe" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XJ9-IK-MH6">
+                                                <rect key="frame" x="0.0" y="491.5" width="355" height="197.5"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="500" id="az3-QT-H3a"/>
+                                                    <constraint firstAttribute="height" constant="200" id="5Oe-vj-Bb4"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -190,24 +191,16 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.artframe" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TPK-X8-Kzb">
-                                        <rect key="frame" x="20" y="491" width="315" height="248"/>
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xGz-Od-6Hz" secondAttribute="trailing" id="1kz-ym-KWm"/>
-                                    <constraint firstItem="TPK-X8-Kzb" firstAttribute="leading" secondItem="6cx-Oj-M3S" secondAttribute="leading" constant="20" id="CQ2-oO-mIg"/>
-                                    <constraint firstItem="TPK-X8-Kzb" firstAttribute="top" secondItem="6cx-Oj-M3S" secondAttribute="top" constant="490" id="GwZ-cJ-gXf"/>
                                     <constraint firstAttribute="trailing" secondItem="Lct-oe-kvz" secondAttribute="trailing" constant="10" id="ICu-F9-fU6"/>
-                                    <constraint firstAttribute="bottom" secondItem="xGz-Od-6Hz" secondAttribute="bottom" id="Jfq-Qz-AgR"/>
+                                    <constraint firstAttribute="bottom" secondItem="xGz-Od-6Hz" secondAttribute="bottom" constant="20" id="Jfq-Qz-AgR"/>
                                     <constraint firstItem="xGz-Od-6Hz" firstAttribute="top" secondItem="6cx-Oj-M3S" secondAttribute="top" id="YWr-7H-tHg"/>
-                                    <constraint firstAttribute="bottom" secondItem="TPK-X8-Kzb" secondAttribute="bottom" constant="250" id="cZX-pX-BO8"/>
                                     <constraint firstItem="Lct-oe-kvz" firstAttribute="leading" secondItem="6cx-Oj-M3S" secondAttribute="leading" constant="70" id="kCi-U5-5pb"/>
                                     <constraint firstItem="xGz-Od-6Hz" firstAttribute="leading" secondItem="6cx-Oj-M3S" secondAttribute="leading" id="m45-KS-qdN"/>
                                     <constraint firstItem="Lct-oe-kvz" firstAttribute="top" secondItem="6cx-Oj-M3S" secondAttribute="top" constant="300" id="oXb-xU-v88"/>
                                     <constraint firstItem="xGz-Od-6Hz" firstAttribute="width" secondItem="6cx-Oj-M3S" secondAttribute="width" id="u90-c1-hy9"/>
-                                    <constraint firstAttribute="trailing" secondItem="TPK-X8-Kzb" secondAttribute="trailing" constant="20" id="vqS-Kk-Rn5"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="nCS-bA-C1q"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="RCp-Z2-3cK"/>
@@ -267,8 +260,8 @@
                         <outlet property="deletePhotoButton" destination="3Co-Yy-Bk7" id="qyA-j0-mdO"/>
                         <outlet property="nameOfItemTextField" destination="RQd-WW-qo9" id="79d-MQ-S7o"/>
                         <outlet property="numberOfItemPickerView" destination="AWi-nL-b3N" id="Kei-CE-DIb"/>
-                        <outlet property="photoBackgroundImage" destination="TPK-X8-Kzb" id="hYd-v6-xYg"/>
-                        <outlet property="photoImageView" destination="YWi-Bj-frU" id="Yk8-jn-krr"/>
+                        <outlet property="photoImageView" destination="XJ9-IK-MH6" id="Qt9-rB-E0h"/>
+                        <outlet property="photoImageViewHeightConstraint" destination="5Oe-vj-Bb4" id="ovb-dT-RcQ"/>
                         <outlet property="placeholderLabel" destination="Lct-oe-kvz" id="r6C-GE-WBa"/>
                         <outlet property="selectPhotoButton" destination="sON-BO-0No" id="aH2-Y5-VxT"/>
                         <outlet property="selectTypeOfSalesFloorButton" destination="qf2-8I-85S" id="xVm-wI-U9P"/>
@@ -285,7 +278,7 @@
     <resources>
         <image name="photo.artframe" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
