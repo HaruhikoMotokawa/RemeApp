@@ -14,11 +14,7 @@ final class EditItemViewController: UIViewController {
   /// タイトル
   @IBOutlet weak var titleLabel: UILabel! {
     didSet {
-      if isNewItem {
-        titleLabel.text = "新規作成"
-      } else {
-        titleLabel.text = "編集"
-      }
+      titleLabel.text = isNewItem ? "新規作成" : "編集"
     }
   }
   /// 商品名入力
@@ -49,7 +45,7 @@ final class EditItemViewController: UIViewController {
     }
   }
   /// 補足文のプレースホルダー
-  @IBOutlet weak var placeholderLabel: UILabel!
+  @IBOutlet private weak var placeholderLabel: UILabel!
   /// 補足入力
   @IBOutlet private weak var supplementTextView: UITextView! {
     didSet {
@@ -73,8 +69,8 @@ final class EditItemViewController: UIViewController {
   }
   /// 選択した写真を添付する
   @IBOutlet private weak var photoImageView: UIImageView!
-  /// photoImageViewの高さの制約
-  @IBOutlet weak var photoImageViewHeightConstraint: NSLayoutConstraint!
+  /// photoImageViewの高さの制約 (弱参照にするとクラッシュする？）
+  @IBOutlet private var photoImageViewHeightConstraint: NSLayoutConstraint!
   /// キャンセルボタン
   @IBOutlet private weak var cancelButton: UIButton! {
     didSet {
@@ -242,7 +238,7 @@ final class EditItemViewController: UIViewController {
       addButton.setEnable()
     }
     // 添付写真削除ボタンの切り替えと背景写真イメージの切り替え
-    if photoImageView.image == nil { // 写真データがない場合
+    if photoURL.isEmpty { // 写真データがない場合
       deletePhotoButton.setDisable()
     } else {  // 写真データがある場合
       selectPhotoButton.setDisable()
@@ -349,6 +345,9 @@ final class EditItemViewController: UIViewController {
       let roundedAndBorderedImage = resizedImage.roundedAndBordered()
       photoImageViewHeightConstraint.isActive = false // 高さの制限を解除して、リサイズして算出された高さを使用する
       photoImageView.image = roundedAndBorderedImage
+    } else {
+      photoImageViewHeightConstraint.isActive = true
+      photoImageView.image = UIImage(systemName: "photo.artframe")
     }
   }
   /// キーボードの完了ボタン配置、完了ボタン押してキーボードを非表示に変更するメソッド
@@ -650,7 +649,7 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     setPhotoPathImageView(image: savePhotoImage)
     deletePhotoButton.setEnable()
     selectPhotoButton.setDisable()
-    photoImageViewHeightConstraint.isActive = false
+
     if !isNewItem {
       isChangePhoto = true
     }
@@ -666,17 +665,13 @@ extension EditItemViewController: UIImagePickerControllerDelegate, UINavigationC
     let okAction = UIAlertAction(title: "削除する", style: .default) { [weak self] (action) in
       // OKが押された時の処理
       guard let self else { return }
-      if self.isNewItem { // 新規作成時の削除処理
-          self.photoImageView.image = nil
-          self.deletePhotoButton.setDisable()
-          self.selectPhotoButton.setEnable()
-        self.photoImageViewHeightConstraint.isActive = true
-      } else { // 既存アイテムの編集時の削除処理
-        self.photoImageView.image = nil
+      self.photoImageView.image = UIImage(systemName: "photo.artframe")
+      self.photoImageViewHeightConstraint.isActive = true
+      self.savePhotoImage = nil
+      self.deletePhotoButton.setDisable()
+      self.selectPhotoButton.setEnable()
+      if !self.isNewItem { // 既存アイテムの編集時の削除処理
         self.isChangePhoto = true // 写真に変更があったフラグを立てる
-        self.deletePhotoButton.setDisable()
-        self.selectPhotoButton.setEnable()
-        self.photoImageViewHeightConstraint.isActive = true
       }
     }
     let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -701,7 +696,6 @@ extension EditItemViewController: PHPickerViewControllerDelegate {
           self.setPhotoPathImageView(image: self.savePhotoImage)
           self.deletePhotoButton.setEnable()
           self.selectPhotoButton.setDisable()
-          self.photoImageViewHeightConstraint.isActive = false
           if !self.isNewItem {
             self.isChangePhoto = true
           }
