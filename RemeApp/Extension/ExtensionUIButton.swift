@@ -19,7 +19,7 @@ extension UIButton {
     /// - ラベルのテキストをボタンの幅に合わせて自動的に調整
     /// - ラベルの自動調整の際に縮小率を0.５に設定
     /// - ラベルの自動調整の際に必ず１行になるように設定
-    func setAppearance(fontColor: UIColor) {
+  func setAppearance(fontColor: UIColor, borderColor: CGColor = UIColor.black.cgColor) {
         // 文字色を黒に設定
         self.setTitleColor(fontColor, for: .normal)
         // フォントをボールド、サイズを２０に設定
@@ -27,7 +27,7 @@ extension UIButton {
         // 枠線の幅を１で設定
         self.layer.borderWidth = 1
         // 枠線のカラーを黒に設定
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = borderColor
         // バックグラウンドを角丸１０に設定
         self.layer.cornerRadius = 10.0
         // ラベルのテキストをボタンの幅に合わせて自動的に調整
