@@ -84,7 +84,6 @@
 		78F38E4929DD8C6C004972A3 /* EditItemView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */; };
 		78F38E4B29DD8C90004972A3 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */; };
 		78F5090B2AC3C04B000AB440 /* TutorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */; };
-		78F5090E2AC6C31C000AB440 /* FlexibleHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5090D2AC6C31C000AB440 /* FlexibleHeightImageView.swift */; };
 		78FBBF5B2A2EEC4300EDCE9D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */; };
 		78FBBF5F2A2EECB900EDCE9D /* AccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */; };
 		78FBBF612A2EFEDF00EDCE9D /* CreateAccountView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */; };
@@ -191,7 +190,6 @@
 		78F38E4829DD8C6C004972A3 /* EditItemView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditItemView.storyboard; sourceTree = "<group>"; };
 		78F38E4A29DD8C90004972A3 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		78F5090A2AC3C04B000AB440 /* TutorialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialTableViewCell.swift; sourceTree = "<group>"; };
-		78F5090D2AC6C31C000AB440 /* FlexibleHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleHeightImageView.swift; sourceTree = "<group>"; };
 		78FBBF5A2A2EEC4300EDCE9D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = RemeApp/Controller/AccountView/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		78FBBF5E2A2EECB900EDCE9D /* AccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AccountView.storyboard; sourceTree = "<group>"; };
 		78FBBF602A2EFEDF00EDCE9D /* CreateAccountView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateAccountView.storyboard; sourceTree = "<group>"; };
@@ -468,14 +466,6 @@
 			path = FirebaseModel;
 			sourceTree = "<group>";
 		};
-		78F5090C2AC6C2EB000AB440 /* FlexibleHeightImageView FlexibleHeightImageView */ = {
-			isa = PBXGroup;
-			children = (
-				78F5090D2AC6C31C000AB440 /* FlexibleHeightImageView.swift */,
-			);
-			path = "FlexibleHeightImageView FlexibleHeightImageView";
-			sourceTree = "<group>";
-		};
 		78F6F6FD29D9552F00AF4DC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,7 +482,6 @@
 		78F6F6FF29D9555500AF4DC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				78F5090C2AC6C2EB000AB440 /* FlexibleHeightImageView FlexibleHeightImageView */,
 				787DDF4A2A6A4B4100749480 /* LunchScren */,
 				787DDF4B2A6A4B5F00749480 /* UITabBar */,
 				785067212A53EA14007E0E1A /* IntroductionView */,
@@ -774,7 +763,6 @@
 				788E1E8C29CE7E2C006777E6 /* CheckBox.swift in Sources */,
 				782DEBDF29EE522E00141E57 /* CustomSalesFloorType.swift in Sources */,
 				7889D44D2A3AAF2300FC3F48 /* StorageManager.swift in Sources */,
-				78F5090E2AC6C31C000AB440 /* FlexibleHeightImageView.swift in Sources */,
 				78030EDA29ED8A4C000E40A3 /* ExtensionNSNotificationName.swift in Sources */,
 				78A045612A4DC1AF0052EC65 /* IndicatorController.swift in Sources */,
 				78B18CC629EA98CD00721592 /* PageViewController.swift in Sources */,
@@ -888,7 +876,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -943,7 +931,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -970,12 +958,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1004,12 +992,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.motoharu.RemeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
